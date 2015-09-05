@@ -5,60 +5,78 @@ in ionic's _variables.scss file.
 For example, you might change some of the default colors:
 */
 
-$light:                           #fff !default;
-$base:                           #212121 !default;
-$stable:                          #e6e7e9 !default;
-$positive:                        #d4ae70 !default;
-$calm:                            #11c1f3 !default;
-$balanced:                        #0fba66 !default;
-$energized:                       #ffc900 !default;
-$assertive:                       #ff4f4f !default;
-$royal:                           #886aea !default;
-$dark:                            #444 !default;
-
-$button-border-radius:            0px !default;
-$button-border-width:             0px !default;
-$font-family-sans-serif:          "Open Sans","Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
-$headings-font-weight:            500 !default;
-
+$light: #fff !default;
+$base: #212121 !default;
+$stable: #e6e7e9 !default;
+$positive: #d4ae70 !default;
+$calm: #11c1f3 !default;
+$balanced: #0fba66 !default;
+$energized: #ffc900 !default;
+$assertive: #ff4f4f !default;
+$royal: #886aea !default;
+$dark: #444 !default;
+$menu-color: #2c2c2c !default;
+$button-border-radius: 0px !default;
+$button-border-width: 0px !default;
+$font-family-sans-serif: "Open Sans",
+"Helvetica Neue",
+"Roboto",
+"Segoe UI",
+sans-serif !default;
+$headings-font-weight: 500 !default;
 //************ sass start ********
-.padbottom{
+.padbottom {
     padding-bottom: 0px !important;
 }
-.marbotzero{
-     margin-bottom: 0;
+
+.marbotzero {
+    margin-bottom: 0;
 }
-.marbot{
+
+.marbot {
     margin-bottom: 12px;
 }
-.marbottwo{
+
+.marbottwo {
     margin-bottom: 10px;
 }
-.custom-drop{
+
+.martoptwo {
+    margin-top: 0px !important;
+}
+.bortop{
+        border-top: 1px solid #ddd !important;
+}
+.margin{
+    margin: 5px 0px 5px 0px;
+}
+.custom-drop {
     .list .item.item-accordion {
-  line-height: 38px;
-  padding-top: 0;
-  padding-bottom: 0;
-  transition: 0.09s all linear;
+        line-height: 38px;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: 0.09s all linear;
+    }
+    .list .item.item-accordion.ng-hide {
+        line-height: 0px;
+    }
+    .list .item.item-accordion.ng-hide-add,
+    .list .item.item-accordion.ng-hide-remove {
+        display: block !important;
+    }
 }
-.list .item.item-accordion.ng-hide {
-  line-height: 0px;
-}
-.list .item.item-accordion.ng-hide-add,
-.list .item.item-accordion.ng-hide-remove {
-  display: block !important;
-}
-}
-.htwo{
-    h4{
+
+.htwo {
+    h4 {
         text-transform: uppercase;
         color: $assertive;
         font-weight: $headings-font-weight;
-            margin-top: 6px;
+        margin-top: 6px;
     }
 }
+
 .text-heading {
-     position: absolute;
+    position: absolute;
     bottom: 7px;
     color: white;
     text-transform: uppercase;
@@ -72,32 +90,137 @@ $headings-font-weight:            500 !default;
     right: 2px;
     line-height: 130%
 }
+
 .contact {
-    h4{
-            font-size: 16px;
-//    font-weight: 600;
-    text-transform: capitalize;
-           margin: 0px 0px 5px 0px;
-        
+    h4 {
+        font-size: 16px;
+        //    font-weight: 600;
+        text-transform: capitalize;
+        margin: 0px 0px 5px 0px;
     }
     .c-name {
-    padding-bottom: 25px;
+        padding-bottom: 25px;
+    }
+    a {
+        font-size: 13px;
+        color: $base;
+        text-decoration: blink;
+    }
+    p {
+        font-size: 13px;
+    }
 }
-    a{
-        font-size: 13px;
-        color:$base;
-            text-decoration: blink;
+
+.head-menu {
+    h1 {
+        font-weight: 600 !important;
     }
+}
+
+.upper-menu {
+    a.item-content {
+        font-size: 14px;
+        text-transform: uppercase;
+        padding-left: 48px;
+        color: $menu-color;
+        i {
+            font-size: 18px;
+            color: $positive;
+        }
+    }
+    .list{
+        ion-item{
+                border-bottom: 0px;
+    border-top: 0px;
+        }
+    }
+}
+
+.lower-menu {
+    a.item-content {
+        font-size: 14px;
+        text-transform: uppercase;
+        padding-left: 22px;
+        color: $menu-color;
+    }
+}
+
+button.button-icon.ion-ios-search.btn-font:before {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+button.button.button-icon.ln-cart.cart-btn:before {
+    font-size: 28px;
+}
+
+span.badge.badge-assertive.cart {
+    top: -30px;
+    right: -7px;
+    background-color: $stable;
+    z-index: 1;
+    padding: 2px 2px;
+    font-size: 13px;
+    margin-left: 12px;
+    color: $base;
+}
+
+.search-panel {
+    .search-top {
+        min-height: 53px !important;
+        background-color: transparent !important;
+        .src-text {
+            position: absolute;
+            text-align: left;
+            text-transform: uppercase;
+            line-height: 36px;
+            i {
+                vertical-align: baseline;
+                padding-right: 5px;
+            }
+        }
+        .src-btn {}
+        button.button.button-positive.button-block.src-btn {
+            position: absolute;
+            margin: 0;
+            font-size: 14px;
+            line-height: 34px;
+            width: 20% !important;
+            right: 0px;
+            margin-right: 10px;
+            margin-top: 0;
+            min-height: 25px;
+        }
+    }
+    label {
+        border-top: 0px;
+        border-bottom: 0px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+}
+.img-detail {
+       border: 3px solid #ddd;
+    padding: 0px 4px 0px 4px;
     p{
-        font-size: 13px;
+               font-size: 12px;
+    line-height: 100%;
+        font-weight: 300;
     }
+    button.img-btn {
+    margin: 10px auto !important;
+    min-height: 30px;
+    font-size: 10px;
+    line-height: 0px;
+    cursor: pointer;
+    width: 67% !important;
+    text-transform: uppercase;
+        background: transparent !important;
+        color:$assertive;
+        border:1px solid $assertive;
+}
 }
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
-
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
-
-
-
