@@ -5,6 +5,43 @@ in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
 */
+.marbot {
+  margin-bottom: 12px; }
+
+.marbottwo {
+  margin-bottom: 10px; }
+
+.custom-drop .list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear; }
+.custom-drop .list .item.item-accordion.ng-hide {
+  line-height: 0px; }
+.custom-drop .list .item.item-accordion.ng-hide-add, .custom-drop .list .item.item-accordion.ng-hide-remove {
+  display: block !important; }
+
+.htwo h4 {
+  text-transform: uppercase;
+  color: #ff4f4f;
+  font-weight: 500;
+  margin-top: 6px; }
+
+.text-heading {
+  position: absolute;
+  bottom: 7px;
+  color: white;
+  text-transform: uppercase;
+  width: auto;
+  text-align: center;
+  font-size: 14px;
+  padding: 7px 0;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: 2px;
+  right: 2px;
+  line-height: 100%; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -2556,7 +2593,7 @@ body, .ionic-body {
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -2786,7 +2823,7 @@ cite {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;
   font-weight: 500;
-  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -4137,7 +4174,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   white-space: nowrap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
     cursor: pointer; }
@@ -5656,7 +5693,7 @@ label, input, button, select, textarea {
   line-height: 1.42857; }
 
 input, button, select, textarea {
-  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+  font-family: "Open Sans", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
 
 .item-input {
   display: -webkit-box;

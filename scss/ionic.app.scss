@@ -17,11 +17,61 @@ $dark:                            #444 !default;
 
 $button-border-radius:            0px !default;
 $button-border-width:             0px !default;
+$font-family-sans-serif:          "Open Sans","Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+$headings-font-weight:            500 !default;
 
+//************ sass start ********
 
+.marbot{
+    margin-bottom: 12px;
+}
+.marbottwo{
+    margin-bottom: 10px;
+}
+.custom-drop{
+    .list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+}
+.htwo{
+    h4{
+        text-transform: uppercase;
+        color: $assertive;
+        font-weight: $headings-font-weight;
+            margin-top: 6px;
+    }
+}
+.text-heading {
+     position: absolute;
+    bottom: 7px;
+    color: white;
+    text-transform: uppercase;
+    width: auto;
+    text-align: center;
+    font-size: 14px;
+    padding: 7px 0;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.6);
+    left: 2px;
+    right: 2px;
+    line-height: 100%
+}
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+
+
 
