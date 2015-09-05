@@ -1,0 +1,10 @@
+{
+    "jscodehints.detectedExclusions": [
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/exploded-aar/org.xwalk/xwalk_core_library_beta/13.42.319.12/res/raw/messaging_api.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/exploded-aar/org.xwalk/xwalk_core_library_beta/13.42.319.12/res/raw/contacts_api.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/exploded-aar/org.xwalk/xwalk_core_library_beta/13.42.319.12/res/raw/device_capabilities_api.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/exploded-aar/org.xwalk/xwalk_core_library_beta/13.42.319.12/res/raw/launch_screen_api.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/exploded-aar/org.xwalk/xwalk_core_library_beta/13.42.319.12/res/raw/presentation_api.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/ionic/auraart/platforms/android/build/intermediates/res/armv7/debug/raw/contacts_api.js"
+    ]
+}

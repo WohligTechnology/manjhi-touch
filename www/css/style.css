@@ -1,0 +1,31 @@
+/* Empty. Add your own CSS if you like */
+
+.full-height {
+  height: 100%;
+}
+.text-heading {
+  position: absolute;
+  bottom: 7px;
+  color: white;
+  text-transform: uppercase;
+  width: auto;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px 0;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: 2px;
+  right: 2px;
+}
+.artbox .col {
+    position: relative;
+    padding: 2px;
+}
+.artbox .row {
+    padding: 0;
+    margin: 0;
+}
+.artbox .row+.row .col {
+    padding-top: 0;
+    margin-top: -3px;
+}
