@@ -5,6 +5,12 @@ in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
 */
+.padbottom {
+  padding-bottom: 0px !important; }
+
+.marbotzero {
+  margin-bottom: 0; }
+
 .marbot {
   margin-bottom: 12px; }
 
@@ -34,13 +40,26 @@ For example, you might change some of the default colors:
   text-transform: uppercase;
   width: auto;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   padding: 7px 0;
   font-weight: 500;
   background-color: rgba(0, 0, 0, 0.6);
   left: 2px;
   right: 2px;
-  line-height: 100%; }
+  line-height: 130%; }
+
+.contact h4 {
+  font-size: 16px;
+  text-transform: capitalize;
+  margin: 0px 0px 5px 0px; }
+.contact .c-name {
+  padding-bottom: 25px; }
+.contact a {
+  font-size: 13px;
+  color: #212121;
+  text-decoration: blink; }
+.contact p {
+  font-size: 13px; }
 
 /*!
   Ionicons, v2.0.1

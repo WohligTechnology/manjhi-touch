@@ -6,6 +6,7 @@ For example, you might change some of the default colors:
 */
 
 $light:                           #fff !default;
+$base:                           #212121 !default;
 $stable:                          #e6e7e9 !default;
 $positive:                        #d4ae70 !default;
 $calm:                            #11c1f3 !default;
@@ -21,7 +22,12 @@ $font-family-sans-serif:          "Open Sans","Helvetica Neue", "Roboto", "Segoe
 $headings-font-weight:            500 !default;
 
 //************ sass start ********
-
+.padbottom{
+    padding-bottom: 0px !important;
+}
+.marbotzero{
+     margin-bottom: 0;
+}
 .marbot{
     margin-bottom: 12px;
 }
@@ -58,13 +64,33 @@ $headings-font-weight:            500 !default;
     text-transform: uppercase;
     width: auto;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     padding: 7px 0;
     font-weight: 500;
     background-color: rgba(0, 0, 0, 0.6);
     left: 2px;
     right: 2px;
-    line-height: 100%
+    line-height: 130%
+}
+.contact {
+    h4{
+            font-size: 16px;
+//    font-weight: 600;
+    text-transform: capitalize;
+           margin: 0px 0px 5px 0px;
+        
+    }
+    .c-name {
+    padding-bottom: 25px;
+}
+    a{
+        font-size: 13px;
+        color:$base;
+            text-decoration: blink;
+    }
+    p{
+        font-size: 13px;
+    }
 }
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
