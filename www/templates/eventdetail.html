@@ -1,0 +1,48 @@
+<ion-view title="Event Details">
+	<!--
+    <ion-nav-title>
+        <img src="img/logo.jpg" class="full-height">
+    </ion-nav-title>
+-->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content class="padding">
+		<div class="eventpad" ng-repeat="events in event">
+			<div class="row">
+				<div class="eventdetail">
+					<h5 class="assertive home-header">{{events.name}}</h5>
+					<p><span>Event Venue</span> : {{events.venue}}</p>
+					<p><span>Period of show </span> : {{events.Period}}</p>
+					<p><span>Event Time</span> : {{events.time}}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="eventdetail">
+					<span>Details :</span>
+					<p ng-bind-html="events.detail | rawHtml"></p>
+				</div>
+			</div>
+			<div class="row" ng-repeat="gal in gallery">
+				<div class="col-33" ng-repeat="gals in gal">
+					<div class="eventgallery">
+						<div class="event-pic" fixit>
+							<img class="fix-img" ng-src="{{gals.image}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>

@@ -1,0 +1,96 @@
+<ion-view title="Contact Us">
+	<!--
+    <ion-nav-title>
+        <img src="img/logo.jpg" class="full-height">
+    </ion-nav-title>
+-->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content>
+		<div class="white-line">
+			<div class="row">
+				<div class="col">
+
+					<h5 class="">Daljit S Sethi</h5>
+					<p>
+						<a href="tel:+919820351667">+91 98203 51667</a>
+					</p>
+
+					<h5 class="">Harmeet S Sethi</h5>
+					<p>
+						<a href="tel:+919328877000">+91 93288 77000</a>
+						<br>
+						<a href="mailto:harmeet@auraart.in">harmeet@auraart.in</a>
+						<br>
+						<a href="mailto:harmeetssethi@gmail.com">harmeetssethi@gmail.com</a>
+					</p>
+					<h5 class="">Rishiraj S Sethi</h5>
+					<p><a href="tel:+919820345740">+91 98203 45740</a>
+						<br>
+						<a href="mailto:rishiraj@auraart.in">rishiraj@auraart.in</a>
+						<br>
+						<a href="mailto:rishirajssethi@gmail.com">rishirajssethi@gmail.com</a>
+					</p>
+
+				</div>
+				<div class="col">
+
+					<h5 class="">Office (Mumbai)</h5>
+					<p>A-117, 1st floor,
+						<br> Vinay Bhavya 159,
+						<br> CST Road, Kalina
+						<br>Santacruz (East)
+						<br>Mumbai - 400 098
+						<br>Tel: +91 22 2652 4557
+					</p>
+					<h5 class="">Office (Vadodara)</h5>
+					<p>633, Fortune Tower
+						<br>Sayajigunj
+						<br>Vadodara - 390 005
+					</p>
+					<h5 class="">Registered Office</h5>
+					<p>Mangal Prabhat, 7th Floor
+						<br>Gulmohar Cross Road No 7
+						<br>Vile Parle (W)
+						<br>Mumbai - 400 049
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="contact-form">
+			<h4 class="">Send Us Query</h4>
+			<div class="list">
+				<label class="item item-input">
+					<input type="text" placeholder="Name*" required>
+				</label>
+				<label class="item item-input">
+					<input type="text" placeholder="Phone No*" required>
+				</label>
+				<label class="item item-input">
+					<input type="text" placeholder="Email ID*" required>
+				</label>
+				<label class="item item-input">
+					<textarea placeholder="Observations &amp; Queries *" required></textarea>
+				</label>
+				<div class="padding">
+					<button class="button button-block button-positive">
+						Submit
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

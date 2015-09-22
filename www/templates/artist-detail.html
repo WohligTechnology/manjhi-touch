@@ -1,0 +1,73 @@
+<ion-view title="Artist Details">
+	<!--
+    <ion-nav-title>
+        <img src="img/logo.jpg" class="full-height">
+    </ion-nav-title>
+-->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content class="padding">
+		<div class="cont-artist">
+			<h4 class="text-center assertive">TAPAS BASU</h4>
+			<div class="text-right">
+				<a class="color-black" href="">View Profile </a>
+			</div>
+			<p><span class="bold">Born in</span>1983 <span class="bold">at</span> Andhra Pradesh</p>
+			<p><span class="bold">Passed away</span>
+			</p>
+			<p><span class="bold">Education</span>
+				<br>2006, Bachelor of Fine Arts, Andhra University, Vishakhapatnam
+				<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
+				<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
+			</p>
+		</div>
+		<div class="row" ng-repeat="detail in artistdetail">
+			<div class="col-50" ng-repeat="details in detail">
+				<a href="#/app/art-detail">
+					<div class="prd-cont">
+						<div class="img-holder">
+							<figure>
+								<img ng-src="{{details.image}}" class="full-image">
+							</figure>
+						</div>
+						<div class="artist-cont-detail">
+							<p>
+								{{details.id}}
+								<i class="icon ion-heart active"></i>
+								<i class="icon ion-ios-cart positive"></i>
+							</p>
+							<p>
+								{{details.typename}}
+							</p>
+							<p>
+								{{details.madein}}
+							</p>
+							<p>
+								{{details.size}}
+							</p>
+							<p>
+								{{details.year}}
+							</p>
+							<p>
+								{{details.price}}
+							</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

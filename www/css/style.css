@@ -1,27 +1,77 @@
 /* Empty. Add your own CSS if you like */
 
 .full-height {
-  height: 100%;
+	height: 100%;
 }
+
 .artbox .col {
-    position: relative;
-    padding: 2px;
+	position: relative;
+	padding: 2px;
 }
+
 .artbox .row {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
+
 .artbox .row+.row .col {
-    padding-top: 0;
-    margin-top: -3px;
+	padding-top: 0;
+	margin-top: -3px;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
+.htwo h2 {
+	text-transform: uppercase;
+	color: $assertive;
+}
 
-.htwo h2{
-     text-transform: uppercase;
-        color: $assertive;
+.prd-holder,
+.prd-cont {
+	padding: 2px;
+}
+
+.artist-cont-detail p {
+	margin: 0 0;
+	font-size: 12px;
+	line-height: 120%;
+}
+
+.img-artist .col-25 {
+	padding-right: 3px;
+}
+
+.head {
+	padding: 0 10px;
+}
+
+.logo-sign {
+	padding: 25px 0;
+}
+
+.list.reg-login .item {
+	padding: 2px 4px;
+	border: 0px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 1px;
+}
+
+.button {
+	line-height: 20px;
+	min-height: 40px;
+}
+
+.list.reg-login {
+	margin-top: 20px;
+}
+
+.btn-grp .button-positive {
+	margin-bottom: 0px;
+}
+
+.row.reg a {
+	color: #FF4F4F;
+	text-decoration: none;
 }

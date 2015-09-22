@@ -1,0 +1,193 @@
+<ion-view classs="bar-stable" title="Artist" align-title="center">
+	<!--
+    <ion-nav-title>
+        <img src="img/logo.jpg" class="full-height">
+    </ion-nav-title>
+-->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content>
+		<ul class="artist-crisp">
+			<li>
+				<a href="" class="actives">
+                           All
+                            </a>
+			</li>
+			<li>
+				<a href="" class="">
+                           Paintings
+                            </a>
+			</li>
+			<li>
+				<a href="" class="">
+                           Sculptures
+                            </a>
+			</li>
+			<li>
+				<a href="" class="">
+                           Photographs
+                            </a>
+			</li>
+			<li>
+				<a href="" class="">Prints
+                            </a>
+			</li>
+			<li>
+				<a href="" class="">
+                           Others
+                            </a>
+			</li>
+		</ul>
+		<div class="grid-view">
+			<select>
+				<option value="grid" selected>Grid View</option>
+				<option value="list">List View</option>
+			</select>
+		</div>
+		<div class="row" ng-repeat="artist in aristname">
+			<div class="col-50" ng-repeat="aristnames in artist">
+				<a href="#/app/artist/detail">
+					<div class="prd-holder">
+						<div class="title">
+							<h5 class="text-center">{{aristnames.name}}</h4>
+                    </div>
+                    <div class="img-holder">
+                        <figure>
+                            <img ng-src="{{aristnames.image}}" class="full-image">
+                        </figure>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>  
+        <div class="list-view">
+        	<ul class="lineul">
+                <li  class=""><a href="#" class="">Ajay R Dhandre
+				</a></li>
+				<li class=""><a href="#" class="">Aparna Anil</a></li>
+				<li class=""><a href="#" class="">Devangi Sidharth
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Dhiraj Choudhary
+                </a>
+                </li><li class=""><a href="#" class="">Amarnath Sharma
+                </a>
+                </li><li class=""><a href="#" class="">Arunanshu Chowdhury
+                </a>
+                </li><li class=""><a href="#" class="">Bhushen Koul
+                </a>
+                </li><li class=""><a href="#" class="">DJ Bagga
+                </a>
+                </li><li class=""><a href="#" class="">Dilip Ranade
+                </a>
+                </li><li class=""><a href="#" class="">Dinesh Gain
+                </a>
+                </li><li class=""><a href="#" class="">Ghanshyam Gupta
+                </a>
+                </li><li class=""><a href="#" class="">Heeral Trivedi
+                </a>
+                </li><li class=""><a href="#" class="">Isha Diwanji
+                </a>
+                </li><li class=""><a href="#" class="">Jagannath Mahapatra
+                </a>
+                </li><li class=""><a href="#" class="">Jignasa Doshi
+                </a>
+                </li><li class=""><a href="#" class="">Lokesh Khodke
+                </a>
+                </li><li class=""><a href="#" class="">Malay Samiran Banerjee
+                </a>
+                </li><li class=""><a href="#" class="">Maneesha Doshi
+                </a>
+                </li><li class=""><a href="#" class="">Meera Gupta
+                </a>
+                </li><li class=""><a href="#" class="">Meghansh Thapa
+                </a>
+                </li><li class=""><a href="#" class="">Mohit Bhatia
+                </a>
+                </li><li class=""><a href="#" class="">Nimisha Sharma
+                </a>
+                </li><li class=""><a href="#" class="">Prabhakar Alok
+                </a>
+				</li>
+                </ul> 
+                <ul class="lineul">
+                <li  class=""><a href="#" class="">Ajay R Dhandre</a></li>
+				<li class=""><a href="#" class="">Aparna Anil</a></li>
+				<li class=""><a href="#" class="">Devangi Sidharth</a></li>
+                <li class=""><a href="#" class="">Dhiraj Choudhary
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Amarnath Sharma
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Arunanshu Chowdhury
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Bhushen Koul
+                </a>
+                </li>
+                <li class=""><a href="#" class="">DJ Bagga
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Dilip Ranade
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Dinesh Gain
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Ghanshyam Gupta
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Heeral Trivedi
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Isha Diwanji
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Jagannath Mahapatra
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Jignasa Doshi
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Lokesh Khodke
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Malay Samiran Banerjee
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Maneesha Doshi
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Meera Gupta
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Meghansh Thapa
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Mohit Bhatia
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Nimisha Sharma
+                </a>
+                </li>
+                <li class=""><a href="#" class="">Prabhakar Alok
+                </a>
+								</li>
+                </ul>
+        </div> 
+    </ion-content>
+</ion-view>

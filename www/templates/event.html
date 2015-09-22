@@ -1,0 +1,106 @@
+<ion-view title="Events">
+	<!--
+    <ion-nav-title>
+        <img src="img/logo.jpg" class="full-height">
+    </ion-nav-title>
+-->
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content class="padding">
+		<div class="event-set">
+			<div class="all-events search-box">
+				<h5 class="assertive home-header padtop">Upcoming Events</h5>
+				<h5 class="eventhead">2016</h5>
+				<div class="row" ng-repeat="events in event2016">
+					<div class="col-50" ng-repeat="event in events">
+						<div class="event-detail ">
+							<div class="data-event">
+								<h6 class="font-color2">{{event.name}}</h6>
+								<p>{{event.detail}}</p>
+							</div>
+							<a href="#/app/eventdetail">
+								<div class="event-img media-img text-center">
+									<figure>
+										<img ng-src="{{event.img}}" class="img-responsive">
+									</figure>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="all-events search-box">
+				<h5 class="assertive home-header padtop">Present Events</h5>
+				<h5 class="eventhead">2015</h5>
+				<div class="row" ng-repeat="events in event2015">
+					<div class="col-50" ng-repeat="event in events">
+						<div class="event-detail ">
+							<div class="data-event">
+								<h6 class="font-color2">{{event.name}}</h6>
+								<p>{{event.detail}}</p>
+							</div>
+							<a href="#/app/eventdetail">
+								<div class="media-img event-img text-center">
+									<figure>
+										<img ng-src="{{event.img}}" class="img-responsive">
+									</figure>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="all-events search-box">
+				<h5 class="assertive home-header padtop">Past Events</h5>
+				<h5 class="eventhead">2014</h5>
+				<div class="row" ng-repeat="events in event2014">
+					<div class="col-50" ng-repeat="event in events">
+						<div class="event-detail ">
+							<div class="data-event">
+								<h6 class="font-color2">{{event.name}}</h6>
+								<p>{{event.detail}}</p>
+							</div>
+							<a href="#/app/eventdetail">
+								<div class="media-img event-img text-center">
+									<figure>
+										<img ng-src="{{event.img}}" class="img-responsive">
+									</figure>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<h5 class="eventhead">2013</h5>
+				<div class="row" ng-repeat="events in event2014">
+					<div class="col-50" ng-repeat="event in events">
+						<div class="event-detail ">
+							<div class="data-event">
+								<h6 class="font-color2">{{event.name}}</h6>
+								<p>{{event.detail}}</p>
+							</div>
+							<a href="#/app/eventdetail">
+								<div class="media-img event-img text-center">
+									<figure>
+										<img ng-src="{{event.img}}" class="img-responsive">
+									</figure>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
