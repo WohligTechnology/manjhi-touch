@@ -7847,6 +7847,9 @@ a {
   text-decoration: none;
   color: #212121; }
 
+.pull-right {
+  float: right; }
+
 .bold {
   font-weight: 700; }
 
@@ -7861,6 +7864,11 @@ a {
   padding: 0;
   margin: 0; }
 
+.item-divider {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  line-height: 1.4; }
+
 .artbox .row + .row .col {
   padding-top: 0;
   margin-top: -3px; }
@@ -7873,7 +7881,7 @@ body {
   color: #ff4f4f; }
 
 .prd-holder, .prd-cont {
-  padding: 0 5px;
+  padding-right: 5px;
   min-height: 240px;
   padding-bottom: 20px; }
   .prd-holder .full-image, .prd-cont .full-image {
@@ -7890,6 +7898,9 @@ body {
 i.icon.ion-heart {
   color: #ddd; }
 
+.item-input textarea {
+  resize: none; }
+
 .prd-holder {
   padding-bottom: 0px; }
 
@@ -7897,6 +7908,15 @@ i.icon.ion-heart {
   margin: 0 0;
   font-size: 12px;
   line-height: 120%; }
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition: all cubic-bezier(.43, .55, .93, .88) 0.5s; }
+
+.animate-if.ng-enter, .animate-if.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+.animate-if.ng-leave, .animate-if.ng-enter.ng-enter-active {
+  opacity: 1; }
 
 .img-artist .col-25 {
   padding-right: 3px; }
@@ -7908,13 +7928,12 @@ i.icon.ion-heart {
   padding: 25px 0; }
 
 .list.reg-login .item {
-  padding: 2px 4px;
+  padding: 2px 16px;
   border: 0px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 1px; }
 
 .button {
-  line-height: 20px;
   min-height: 40px; }
 
 .list.reg-login {
@@ -8013,7 +8032,8 @@ ul.artist-crisp {
     padding: 5px 5px;
     border: 0px; }
   ul.artist-crisp a {
-    padding: 0 5px; }
+    padding: 0 5px;
+    text-transform: uppercase; }
   ul.artist-crisp a.actives {
     color: #d4ae70;
     border-bottom: 3px solid #d4ae70; }
@@ -8045,23 +8065,36 @@ ul.artist-crisp {
     appearance: none;
     font-weight: normal; }
 
+ul.lineul + ul.lineul {
+  padding-left: 10px; }
+
 .list-view {
-  display: table; }
+  display: table;
+  padding-left: 10px;
+  margin-top: 10px; }
   .list-view ul.lineul {
     display: table-cell;
     list-style: none;
-    padding: 0 20px;
-    font-size: 12px; }
+    font-size: 12px;
+    text-transform: uppercase; }
+    .list-view ul.lineul li {
+      line-height: 120%;
+      margin-bottom: 7px; }
 
 .list.list-details .item {
   padding: 5px 10px;
   border: 0px;
   font-size: 14px; }
 .list.list-details .item-note {
-  font-size: 12px; }
+  font-size: 12px;
+  color: #444; }
+.list.list-details .item-note.assertive {
+  color: #ff4f4f; }
 .list.list-details i {
   padding-left: 5px;
   font-size: 16px; }
+.list.list-details i.icon.ion-heart.assertive {
+  color: #ff4f4f; }
 
 .head.head-artist .item-note {
   margin-top: -2px;
@@ -8114,7 +8147,7 @@ a.item.cart-cont {
   left: 13%; }
 
 .cont-checkout label.item.item-input {
-  padding: 4px 16px; }
+  padding: 2px 16px; }
 .cont-checkout .input-label {
   font-size: 14px;
   width: 40%; }
@@ -8264,3 +8297,35 @@ h5.eventhead {
   margin-bottom: 0px;
   margin-top: 10px;
   text-transform: uppercase; }
+
+.read-inner input {
+  border: 1px solid #ddd;
+  padding-left: 7px; }
+
+.read-morecont {
+  transition: all 600ms ease;
+  overflow: hidden;
+  margin: 5px 0; }
+
+.maxmin {
+  width: 40%;
+  padding-left: 5px; }
+
+.min-max h3 {
+  padding: 10px 0 2px 0; }
+
+.margin-btm {
+  margin-bottom: 5px; }
+
+.cont-artist h4 {
+  margin-top: 0px; }
+
+.list.margin-btm .list .item {
+  padding-bottom: 6px; }
+
+.panel-body {
+  font-size: 12px; }
+
+.panel-heading {
+  font-size: 14px;
+  font-weight: 600; }

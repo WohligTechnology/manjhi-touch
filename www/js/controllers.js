@@ -1,19 +1,19 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {})
-
-.controller('AccessCtrl', function ($scope, $ionicModal, $timeout) {})
-	.controller('LoginCtrl', function ($scope, $stateParams) {})
-
-.controller('HomeCtrl', function ($scope, $stateParams) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 	$scope.searchbar = false;
 	$scope.toggleSearchbar = function () {
 		$scope.searchbar = $scope.searchbar === false ? true : false;
 	};
+
 })
 
-.controller('ArtDetailCtrl', function ($scope, $stateParams) {
+.controller('AccessCtrl', function ($scope, $ionicModal, $timeout) {})
+	.controller('LoginCtrl', function ($scope, $stateParams) {})
 
+.controller('HomeCtrl', function ($scope, $stateParams) {})
+
+.controller('ArtDetailCtrl', function ($scope, $stateParams) {
 	$scope.artdetail = [{
 		image: 'img/artist/artist1.jpg'
     }]
@@ -21,6 +21,8 @@ angular.module('starter.controllers', [])
 
 
 .controller('SigninCtrl', function ($scope, $stateParams) {})
+
+.controller('ForgotCtrl', function ($scope, $stateParams) {})
 
 .controller('ArtworkCtrl', function ($scope, $stateParams) {
 
@@ -53,6 +55,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ArtistCtrl', function ($scope, $stateParams) {
+	$scope.tab = 'grid';
 	$scope.aristname = [{
 		name: 'S Yousuf Ali',
 		image: 'img/artist/artist1.jpg'
@@ -154,7 +157,18 @@ angular.module('starter.controllers', [])
 
 .controller('ContactCtrl', function ($scope, $stateParams) {})
 
-.controller('AboutCtrl', function ($scope, $stateParams) {})
+.controller('AboutCtrl', function ($scope, $stateParams) {
+$scope.showteam="true";
+//$scope.showactivity="true";
+	$scope.tab = true;
+	$scope.changetab=function(tab){
+		if(tab == 1){
+			$scope.tab = true;
+		}else{
+			$scope.tab = false;
+		}
+	}
+})
 
 .controller('PressCtrl', function ($scope, $stateParams) {
 	$scope.media2015 = [{
@@ -323,17 +337,33 @@ angular.module('starter.controllers', [])
 	$scope.gallery = _.chunk($scope.gallery, 3);
 })
 
-.controller('InfraServicesCtrl', function ($scope, $stateParams) {
- 
-
-})
+.controller('InfraServicesCtrl', function ($scope, $stateParams) {})
 
 .controller('CartCtrl', function ($scope, $stateParams) {})
 
 .controller('CheckoutCtrl', function ($scope, $stateParams) {
 	$scope.checkout = [];
 	$scope.checkout.isshipping = true;
+	$scope.formstatus = false;
+	$scope.changeTab = function (tab) {
+		if (tab == 1) {
+			$scope.formstatus = true;
+			//                $scope.formstatussec = false;
+		} else {
+			//                $scope.formstatus = false;
+			$scope.formstatussec = true;
+		}
+
+	}
+	$scope.closeTab = function (tab) {
+		if (tab == 1) {
+			$scope.formstatus = false;
+			//                $scope.formstatussec = false;
+		} else {
+			//                $scope.formstatus = false;
+			$scope.formstatussec = false;
+		}
+
+	}
 })
-
-
 ;

@@ -1,4 +1,4 @@
-<ion-view class="About">
+<ion-view title="About">
 	<!--
 	<ion-nav-title>
 		<img src="img/logo.jpg" class="full-height">
@@ -19,12 +19,12 @@
 	<div class="aur-logo">
 		<img src="img/logo2.png" class="full-height">
 	</div>
-	<ion-tabs class="tabs-striped tabs-top tabs-color-active-positive ">
-		<ion-tab title="Team"></ion-tab>
-		<ion-tab title="Activities"></ion-tab>
+	<ion-tabs class="tabs-striped tabs-top tabs-color-active-positive">
+		<ion-tab title="Team" ng-click="changetab(1)"></ion-tab>
+		<ion-tab title="Activities" ng-click="changetab(2)" ng-class="tab-item-active"></ion-tab>
 	</ion-tabs>
 	<ion-content class="has-tabs-top padding">
-		<div class="team">
+		<div class="team" ng-show="tab">
 			<div class="pad-top-btm">
 				<h4 class="head-team">Aura Art Team</h4>
 				<div class="team-style">
@@ -76,11 +76,10 @@
 								<li>Director, Aura Art Development Pvt Ltd</li>
 								<li>CEO, Aura Art</li>
 							</ul>
+							
 							<div class="text-right">
 								<a class="readmore" ng-click="status1.open = !status1.open">see more </a>
 							</div>
-							<accordion>
-								<accordion-group is-open="status1.open">
 									<ul>
 										<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building deep relationships with artists across the country.</li>
 										<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
@@ -92,8 +91,6 @@
 										<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
 										<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
 									</ul>
-								</accordion-group>
-							</accordion>
 
 							<h5>Rishiraj S Sethi</h5>
 							<ul>
@@ -281,10 +278,10 @@
 		
 		
 		
-		<div class="activities">
+		<div class="activities" ng-hide="tab">
 			<div class="padding-more">
 				<h4 class="head-team">Activities</h4>
-				<p> After a couple of decades of&nbsp;researching&nbsp;and&nbsp;collecting art,&nbsp;Aura Art&nbsp;was formed in&nbsp;April 2006&nbsp;by the&nbsp;Core Team&nbsp;(comprising of&nbsp;Daljit Singh Sethi&nbsp;and his sons&nbsp;Harmeet&nbsp;and&nbsp;Rishiraj), to fill the gaps in the&nbsp;Indian Art Industry - identifying and discovering value amongst the best of Indian art, utilising every available platform to promote art, assisting art lovers in building and maintaining their collections, working closely with the design space to meet their aesthetic requirements - with an aspiration to migrate to a fully&nbsp;Integrated Art House.&nbsp; Aura Art now boasts of some of the most prominent personalities from all walks of life in its <a class="link-page assertive" href="#/team">Team</a>.</p>
+				<p> After a couple of decades of&nbsp;researching&nbsp;and&nbsp;collecting art,&nbsp;Aura Art&nbsp;was formed in&nbsp;April 2006&nbsp;by the&nbsp;Core Team&nbsp;(comprising of&nbsp;Daljit Singh Sethi&nbsp;and his sons&nbsp;Harmeet&nbsp;and&nbsp;Rishiraj), to fill the gaps in the&nbsp;Indian Art Industry - identifying and discovering value amongst the best of Indian art, utilising every available platform to promote art, assisting art lovers in building and maintaining their collections, working closely with the design space to meet their aesthetic requirements - with an aspiration to migrate to a fully&nbsp;Integrated Art House.&nbsp; Aura Art now boasts of some of the most prominent personalities from all walks of life in its <a class="link-page assertive" href="#">Team</a>.</p>
 
 				<p> To achieve the above, the Core Team of Aura Art has established&nbsp;Aura Art Development Pvt Ltd (April 2008)&nbsp;and&nbsp;Aura Art eConnect Pvt Ltd (March 2015)&nbsp;to carry out the following activities, to further its primary objective of&nbsp;promoting Indian Art, keeping the long term interest of all stakeholders in perspective.</p>
 				<ul>
@@ -302,7 +299,6 @@
 					</ul>
 				</ul>
 			</div>
-
 		</div>
 	</ion-content>
 </ion-view>

@@ -1,4 +1,4 @@
-<ion-view classs="bar-stable" title="Artist" align-title="center">
+<ion-view classs="bar-stable" title="Artist">
 	<!--
     <ion-nav-title>
         <img src="img/logo.jpg" class="full-height">
@@ -20,44 +20,49 @@
 		<img src="img/logo2.png" class="full-height">
 	</div>
 	<ion-content>
-		<ul class="artist-crisp">
-			<li>
-				<a href="" class="actives">
+		<ion-scroll zooming="true" direction="x" style="width: auto">
+			<ul class="artist-crisp">
+				<li>
+					<a href="" class="actives">
                            All
                             </a>
-			</li>
-			<li>
-				<a href="" class="">
+				</li>
+				<li>
+					<a href="" class="">
                            Paintings
                             </a>
-			</li>
-			<li>
-				<a href="" class="">
+				</li>
+				<li>
+					<a href="" class="">
                            Sculptures
                             </a>
-			</li>
-			<li>
-				<a href="" class="">
+				</li>
+				<li>
+					<a href="" class="">
                            Photographs
                             </a>
-			</li>
-			<li>
-				<a href="" class="">Prints
+				</li>
+				<li>
+					<a href="" class="">Prints
                             </a>
-			</li>
-			<li>
-				<a href="" class="">
+				</li>
+				<li>
+					<a href="" class="">
                            Others
                             </a>
-			</li>
-		</ul>
+				</li>
+			</ul>
+		</ion-scroll>
+<!--
 		<div class="grid-view">
-			<select>
+			<select ng-model="tab">
 				<option value="grid" selected>Grid View</option>
 				<option value="list">List View</option>
 			</select>
 		</div>
-		<div class="row" ng-repeat="artist in aristname">
+-->
+<!--
+		<div class="row animate-if" ng-repeat="artist in aristname" ng-if="tab=='grid'">
 			<div class="col-50" ng-repeat="aristnames in artist">
 				<a href="#/app/artist/detail">
 					<div class="prd-holder">
@@ -73,118 +78,119 @@
                 </a>
             </div>
         </div>  
-        <div class="list-view">
+-->
+        <div class="list-view animate-if">
         	<ul class="lineul">
-                <li  class=""><a href="#" class="">Ajay R Dhandre
+                <li  class=""><a href="#/app/artist/detail" class="">Ajay R Dhandre
 				</a></li>
-				<li class=""><a href="#" class="">Aparna Anil</a></li>
-				<li class=""><a href="#" class="">Devangi Sidharth
+				<li class=""><a href="#/app/artist/detail" class="">Aparna Anil</a></li>
+				<li class=""><a href="#/app/artist/detail" class="">Devangi Sidharth
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Dhiraj Choudhary
+                <li class=""><a href="#/app/artist/detail" class="">Dhiraj Choudhary
                 </a>
-                </li><li class=""><a href="#" class="">Amarnath Sharma
+                </li><li class=""><a href="#/app/artist/detail" class="">Amarnath Sharma
                 </a>
-                </li><li class=""><a href="#" class="">Arunanshu Chowdhury
+                </li><li class=""><a href="#/app/artist/detail" class="">Arunanshu Chowdhury
                 </a>
-                </li><li class=""><a href="#" class="">Bhushen Koul
+                </li><li class=""><a href="#/app/artist/detail" class="">Bhushen Koul
                 </a>
-                </li><li class=""><a href="#" class="">DJ Bagga
+                </li><li class=""><a href="#/app/artist/detail" class="">DJ Bagga
                 </a>
-                </li><li class=""><a href="#" class="">Dilip Ranade
+                </li><li class=""><a href="#/app/artist/detail" class="">Dilip Ranade
                 </a>
-                </li><li class=""><a href="#" class="">Dinesh Gain
+                </li><li class=""><a href="#/app/artist/detail" class="">Dinesh Gain
                 </a>
-                </li><li class=""><a href="#" class="">Ghanshyam Gupta
+                </li><li class=""><a href="#/app/artist/detail" class="">Ghanshyam Gupta
                 </a>
-                </li><li class=""><a href="#" class="">Heeral Trivedi
+                </li><li class=""><a href="#/app/artist/detail" class="">Heeral Trivedi
                 </a>
-                </li><li class=""><a href="#" class="">Isha Diwanji
+                </li><li class=""><a href="#/app/artist/detail" class="">Isha Diwanji
                 </a>
-                </li><li class=""><a href="#" class="">Jagannath Mahapatra
+                </li><li class=""><a href="#/app/artist/detail" class="">Jagannath Mahapatra
                 </a>
-                </li><li class=""><a href="#" class="">Jignasa Doshi
+                </li><li class=""><a href="#/app/artist/detail" class="">Jignasa Doshi
                 </a>
-                </li><li class=""><a href="#" class="">Lokesh Khodke
+                </li><li class=""><a href="#/app/artist/detail" class="">Lokesh Khodke
                 </a>
-                </li><li class=""><a href="#" class="">Malay Samiran Banerjee
+                </li><li class=""><a href="#/app/artist/detail" class="">Malay Samiran Banerjee
                 </a>
-                </li><li class=""><a href="#" class="">Maneesha Doshi
+                </li><li class=""><a href="#/app/artist/detail" class="">Maneesha Doshi
                 </a>
-                </li><li class=""><a href="#" class="">Meera Gupta
+                </li><li class=""><a href="#/app/artist/detail" class="">Meera Gupta
                 </a>
-                </li><li class=""><a href="#" class="">Meghansh Thapa
+                </li><li class=""><a href="#/app/artist/detail" class="">Meghansh Thapa
                 </a>
-                </li><li class=""><a href="#" class="">Mohit Bhatia
+                </li><li class=""><a href="#/app/artist/detail" class="">Mohit Bhatia
                 </a>
-                </li><li class=""><a href="#" class="">Nimisha Sharma
+                </li><li class=""><a href="#/app/artist/detail" class="">Nimisha Sharma
                 </a>
-                </li><li class=""><a href="#" class="">Prabhakar Alok
+                </li><li class=""><a href="#/app/artist/detail" class="">Prabhakar Alok
                 </a>
 				</li>
                 </ul> 
                 <ul class="lineul">
-                <li  class=""><a href="#" class="">Ajay R Dhandre</a></li>
-				<li class=""><a href="#" class="">Aparna Anil</a></li>
-				<li class=""><a href="#" class="">Devangi Sidharth</a></li>
-                <li class=""><a href="#" class="">Dhiraj Choudhary
+                <li  class=""><a href="#/app/artist/detail" class="">Ajay R Dhandre</a></li>
+				<li class=""><a href="#/app/artist/detail" class="">Aparna Anil</a></li>
+				<li class=""><a href="#/app/artist/detail" class="">Devangi Sidharth</a></li>
+                <li class=""><a href="#/app/artist/detail" class="">Dhiraj Choudhary
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Amarnath Sharma
+                <li class=""><a href="#/app/artist/detail" class="">Amarnath Sharma
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Arunanshu Chowdhury
+                <li class=""><a href="#/app/artist/detail" class="">Arunanshu Chowdhury
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Bhushen Koul
+                <li class=""><a href="#/app/artist/detail" class="">Bhushen Koul
                 </a>
                 </li>
-                <li class=""><a href="#" class="">DJ Bagga
+                <li class=""><a href="#/app/artist/detail" class="">DJ Bagga
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Dilip Ranade
+                <li class=""><a href="#/app/artist/detail" class="">Dilip Ranade
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Dinesh Gain
+                <li class=""><a href="#/app/artist/detail" class="">Dinesh Gain
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Ghanshyam Gupta
+                <li class=""><a href="#/app/artist/detail" class="">Ghanshyam Gupta
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Heeral Trivedi
+                <li class=""><a href="#/app/artist/detail" class="">Heeral Trivedi
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Isha Diwanji
+                <li class=""><a href="#/app/artist/detail" class="">Isha Diwanji
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Jagannath Mahapatra
+                <li class=""><a href="#/app/artist/detail" class="">Jagannath Mahapatra
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Jignasa Doshi
+                <li class=""><a href="#/app/artist/detail" class="">Jignasa Doshi
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Lokesh Khodke
+                <li class=""><a href="#/app/artist/detail" class="">Lokesh Khodke
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Malay Samiran Banerjee
+                <li class=""><a href="#/app/artist/detail" class="">Malay Samiran Banerjee
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Maneesha Doshi
+                <li class=""><a href="#/app/artist/detail" class="">Maneesha Doshi
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Meera Gupta
+                <li class=""><a href="#/app/artist/detail" class="">Meera Gupta
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Meghansh Thapa
+                <li class=""><a href="#/app/artist/detail" class="">Meghansh Thapa
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Mohit Bhatia
+                <li class=""><a href="#/app/artist/detail" class="">Mohit Bhatia
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Nimisha Sharma
+                <li class=""><a href="#/app/artist/detail" class="">Nimisha Sharma
                 </a>
                 </li>
-                <li class=""><a href="#" class="">Prabhakar Alok
+                <li class=""><a href="#/app/artist/detail" class="">Prabhakar Alok
                 </a>
 								</li>
                 </ul>

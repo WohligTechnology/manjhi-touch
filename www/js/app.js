@@ -13,203 +13,213 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
-		$stateProvider
-			.state('app', {
-				url: '/app',
-				abstract: true,
-				templateUrl: 'templates/menu.html',
-				controller: 'AppCtrl'
-			})
-
-		.state('access', {
-			url: '/access',
+	$stateProvider
+		.state('app', {
+			url: '/app',
 			abstract: true,
-			templateUrl: 'templates/access.html',
-			controller: 'AccessCtrl'
+			templateUrl: 'templates/menu.html',
+			controller: 'AppCtrl'
 		})
 
-		.state('access.login', {
-				url: '/login',
-				views: {
-					'content': {
-						templateUrl: 'templates/login.html',
-						controller: "LoginCtrl"
-					}
-				}
-			})
-			.state('access.signin', {
-				url: '/signin',
-				views: {
-					'content': {
-						templateUrl: 'templates/sign-in.html',
-						controller: "SigninCtrl"
-					}
-				}
-			})
+	.state('access', {
+		url: '/access',
+		abstract: true,
+		templateUrl: 'templates/access.html',
+		controller: 'AccessCtrl'
+	})
 
-		.state('app.home', {
-			url: '/home',
+	.state('access.login', {
+			url: '/login',
 			views: {
-				'menuContent': {
-					templateUrl: 'templates/home.html',
-					controller: 'HomeCtrl'
-
+				'content': {
+					templateUrl: 'templates/login.html',
+					controller: "LoginCtrl"
+				}
+			}
+		})
+		.state('access.signin', {
+			url: '/signin',
+			views: {
+				'content': {
+					templateUrl: 'templates/sign-in.html',
+					controller: "SigninCtrl"
 				}
 			}
 		})
 
+	.state('access.forgot', {
+		url: '/forgot',
+		views: {
+			'content': {
+				templateUrl: 'templates/forgot.html',
+				controller: 'ForgotCtrl'
+			}
+		}
+	})
+
+	.state('app.home', {
+		url: '/home',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/home.html',
+				controller: 'HomeCtrl'
+
+			}
+		}
+	})
 
 
-		//    .state('app.artists', {
-		//        url: '/artists',
-		//        views: {
-		//            'menuContent': {
-		//                templateUrl: 'templates/artists.html',
-		//                controller: 'AppCtrl'
-		//
-		//            }
-		//        }
-		//    })
-		.state('app.paintings', {
-				url: '/paintings',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/paintings.html',
-						controller: 'AppCtrl'
 
-					}
-				}
-			})
-			.state('app.artist', {
-				url: '/artist',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/artist.html',
-						controller: 'ArtistCtrl'
-
-					}
-				}
-			})
-			.state('app.artist-detail', {
-				url: '/artist/detail',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/artist-detail.html',
-						controller: 'ArtistDetailCtrl'
-
-					}
-				}
-			})
-
-		.state('app.artwork', {
-				url: '/artwork/all',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/artwork.html',
-						controller: 'ArtworkCtrl'
-
-					}
-				}
-			})
-			.state('app.about', {
-				url: '/about',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/about.html',
-						controller: 'AboutCtrl'
-
-					}
-				}
-			})
-
-		.state('app.cart', {
-				url: '/cart',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/cart.html',
-						controller: 'CartCtrl'
-
-					}
-				}
-			})
-			.state('app.checkout', {
-				url: '/checkout',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/checkout.html',
-						controller: 'CheckoutCtrl'
-
-					}
-				}
-			})
-
-		.state('app.profile', {
-			url: '/profile',
+	//    .state('app.artists', {
+	//        url: '/artists',
+	//        views: {
+	//            'menuContent': {
+	//                templateUrl: 'templates/artists.html',
+	//                controller: 'AppCtrl'
+	//
+	//            }
+	//        }
+	//    })
+	.state('app.paintings', {
+			url: '/paintings',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/profile.html',
+					templateUrl: 'templates/paintings.html',
 					controller: 'AppCtrl'
 
 				}
 			}
 		})
-
-		.state('app.art-detail', {
-			url: '/artist/detail/art-detail',
+		.state('app.artist', {
+			url: '/artist',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/art-detail.html',
-					controller: 'ArtDetailCtrl'
+					templateUrl: 'templates/artist.html',
+					controller: 'ArtistCtrl'
+
+				}
+			}
+		})
+		.state('app.artist-detail', {
+			url: '/artist/detail',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/artist-detail.html',
+					controller: 'ArtistDetailCtrl'
 
 				}
 			}
 		})
 
-		.state('app.contact', {
-			url: '/contact',
+	.state('app.artwork', {
+			url: '/artwork/all',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/contact.html',
-					controller: 'ContactCtrl'
+					templateUrl: 'templates/artwork.html',
+					controller: 'ArtworkCtrl'
+
+				}
+			}
+		})
+		.state('app.about', {
+			url: '/about',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/about.html',
+					controller: 'AboutCtrl'
 
 				}
 			}
 		})
 
-		.state('app.art-details', {
-			url: '/art-detail',
+	.state('app.cart', {
+			url: '/cart',
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/art-detail.html',
-					controller: 'ArtDetailCtrl'
+					templateUrl: 'templates/cart.html',
+					controller: 'CartCtrl'
+
+				}
+			}
+		})
+		.state('app.checkout', {
+			url: '/checkout',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/checkout.html',
+					controller: 'CheckoutCtrl'
 
 				}
 			}
 		})
 
-		.state('app.press', {
-			url: '/press',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/press.html',
-					controller: 'PressCtrl'
+	.state('app.profile', {
+		url: '/profile',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/profile.html',
+				controller: 'AppCtrl'
 
-				}
 			}
-		})
+		}
+	})
 
-		.state('app.event', {
-			url: '/event',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/event.html',
-					controller: 'EventCtrl'
+	.state('app.art-detail', {
+		url: '/artist/detail/art-detail',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/art-detail.html',
+				controller: 'ArtDetailCtrl'
 
-				}
 			}
-		})
+		}
+	})
 
-		.state('app.eventdetail', {
+	.state('app.contact', {
+		url: '/contact',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/contact.html',
+				controller: 'ContactCtrl'
+
+			}
+		}
+	})
+
+	.state('app.art-details', {
+		url: '/art-detail',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/art-detail.html',
+				controller: 'ArtDetailCtrl'
+
+			}
+		}
+	})
+
+	.state('app.press', {
+		url: '/press',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/press.html',
+				controller: 'PressCtrl'
+
+			}
+		}
+	})
+
+	.state('app.event', {
+		url: '/event',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/event.html',
+				controller: 'EventCtrl'
+
+			}
+		}
+	})
+
+	.state('app.eventdetail', {
 			url: '/eventdetail',
 			views: {
 				'menuContent': {
@@ -219,7 +229,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				}
 			}
 		})
-			.state('app.infra-services', {
+		.state('app.infra-services', {
 			url: '/infra-services',
 			views: {
 				'menuContent': {
@@ -228,17 +238,31 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 				}
 			}
-		})
+		});
 
+	$urlRouterProvider.otherwise('/app/home');
+})
 
-		;
-
-		$urlRouterProvider.otherwise('/app/home');
-	})
-	.filter('rawHtml', ['$sce',
+.filter('rawHtml', ['$sce',
   function ($sce) {
-			return function (val) {
-				return $sce.trustAsHtml(val);
-			};
+		return function (val) {
+			return $sce.trustAsHtml(val);
+		};
   }
 ])
+
+.directive('readmores', function ($window) {
+	return function (scope, element, attrs) {
+		var $element = $(element);
+		$element.children(".read-morecont").height(0);
+		$element.children(".readmore").click(function () {
+			var lastheight = $element.children(".read-morecont").height();
+			if (lastheight == 0) {
+				var newheight = $element.children(".read-morecont").children(".read-inner").height();
+				$element.children(".read-morecont").height(newheight);
+			} else {
+				$element.children(".read-morecont").height(0);
+			}
+		});
+	};
+});

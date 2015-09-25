@@ -23,11 +23,13 @@
 		<div class="row" ng-repeat="detail in artistdetail">
 			<div class="col-50" ng-repeat="details in detail">
 				<div class="prd-cont">
+				<a href="#/app/art-detail">
 					<div class="img-holder">
 						<figure>
 							<img ng-src="{{details.image}}" class="full-image">
 						</figure>
 					</div>
+					</a>
 					<div class="artist-cont-detail">
 						<p>
 							{{details.id}}

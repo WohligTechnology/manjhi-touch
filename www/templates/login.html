@@ -2,7 +2,7 @@
 	<ion-header-bar align-title="center">
 		<h1 class="title">Login</h1>
 	</ion-header-bar>
-	<ion-content class="padding">
+	<ion-content class="">
 		<div class="text-center">
 			<figure>
 				<img src="img/logo.jpg" class="full-size" width="80%">
@@ -16,17 +16,17 @@
 				<label class="item item-input">
 					<input type="password" ng-model="loginData.password" placeholder="Password">
 				</label>
-				<div class="btn-grp">
-					<button class="button button-block button-positive" type="submit">Log in</button>
+				<div class="btn-grp padding">
+					<a href="#/app/home" class="button button-block button-positive" type="submit">Log in</a>
 					<div class="row reg">
 						<div class="col-50">
 							<div class="">
-								<a href="">	Forgot Password? </a>
+								<a href="#/access/forgot">	Forgot Password? </a>
 							</div>
 						</div>
 						<div class="col-50">
 							<div class="text-right">
-								<a href="" class="pull-right"> Register</a>
+								<a href="#/access/signin" class="pull-right"> Register</a>
 							</div>
 						</div>
 					</div>

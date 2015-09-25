@@ -286,24 +286,19 @@
 		</label>
 		<div class="item item-checkbox">
 			<label class="checkbox">
-				<input type="checkbox" value="">
+				<input type="checkbox" value="" ng-model="on" ng-init="on=false">
 			</label>
-			Ship to Same Different
+			Ship to Different Address
 		</div>
-		<div class="item item-checkbox">
+<!--
+		<div class="item item-checkbox" ng-if="on">
 			<label class="checkbox">
-				<input type="checkbox">
+				<input type="checkbox" value="" ng-model="on" ng-init="on=false">
 			</label>
-			Ship to Same address
-		</div>
-		<!--
-		<div class="padding">
-			<button class="button button-block button-royal">
-				Ship to Same address
-			</button>
+			Ship to Same Address
 		</div>
 -->
-		<div ng-show="diffadd">
+		<div class="animate-if" ng-if="on">
 			<div class="item item-divider">Ship To This Address</div>
 
 			<label class="item item-input">
