@@ -111,6 +111,8 @@ span.badge.badge-assertive.cart {
   margin-left: 12px;
   color: #212121; }
 
+.search-panel .border-topnone {
+  border-top: 0px; }
 .search-panel .search-top {
   min-height: 53px !important;
   background-color: transparent !important; }
@@ -118,10 +120,15 @@ span.badge.badge-assertive.cart {
     position: absolute;
     text-align: left;
     text-transform: uppercase;
-    line-height: 36px; }
+    line-height: 36px;
+    font-weight: 600; }
     .search-panel .search-top .src-text i {
       vertical-align: baseline;
       padding-right: 5px; }
+  .search-panel .search-top .src-texts {
+    line-height: 45px;
+    text-transform: uppercase;
+    font-weight: 600; }
   .search-panel .search-top button.button.button-positive.button-block.src-btn {
     position: absolute;
     margin: 0;
@@ -8135,17 +8142,6 @@ a.item.cart-cont {
 .button-small.remove-btn {
   padding: 0 1px; }
 
-.checkbox input::before, .checkbox-icon::before {
-  display: table;
-  width: 20px;
-  height: 20px;
-  margin-top: 4px;
-  background: #fff;
-  border-radius: 0px; }
-.checkbox input::after, .checkbox-icon::after {
-  top: 18%;
-  left: 13%; }
-
 .cont-checkout label.item.item-input {
   padding: 2px 16px; }
 .cont-checkout .input-label {
@@ -8304,15 +8300,7 @@ h5.eventhead {
 
 .read-morecont {
   transition: all 600ms ease;
-  overflow: hidden;
-  margin: 5px 0; }
-
-.maxmin {
-  width: 40%;
-  padding-left: 5px; }
-
-.min-max h3 {
-  padding: 10px 0 2px 0; }
+  overflow: hidden; }
 
 .margin-btm {
   margin-bottom: 5px; }
@@ -8320,11 +8308,26 @@ h5.eventhead {
 .cont-artist h4 {
   margin-top: 0px; }
 
-.list.margin-btm .list .item {
-  padding-bottom: 6px; }
+.home-holder {
+  border: 1px solid #ddd; }
+  .home-holder .item-input {
+    padding: 10px; }
 
 .panel-body {
   font-size: 12px; }
+
+.min-max {
+  padding: 6px; }
+  .min-max h3 {
+    margin: 10px 0 5px 0;
+    font-size: 15px; }
+
+.maxmin {
+  width: 40%;
+  padding-left: 5px; }
+
+.search-top.item.item-divider.readmore {
+  border-bottom: 0px; }
 
 .panel-heading {
   font-size: 14px;

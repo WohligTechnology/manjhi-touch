@@ -164,6 +164,7 @@ $scope.showteam="true";
 	$scope.changetab=function(tab){
 		if(tab == 1){
 			$scope.tab = true;
+		
 		}else{
 			$scope.tab = false;
 		}

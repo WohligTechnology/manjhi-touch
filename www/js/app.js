@@ -260,8 +260,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			if (lastheight == 0) {
 				var newheight = $element.children(".read-morecont").children(".read-inner").height();
 				$element.children(".read-morecont").height(newheight);
+				$element.children(".read-morecont").css("margin-top", "5px");
+				$element.children(".read-morecont").css("margin-bottom", "5px");
 			} else {
 				$element.children(".read-morecont").height(0);
+				$element.children(".read-morecont").css("margin", "0px");
+//				$element.children(".read-morecont").css("overflow", "hidden");
 			}
 		});
 	};

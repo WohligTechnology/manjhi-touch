@@ -174,6 +174,9 @@ span.badge.badge-assertive.cart {
 }
 
 .search-panel {
+	.border-topnone {
+		border-top: 0px;
+	}
 	.search-top {
 		min-height: 53px !important;
 		background-color: transparent !important;
@@ -182,10 +185,16 @@ span.badge.badge-assertive.cart {
 			text-align: left;
 			text-transform: uppercase;
 			line-height: 36px;
+			font-weight: 600;
 			i {
 				vertical-align: baseline;
 				padding-right: 5px;
 			}
+		}
+		.src-texts {
+			line-height: 45px;
+			text-transform: uppercase;
+			font-weight: 600;
 		}
 		button.button.button-positive.button-block.src-btn {
 			position: absolute;
@@ -233,5 +242,4 @@ span.badge.badge-assertive.cart {
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-@import "style.scss";
-@import "angular.rangeSlider.scss"
+@import "style";
