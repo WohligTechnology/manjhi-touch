@@ -1,0 +1,43 @@
+<ion-modal-view>
+	<ion-header-bar class="header-rights" align-title="center">
+		<h1 class="title">Sort By</h1>
+		<div class="buttons">
+			<button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeSort()"></button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list catogories">
+			<label class="item item-radio">
+				<input type="radio" name="group" value="on">
+				<div class="item-content">
+					New to Old
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+			<label class="item item-radio">
+				<input type="radio" name="group">
+				<div class="item-content">
+					Old to New
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+			<label class="item item-radio">
+				<input type="radio" name="group">
+				<div class="item-content">
+					High to Low
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+			<label class="item item-radio">
+				<input type="radio" name="group">
+				<div class="item-content">
+					Low to High
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+		</div>
+		<div class="padding">
+			<button class="button button-positive button-block martoptwo">Submit</button>
+		</div>
+	</ion-content>
+</ion-modal-view>

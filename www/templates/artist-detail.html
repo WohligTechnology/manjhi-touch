@@ -6,7 +6,7 @@
 -->
 	<ion-nav-buttons side="right">
 		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+		<button class="button button-icon ion-ios-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
 		<label class="item-input-wrapper">
@@ -53,8 +53,6 @@
 					<div class="artist-cont-detail">
 						<p>
 							{{details.id}}
-							<i class="icon ion-heart active"></i>
-							<i class="icon ion-ios-cart positive"></i>
 						</p>
 						<p>
 							{{details.typename}}

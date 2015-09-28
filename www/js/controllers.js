@@ -15,8 +15,34 @@ angular.module('starter.controllers', [])
 
 .controller('ArtDetailCtrl', function ($scope, $stateParams) {
 	$scope.artdetail = [{
-		image: 'img/artist/artist1.jpg'
+		image: 'img/artist/artist1.jpg',
+    }, {
+		image: 'img/artist/artist2.jpg',
+    }, {
+		image: 'img/artist/artist3.jpg',
     }]
+
+	$scope.artistsimilar = [{
+		image: 'img/artist/artist1.jpg',
+    }, {
+		image: 'img/artist/artist2.jpg',
+    }, {
+		image: 'img/artist/artist3.jpg',
+    }, {
+		image: 'img/artist/artist4.jpg',
+    }]
+
+	$scope.artdetailcont = [{
+		id: '1',
+		name: 'Ajay R Dhandre',
+		title: 'Untitled',
+		medium: 'Water Colour & Ink on Paper',
+		size: '30 X 20 inches',
+		year: '2005',
+		price: 'Rs. 30,000 / $ 60.00'
+
+	}]
+
 })
 
 
@@ -54,7 +80,7 @@ angular.module('starter.controllers', [])
 	$scope.artistdetail = _.chunk($scope.artistdetail, 2);
 })
 
-.controller('ArtistCtrl', function ($scope, $stateParams) {
+.controller('ArtistCtrl', function ($scope, $stateParams, $ionicModal) {
 	$scope.tab = 'grid';
 	$scope.aristname = [{
 		name: 'S Yousuf Ali',
@@ -84,6 +110,52 @@ angular.module('starter.controllers', [])
 
 	$scope.aristname = _.chunk($scope.aristname, 2);
 
+	$scope.showCategory = function () {
+		$scope.modal.show();
+	};
+	$ionicModal.fromTemplateUrl('templates/category.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeCategory = function () {
+		$scope.modal.hide();
+	};
+
+	// Open the login modal
+	$scope.showFilter = function () {
+		$scope.modal1.show();
+	};
+	$ionicModal.fromTemplateUrl('templates/filter.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal1 = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeFilter = function () {
+		$scope.modal1.hide();
+	};
+
+
+
+	$ionicModal.fromTemplateUrl('templates/sort.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal2 = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeSort = function () {
+		$scope.modal2.hide();
+	};
+
+	// Open the login modal
+	$scope.showSort = function () {
+		$scope.modal2.show();
+	};
 })
 
 .controller('ArtistDetailCtrl', function ($scope, $stateParams) {
@@ -158,14 +230,14 @@ angular.module('starter.controllers', [])
 .controller('ContactCtrl', function ($scope, $stateParams) {})
 
 .controller('AboutCtrl', function ($scope, $stateParams) {
-$scope.showteam="true";
-//$scope.showactivity="true";
+	$scope.showteam = "true";
+	//$scope.showactivity="true";
 	$scope.tab = true;
-	$scope.changetab=function(tab){
-		if(tab == 1){
+	$scope.changetab = function (tab) {
+		if (tab == 1) {
 			$scope.tab = true;
-		
-		}else{
+
+		} else {
 			$scope.tab = false;
 		}
 	}
@@ -342,6 +414,8 @@ $scope.showteam="true";
 
 .controller('CartCtrl', function ($scope, $stateParams) {})
 
+.controller('WishlistCtrl', function ($scope, $stateParams) {})
+
 .controller('CheckoutCtrl', function ($scope, $stateParams) {
 	$scope.checkout = [];
 	$scope.checkout.isshipping = true;
@@ -366,5 +440,4 @@ $scope.showteam="true";
 		}
 
 	}
-})
-;
+});

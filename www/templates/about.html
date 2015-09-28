@@ -6,7 +6,7 @@
 -->
 	<ion-nav-buttons side="right">
 		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+		<button class="button button-icon ion-ios-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
 		<label class="item-input-wrapper">
@@ -44,54 +44,60 @@
 								<li>Deputy Governor RI Dist 3140 (1998-99)</li>
 								<li>Founder &#38; Chairman – Noble Heart Foundation</li>
 							</ul>
-							<div class="text-right">
-								<a class="readmore" ng-click="status.open = !status.open">see more </a>
-							</div>
-							<accordion>
-								<accordion-group is-open="status.open">
-									<ul>
-										<li>An ardent fan and lover of Art, always eager to promote artists. Invested significant time and energy in the study of art in all its manifestations over the last 30 years.</li>
-										<li>Entrepreneur, always in search of pursuits. Past and present business ventures include timber and forest business in Kashmir, mines and orchards in Rajasthan, stocks and finance at Vadodara and Mumbai.</li>
-										<li>B Com, Diploma in Business Management.</li>
-										<li>A Sportsman: Hockey, Football and Shooting and in the year 1973 was allocated a special .22 Bore Rifle by the National Rifle Association of India, Delhi.</li>
-										<li>Founder: Kota Heart Foundation and Noble Heart Foundation - has been serving heart patients for over 30 years.</li>
-										<li>Founder Member of School for Deaf, Dumb and Blind at Kota.</li>
-										<li>Joined Rotary in 1976. Held all important positions since then. To name a few - Deputy Governor R I Dist 3140 in 1998-1999, Director/Chairman Promotion of Arts &amp; Culture R I DIST 3140 (Since 2006).</li>
-										<li>Won more than 50 trophies and awards including "OUTSTANDING SERVICE AWARD" and "SIGNIFICANT ACHIEVEMENT AWARD" by Rotary International President, "EXCEPTIONAL PROJECT AWARD" in the year 1990, prestigious "LOK SEVA AWARD" for service to Heart Patients, "RAJIV GANDHI EXCELLENCE AWARD" for outstanding services, achievements and contributions, 1996.</li>
-										<li>ADDITIONAL CHIEF CONVENER - Bombay for HANDS OF HARMONY ACROSS INDIA organized at ALL INDIA LEVEL to express solidarity for peace and communal harmony. "Ekta Raksha Bandan Din" was organized in all State Capitals and District Towns of India from 1050 to 1115 hours on Martyrs Day, January 30,1994.</li>
-										<li>For the UPLIFTMENT of brother and sister humans, convening and organizing talks by enlightened Masters, Philosophers, Scientists, Scholars and Selfless Social Workers on Rotary and other platforms, with special emphasis on subjects such as Peace, Harmony, Integration, Rebuilding India through right values, Art in all its magnificent facets and its softening and elevating effect etc.</li>
-										<li>Took very active and keen interest in eradication of leprosy.</li>
-										<li>Preservation of Playgrounds, Parks and open spaces with passion. In association with (late) Shri Chatrabhuj Bhai Narsee, an educationist and philanthropist and other friends,organized many lectures on the subject. Ensured students are not deprived of the necessary facility of playgrounds and open spaces for harmonious growth.</li>
-										<li>Organiser, Charity auctions of Art conducted by Rotary as Deputy Governor of R I Dist 3140. Path -breaking initiatives were emulated at several other centres.</li>
-										<li>I love my India campaign: To create national pride and patriotism in youth and citizens. It was inaugurated by then President of India Shri KR Narayanan in Mumbai. This programme was held under auspicious of Rotary when he was Deputy District Governor RI Dist 3140.</li>
-										<li>When he was Deputy District Governor RI Dist 3140, RI Dist 3140 along with UNAIDS organized to sponsor an International conference on HIV/AIDS in Mumbai and invited Rotary Governors of India, Pakistan, Srilanka, Bangladesh, Nepal. Executive Director of UNAIDS and Assistant Secretary General of UN Dr Peter Piot, NACO, Health Officials of States of India and NGOs participated.
-										</li>
-									</ul>
-								</accordion-group>
-							</accordion>
-
+							<readmores class="">
+								<div class="text-right readmore">
+									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
+								</div>
+								<div class="read-morecont">
+									<div class="read-inner">
+										<ul>
+											<li>An ardent fan and lover of Art, always eager to promote artists. Invested significant time and energy in the study of art in all its manifestations over the last 30 years.</li>
+											<li>Entrepreneur, always in search of pursuits. Past and present business ventures include timber and forest business in Kashmir, mines and orchards in Rajasthan, stocks and finance at Vadodara and Mumbai.</li>
+											<li>B Com, Diploma in Business Management.</li>
+											<li>A Sportsman: Hockey, Football and Shooting and in the year 1973 was allocated a special .22 Bore Rifle by the National Rifle Association of India, Delhi.</li>
+											<li>Founder: Kota Heart Foundation and Noble Heart Foundation - has been serving heart patients for over 30 years.</li>
+											<li>Founder Member of School for Deaf, Dumb and Blind at Kota.</li>
+											<li>Joined Rotary in 1976. Held all important positions since then. To name a few - Deputy Governor R I Dist 3140 in 1998-1999, Director/Chairman Promotion of Arts &amp; Culture R I DIST 3140 (Since 2006).</li>
+											<li>Won more than 50 trophies and awards including "OUTSTANDING SERVICE AWARD" and "SIGNIFICANT ACHIEVEMENT AWARD" by Rotary International President, "EXCEPTIONAL PROJECT AWARD" in the year 1990, prestigious "LOK SEVA AWARD" for service to Heart Patients, "RAJIV GANDHI EXCELLENCE AWARD" for outstanding services, achievements and contributions, 1996.</li>
+											<li>ADDITIONAL CHIEF CONVENER - Bombay for HANDS OF HARMONY ACROSS INDIA organized at ALL INDIA LEVEL to express solidarity for peace and communal harmony. "Ekta Raksha Bandan Din" was organized in all State Capitals and District Towns of India from 1050 to 1115 hours on Martyrs Day, January 30,1994.</li>
+											<li>For the UPLIFTMENT of brother and sister humans, convening and organizing talks by enlightened Masters, Philosophers, Scientists, Scholars and Selfless Social Workers on Rotary and other platforms, with special emphasis on subjects such as Peace, Harmony, Integration, Rebuilding India through right values, Art in all its magnificent facets and its softening and elevating effect etc.</li>
+											<li>Took very active and keen interest in eradication of leprosy.</li>
+											<li>Preservation of Playgrounds, Parks and open spaces with passion. In association with (late) Shri Chatrabhuj Bhai Narsee, an educationist and philanthropist and other friends,organized many lectures on the subject. Ensured students are not deprived of the necessary facility of playgrounds and open spaces for harmonious growth.</li>
+											<li>Organiser, Charity auctions of Art conducted by Rotary as Deputy Governor of R I Dist 3140. Path -breaking initiatives were emulated at several other centres.</li>
+											<li>I love my India campaign: To create national pride and patriotism in youth and citizens. It was inaugurated by then President of India Shri KR Narayanan in Mumbai. This programme was held under auspicious of Rotary when he was Deputy District Governor RI Dist 3140.</li>
+											<li>When he was Deputy District Governor RI Dist 3140, RI Dist 3140 along with UNAIDS organized to sponsor an International conference on HIV/AIDS in Mumbai and invited Rotary Governors of India, Pakistan, Srilanka, Bangladesh, Nepal. Executive Director of UNAIDS and Assistant Secretary General of UN Dr Peter Piot, NACO, Health Officials of States of India and NGOs participated.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</readmores>
 							<h5>Harmeet S Sethi</h5>
 							<ul>
 								<li>Director, Aura Art eConnect Pvt Ltd</li>
 								<li>Director, Aura Art Development Pvt Ltd</li>
 								<li>CEO, Aura Art</li>
 							</ul>
-							
-							<div class="text-right">
-								<a class="readmore" ng-click="status1.open = !status1.open">see more </a>
-							</div>
-									<ul>
-										<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building deep relationships with artists across the country.</li>
-										<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
-										</li>
-										<li>Instrumental in conceptualising and administering nearly 30 shows over the last 6 years, across the country.</li>
-										<li>Managing family business of stocks and finance in Vadodara since 1995. Developed and successfully implemented trading techniques, relying significantly on Technical Analysis.</li>
-										<li>Was Gold medalist at Stock Market Operations programme conducted by Vadodara Stock Exchange Ltd in 1995.</li>
-										<li>Bachelor of Business Administration.</li>
-										<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
-										<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
-									</ul>
 
+							<readmores class="">
+								<div class="text-right readmore">
+									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
+								</div>
+								<div class="read-morecont">
+									<div class="read-inner">
+										<ul>
+											<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building deep relationships with artists across the country.</li>
+											<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
+											</li>
+											<li>Instrumental in conceptualising and administering nearly 30 shows over the last 6 years, across the country.</li>
+											<li>Managing family business of stocks and finance in Vadodara since 1995. Developed and successfully implemented trading techniques, relying significantly on Technical Analysis.</li>
+											<li>Was Gold medalist at Stock Market Operations programme conducted by Vadodara Stock Exchange Ltd in 1995.</li>
+											<li>Bachelor of Business Administration.</li>
+											<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
+											<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
+										</ul>
+									</div>
+								</div>
+							</readmores>
 							<h5>Rishiraj S Sethi</h5>
 							<ul>
 								<li>Director, Aura Art eConnect Pvt Ltd
@@ -101,24 +107,26 @@
 								<li>Chief Strategist, Aura Art
 								</li>
 							</ul>
-							<div class="text-right">
-								<a class="readmore" ng-click="status2.open = !status2.open">see more</a>
-							</div>
-							<accordion>
-								<accordion-group is-open="status2.open">
-									<ul>
-										<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building deep relationships with artists across the country.</li>
-										<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
-										</li>
-										<li>Instrumental in conceptualising and administering nearly 30 shows over the last 6 years, across the country.</li>
-										<li>Managing family business of stocks and finance in Vadodara since 1995. Developed and successfully implemented trading techniques, relying significantly on Technical Analysis.</li>
-										<li>Was Gold medalist at Stock Market Operations programme conducted by Vadodara Stock Exchange Ltd in 1995.</li>
-										<li>Bachelor of Business Administration.</li>
-										<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
-										<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
-									</ul>
-								</accordion-group>
-							</accordion>
+							<readmores class="">
+								<div class="text-right readmore">
+									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
+								</div>
+								<div class="read-morecont">
+									<div class="read-inner">
+										<ul>
+											<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building deep relationships with artists across the country.</li>
+											<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
+											</li>
+											<li>Instrumental in conceptualising and administering nearly 30 shows over the last 6 years, across the country.</li>
+											<li>Managing family business of stocks and finance in Vadodara since 1995. Developed and successfully implemented trading techniques, relying significantly on Technical Analysis.</li>
+											<li>Was Gold medalist at Stock Market Operations programme conducted by Vadodara Stock Exchange Ltd in 1995.</li>
+											<li>Bachelor of Business Administration.</li>
+											<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
+											<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
+										</ul>
+									</div>
+								</div>
+							</readmores>
 							<h4> Management Advisors </h4>
 							<h5>Shri Nilesh Ganjwala</h5>
 							<p>CEO, Innergize Solutions Pvt Ltd
@@ -274,10 +282,10 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="activities" ng-hide="tab">
 			<div class="padding-more">
 				<h4 class="head-team">Activities</h4>

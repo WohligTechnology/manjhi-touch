@@ -34,6 +34,10 @@ $headings-font-weight: 500 !default;
 	margin-bottom: 0;
 }
 
+.button {
+	text-transform: capitalize;
+}
+
 .marbot {
 	margin-bottom: 12px;
 }
@@ -54,8 +58,19 @@ $headings-font-weight: 500 !default;
 	margin: 5px 0px 5px 0px;
 }
 
+.margin-zero {
+	margin: 0px !important;
+}
+
 .color-black {
 	color: #212121;
+}
+
+.item.item-divider {
+	text-transform: uppercase;
+	background: #fff;
+	font-weight: 600;
+	font-size: 14px;
 }
 
 .custom-drop {
@@ -163,8 +178,8 @@ button.button.button-icon.ln-cart.cart-btn:before {
 }
 
 span.badge.badge-assertive.cart {
-	top: -30px;
-	right: -7px;
+	top: -37px;
+	right: -10px;
 	background-color: $stable;
 	z-index: 1;
 	padding: 2px 2px;
@@ -173,28 +188,52 @@ span.badge.badge-assertive.cart {
 	color: $base;
 }
 
+.bar .button {
+	padding: 0 11px;
+}
+
 .search-panel {
 	.border-topnone {
 		border-top: 0px;
+		border-bottom: 0px;
+	}
+	.min-max {
+		padding: 6px;
+		h3 {
+			margin: 10px 0 5px 0;
+			font-size: 15px;
+		}
+		.margin-top-zero {
+			margin-top: 0px;
+		}
 	}
 	.search-top {
-		min-height: 53px !important;
+		min-height: 45px !important;
 		background-color: transparent !important;
+		&.item.item-divider.readmore {
+			border-bottom: 0px;
+		}
 		.src-text {
 			position: absolute;
 			text-align: left;
 			text-transform: uppercase;
 			line-height: 36px;
 			font-weight: 600;
+			font-size: 14px;
 			i {
 				vertical-align: baseline;
 				padding-right: 5px;
 			}
 		}
 		.src-texts {
-			line-height: 45px;
+			line-height: 30px;
 			text-transform: uppercase;
 			font-weight: 600;
+			font-size: 14px;
+			i {
+				vertical-align: baseline;
+				padding-right: 5px;
+			}
 		}
 		button.button.button-positive.button-block.src-btn {
 			position: absolute;

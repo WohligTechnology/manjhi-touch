@@ -11,6 +11,9 @@ For example, you might change some of the default colors:
 .marbotzero {
   margin-bottom: 0; }
 
+.button {
+  text-transform: capitalize; }
+
 .marbot {
   margin-bottom: 12px; }
 
@@ -26,8 +29,17 @@ For example, you might change some of the default colors:
 .margin {
   margin: 5px 0px 5px 0px; }
 
+.margin-zero {
+  margin: 0px !important; }
+
 .color-black {
   color: #212121; }
+
+.item.item-divider {
+  text-transform: uppercase;
+  background: #fff;
+  font-weight: 600;
+  font-size: 14px; }
 
 .custom-drop .list .item.item-accordion {
   line-height: 38px;
@@ -102,8 +114,8 @@ button.button.button-icon.ln-cart.cart-btn:before {
   font-size: 28px; }
 
 span.badge.badge-assertive.cart {
-  top: -30px;
-  right: -7px;
+  top: -37px;
+  right: -10px;
   background-color: #e6e7e9;
   z-index: 1;
   padding: 2px 2px;
@@ -111,24 +123,42 @@ span.badge.badge-assertive.cart {
   margin-left: 12px;
   color: #212121; }
 
+.bar .button {
+  padding: 0 11px; }
+
 .search-panel .border-topnone {
-  border-top: 0px; }
+  border-top: 0px;
+  border-bottom: 0px; }
+.search-panel .min-max {
+  padding: 6px; }
+  .search-panel .min-max h3 {
+    margin: 10px 0 5px 0;
+    font-size: 15px; }
+  .search-panel .min-max .margin-top-zero {
+    margin-top: 0px; }
 .search-panel .search-top {
-  min-height: 53px !important;
+  min-height: 45px !important;
   background-color: transparent !important; }
+  .search-panel .search-top.item.item-divider.readmore {
+    border-bottom: 0px; }
   .search-panel .search-top .src-text {
     position: absolute;
     text-align: left;
     text-transform: uppercase;
     line-height: 36px;
-    font-weight: 600; }
+    font-weight: 600;
+    font-size: 14px; }
     .search-panel .search-top .src-text i {
       vertical-align: baseline;
       padding-right: 5px; }
   .search-panel .search-top .src-texts {
-    line-height: 45px;
+    line-height: 30px;
     text-transform: uppercase;
-    font-weight: 600; }
+    font-weight: 600;
+    font-size: 14px; }
+    .search-panel .search-top .src-texts i {
+      vertical-align: baseline;
+      padding-right: 5px; }
   .search-panel .search-top button.button.button-positive.button-block.src-btn {
     position: absolute;
     margin: 0;
@@ -7863,6 +7893,10 @@ a {
 .full-height {
   height: 100%; }
 
+.logo {
+  width: 115px;
+  margin-top: 5px; }
+
 .artbox .col {
   position: relative;
   padding: 2px; }
@@ -7870,11 +7904,6 @@ a {
 .artbox .row {
   padding: 0;
   margin: 0; }
-
-.item-divider {
-  padding-top: 4px;
-  padding-bottom: 4px;
-  line-height: 1.4; }
 
 .artbox .row + .row .col {
   padding-top: 0;
@@ -7888,7 +7917,7 @@ body {
   color: #ff4f4f; }
 
 .prd-holder, .prd-cont {
-  padding-right: 5px;
+  padding-right: 15px;
   min-height: 240px;
   padding-bottom: 20px; }
   .prd-holder .full-image, .prd-cont .full-image {
@@ -8004,9 +8033,8 @@ i.assertive {
   font-size: 13px;
   font-weight: 300;
   line-height: 140%; }
-.team-style a.readmore {
-  color: #ff4f4f;
-  cursor: pointer; }
+.team-style .button {
+  text-transform: lowercase; }
 
 .activities ul {
   padding-left: 17px;
@@ -8090,22 +8118,20 @@ ul.lineul + ul.lineul {
 
 .list.list-details .item {
   padding: 5px 10px;
-  border: 0px;
-  font-size: 14px; }
-.list.list-details .item-note {
-  font-size: 12px;
-  color: #444; }
-.list.list-details .item-note.assertive {
-  color: #ff4f4f; }
-.list.list-details i {
-  padding-left: 5px;
+  border: 0px; }
+.list.list-details span.label {
+  display: table;
+  padding: 7px 10px 7px 0px;
+  max-width: 200px;
+  width: 30%;
+  color: #444;
   font-size: 16px; }
-.list.list-details i.icon.ion-heart.assertive {
-  color: #ff4f4f; }
+.list.list-details .item-map {
+  padding-right: 10px;
+  font-size: 14px; }
 
-.head.head-artist .item-note {
-  margin-top: -2px;
-  color: #ff4f4f; }
+.head-artist h5 {
+  text-transform: uppercase; }
 
 .style1-bg {
   background-color: #e6e7e9; }
@@ -8162,7 +8188,6 @@ a.item.cart-cont {
   font-weight: 500;
   margin-bottom: 2px; }
 .white-line p {
-  font-size: 11px;
   line-height: 150%; }
   .white-line p .row .col {
     padding-right: 0px; }
@@ -8253,7 +8278,8 @@ h5.eventhead {
   margin-right: 5px; }
   .box-style1 h5 {
     font-size: 13px;
-    height: 40px; }
+    min-height: 40px;
+    margin-bottom: 0px; }
   .box-style1 p {
     font-size: 12px;
     height: 55px;
@@ -8307,6 +8333,8 @@ h5.eventhead {
 
 .cont-artist h4 {
   margin-top: 0px; }
+.cont-artist .text-right.readmore {
+  padding-right: 15px; }
 
 .home-holder {
   border: 1px solid #ddd; }
@@ -8316,19 +8344,37 @@ h5.eventhead {
 .panel-body {
   font-size: 12px; }
 
-.min-max {
-  padding: 6px; }
-  .min-max h3 {
-    margin: 10px 0 5px 0;
-    font-size: 15px; }
-
 .maxmin {
   width: 40%;
   padding-left: 5px; }
 
-.search-top.item.item-divider.readmore {
-  border-bottom: 0px; }
-
 .panel-heading {
   font-size: 14px;
   font-weight: 600; }
+
+ion-footer-bar.tabs-down.bar.bar-footer {
+  padding: 0; }
+  ion-footer-bar.tabs-down.bar.bar-footer .tabs {
+    background: #fff;
+    height: 38px;
+    line-height: 32px; }
+    ion-footer-bar.tabs-down.bar.bar-footer .tabs a.tab-item {
+      border-right: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      min-height: 0px; }
+
+.list.thumbnail .item-thumbnail-left {
+  padding-bottom: 5px; }
+.list.thumbnail button.remove-btn {
+  line-height: 0px;
+  min-height: 20px; }
+
+.list.catogories .item .item-content {
+  padding: 10px 15px; }
+.list.catogories .item i.radio-icon.ion-checkmark {
+  padding: 5px 14px;
+  color: #d4ae70; }
+
+.header-rights.bar .button.button-icon .icon:before, .header-rights.bar .button.button-icon:before, .header-rights.bar .button.button-icon.icon-right:before {
+  font-size: 20px;
+  line-height: 32px; }

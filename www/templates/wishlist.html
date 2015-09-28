@@ -1,0 +1,47 @@
+<ion-view classs="bar-stable" title="Wishlist">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ion-ios-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<div class="aur-logo">
+		<img src="img/logo2.png" class="full-height">
+	</div>
+	<ion-content>
+		<div class="list thumbnail">
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000/ $6,400</h3>
+				<h3 class="">Quantity: 1</h3>
+				<button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000/ $6,400</h3>
+				<h3 class="">Quantity: 1</h3>
+				<button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000/ $6,400</h3>
+				<h3 class="">Quantity: 1</h3>
+				<button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
+			</a>
+	</ion-content>
+</ion-view>

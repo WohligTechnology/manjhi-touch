@@ -1,12 +1,7 @@
 <ion-view classs="bar-stable" title="PAINTING">
-	<!--
-    <ion-nav-title>
-        <img src="img/logo.jpg" class="full-height">
-    </ion-nav-title>
--->
 	<ion-nav-buttons side="right">
 		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ln-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+		<button class="button button-icon ion-ios-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
 		<label class="item-input-wrapper">
@@ -21,66 +16,74 @@
 	</div>
 	<ion-content>
 		<div class="img-holder-prd">
+			<!--
 			<div class="img-holder-big text-center">
-<!--				<a href="#" class="">Enlarge <i class="icon ion-arrow-expand"></i></a>-->
+				<a href="#" class="">Enlarge <i class="icon ion-arrow-expand"></i></a>
 				<img src="img/artist/artist1.jpg">
 			</div>
-			<div class="list list-details padding">
-				<div class="item" href="#">
-					1
-					<i class="icon ion-heart assertive"></i>
+-->
+			<ion-slide-box show-pager="true" auto-play="true" pager-click="true">
+				<ion-slide ng-repeat="item in artdetail">
+					<!--				<ion-slide>-->
+					<div class="box img-holder-big text-center">
+						<ion-scroll zooming="true" direction="x" min-zoom="1" max-zoom="2" style="width:80%;display:block;margin:0 auto;">
+							<img ng-src="{{item.image}}" class="full-image">
+							<!--							<img src="img/artist/artist1.jpg">-->
+						</ion-scroll>
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+			<div class="padding">
+				<div class="list list-details" ng-repeat="item in artdetailcont">
+					<label class="item item-input">
+						{{item.id}}
+					</label>
+					<label class="item item-input">
+						<span class="label">Artist</span>
+						<div class="item-map">{{item.name}}</div>
+					</label>
+					<label class="item item-input">
+						<span class="label">Title</span>
+						<div class="item-map">{{item.title}}</div>
+					</label>
+					<label class="item item-input">
+						<span class="label">Medium</span>
+						<div class="item-map">{{item.medium}}</div>
+					</label>
+					<label class="item item-input">
+						<span class="label">Size</span>
+						<div class="item-map">{{item.size}}</div>
+					</label>
+					<label class="item item-input">
+						<span class="label">Year</span>
+						<div class="item-map">{{item.year}}</div>
+					</label>
+					<label class="item item-input">
+						<span class="label">Price</span>
+						<div class="item-map">{{item.price}}</div>
+					</label>
 				</div>
-
-				<div class="item assertive" href="#">
-					Artist
-					<span class="item-note assertive">Ajay R Dhandre</span>
-				</div>
-				<div class="item" href="#">
-					Title
-					<span class="item-note">Untitled</span>
-				</div>
-				<div class="item" href="#">
-					Medium
-					<span class="item-note">Water Colour &amp; Ink on Paper</span>
-				</div>
-				<div class="item" href="#">
-					Size
-					<span class="item-note">30 X 20 inches</span>
-				</div>
-				<div class="item" href="#">
-					Year
-					<span class="item-note">2005</span>
-				</div>
-				<div class="item" href="#">
-					Price
-					<span class="item-note">Rs. 30,000</span>
-				</div>
-			</div>
-			<div class="btn-grp padding">
-				<button class="button button-block">
-					VIEW ARTWORK IN YOUR ROOM
-				</button>
-				<a href="#/app/cart" class="button button-block button-positive">
-					ADD TO CART
+				<div class="btn-grp">
+					<button class="button button-block button-balanced icon-left ion-ios-home">
+						View Artwork In Your Room
+					</button>
+					<button class="button button-block button-assertive icon-left ion-ios-heart">
+						Add to WishList
+					</button>
+					<a href="#/app/cart" class="button button-positive button-block icon-left ion-ios-cart">
+					Add To Cart
 				</a>
+				</div>
 			</div>
 			<div class="img-artist style1-bg padding">
-				<div class="head head-artist" href="#">
-					<span class="item-note">view all</span>
-					<h5>MORE WORKS BY THIS ARTIST</h5>
+				<div class="head-artist" href="#">
+					<!--					<span class="item-note">view all</span>-->
+					<h5>More Works By This Artist</h5>
 				</div>
 				<div class="row">
-					<div class="col-25">
-						<img src="img/artist/artist1.jpg" class="full-image">
-					</div>
-					<div class="col-25">
-						<img src="img/artist/artist2.jpg" class="full-image">
-					</div>
-					<div class="col-25">
-						<img src="img/artist/artist3.jpg" class="full-image">
-					</div>
-					<div class="col-25">
-						<img src="img/artist/artist4.jpg" class="full-image">
+					<div class="col-25" ng-repeat="item in artistsimilar">
+						<!--						<img src="img/artist/artist1.jpg" class="full-image">-->
+						<img ng-src="{{item.image}}" class="full-image">
 					</div>
 				</div>
 			</div>
