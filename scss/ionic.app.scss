@@ -34,10 +34,6 @@ $headings-font-weight: 500 !default;
 	margin-bottom: 0;
 }
 
-.button {
-	text-transform: capitalize;
-}
-
 .marbot {
 	margin-bottom: 12px;
 }
@@ -178,16 +174,18 @@ button.button.button-icon.ln-cart.cart-btn:before {
 }
 
 span.badge.badge-assertive.cart {
-	top: -37px;
-	right: -10px;
+	top: -38px;
+	right: -14px;
 	background-color: $stable;
 	z-index: 1;
 	padding: 2px 2px;
 	font-size: 13px;
-	margin-left: 12px;
+	margin-left: 3px;
 	color: $base;
 }
-
+button.right-btn.cart-btn {
+    margin-right: 2px;
+}
 .bar .button {
 	padding: 0 11px;
 }
@@ -218,11 +216,11 @@ span.badge.badge-assertive.cart {
 			text-align: left;
 			text-transform: uppercase;
 			line-height: 36px;
-			font-weight: 600;
+			font-weight: 800;
 			font-size: 14px;
 			i {
 				vertical-align: baseline;
-				padding-right: 5px;
+				padding-right: 10px;
 			}
 		}
 		.src-texts {
@@ -232,7 +230,7 @@ span.badge.badge-assertive.cart {
 			font-size: 14px;
 			i {
 				vertical-align: baseline;
-				padding-right: 5px;
+				padding-right: 10px;
 			}
 		}
 		button.button.button-positive.button-block.src-btn {
@@ -245,6 +243,7 @@ span.badge.badge-assertive.cart {
 			margin-right: 10px;
 			margin-top: 0;
 			min-height: 25px;
+			text-transform: uppercase;
 		}
 	}
 	label {
@@ -256,24 +255,31 @@ span.badge.badge-assertive.cart {
 }
 
 .img-detail {
-	border: 3px solid #ddd;
+	border: 5px solid #ddd;
 	padding: 0px 4px 0px 4px;
+	position: absolute;
+	top: 0;
 	p {
 		font-size: 12px;
 		line-height: 100%;
-		font-weight: 300;
+		font-weight: 400;
+		margin-bottom: 5px;
 	}
 	button.img-btn {
-		margin: 10px auto !important;
+		margin: 6px auto !important;
 		min-height: 30px;
 		font-size: 10px;
 		line-height: 0px;
 		cursor: pointer;
-		width: 67% !important;
+		width: 70% !important;
 		text-transform: uppercase;
 		background: transparent !important;
 		color: $assertive;
 		border: 1px solid $assertive;
+	}
+	h5 {
+		font-weight: 600;
+		margin: 5px 0;
 	}
 }
 

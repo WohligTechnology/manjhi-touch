@@ -1,10 +1,10 @@
 <ion-view class="custom-home">
-	<ion-nav-title align-title="center">
-		<img src="img/logo.png" class="logo">
+	<ion-nav-title>
+		<img src="img/logo.jpg" class="full-height">
 	</ion-nav-title>
 	<ion-nav-buttons side="right">
-		<button class="button button-clear button-icon ion-ios-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ion-ios-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+		<button class="button button-clear button-icon right-btn ion-android-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
 		<label class="item-input-wrapper">
@@ -17,13 +17,13 @@
 	<div class="aur-logo">
 		<img src="img/logo2.png" class="full-height">
 	</div>
-	<ion-tabs class="tabs-striped tabs-top tabs-color-active-positive ">
+	<ion-tabs class="tabs-striped tabs-top tabs-top1 tabs-color-active-positive ">
 		<ion-tab title="Home" href="#/app/home"></ion-tab>
 		<ion-tab title="Artists" href="#/app/artist"></ion-tab>
 		<ion-tab title="Paintings & More" href="#/app/artwork/all"></ion-tab>
 	</ion-tabs>
 
-	<ion-content class="has-tabs-top padding">
+	<ion-content class="has-tabs-top1 padding">
 		<div class="home-holder">
 			<ion-slide-box on-slide-changed="slideHasChanged($index)">
 				<ion-slide>
@@ -117,34 +117,43 @@
 				</ion-list>
 			</div>
 		</div>
-		<button class="button button-positive button-block martoptwo">Search</button>
+		<button class="button button-positive button-block martoptwo btn-home">Search</button>
 		<div class="heading padding-vertical assertive text-center htwo">
 			<h4 class="marbottwo">Customised Solutions</h4>
 		</div>
 		<div class="artbox">
 			<div class="row">
 				<div class="col">
-					<img src="img/room.jpg" class="full-image">
-					<span class="text-heading">View Artwork <br>
-in your room</span>
+					<div class="box-grey">
+						<img src="img/room.jpg" class="full-image">
+						<span class="text-heading">View Artwork <br>
+						in your room</span>
+					</div>
 				</div>
 				<div class="col">
-					<img src="img/frame.jpg" class="full-image">
-					<span class="text-heading">Custom <br>Framing</span>
+					<div class="box-grey">
+						<img src="img/frame.jpg" class="full-image">
+						<span class="text-heading">Custom <br>Framing</span>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<img src="img/sculpture.jpg" class="full-image">
-					<span class="text-heading">Commisioned <br> Sculptures</span>
+					<div class="box-grey">
+						<img src="img/sculpture.jpg" class="full-image">
+						<span class="text-heading">Commisioned <br> Sculptures</span>
+					</div>
 				</div>
 				<div class="col ">
-					<div class="img-detail text-center">
-						<h5>THOUGHT LEADERSHIP &amp; DEVELOPMENTS</h5>
-						<p>
-							Aura Art announces ICICI Lombard as Insurance Partner.
-						</p>
-						<button class="button button-positive button-block img-btn">know more</button>
+					<div class="box-grey">
+						<img src="img/leadership.jpg" class="full-image">
+						<div class="img-detail text-center">
+							<h5>THOUGHT LEADERSHIP &amp; DEVELOPMENTS</h5>
+							<p>
+								Aura Art announces ICICI Lombard as Insurance Partner.
+							</p>
+							<button class="button button-positive button-block img-btn">know more</button>
+						</div>
 					</div>
 					<!--                    <img src="img/print1.jpg" class="full-image no-opacity">-->
 				</div>
@@ -157,11 +166,11 @@ in your room</span>
 		<div class="artbox">
 			<div class="row">
 				<div class="col">
-					<img src="img/painting1.jpg" class="full-image" alt="painting">
+					<img src="img/painting2.jpg" class="full-image" alt="painting">
 					<span class="text-heading">Paintings</span>
 				</div>
 				<div class="col">
-					<img src="img/sculpture1.jpg" class="full-image" alt="sculpture">
+					<img src="img/sculpture2.jpg" class="full-image" alt="sculpture">
 					<span class="text-heading">Sculptures</span>
 				</div>
 			</div>

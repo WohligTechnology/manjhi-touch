@@ -17,26 +17,48 @@ a {
 	height: 100%;
 }
 
-.logo {
-	width: 115px;
-	margin-top: 5px;
+.bar .button.right-btn.button-icon .icon:before,
+.bar .button.right-btn.button-icon:before,
+.bar .button.right-btn.button-icon.icon-left:before,
+.bar .button.right-btn.button-icon.icon-right:before {
+	vertical-align: top;
+	font-size: 24px;
+	line-height: 35px;
 }
 
 .artbox .col {
 	position: relative;
 	padding: 2px;
+	.row {
+		padding: 0;
+		margin: 0;
+	}
 }
 
-.artbox .row {
-	padding: 0;
-	margin: 0;
+.item-checkbox {
+	padding: 10px 10px 10px 60px;
 }
 
-//.item-divider {
-//	padding-top: 4px;
-//	padding-bottom: 4px;
-//	line-height: 1.4;
-//}
+.tab-item .tab-title {
+	text-transform: uppercase;
+}
+
+.aur-logo {
+	position: absolute;
+	top: 40px;
+	text-align: center;
+	width: 100%;
+	height: 8px;
+}
+
+.tabs-top1 > .tabs {
+	top: 58px;
+}
+
+.has-tabs-top1 {
+	top: 110px;
+}
+
 .artbox .row+.row .col {
 	padding-top: 0;
 	margin-top: -3px;
@@ -383,21 +405,6 @@ a.item.cart-cont {
 	padding: 0 1px;
 }
 
-//.checkbox input,
-//.checkbox-icon {
-//	&::before {
-//		display: table;
-//		width: 20px;
-//		height: 20px;
-//		margin-top: 4px;
-//		background: #fff;
-//		border-radius: 0px;
-//	}
-//	&::after {
-//		top: 18%;
-//		left: 13%;
-//	}
-//}
 .cont-checkout {
 	label.item.item-input {
 		padding: 2px 16px;
@@ -638,9 +645,14 @@ h5.eventhead {
 //}
 .home-holder {
 	border: 1px solid #ddd;
+	border-bottom: 0px;
 	.item-input {
 		padding: 10px;
 	}
+}
+
+.btn-home {
+	text-transform: uppercase;
 }
 
 .panel-body {
@@ -698,4 +710,26 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 .header-rights.bar .button.button-icon.icon-right:before {
 	font-size: 20px;
 	line-height: 32px;
+}
+
+.slider-pager {
+	height: 5px;
+	.slider-pager-page {
+		width: 10px;
+	}
+	i {
+		font-size: 10px;
+		color: #fff;
+	}
+}
+
+.checkbox input:before,
+.checkbox .checkbox-icon:before {
+	border-color: #9d9d9d;
+}
+
+.checkbox input:checked:before,
+.checkbox input:checked + .checkbox-icon:before {
+	background: #9d9d9d;
+	border-color: #9d9d9d;
 }

@@ -11,9 +11,6 @@ For example, you might change some of the default colors:
 .marbotzero {
   margin-bottom: 0; }
 
-.button {
-  text-transform: capitalize; }
-
 .marbot {
   margin-bottom: 12px; }
 
@@ -114,14 +111,17 @@ button.button.button-icon.ln-cart.cart-btn:before {
   font-size: 28px; }
 
 span.badge.badge-assertive.cart {
-  top: -37px;
-  right: -10px;
+  top: -38px;
+  right: -14px;
   background-color: #e6e7e9;
   z-index: 1;
   padding: 2px 2px;
   font-size: 13px;
-  margin-left: 12px;
+  margin-left: 3px;
   color: #212121; }
+
+button.right-btn.cart-btn {
+  margin-right: 2px; }
 
 .bar .button {
   padding: 0 11px; }
@@ -146,11 +146,11 @@ span.badge.badge-assertive.cart {
     text-align: left;
     text-transform: uppercase;
     line-height: 36px;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 14px; }
     .search-panel .search-top .src-text i {
       vertical-align: baseline;
-      padding-right: 5px; }
+      padding-right: 10px; }
   .search-panel .search-top .src-texts {
     line-height: 30px;
     text-transform: uppercase;
@@ -158,7 +158,7 @@ span.badge.badge-assertive.cart {
     font-size: 14px; }
     .search-panel .search-top .src-texts i {
       vertical-align: baseline;
-      padding-right: 5px; }
+      padding-right: 10px; }
   .search-panel .search-top button.button.button-positive.button-block.src-btn {
     position: absolute;
     margin: 0;
@@ -168,7 +168,8 @@ span.badge.badge-assertive.cart {
     right: 0px;
     margin-right: 10px;
     margin-top: 0;
-    min-height: 25px; }
+    min-height: 25px;
+    text-transform: uppercase; }
 .search-panel label {
   border-top: 0px;
   border-bottom: 0px;
@@ -176,23 +177,29 @@ span.badge.badge-assertive.cart {
   font-size: 14px; }
 
 .img-detail {
-  border: 3px solid #ddd;
-  padding: 0px 4px 0px 4px; }
+  border: 5px solid #ddd;
+  padding: 0px 4px 0px 4px;
+  position: absolute;
+  top: 0; }
   .img-detail p {
     font-size: 12px;
     line-height: 100%;
-    font-weight: 300; }
+    font-weight: 400;
+    margin-bottom: 5px; }
   .img-detail button.img-btn {
-    margin: 10px auto !important;
+    margin: 6px auto !important;
     min-height: 30px;
     font-size: 10px;
     line-height: 0px;
     cursor: pointer;
-    width: 67% !important;
+    width: 70% !important;
     text-transform: uppercase;
     background: transparent !important;
     color: #ff4f4f;
     border: 1px solid #ff4f4f; }
+  .img-detail h5 {
+    font-weight: 600;
+    margin: 5px 0; }
 
 /*!
   Ionicons, v2.0.1
@@ -3800,7 +3807,7 @@ a.subdued {
   margin-top: -2px;
   border-style: solid;
   border-width: 2px 0 0 0;
-  border-color: #444; }
+  border-color: #d4ae70; }
   .tabs-striped .tab-item.tab-item-active .badge, .tabs-striped .tab-item.active .badge, .tabs-striped .tab-item.activated .badge {
     top: 2px;
     opacity: 1; }
@@ -7893,17 +7900,36 @@ a {
 .full-height {
   height: 100%; }
 
-.logo {
-  width: 115px;
-  margin-top: 5px; }
+.bar .button.right-btn.button-icon .icon:before, .bar .button.right-btn.button-icon:before, .bar .button.right-btn.button-icon.icon-left:before, .bar .button.right-btn.button-icon.icon-right:before {
+  vertical-align: top;
+  font-size: 24px;
+  line-height: 35px; }
 
 .artbox .col {
   position: relative;
   padding: 2px; }
+  .artbox .col .row {
+    padding: 0;
+    margin: 0; }
 
-.artbox .row {
-  padding: 0;
-  margin: 0; }
+.item-checkbox {
+  padding: 10px 10px 10px 60px; }
+
+.tab-item .tab-title {
+  text-transform: uppercase; }
+
+.aur-logo {
+  position: absolute;
+  top: 40px;
+  text-align: center;
+  width: 100%;
+  height: 8px; }
+
+.tabs-top1 > .tabs {
+  top: 58px; }
+
+.has-tabs-top1 {
+  top: 110px; }
 
 .artbox .row + .row .col {
   padding-top: 0;
@@ -8337,9 +8363,13 @@ h5.eventhead {
   padding-right: 15px; }
 
 .home-holder {
-  border: 1px solid #ddd; }
+  border: 1px solid #ddd;
+  border-bottom: 0px; }
   .home-holder .item-input {
     padding: 10px; }
+
+.btn-home {
+  text-transform: uppercase; }
 
 .panel-body {
   font-size: 12px; }
@@ -8378,3 +8408,18 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 .header-rights.bar .button.button-icon .icon:before, .header-rights.bar .button.button-icon:before, .header-rights.bar .button.button-icon.icon-right:before {
   font-size: 20px;
   line-height: 32px; }
+
+.slider-pager {
+  height: 5px; }
+  .slider-pager .slider-pager-page {
+    width: 10px; }
+  .slider-pager i {
+    font-size: 10px;
+    color: #fff; }
+
+.checkbox input:before, .checkbox .checkbox-icon:before {
+  border-color: #9d9d9d; }
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+  background: #9d9d9d;
+  border-color: #9d9d9d; }
