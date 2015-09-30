@@ -1,0 +1,35 @@
+<ion-view title="Change Password">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon right-btn ion-android-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar">
+		</button>
+		<button class="button button-icon ion-android-cart right-btn cart-btn">
+			<span class="badge badge-assertive cart">0</span>
+		</button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<ion-content class="has-header cont-checkout">
+		<div class="list">
+			<label class="item item-input">
+				<input type="text" placeholder="Enter Order Id *" required>
+			</label>
+			<div class="item">
+				<p class="pending bolds">Your Order Status Is :</p>
+				<p>The shipment was sent through</p>
+				<p> Ekart Logistics Shipment
+					<br> Tracking ID: WSRC4251982428</p>
+			</div>
+		</div>
+		<div class="padding-horizontal">
+			<button class="button button-full button-positive">
+				Save
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

@@ -80,36 +80,38 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	//            }
 	//        }
 	//    })
-	.state('app.paintings', {
-			url: '/paintings',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/paintings.html',
-					controller: 'AppCtrl'
+	//	.state('app.paintings', {
+	//			url: '/paintings',
+	//			views: {
+	//				'menuContent': {
+	//					templateUrl: 'templates/paintings.html',
+	//					controller: 'AppCtrl'
+	//
+	//				}
+	//			}
+	//		})
 
-				}
-			}
-		})
-		.state('app.artist', {
-			url: '/artist',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/artist.html',
-					controller: 'ArtistCtrl'
+	.state('app.artist', {
+		url: '/artist',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/artist.html',
+				controller: 'ArtistCtrl'
 
-				}
 			}
-		})
-		.state('app.artist-detail', {
-			url: '/artist/detail',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/artist-detail.html',
-					controller: 'ArtistDetailCtrl'
+		}
+	})
 
-				}
+	.state('app.artist-detail', {
+		url: '/artist/detail',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/artist-detail.html',
+				controller: 'ArtistDetailCtrl'
+
 			}
-		})
+		}
+	})
 
 	.state('app.artwork', {
 			url: '/artwork/all',
@@ -133,43 +135,87 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		})
 
 	.state('app.cart', {
-			url: '/cart',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/cart.html',
-					controller: 'CartCtrl'
-
-				}
-			}
-		})
-		.state('app.checkout', {
-			url: '/checkout',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/checkout.html',
-					controller: 'CheckoutCtrl'
-
-				}
-			}
-		})
-		.state('app.wishlist', {
-			url: '/wishlist',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/wishlist.html',
-					controller: 'WishlistCtrl'
-
-				}
-			}
-		})
-
-	.state('app.profile', {
-		url: '/profile',
+		url: '/cart',
 		views: {
 			'menuContent': {
-				templateUrl: 'templates/profile.html',
-				controller: 'AppCtrl'
+				templateUrl: 'templates/cart.html',
+				controller: 'CartCtrl'
 
+			}
+		}
+	})
+
+	.state('app.checkout', {
+		url: '/checkout',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/checkout.html',
+				controller: 'CheckoutCtrl'
+
+			}
+		}
+	})
+
+	.state('app.wishlist', {
+		url: '/wishlist',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/wishlist.html',
+				controller: 'WishlistCtrl'
+
+			}
+		}
+	})
+
+	//	.state('app.profile', {
+	//		url: '/profile',
+	//		views: {
+	//			'menuContent': {
+	//				templateUrl: 'templates/profile.html',
+	//				controller: 'AppCtrl'
+	//
+	//			}
+	//		}
+	//	})
+
+	.state('app.account', {
+		url: '/account',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/account.html',
+				controller: 'AccountCtrl'
+
+			}
+		}
+	})
+
+	.state('app.personal-accnt', {
+		url: '/personal-accnt',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/personal-accnt.html',
+				controller: 'PersonalAccntCtrl'
+
+			}
+		}
+	})
+
+	.state('app.chngpassword', {
+		url: '/chngpassword',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/chngpassword.html',
+				controller: 'ChngPasswordCtrl'
+			}
+		}
+	})
+
+	.state('app.address', {
+		url: '/address',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/address.html',
+				controller: 'AddressCtrl'
 			}
 		}
 	})
@@ -230,25 +276,38 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	})
 
 	.state('app.eventdetail', {
-			url: '/eventdetail',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/eventdetail.html',
-					controller: 'EventdetailCtrl'
+		url: '/eventdetail',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/eventdetail.html',
+				controller: 'EventdetailCtrl'
 
-				}
 			}
-		})
-		.state('app.infra-services', {
-			url: '/infra-services',
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/infra-services.html',
-					controller: 'EventdetailCtrl'
+		}
+	})
 
-				}
+	.state('app.infra-services', {
+		url: '/infra-services',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/infra-services.html',
+				controller: 'EventdetailCtrl'
+
 			}
-		});
+		}
+	})
+
+	.state('app.trace-order', {
+		url: '/trace-order',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/trace-order.html',
+				controller: 'TraceOrderCtrl'
+			}
+		}
+	})
+
+	;
 
 	$urlRouterProvider.otherwise('/app/home');
 })
@@ -275,7 +334,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			} else {
 				$element.children(".read-morecont").height(0);
 				$element.children(".read-morecont").css("margin", "0px");
-//				$element.children(".read-morecont").css("overflow", "hidden");
+				//				$element.children(".read-morecont").css("overflow", "hidden");
 			}
 		});
 	};

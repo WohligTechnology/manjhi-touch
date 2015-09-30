@@ -182,17 +182,17 @@ button.right-btn.cart-btn {
   position: absolute;
   top: 0; }
   .img-detail p {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 100%;
     font-weight: 400;
-    margin-bottom: 5px; }
+    margin-bottom: 0px; }
   .img-detail button.img-btn {
     margin: 6px auto !important;
     min-height: 30px;
     font-size: 10px;
     line-height: 0px;
     cursor: pointer;
-    width: 70% !important;
+    width: 74% !important;
     text-transform: uppercase;
     background: transparent !important;
     color: #ff4f4f;
@@ -8358,13 +8358,22 @@ h5.eventhead {
   margin-bottom: 5px; }
 
 .cont-artist h4 {
-  margin-top: 0px; }
+  margin: 0px; }
 .cont-artist .text-right.readmore {
   padding-right: 15px; }
+.cont-artist a.color-black.button.bold {
+  background-color: #fff;
+  text-transform: lowercase;
+  font-size: 13px; }
+  .cont-artist a.color-black.button.bold.activated {
+    box-shadow: inset 0px 0px 0px;
+    border: 0px; }
 
 .home-holder {
   border: 1px solid #ddd;
   border-bottom: 0px; }
+  .home-holder.bor-top-zero {
+    border-top: 0px; }
   .home-holder .item-input {
     padding: 10px; }
 
@@ -8387,11 +8396,17 @@ ion-footer-bar.tabs-down.bar.bar-footer {
   ion-footer-bar.tabs-down.bar.bar-footer .tabs {
     background: #fff;
     height: 38px;
-    line-height: 32px; }
+    line-height: 32px;
+    border-top: 1px solid #ddd !important;
+    padding-top: 0px; }
+    ion-footer-bar.tabs-down.bar.bar-footer .tabs a.tab-item + a.tab-item {
+      border-left: 1px solid #ddd; }
     ion-footer-bar.tabs-down.bar.bar-footer .tabs a.tab-item {
-      border-right: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      min-height: 0px; }
+      border-right: 0px solid #ddd;
+      border-top: 0px solid #ddd;
+      min-height: 0px;
+      margin-right: 0px;
+      margin-left: 0px; }
 
 .list.thumbnail .item-thumbnail-left {
   padding-bottom: 5px; }
@@ -8423,3 +8438,8 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
   background: #9d9d9d;
   border-color: #9d9d9d; }
+
+.list.account .item {
+  padding: 8px 54px 8px 16px; }
+  .list.account .item i.icon.ion-chevron-right {
+    font-size: 18px; }

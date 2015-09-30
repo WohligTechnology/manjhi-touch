@@ -9,7 +9,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AccessCtrl', function ($scope, $ionicModal, $timeout) {})
-	.controller('LoginCtrl', function ($scope, $stateParams) {})
+
+.controller('LoginCtrl', function ($scope, $stateParams) {})
 
 .controller('HomeCtrl', function ($scope, $stateParams) {})
 
@@ -415,6 +416,46 @@ angular.module('starter.controllers', [])
 .controller('CartCtrl', function ($scope, $stateParams) {})
 
 .controller('WishlistCtrl', function ($scope, $stateParams) {})
+
+.controller('AccountCtrl', function ($scope, $stateParams) {})
+
+.controller('ChngPasswordCtrl', function ($scope, $stateParams) {})
+
+.controller('PersonalAccntCtrl', function ($scope, $stateParams) {})
+
+.controller('TraceOrderCtrl', function ($scope, $stateParams) {})
+
+.controller('AddressCtrl', function ($scope, $stateParams, $ionicModal) {
+	$scope.showBilling = function () {
+		$scope.modal.show();
+	};
+	$ionicModal.fromTemplateUrl('templates/edit-billing.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeBilling = function () {
+		$scope.modal.hide();
+	};
+
+	// Open the login modal
+	$scope.showShipping = function () {
+		$scope.modal1.show();
+	};
+	$ionicModal.fromTemplateUrl('templates/edit-shipping.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal1 = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeShipping = function () {
+		$scope.modal1.hide();
+	};
+
+})
 
 .controller('CheckoutCtrl', function ($scope, $stateParams) {
 	$scope.checkout = [];

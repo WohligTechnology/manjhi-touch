@@ -1,0 +1,29 @@
+<ion-modal-view>
+	<ion-header-bar class="header-rights" align-title="center">
+		<h1 class="title">Billing Address</h1>
+		<div class="buttons">
+			<button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeBilling()"></button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list">
+			<label class="item item-input">
+				<textarea placeholder="Address*" required></textarea>
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="City*" required>
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="State*" required>
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="Pincode*" required>
+			</label>
+		</div>
+		<div class="padding-horizontal">
+			<button class="button button-full button-positive">
+				Save
+			</button>
+		</div>
+	</ion-content>
+</ion-modal-view>

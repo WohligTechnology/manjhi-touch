@@ -629,23 +629,28 @@ h5.eventhead {
 
 .cont-artist {
 	h4 {
-		margin-top: 0px;
+		margin: 0px;
 	}
 	.text-right.readmore {
 		padding-right: 15px;
 	}
+	a.color-black.button.bold {
+		background-color: #fff;
+		text-transform: lowercase;
+		font-size: 13px;
+		&.activated {
+			box-shadow: inset 0px 0px 0px;
+			border: 0px;
+		}
+	}
 }
 
-//.list.margin-btm {
-//	.list {
-//		.item {
-//			padding-bottom: 6px;
-//		}
-//	}
-//}
 .home-holder {
 	border: 1px solid #ddd;
 	border-bottom: 0px;
+	&.bor-top-zero {
+		border-top: 0px;
+	}
 	.item-input {
 		padding: 10px;
 	}
@@ -675,10 +680,17 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 		background: #fff;
 		height: 38px;
 		line-height: 32px;
+		border-top: 1px solid #ddd !important;
+		padding-top: 0px;
+		a.tab-item+a.tab-item {
+			border-left: 1px solid #ddd;
+		}
 		a.tab-item {
-			border-right: 1px solid #ddd;
-			border-top: 1px solid #ddd;
+			border-right: 0px solid #ddd;
+			border-top: 0px solid #ddd;
 			min-height: 0px;
+			margin-right: 0px;
+			margin-left: 0px;
 		}
 	}
 }
@@ -732,4 +744,13 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 .checkbox input:checked + .checkbox-icon:before {
 	background: #9d9d9d;
 	border-color: #9d9d9d;
+}
+
+.list.account {
+	.item {
+		padding: 8px 54px 8px 16px;
+		i.icon.ion-chevron-right {
+			font-size: 18px;
+		}
+	}
 }

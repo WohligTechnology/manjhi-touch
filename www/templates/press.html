@@ -1,12 +1,7 @@
 <ion-view title="Press">
-	<!--
-    <ion-nav-title>
-        <img src="img/logo.jpg" class="full-height">
-    </ion-nav-title>
--->
 	<ion-nav-buttons side="right">
-		<button class="button button-clear button-icon ion-android-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ion-android-cart cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+		<button class="button button-clear button-icon ion-android-search right-btn btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
 		<label class="item-input-wrapper">
@@ -56,3 +51,4 @@
 			</div>
 		</div>
 	</ion-content>
+</ion-view>

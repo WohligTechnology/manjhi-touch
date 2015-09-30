@@ -260,10 +260,10 @@ button.right-btn.cart-btn {
 	position: absolute;
 	top: 0;
 	p {
-		font-size: 12px;
+		font-size: 11px;
 		line-height: 100%;
 		font-weight: 400;
-		margin-bottom: 5px;
+		margin-bottom: 0px;
 	}
 	button.img-btn {
 		margin: 6px auto !important;
@@ -271,7 +271,7 @@ button.right-btn.cart-btn {
 		font-size: 10px;
 		line-height: 0px;
 		cursor: pointer;
-		width: 70% !important;
+		width: 74% !important;
 		text-transform: uppercase;
 		background: transparent !important;
 		color: $assertive;

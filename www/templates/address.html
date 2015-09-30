@@ -1,0 +1,50 @@
+<ion-view title="Personal Info">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon right-btn ion-android-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
+		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<ion-content class="has-header cont-checkout">
+		<div class="chngpswd-cont">
+			<div class="list">
+				<div class="item item-divider">
+					Default Billing Address
+				</div>
+				<div class="item">
+					<h4>Krishna Cottage,Mg Road</h4>
+					<h4>Kumar Metro Center,Room Number:121</h4>
+					<h4>Mumbai</h4>
+					<h4>Maharashtra</h4>
+					<h4>421001</h4>
+				</div>
+				<div class="item item-divider">
+					Default Shipping Address
+				</div>
+				<div class="item">
+					<h4>Krishna Cottage,Mg Road</h4>
+					<h4>Kumar Metro Center,Room Number:121</h4>
+					<h4>Mumbai</h4>
+					<h4>Maharashtra</h4>
+					<h4>421001</h4>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+	<ion-footer-bar class="tabs-down">
+		<div class="tabs">
+			<a class="tab-item" ng-click="showBilling();">
+ Edit Billing Address
+  </a>
+			<a class="tab-item" ng-click="showShipping();">
+     Edit Shipping Address
+  </a>
+		</div>
+	</ion-footer-bar>
+</ion-view>
