@@ -683,6 +683,7 @@ h5.eventhead {
 ion-footer-bar.tabs-down.bar.bar-footer {
 	padding: 0;
 	border: 0px;
+	height: 38px;
 	.tabs {
 		background: #fff;
 		height: 38px;
@@ -764,9 +765,10 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 
 ul.tabul {
 	display: block;
+	width: 100%;
 	height: 40px;
 	margin: 0 0 10px 0;
-	li.tab-item {
+	li.tab-items {
 		display: inline-block;
 		width: 50%;
 		float: left;
@@ -785,7 +787,7 @@ ul.list.catogories p {
 }
 
 .bar.item-input-inset .item-input-wrapper.cust-css {
-    border-radius: 0px;
-    background-color: #fff;
-    color: #ddd;
+	border-radius: 0px;
+	background-color: #fff;
+	color: #ddd;
 }

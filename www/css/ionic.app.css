@@ -8401,7 +8401,8 @@ h5.eventhead {
 
 ion-footer-bar.tabs-down.bar.bar-footer {
   padding: 0;
-  border: 0px; }
+  border: 0px;
+  height: 38px; }
   ion-footer-bar.tabs-down.bar.bar-footer .tabs {
     background: #fff;
     height: 38px;
@@ -8455,16 +8456,17 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 
 ul.tabul {
   display: block;
+  width: 100%;
   height: 40px;
   margin: 0 0 10px 0; }
-  ul.tabul li.tab-item {
+  ul.tabul li.tab-items {
     display: inline-block;
     width: 50%;
     float: left;
     padding: 10px 0;
     color: #444;
     text-transform: uppercase; }
-    ul.tabul li.tab-item.active {
+    ul.tabul li.tab-items.active {
       border-bottom: 2px solid #d4ae70;
       color: #d4ae70; }
 
