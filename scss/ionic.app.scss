@@ -63,7 +63,7 @@ $headings-font-weight: 500 !default;
 }
 
 .item.item-divider {
-//	text-transform: uppercase;
+	//	text-transform: uppercase;
 	background: #fff;
 	font-weight: 600;
 	font-size: 14px;
@@ -175,7 +175,7 @@ button.button.button-icon.ln-cart.cart-btn:before {
 
 span.badge.badge-assertive.cart {
 	top: -38px;
-	right: -14px;
+	right: -12px;
 	background-color: $stable;
 	z-index: 1;
 	padding: 2px 2px;
@@ -183,9 +183,11 @@ span.badge.badge-assertive.cart {
 	margin-left: 3px;
 	color: $base;
 }
+
 button.right-btn.cart-btn {
-    margin-right: 2px;
+	margin-right: 2px;
 }
+
 .bar .button {
 	padding: 0 11px;
 }
@@ -196,7 +198,7 @@ button.right-btn.cart-btn {
 		border-bottom: 0px;
 	}
 	.min-max {
-		padding: 6px;
+		padding: 10px;
 		h3 {
 			margin: 10px 0 5px 0;
 			font-size: 15px;
@@ -253,37 +255,39 @@ button.right-btn.cart-btn {
 		font-size: 14px;
 	}
 }
+
 .box-grey.border-colr {
-    border: 5px solid #ddd;
-    margin: 0px 0px 0px 4px;
-.img-detail {
-	padding: 0px 4px 0px 4px;
-	position: absolute;
-	top: 0;
-	p {
-		font-size: 11px;
-		line-height: 100%;
-		font-weight: 400;
-		margin-bottom: 0px;
-	}
-	button.img-btn {
-		margin: 6px auto !important;
-		min-height: 30px;
-		font-size: 10px;
-		line-height: 0px;
-		cursor: pointer;
-		width: 74% !important;
-		text-transform: uppercase;
-		background: transparent !important;
-		color: $assertive;
-		border: 1px solid $assertive;
-	}
-	h5 {
-		font-weight: 600;
-		margin: 8px 0;
+	border: 5px solid #ddd;
+	margin: 0px 0px 0px 4px;
+	.img-detail {
+		padding: 0px 4px 0px 4px;
+		position: absolute;
+		top: 0;
+		p {
+			font-size: 11px;
+			line-height: 100%;
+			font-weight: 400;
+			margin-bottom: 0px;
+		}
+		button.img-btn {
+			margin: 6px auto !important;
+			min-height: 30px;
+			font-size: 10px;
+			line-height: 0px;
+			cursor: pointer;
+			width: 74% !important;
+			text-transform: uppercase;
+			background: transparent !important;
+			color: $assertive;
+			border: 1px solid $assertive;
+		}
+		h5 {
+			font-weight: 600;
+			margin: 8px 0;
+		}
 	}
 }
-}
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic

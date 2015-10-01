@@ -111,7 +111,7 @@ button.button.button-icon.ln-cart.cart-btn:before {
 
 span.badge.badge-assertive.cart {
   top: -38px;
-  right: -14px;
+  right: -12px;
   background-color: #e6e7e9;
   z-index: 1;
   padding: 2px 2px;
@@ -129,7 +129,7 @@ button.right-btn.cart-btn {
   border-top: 0px;
   border-bottom: 0px; }
 .search-panel .min-max {
-  padding: 6px; }
+  padding: 10px; }
   .search-panel .min-max h3 {
     margin: 10px 0 5px 0;
     font-size: 15px; }
@@ -8007,7 +8007,8 @@ i.icon.ion-heart {
 .btn-grp button.button.button-block.button-fb {
   border-color: #3c5a98;
   background-color: #3c5a98;
-  color: #fff; }
+  color: #fff;
+  margin-top: 12px; }
 .btn-grp .button.button-block.button-twit {
   border-color: #3C89E2;
   background-color: #3C89E2;
@@ -8399,7 +8400,8 @@ h5.eventhead {
   font-weight: 600; }
 
 ion-footer-bar.tabs-down.bar.bar-footer {
-  padding: 0; }
+  padding: 0;
+  border: 0px; }
   ion-footer-bar.tabs-down.bar.bar-footer .tabs {
     background: #fff;
     height: 38px;
@@ -8465,3 +8467,11 @@ ul.tabul {
     ul.tabul li.tab-item.active {
       border-bottom: 2px solid #d4ae70;
       color: #d4ae70; }
+
+ul.list.catogories p {
+  padding: 0 15px; }
+
+.bar.item-input-inset .item-input-wrapper.cust-css {
+  border-radius: 0px;
+  background-color: #fff;
+  color: #ddd; }

@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 
 .controller('ForgotCtrl', function ($scope, $stateParams) {})
 
-.controller('ArtworkCtrl', function ($scope, $stateParams,$ionicModal) {
+.controller('ArtworkCtrl', function ($scope, $stateParams, $ionicModal) {
 
 	$scope.artistdetail = [{
 		image: 'img/artist/artist1.jpg',
@@ -240,13 +240,13 @@ angular.module('starter.controllers', [])
 	$scope.changetab = function (tab) {
 		if (tab == 1) {
 			$scope.tab = true;
-	$scope.classteam = "active";
-	$scope.classavtivity = "";
+			$scope.classteam = "active";
+			$scope.classavtivity = "";
 
 		} else {
 			$scope.tab = false;
-	$scope.classavtivity = "active";
-	$scope.classteam = "";
+			$scope.classavtivity = "active";
+			$scope.classteam = "";
 		}
 	}
 })
@@ -434,6 +434,36 @@ angular.module('starter.controllers', [])
 
 .controller('MyOrderCtrl', function ($scope, $stateParams) {})
 
+.controller('SearchCtrl', function ($scope, $stateParams) {
+
+	$scope.artistdetail = [{
+		image: 'img/artist/artist1.jpg',
+		id: '1528',
+		name: 'Ajay R Dhandre',
+		typename: 'Untitled',
+		size: '19.5 x 23',
+        }, {
+		image: 'img/artist/artist2.jpg',
+		id: '1527',
+		name: 'Amarnath Sharma',
+		typename: 'Untitled',
+		size: '19.5 x 23',
+        }, {
+		image: 'img/artist/artist3.jpg',
+		name: 'Ajay R Dhandre',
+		id: '1527',
+		typename: 'Untitled',
+		size: '19.5 x 23',
+        }, {
+		image: 'img/artist/artist4.jpg',
+		id: '1530',
+		name: 'Bhushen Koul',
+		madein: 'Oil on board',
+		size: '19.5 x 23'
+        }];
+	$scope.artistdetail = _.chunk($scope.artistdetail, 2);
+})
+
 .controller('AddressCtrl', function ($scope, $stateParams, $ionicModal) {
 	$scope.showBilling = function () {
 		$scope.modal.show();
@@ -466,7 +496,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('CheckoutCtrl', function ($scope, $stateParams) {
+.controller('CheckoutCtrl', function ($scope, $stateParams, $location) {
 	$scope.checkout = [];
 	$scope.checkout.isshipping = true;
 	$scope.formstatus = false;
@@ -490,4 +520,15 @@ angular.module('starter.controllers', [])
 		}
 
 	}
+
+	$scope.openbilling = false;
+
+	$scope.continue = function (ch) {
+		if (ch === 'login') {
+			$scope.openbilling = false;
+			$location.path('access/login');
+		} else {
+			$scope.openbilling = true;
+		}
+	};
 });

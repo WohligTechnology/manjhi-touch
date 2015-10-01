@@ -1,17 +1,23 @@
-<ion-view title="Artworks">
-	<ion-nav-buttons side="right">
-		<button class="button button-clear button-icon ion-android-search right-btn btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar"></button>
-		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
-	</ion-nav-buttons>
-	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
-		<label class="item-input-wrapper">
-			<i class="icon ion-ios-search placeholder-icon"></i>
-			<input type="search" placeholder="search...">
-		</label>
-		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
-		</button>
-	</div>
-	<ion-content>
+<ion-view title="Search">
+    <div class="bar bar-subheader subheader-search bar-positive item-input-inset">
+        <label class="item-input-wrapper cust-css">
+            <i class="icon ion-ios-search"></i>
+            <input type="search" placeholder="Search">
+        </label>
+        <button class="button button-clear button-icon ion-ios-close-empty" ng-click="goBack()">
+        </button>
+    </div>
+	<ion-content class="has-subheader">
+<!--
+		<div class="bar bar-subheader bar-positive">
+			<label class="item-input-wrapper">
+				<i class="icon ion-ios-search placeholder-icon"></i>
+				<input type="search" placeholder="search...">
+			</label>
+			<button class="button button-icon button-clear">Cancel
+			</button>
+		</div>
+-->
 		<div class="row" ng-repeat="detail in artistdetail">
 			<div class="col-50" ng-repeat="details in detail">
 				<div class="prd-cont">

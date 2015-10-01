@@ -164,6 +164,7 @@ i.icon.ion-heart {
 		border-color: #3c5a98;
 		background-color: #3c5a98;
 		color: #fff;
+		margin-top: 12px;
 	}
 	.button.button-block.button-twit {
 		border-color: #3C89E2;
@@ -681,6 +682,7 @@ h5.eventhead {
 
 ion-footer-bar.tabs-down.bar.bar-footer {
 	padding: 0;
+	border: 0px;
 	.tabs {
 		background: #fff;
 		height: 38px;
@@ -776,4 +778,14 @@ ul.tabul {
 			color: #d4ae70;
 		}
 	}
+}
+
+ul.list.catogories p {
+	padding: 0 15px;
+}
+
+.bar.item-input-inset .item-input-wrapper.cust-css {
+    border-radius: 0px;
+    background-color: #fff;
+    color: #ddd;
 }
