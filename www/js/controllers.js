@@ -353,7 +353,7 @@ angular.module('starter.controllers', [])
 	$scope.event2014 = [{
 		name: 'Art Infrastructure – nobody’s business',
 		detail: 'Dec 14, 2013 - Dec 14, 2013 Taj Lands End',
-		img: 'img/event/event4.jpg'
+		img: 'img/event/event4.JPG'
         }, {
 		name: 'Aura Art Show 2013 - Oct 15-21, 2013, Jehangir Art Gallery, Mumbai',
 		detail: 'Oct 15, 2013 - Oct 21, 2013 Jehangir Art Gallery, Auditorium Hall',
