@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 
 .controller('ForgotCtrl', function ($scope, $stateParams) {})
 
-.controller('ArtworkCtrl', function ($scope, $stateParams) {
+.controller('ArtworkCtrl', function ($scope, $stateParams,$ionicModal) {
 
 	$scope.artistdetail = [{
 		image: 'img/artist/artist1.jpg',
@@ -79,6 +79,39 @@ angular.module('starter.controllers', [])
 		size: '19.5 x 23'
         }];
 	$scope.artistdetail = _.chunk($scope.artistdetail, 2);
+
+	// Open the login modal
+	$scope.showFilter = function () {
+		$scope.modal1.show();
+	};
+	$ionicModal.fromTemplateUrl('templates/filter.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal1 = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeFilter = function () {
+		$scope.modal1.hide();
+	};
+
+
+
+	$ionicModal.fromTemplateUrl('templates/sort.html', {
+		scope: $scope
+	}).then(function (modal) {
+		$scope.modal2 = modal;
+	});
+
+	// Triggered in the login modal to close it
+	$scope.closeSort = function () {
+		$scope.modal2.hide();
+	};
+
+	// Open the login modal
+	$scope.showSort = function () {
+		$scope.modal2.show();
+	};
 })
 
 .controller('ArtistCtrl', function ($scope, $stateParams, $ionicModal) {
@@ -123,39 +156,6 @@ angular.module('starter.controllers', [])
 	// Triggered in the login modal to close it
 	$scope.closeCategory = function () {
 		$scope.modal.hide();
-	};
-
-	// Open the login modal
-	$scope.showFilter = function () {
-		$scope.modal1.show();
-	};
-	$ionicModal.fromTemplateUrl('templates/filter.html', {
-		scope: $scope
-	}).then(function (modal) {
-		$scope.modal1 = modal;
-	});
-
-	// Triggered in the login modal to close it
-	$scope.closeFilter = function () {
-		$scope.modal1.hide();
-	};
-
-
-
-	$ionicModal.fromTemplateUrl('templates/sort.html', {
-		scope: $scope
-	}).then(function (modal) {
-		$scope.modal2 = modal;
-	});
-
-	// Triggered in the login modal to close it
-	$scope.closeSort = function () {
-		$scope.modal2.hide();
-	};
-
-	// Open the login modal
-	$scope.showSort = function () {
-		$scope.modal2.show();
 	};
 })
 
@@ -233,13 +233,20 @@ angular.module('starter.controllers', [])
 .controller('AboutCtrl', function ($scope, $stateParams) {
 	$scope.showteam = "true";
 	//$scope.showactivity="true";
+	console.log("dfasdf");
 	$scope.tab = true;
+	$scope.classteam = "active";
+	$scope.classavtivity = "";
 	$scope.changetab = function (tab) {
 		if (tab == 1) {
 			$scope.tab = true;
+	$scope.classteam = "active";
+	$scope.classavtivity = "";
 
 		} else {
 			$scope.tab = false;
+	$scope.classavtivity = "active";
+	$scope.classteam = "";
 		}
 	}
 })
@@ -424,6 +431,8 @@ angular.module('starter.controllers', [])
 .controller('PersonalAccntCtrl', function ($scope, $stateParams) {})
 
 .controller('TraceOrderCtrl', function ($scope, $stateParams) {})
+
+.controller('MyOrderCtrl', function ($scope, $stateParams) {})
 
 .controller('AddressCtrl', function ($scope, $stateParams, $ionicModal) {
 	$scope.showBilling = function () {

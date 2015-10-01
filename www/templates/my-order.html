@@ -1,0 +1,79 @@
+<ion-view title="My Order">
+	<ion-nav-buttons side="right">
+		<button class="button button-clear button-icon right-btn ion-android-search btn-font" ng-click="toggleSearchbar()" ng-hide="searchbar">
+		</button>
+		<button class="button button-icon ion-android-cart right-btn cart-btn">
+			<span class="badge badge-assertive cart">0</span>
+		</button>
+	</ion-nav-buttons>
+	<div class="bar bar-subheader bar-positive item-input-inset" ng-show="searchbar">
+		<label class="item-input-wrapper">
+			<i class="icon ion-ios-search placeholder-icon"></i>
+			<input type="search" placeholder="search...">
+		</label>
+		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
+		</button>
+	</div>
+	<ion-content class="has-header cont-checkout">
+		<div class="list">
+			<div class="item item-divider">
+				<span class="item-note">13/dec/2015</span>
+				<p> Order Id:<span> 874464898</span></p>
+			</div>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000/ $6,400</h3>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000 / $6,400</h3>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000 / $6,400</h3>
+			</a>
+			<div class="item item-divider">
+				<span class="item-note assertive">Shipped</span>
+				<p> Total: <span>Rs.60000/ $600</span></p>
+			</div>
+			<div class="item item-divider">
+				<span class="item-note">13/dec/2015</span>
+				<p> Order Id:<span> 874464898</span></p>
+			</div>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000 / $6,400</h3>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000 / $6,400</h3>
+			</a>
+			<a class="item item-thumbnail-left">
+				<img src="img/artist/artist1.jpg">
+				<h3>Id</h3>
+				<h3 class="">Artist Name</h3>
+				<h3 class="">Title Name</h3>
+				<h3>Rs.1,00,000/ $6,400</h3>
+			</a>
+			<div class="item item-divider">
+				<span class="item-note balanced">Delivered</span>
+				<p> Total: <span>Rs.60000 / $600</span></p>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

@@ -16,11 +16,19 @@
 		<button ng-click="toggleSearchbar()" class="button button-icon button-clear">Cancel
 		</button>
 	</div>
+<!--
 	<ion-tabs class="tabs-striped tabs-top tabs-color-active-positive">
-		<ion-tab title="Team" ng-click="changetab(1)" ng-class="tab-item-active"></ion-tab>
-		<ion-tab title="Activities" ng-click="changetab(2)" ng-class="tab-item-active"></ion-tab>
+		<ion-tab title="Team" ng-click="changetab(1)" class="tab-item-active"></ion-tab>
+		<ion-tab title="Activities" ng-click="changetab(2)" class="tab-item-active"></ion-tab>
 	</ion-tabs>
-	<ion-content class="has-tabs-top padding">
+-->
+	<ion-content class="padding">
+	<div class="tab-made">
+	<ul class="tabul">
+		<li class="tab-item" ng-click="changetab(1)" ng-class="classteam">Team</li>
+		<li class="tab-item" ng-click="changetab(2)" ng-class="classavtivity">Activities</li>
+	</ul>
+	  </div>
 		<div class="team" ng-show="tab">
 			<div class="pad-top-btm">
 				<h4 class="head-team">Aura Art Team</h4>

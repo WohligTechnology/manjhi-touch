@@ -33,7 +33,6 @@ For example, you might change some of the default colors:
   color: #212121; }
 
 .item.item-divider {
-  text-transform: uppercase;
   background: #fff;
   font-weight: 600;
   font-size: 14px; }
@@ -8143,18 +8142,24 @@ ul.lineul + ul.lineul {
       margin-bottom: 7px; }
 
 .list.list-details .item {
-  padding: 5px 10px;
+  padding: 1px 5px;
+  display: block;
   border: 0px; }
 .list.list-details span.label {
-  display: table;
-  padding: 7px 10px 7px 0px;
-  max-width: 200px;
+  display: inline-block;
+  padding: 0px 10px 0px 0px;
   width: 30%;
   color: #444;
-  font-size: 16px; }
+  font-size: 14px;
+  font-weight: 600; }
 .list.list-details .item-map {
   padding-right: 10px;
-  font-size: 14px; }
+  display: inline-block;
+  padding: 2px 0px;
+  width: 30%;
+  color: #444;
+  font-size: 14px;
+  vertical-align: text-bottom; }
 
 .head-artist h5 {
   text-transform: uppercase; }
@@ -8443,3 +8448,18 @@ ion-footer-bar.tabs-down.bar.bar-footer {
   padding: 8px 54px 8px 16px; }
   .list.account .item i.icon.ion-chevron-right {
     font-size: 18px; }
+
+ul.tabul {
+  display: block;
+  height: 40px;
+  margin: 0 0 10px 0; }
+  ul.tabul li.tab-item {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    padding: 10px 0;
+    color: #444;
+    text-transform: uppercase; }
+    ul.tabul li.tab-item.active {
+      border-bottom: 2px solid #d4ae70;
+      color: #d4ae70; }

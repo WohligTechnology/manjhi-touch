@@ -307,6 +307,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		}
 	})
 
+	.state('app.my-order', {
+		url: '/my-order',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/my-order.html',
+				controller: 'MyOrderCtrl'
+			}
+		}
+	})
+
 	;
 
 	$urlRouterProvider.otherwise('/app/home');

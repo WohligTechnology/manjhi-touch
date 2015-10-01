@@ -17,49 +17,6 @@
 		</button>
 	</div>
 	<ion-content>
-		<!--
-		<ion-scroll zooming="true" direction="x" style="width: auto">
-			<ul class="artist-crisp">
-				<li>
-					<a href="" class="actives">
-                           All
-                            </a>
-				</li>
-				<li>
-					<a href="" class="">
-                           Paintings
-                            </a>
-				</li>
-				<li>
-					<a href="" class="">
-                           Sculptures
-                            </a>
-				</li>
-				<li>
-					<a href="" class="">
-                           Photographs
-                            </a>
-				</li>
-				<li>
-					<a href="" class="">Prints
-                            </a>
-				</li>
-				<li>
-					<a href="" class="">
-                           Others
-                            </a>
-				</li>
-			</ul>
-		</ion-scroll>
--->
-		<!--
-		<div class="grid-view">
-			<select ng-model="tab">
-				<option value="grid" selected>Grid View</option>
-				<option value="list">List View</option>
-			</select>
-		</div>
--->
 		<div class="row animate-if" ng-repeat="artist in aristname">
 			<div class="col-50" ng-repeat="aristnames in artist">
 				<a href="#/app/artist/detail">
@@ -82,12 +39,14 @@
   <a class="tab-item" ng-click="showCategory();">
  All
   </a>
+<!--
   <a class="tab-item" ng-click="showFilter();">
     Filter
   </a>
   <a class="tab-item" ng-click="showSort();">
     Sort
   </a>
+-->
 </div>
 </ion-footer-bar>
 </ion-view>

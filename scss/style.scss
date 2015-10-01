@@ -337,21 +337,26 @@ ul.lineul + ul.lineul {
 
 .list.list-details {
 	.item {
-		padding: 5px 10px;
+		padding: 1px 5px;
+		display: block;
 		border: 0px;
-		//		font-size: 14px;
 	}
 	span.label {
-		display: table;
-		padding: 7px 10px 7px 0px;
-		max-width: 200px;
+		display: inline-block;
+		padding: 0px 10px 0px 0px;
 		width: 30%;
 		color: #444;
-		font-size: 16px;
+		font-size: 14px;
+		font-weight: 600;
 	}
 	.item-map {
 		padding-right: 10px;
+		display: inline-block;
+		padding: 2px 0px;
+		width: 30%;
+		color: #444;
 		font-size: 14px;
+		vertical-align: text-bottom;
 	}
 }
 
@@ -751,6 +756,24 @@ ion-footer-bar.tabs-down.bar.bar-footer {
 		padding: 8px 54px 8px 16px;
 		i.icon.ion-chevron-right {
 			font-size: 18px;
+		}
+	}
+}
+
+ul.tabul {
+	display: block;
+	height: 40px;
+	margin: 0 0 10px 0;
+	li.tab-item {
+		display: inline-block;
+		width: 50%;
+		float: left;
+		padding: 10px 0;
+		color: #444;
+		text-transform: uppercase;
+		&.active {
+			border-bottom: 2px solid #d4ae70;
+			color: #d4ae70;
 		}
 	}
 }
