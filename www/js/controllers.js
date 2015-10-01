@@ -371,10 +371,6 @@ angular.module('starter.controllers', [])
 		detail: 'Feb 17, 2013 - Feb 17, 2013 Mahalaxmi Race Course',
 		img: 'img/event/event3.jpg'
         }, {
-		name: 'Aura Art is delighted to be Exclusive Art Partner for AICOG 2013',
-		detail: 'Jan 16, 2013 - Jan 20, 2013 BKC, Mumbai',
-		img: 'img/event/event4.jpg'
-        }, {
 		name: 'Group Show at The Capital  -  Fundraiser for Cuddles Foundation',
 		detail: 'Jan 15, 2013 - Jan 21, 2013 The Capital, BKC, Mumbai',
 		img: 'img/event/event7.jpg'
