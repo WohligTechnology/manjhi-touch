@@ -66,7 +66,7 @@ angular.module('starter.controllers', [])
         }, {
         image: 'img/artist/artist3.jpg',
         name: 'Ajay Sharma',
-        id: '1527',
+        id: '1530',
         size: '21.5 x 26',
         }, {
         image: 'img/artist/artist4.jpg',
@@ -134,7 +134,7 @@ angular.module('starter.controllers', [])
         image: 'img/artist/artist3.jpg',
 
         }, {
-        name: 'Devki Modi,
+        name: 'Devki Modi',
         image: 'img/artist/artist4.jpg',
 
         }];
@@ -167,7 +167,7 @@ angular.module('starter.controllers', [])
         price: 'Rs.1,00,000/ $6,400'
         }, {
         image: 'img/artist/artist2.jpg',
-        id: '1527',
+        id: '1530',
         typename: 'Web In a Cage',
         madein: 'Sheesham wood, SS and gold foil',
         size: '9 X 13 X 48',
@@ -175,7 +175,7 @@ angular.module('starter.controllers', [])
         price: 'Rs 140,000/ $6,800'
         }, {
         image: 'img/artist/artist3.jpg',
-        id: '1527',
+        id: '1531',
         typename: 'One Step = 8000 Replies',
         madein: 'SS, aluminum, canvas & sensor',
         size: '6 X 78 X 24',
@@ -183,7 +183,7 @@ angular.module('starter.controllers', [])
         price: 'Rs 180,000/ $7,400'
         }, {
         image: 'img/artist/artist4.jpg',
-        id: '1527',
+        id: '1532',
         typename: 'Needles needle',
         madein: 'Mild steel, copper wire & canvas',
         size: '4 X 65 X 29',
@@ -191,7 +191,7 @@ angular.module('starter.controllers', [])
         price: 'Price available on request'
         }, {
         image: 'img/artist/artist5.jpg',
-        id: '1527',
+        id: '1533',
         typename: 'African drums',
         madein: 'Sheesham woodl on board',
         size: '8 X 56 X 11',
@@ -199,7 +199,7 @@ angular.module('starter.controllers', [])
         price: 'Rs 180,000/ $7,400'
         }, {
         image: 'img/artist/artist2.jpg',
-        id: '1527',
+        id: '1524',
         typename: 'Forget Me Not',
         madein: 'Cushions and Seeds',
         size: '34 X 16 X 5',
@@ -207,7 +207,7 @@ angular.module('starter.controllers', [])
         price: 'Rs 40,000/ $3,400'
         }, {
         image: 'img/artist/artist5.jpg',
-        id: '1527',
+        id: '1535',
         typename: 'Drawing of a Fan',
         madein: 'Stainless Steel and White Paint',
         size: '50 X 15 X 12',
@@ -215,7 +215,7 @@ angular.module('starter.controllers', [])
         price: 'Rs.1,40,000/ $7,400'
         }, {
         image: 'img/artist/artist4.jpg',
-        id: '1527',
+        id: '1536',
         typename: 'Untitled',
         madein: 'Oil on board',
         size: '19.5 x 23',
@@ -418,12 +418,12 @@ angular.module('starter.controllers', [])
         id: '1527',
         name: 'Ajay R Dhandre',
         typename: 'Web In a Cage',
-        price: 'Rs 140,000/ $6,800'
+        price: 'Rs 140,000'
     }, {
         id: '1530',
         name: 'Bhushen Koul',
         typename: 'One Step = 8000 Replies',
-        price: 'Rs 180,000/ $7,400'
+        price: 'Rs 180,000'
     }];
 })
 
@@ -456,7 +456,7 @@ angular.module('starter.controllers', [])
         }, {
         image: 'img/artist/artist3.jpg',
         name: 'Ajay R Dhandre',
-        id: '1527',
+        id: '1530',
         typename: 'Untitled',
         size: '19.5 x 23',
         }, {

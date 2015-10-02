@@ -3,8 +3,8 @@
 		<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
-	<ion-content class="padding">
-		<div class="cont-artist">
+	<ion-content>
+		<div class="cont-artist padding" >
 			<h4 class="text-center assertive">TAPAS BASU</h4>
 			<readmores>
 				<div class="text-right readmore">
@@ -25,7 +25,7 @@
 			</readmores>
 		</div>
 		<div class="row" ng-repeat="detail in artistdetail">
-			<div class="col-50" ng-repeat="details in detail">
+			<div class="col-50 padding-horizontal" ng-repeat="details in detail">
 				<div class="prd-cont">
 					<a href="#/app/art-detail">
 						<div class="img-holder">
