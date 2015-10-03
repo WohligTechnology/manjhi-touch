@@ -6,7 +6,7 @@
     <ion-content class="">
         <div class="list thumbnail">
             <a class="item item-thumbnail-left" ng-repeat="item in cart_item">
-                <img src="img/artist/artist1.jpg">
+               	<img ng-src="{{item.img}}">
                 <h3>{{item.id}}</h3>
                 <h3 class="">{{item.name}}</h3>
                 <h3 class="">{{item.typename}}</h3>
