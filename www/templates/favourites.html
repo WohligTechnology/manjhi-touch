@@ -1,0 +1,43 @@
+<ion-view classs="bar-stable" title="Favourites">
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+9124904496 "></a>
+    <a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
+    <button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="row" ng-repeat="detail in artistdetail">
+      <div class="col-50 padding-horizontal" ng-repeat="details in detail">
+        <div class="prd-cont">
+          <a href="#/app/art-detail">
+            <div class="img-holder">
+              <figure>
+                <img ng-src="{{details.image}}" class="full-image">
+              </figure>
+            </div>
+          </a>
+          <div class="artist-cont-detail">
+            <p>
+              <span>{{details.id}}</span>
+            </p>
+            <p>
+              {{details.typename}}
+            </p>
+            <p>
+              {{details.madein}}
+            </p>
+            <p>
+              {{details.size}} inches
+            </p>
+            <p>
+              {{details.year}}
+            </p>
+            <p>
+              {{details.price}}
+            </p>
+            <button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -317,6 +317,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			}
 		}
 	})
+	.state('app.favourites', {
+		url: '/favourites',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/favourites.html',
+				controller: 'FavouritesCtrl'
+			}
+		}
+	})
+	.state('app.savedviews', {
+		url: '/savedviews',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/savedviews.html',
+				controller: 'SavedViewsCtrl'
+			}
+		}
+	})
 
 	.state('app.my-order', {
 		url: '/my-order',

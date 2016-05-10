@@ -6,17 +6,11 @@
 	</ion-nav-buttons>
 	<ion-content>
 		<div class="img-holder-prd">
-			<!--
-			<div class="img-holder-big text-center">
-				<a href="#" class="">Enlarge <i class="icon ion-arrow-expand"></i></a>
-				<img src="img/artist/artist1.jpg">
-			</div>
--->
 			<ion-slide-box show-pager="true" auto-play="true" pager-click="true">
 				<ion-slide ng-repeat="item in artdetail">
 					<!--				<ion-slide>-->
 					<div class="box img-holder-big text-center">
-						<ion-scroll zooming="true" direction="x" min-zoom="1" max-zoom="2" style="width:80%;display:block;margin:0 auto;">
+						<ion-scroll zooming="true" direction="x" min-zoom="1" max-zoom="2" style="width:90%;display:block;margin:0 auto;">
 							<img ng-src="{{item.image}}" class="full-image">
 							<!--							<img src="img/artist/artist1.jpg">-->
 						</ion-scroll>
@@ -26,11 +20,12 @@
 			<div class="padding">
 				<div class="list list-details" ng-repeat="item in artdetailcont">
 					<label class="item item-input">
-						{{item.id}}
+						<span class="label">#</span>
+						<div class="item-map">{{item.id}}</div>
 					</label>
 					<label class="item item-input">
-						<span class="label">Artist</span>
-						<div class="item-map">{{item.name}}</div>
+						<span class="label assertive">Artist</span>
+						<div class="item-map assertive">{{item.name}}</div>
 					</label>
 					<label class="item item-input">
 						<span class="label">Title</span>
@@ -50,7 +45,7 @@
 					</label>
 					<label class="item item-input">
 						<span class="label">Price</span>
-						<div class="item-map">{{item.price}}</div>
+						<div class="item-map">{{item.price}} <span>(excluding VAT)</span></div>
 					</label>
 				</div>
 				<div class="btn-grp">
@@ -58,7 +53,7 @@
 						View Artwork In Your Room
 					</button> -->
 					<button class="button button-block button-assertive icon-left ion-ios-heart">
-						Add to WishList
+						Add to Favorite
 					</button>
 					<a href="#/app/cart" class="button button-positive button-block icon-left ion-ios-cart">
 					Add To Cart
@@ -66,14 +61,36 @@
 				</div>
 			</div>
 			<div class="img-artist style1-bg padding">
-				<div class="head-artist" href="#">
-					<!--					<span class="item-note">view all</span>-->
-					<h5>More Works By This Artist</h5>
+				<div class="head-artist">
+					<readmores>
+						<span class="item-note readmore assertive">view profile</span>
+						<span class="item-note pr15 assertive" ui-sref="app.artist-detail">view all</span>
+						<h5>More Works By This Artist</h5>
+						<div class="read-morecont">
+							<div class="read-inner padding">
+								<p><span class="bold">Born in</span>1983 <span class="bold">at</span> Andhra Pradesh</p>
+								<p><span class="bold">Passed away</span>
+								</p>
+								<p><span class="bold">Education</span>
+									<br>2006, Bachelor of Fine Arts, Andhra University, Vishakhapatnam
+									<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
+									<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
+								</p>
+								<p><span class="bold">Awards / Recognitions / Honors</span>
+									<br>1995 , Elizabeth Greenshields Foundation Grant , Elizabeth Greenshields Foundation
+									<br>1995 , Ravi Jain Award , Ravi Jain Foundation
+								</p>
+							</div>
+						</div>
+					</readmores>
 				</div>
 				<div class="row">
 					<div class="col-25" ng-repeat="item in artistsimilar">
-						<!--						<img src="img/artist/artist1.jpg" class="full-image">-->
-						<img ng-src="{{item.image}}" class="full-image">
+						<div class="img-slid">
+							<a ui-sref="app.art-detail">
+								<img ng-src="{{item.image}}" class="full-image">
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -6,11 +6,16 @@
 	</ion-nav-buttons>
 	<ion-content>
 		<div class="cont-artist padding">
-			<h4 class="text-center assertive">TAPAS BASU</h4>
+
 			<readmores>
-				<div class="text-right readmore">
+				<div class="item-note">
+					<a class="color-black button bold" href="">Edit</a>
+				</div>
+				<div class="readmore item-note">
 					<a class="color-black button bold" href="">View Profile </a>
 				</div>
+				<h4 class="assertive">TAPAS BASU
+				</h4>
 				<div class="read-morecont">
 					<div class="read-inner padding">
 						<p><span class="bold">Born in</span>1983 <span class="bold">at</span> Andhra Pradesh</p>
@@ -20,6 +25,10 @@
 							<br>2006, Bachelor of Fine Arts, Andhra University, Vishakhapatnam
 							<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
 							<br>2008, Master of Fine Arts, Jamia Milia Islamia University, New Delhi
+						</p>
+						<p><span class="bold">Awards / Recognitions / Honors</span>
+							<br>1995 , Elizabeth Greenshields Foundation Grant , Elizabeth Greenshields Foundation
+							<br>1995 , Ravi Jain Award , Ravi Jain Foundation
 						</p>
 					</div>
 				</div>
@@ -37,7 +46,7 @@
 					</a>
 					<div class="artist-cont-detail">
 						<p>
-							{{details.id}}
+							<span>{{details.id}}</span>
 						</p>
 						<p>
 							{{details.typename}}
@@ -46,7 +55,7 @@
 							{{details.madein}}
 						</p>
 						<p>
-							{{details.size}}
+							{{details.size}} inches
 						</p>
 						<p>
 							{{details.year}}

@@ -4,7 +4,17 @@
 		<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
-	<ion-content>
+	<div class="tabs-striped tabs-top">
+		<div class="tabs">
+			<a class="tab-item" ng-click="showFilter();">
+				Filter
+			</a>
+			<a class="tab-item" ng-click="showSort();">
+				Sort
+			</a>
+		</div>
+	</div>
+	<ion-content class="has-tabs made">
 		<div class="row" ng-repeat="detail in artistdetail">
 			<div class="col-50 padding-horizontal" ng-repeat="details in detail">
 				<div class="prd-cont">
@@ -23,7 +33,10 @@
 							{{details.name}}
 						</p>
 						<p>
-							{{details.size}}
+							{{details.size}} inches
+						</p>
+						<p>
+							{{details.price}}
 						</p>
 					</div>
 				</div>
@@ -32,12 +45,18 @@
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">
-			<a class="tab-item" ng-click="showFilter();">
-    Filter
-  </a>
-			<a class="tab-item" ng-click="showSort();">
-    Sort
-  </a>
+			<a class="tab-item" ng-click="showCategory();">
+	 All
+	  </a>
+			<a class="tab-item" href="">
+	    Paintings
+	  </a>
+			<a class="tab-item" href="">
+	    Sculptures
+	  </a>
+			<a class="tab-item" href="">
+	    Other
+	  </a>
 		</div>
 	</ion-footer-bar>
 </ion-view>

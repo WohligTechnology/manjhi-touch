@@ -4,20 +4,29 @@
 		<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
-	<ion-content class="has-header cont-checkout">
+	<ion-content class="has-header cont-checkout personal-radio">
 		<div class="list">
 			<label class="item item-input">
 				<input type="text" placeholder="First Name*" required>
 			</label>
 			<label class="item item-input">
-				<input type="text" placeholder="Last Name*" required>
+				<input type="text" placeholder="Email ID" required>
 			</label>
 			<label class="item item-input">
-				<input type="email" placeholder="Email*" required>
+				<input type="text" placeholder="Secondary Email ID" required>
 			</label>
 			<label class="item item-input">
 				<input type="tel" placeholder="Phone No*" required>
 			</label>
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Gender
+				</div>
+				<select placeholder="country" required>
+					<option value="">Please Select</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+				</select>
 		</div>
 		<div class="padding-horizontal">
 			<button class="button button-full button-positive">
