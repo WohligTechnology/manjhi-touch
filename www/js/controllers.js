@@ -92,7 +92,7 @@ angular.module('starter.controllers', [])
     $scope.artistdetail = _.chunk($scope.artistdetail, 2);
   })
 
-.controller('ArtDetailCtrl', function($scope, $stateParams) {
+.controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal) {
   $scope.artdetail = [{
     image: 'img/artist/artist1.jpg',
   }, {
@@ -121,7 +121,22 @@ angular.module('starter.controllers', [])
     price: 'Rs. 30,000 / $ 60.00'
 
   }]
+  $ionicModal.fromTemplateUrl('templates/modal-image.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
 
+  $scope.details = [{
+    image: 'img/artist/artist1.jpg',
+  }];
 })
 
 
@@ -250,7 +265,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ArtistDetailCtrl', function($scope, $stateParams) {
+.controller('ArtistDetailCtrl', function($scope, $stateParams, $ionicModal) {
   $scope.artistdetail = [{
     image: 'img/artist/artist1.jpg',
     id: '1527',
@@ -342,7 +357,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('PressCtrl', function($scope, $stateParams) {
+.controller('PressCtrl', function($scope, $stateParams, $ionicModal) {
   $scope.media2015 = [{
     name: 'Interiors & Decor',
     date: ' Sep 30, 2014 ',
@@ -413,6 +428,20 @@ angular.module('starter.controllers', [])
   $scope.media2014 = _.chunk($scope.media2014, 2);
   $scope.media2015 = _.chunk($scope.media2015, 2);
 
+  $scope.showpressimage = function() {
+    $scope.modal.show();
+  };
+  $ionicModal.fromTemplateUrl('templates/modal-pressimage.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closepressimage = function() {
+    $scope.modal.hide();
+  };
+
 })
 
 .controller('EventCtrl', function($scope, $stateParams) {
@@ -471,7 +500,7 @@ angular.module('starter.controllers', [])
   $scope.event2016 = _.chunk($scope.event2016, 2);
 })
 
-.controller('EventdetailCtrl', function($scope, $stateParams) {
+.controller('EventdetailCtrl', function($scope, $stateParams, $ionicModal) {
   $scope.event = [{
     name: 'Aura Art connects the two worlds of art and fashion',
     venue: 'Pooja House, Opp JW Mariott, Juhu, Mumbai',
@@ -503,6 +532,19 @@ angular.module('starter.controllers', [])
     image: 'img/eventgallery/g7.jpg'
   }];
   $scope.gallery = _.chunk($scope.gallery, 3);
+  $scope.showeventimage = function() {
+    $scope.modal.show();
+  };
+  $ionicModal.fromTemplateUrl('templates/modal-eventimage.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closeeventimage = function() {
+    $scope.modal.hide();
+  };
 })
 
 .controller('InfraServicesCtrl', function($scope, $stateParams) {})

@@ -20,9 +20,14 @@
 					<p ng-bind-html="events.detail | rawHtml"></p>
 				</div>
 			</div>
+			<!-- <div class="eventgallery">
+				<div class="event-pic">
+					<ion-gallery ion-gallery-items="items" ion-gallery-row="3"></ion-gallery>
+				</div>
+			</div> -->
 			<div class="row" ng-repeat="gal in gallery">
 				<div class="col-33" ng-repeat="gals in gal">
-					<div class="eventgallery">
+					<div class="eventgallery" ng-click="showeventimage();">
 						<div class="event-pic" fixit>
 							<img class="fix-img" ng-src="{{gals.image}}">
 						</div>
