@@ -8578,7 +8578,7 @@ body {
 
 .prd-holder, .prd-cont {
   min-height: 220px;
-  padding-bottom: 10px; }
+  padding-bottom: 15px; }
   .prd-holder .full-image, .prd-cont .full-image {
     width: auto;
     max-width: 100%;
@@ -8660,7 +8660,7 @@ i.icon.ion-heart {
 
 .img-holder {
   height: 200px;
-  margin-bottom: 10px; }
+  margin-bottom: 5px; }
 
 .artist-cont-detail i {
   color: #ddd; }
