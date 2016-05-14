@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
       madein: 'Oil on board',
       size: '19.5 x 23',
       year: '1978',
-      price: 'Rs.1,00,000/ $6,400'
+      price: 'Rs 1,00,000/ $ 6,400'
     }, {
       image: 'img/artist/artist2.jpg',
       id: '1530',
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       madein: 'Stainless Steel and White Paint',
       size: '50 X 15 X 12',
       year: '2013',
-      price: 'Rs.1,40,000/ $7,400'
+      price: 'Rs 1,40,000/ $7,400'
     }, {
       image: 'img/artist/artist4.jpg',
       id: '1536',
@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
     medium: 'Water Colour & Ink on Paper',
     size: '30 X 20 inches',
     year: '2005',
-    price: 'Rs. 30,000 / $ 60.00'
+    price: 'Rs 30,000 / $ 60.00'
 
   }]
   $ionicModal.fromTemplateUrl('templates/modal-image.html', {
@@ -131,6 +131,18 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
   $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  $ionicModal.fromTemplateUrl('templates/modal-contact.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openContact = function() {
+    $scope.modal.show();
+  };
+  $scope.closeContact = function() {
     $scope.modal.hide();
   };
 
@@ -151,26 +163,26 @@ angular.module('starter.controllers', [])
     id: '1528',
     name: 'Ajay R Dhandre',
     size: '19.5 x 23',
-    price: 'Rs. 30,000 / $ 60.00'
+    price: 'Rs 30,000 / $ 60.00'
   }, {
     image: 'img/artist/artist2.jpg',
     id: '1527',
     name: 'Amarnath Sharma',
     size: '30 x 20',
-    price: 'Rs. 30,000 / $ 60.00'
+    price: 'Rs 30,000 / $ 60.00'
   }, {
     image: 'img/artist/artist3.jpg',
     name: 'Ajay Sharma',
     id: '1530',
     size: '21.5 x 26',
-    price: 'Rs. 30,000 / $ 60.00'
+    price: 'Rs 30,000 / $ 60.00'
   }, {
     image: 'img/artist/artist4.jpg',
     id: '1530',
     name: 'Bhushen Koul',
     madein: 'Oil on board',
     size: '20.5 x 23 x N/A',
-    price: 'Rs. 30,000 / $ 60.00'
+    price: 'Rs 30,000 / $ 60.00'
   }];
   $scope.artistdetail = _.chunk($scope.artistdetail, 2);
 
@@ -273,7 +285,7 @@ angular.module('starter.controllers', [])
     madein: 'Oil on board',
     size: '19.5 x 23',
     year: '1978',
-    price: 'Rs.1,00,000/ $6,400'
+    price: 'Rs 1,00,000/ $6,400'
   }, {
     image: 'img/artist/artist2.jpg',
     id: '1530',
@@ -321,7 +333,7 @@ angular.module('starter.controllers', [])
     madein: 'Stainless Steel and White Paint',
     size: '50 X 15 X 12',
     year: '2013',
-    price: 'Rs.1,40,000/ $7,400'
+    price: 'Rs 1,40,000/ $7,400'
   }, {
     image: 'img/artist/artist4.jpg',
     id: '1536',

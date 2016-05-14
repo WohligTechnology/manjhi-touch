@@ -1,28 +1,19 @@
 <ion-view classs="bar-stable" title="PAINTING">
 	<ion-nav-buttons side="right">
-		<a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+9124904496 "></a>
+		<a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+919328877000"></a>
 		<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<ion-content>
 		<div class="img-holder-prd">
 			<div class="box img-holder-big text-center">
-					<img src="img/artist/artist1.jpg" class="full-image" ng-click="openModal();">
+				<img src="img/artist/artist1.jpg" class="full-image" ng-click="openModal();">
 			</div>
-			<!-- <ion-slide-box show-pager="true" auto-play="true" pager-click="true">
-				<ion-slide ng-repeat="item in artdetail">
-					<div class="box img-holder-big text-center">
-						<ion-scroll zooming="true" direction="x" min-zoom="1" max-zoom="2" style="width:90%;display:block;margin:0 auto;">
-							<img ng-src="{{item.image}}" class="full-image" ng-click="openModal();">
-						</ion-scroll>
-					</div>
-				</ion-slide>
-			</ion-slide-box> -->
 			<div class="padding">
 				<div class="list list-details" ng-repeat="item in artdetailcont">
 					<label class="item item-input">
 						<span class="label">#</span>
-						<div class="item-map">{{item.id}}</div>
+						<div class="item-map">{{item.id}}</div> <i class="ion ion-ios-heart assertive fav-art"></i>
 					</label>
 					<label class="item item-input">
 						<span class="label assertive">Artist</span>
@@ -38,7 +29,7 @@
 					</label>
 					<label class="item item-input">
 						<span class="label">Size</span>
-						<div class="item-map">{{item.size}}</div>
+						<div class="item-map lowercase">{{item.size}}</div>
 					</label>
 					<label class="item item-input">
 						<span class="label">Year</span>
@@ -53,9 +44,9 @@
 					<!-- <button class="button button-block button-balanced icon-left ion-ios-home">
 						View Artwork In Your Room
 					</button> -->
-					<button class="button button-block button-assertive icon-left ion-ios-heart">
-						Add to Favorite
-					</button>
+					<a class="button button-block button-assertive icon-left ion-android-mail" ng-click="openContact();">
+					Contact
+					</a>
 					<a href="#/app/cart" class="button button-positive button-block icon-left ion-ios-cart">
 					Add To Cart
 				</a>

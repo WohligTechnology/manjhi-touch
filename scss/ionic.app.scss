@@ -100,7 +100,7 @@ $headings-font-weight: 500 !default;
     margin: 0 0 5px;
   }
   .c-name {
-    padding-bottom: 25px;
+    padding-bottom: 15px;
   }
   a {
     font-size: 13px;
@@ -109,6 +109,43 @@ $headings-font-weight: 500 !default;
   }
   p {
     font-size: 13px;
+    margin-bottom: 0;
+  }
+}
+.social-icon {
+  padding: 5px 0;
+  li {
+    display: inline-block;
+    list-style: none;
+  }
+  a {
+    display: block;
+  }
+  i {
+    font-size: 24px;
+    height: 30px;
+    width: 35px;
+    padding: 2px 0;
+    border-radius: 5px;
+    margin: 0 5px;
+    text-align: center;
+    color: #fff;
+  }
+  i.ion.ion-social-facebook {
+    background: #3b5998;
+    border: 1px solid #3b5998;
+  }
+  i.ion.ion-social-twitter {
+    background: #44ccf6;
+    border: 1px solid #44ccf6;
+  }
+  i.ion.ion-social-instagram {
+    background: #2E5E86;
+    border: 1px solid #2E5E86;
+  }
+  i.ion.ion-social-youtube {
+    background: #bb0000;
+    border: 1px solid #bb0000;
   }
 }
 .head-menu {
