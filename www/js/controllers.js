@@ -137,13 +137,13 @@ angular.module('starter.controllers', [])
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.modal1 = modal;
   });
   $scope.openContact = function() {
-    $scope.modal.show();
+    $scope.modal1.show();
   };
   $scope.closeContact = function() {
-    $scope.modal.hide();
+    $scope.modal1.hide();
   };
 
   $scope.details = [{

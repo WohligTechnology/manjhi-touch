@@ -113,7 +113,7 @@ $headings-font-weight: 500 !default;
   }
 }
 .social-icon {
-  padding: 5px 0;
+  padding: 5px 0 10px;
   li {
     display: inline-block;
     list-style: none;
@@ -122,12 +122,12 @@ $headings-font-weight: 500 !default;
     display: block;
   }
   i {
-    font-size: 24px;
+    font-size: 22px;
     height: 30px;
-    width: 35px;
+    width: 30px;
     padding: 2px 0;
     border-radius: 5px;
-    margin: 0 5px;
+    margin: 0 10px;
     text-align: center;
     color: #fff;
   }
