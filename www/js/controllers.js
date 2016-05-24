@@ -1,18 +1,82 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaInAppBrowser) {
   $scope.searchbar = false;
   $scope.toggleSearchbar = function() {
     $scope.searchbar = $scope.searchbar === false ? true : false;
   };
+  var options = {
+    location: 'yes',
+    clearcache: 'yes',
+    toolbar: 'no'
+  };
 
+  $scope.openFb = function() {
+    $cordovaInAppBrowser.open('https://www.facebook.com/auraarteconnect/', '_blank', options)
+
+    .then(function(event) {
+      // success
+    })
+
+    .catch(function(event) {
+      // error
+    });
+  }
+  $scope.openInsta = function() {
+    $cordovaInAppBrowser.open('https://www.instagram.com/auraarteconnect/', '_blank', options)
+
+    .then(function(event) {
+      // success
+    })
+
+    .catch(function(event) {
+      // error
+    });
+  }
+  $scope.openTwit = function() {
+    $cordovaInAppBrowser.open('https://twitter.com/auraarteconnect', '_blank', options)
+
+    .then(function(event) {
+      // success
+    })
+
+    .catch(function(event) {
+      // error
+    });
+  }
+  $scope.openYt = function() {
+    $cordovaInAppBrowser.open('https://www.youtube.com/user/auraartdpl/', '_blank', options)
+
+    .then(function(event) {
+      // success
+    })
+
+    .catch(function(event) {
+      // error
+    });
+  }
+  $scope.openFb = function() {
+    $cordovaInAppBrowser.open('https://www.facebook.com/auraarteconnect/', '_blank', options)
+
+    .then(function(event) {
+      // success
+    })
+
+    .catch(function(event) {
+      // error
+    });
+  }
 })
 
 .controller('AccessCtrl', function($scope, $ionicModal, $timeout) {})
 
 .controller('LoginCtrl', function($scope, $stateParams) {})
 
-.controller('HomeCtrl', function($scope, $stateParams) {})
+.controller('HomeCtrl', function($scope, $stateParams) {
+
+
+
+})
 
 .controller('SavedViewsCtrl', function($scope, $stateParams) {
     $scope.savedviews = [{

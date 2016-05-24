@@ -55,7 +55,7 @@ For example, you might change some of the default colors:
 
 .text-heading {
   position: absolute;
-  bottom: 7px;
+  top: 0px;
   color: white;
   text-transform: uppercase;
   width: auto;

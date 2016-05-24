@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
