@@ -7,7 +7,7 @@ var abc = "";
 
 angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser) {
 
     $scope.adminurl = adminurl;
 
@@ -247,6 +247,51 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 dataNextPre.getCartItems();
             }
         })
+    }
+
+    var options = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+    };
+
+    $scope.openFb = function() {
+        $cordovaInAppBrowser.open('https://www.facebook.com/auraarteconnect/', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
+    $scope.openInsta = function() {
+        $cordovaInAppBrowser.open('https://www.instagram.com/auraarteconnect/', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
+
+    $scope.openTwit = function() {
+        $cordovaInAppBrowser.open('https://twitter.com/auraarteconnect', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
+
+    $scope.openYt = function() {
+        $cordovaInAppBrowser.open('https://www.youtube.com/user/auraartdpl/', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
+
+    $scope.openFb = function() {
+        $cordovaInAppBrowser.open('https://www.facebook.com/auraarteconnect/', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
     }
 
 })
@@ -533,7 +578,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             }, 1000);
         }
     }
-
 })
 
 .controller('SavedViewsCtrl', function($scope, $stateParams) {
@@ -675,9 +719,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.showitabove = function(artwork) {
         $state.go('app.art-details', {
-            artid: artwork._id
-        })
-        // $scope.loadArtWork(artwork._id);
+                artid: artwork._id
+            })
+            // $scope.loadArtWork(artwork._id);
     }
 
     $scope.addToCart = function(art) {
