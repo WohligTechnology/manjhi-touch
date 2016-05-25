@@ -2,35 +2,35 @@
 	<ion-header-bar class="header-rights" align-title="center">
 		<h1 class="title">Select Catergory</h1>
 		<div class="buttons">
-			<button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeCategory()"></button>
+			<button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeCategory(null)"></button>
 		</div>
 	</ion-header-bar>
 	<ion-content>
 		<div class="list catogories">
 			<label class="item item-radio">
 				<div class="item-content">
-					<a href="#">
+					<a href="">
 					Commissioned Sculptures
 				</a>
 				</div>
 			</label>
-			<label class="item item-radio">
+			<label class="item item-radio" ng-click="closeCategory('Photographs');">
 				<div class="item-content">
-					<a href="#">
+					<a href="">
 					Photographs
 				</a>
 				</div>
 			</label>
-			<label class="item item-radio">
+			<label class="item item-radio" ng-click="closeCategory('Prints');">
 				<div class="item-content">
-					<a href="#">
+					<a href="">
 					Prints
 				</a>
 				</div>
 			</label>
 			<label class="item item-radio">
 				<div class="item-content">
-					<a href="#">
+					<a href="">
 				Others
 					</a>
 				</div>

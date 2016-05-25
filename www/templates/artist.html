@@ -5,37 +5,29 @@
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<ion-content>
-		<div class="row animate-if" ng-repeat="artist in aristname">
-			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="aristnames in artist">
-				<a href="#/app/artist/detail">
+		<div class="row animate-if" collection-repeat="artist in artistimage">
+			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="artistimages in artist">
+				<a href="" ng-click="getHeight(artistimages);">
 					<div class="prd-holder">
 						<div class="title">
-							<h5 class="text-center">{{aristnames.name}}</h4>
-                    </div>
-                    <div class="img-holder">
-                        <figure>
-                            <img ng-src="{{aristnames.image}}" class="full-image">
-                        </figure>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </div>
-    </ion-content>
-<ion-footer-bar class="tabs-down">
- <div class="tabs">
-  <a class="tab-item">
- All
-  </a>
-  <a class="tab-item">
-    Paintings
-  </a>
-  <a class="tab-item">
-    Sculptures
-  </a>
-  <a class="tab-item" ng-click="showCategory();">
-    Other
-  </a>
-</div>
-</ion-footer-bar>
+							<h5 class="text-center">{{artistimages.name}}</h5>
+						</div>
+						<div class="img-holder">
+							<figure>
+								<img ng-src="{{artistimages.artwork[0].image[0] | uploadthumbnail}}" class="full-image">
+							</figure>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</ion-content>
+	<ion-footer-bar class="tabs-down">
+		<div class="tabs">
+			<a class="tab-item" ng-click="makeactive('All');">All</a>
+			<a class="tab-item" ng-click="makeactive('Paintings');">Paintings</a>
+			<a class="tab-item" ng-click="makeactive('Sculptures');">Sculptures</a>
+			<a class="tab-item" ng-click="showCategory();">Other</a>
+		</div>
+	</ion-footer-bar>
 </ion-view>
