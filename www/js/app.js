@@ -116,7 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     })
 
     .state('app.artwork', {
-            url: '/artwork/all',
+            url: '/artwork/:type',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/artwork.html',

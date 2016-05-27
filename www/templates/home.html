@@ -13,7 +13,7 @@
 	<ion-tabs class="tabs-striped tabs-top tabs-top1 tabs-color-active-positive ">
 		<ion-tab title="Home" href="#/app/home"></ion-tab>
 		<ion-tab title="Artists" href="#/app/artist/All"></ion-tab>
-		<ion-tab title="Paintings & More" href="#/app/artwork/all"></ion-tab>
+		<ion-tab title="Paintings & More" href="#/app/artwork/All"></ion-tab>
 	</ion-tabs>
 
 	<ion-content class="has-tabs-top1 padding">
@@ -45,11 +45,17 @@
 						<div class="read-morecont">
 							<div class="read-inner">
 								<label class="item item-input">
-									<ui-select demo="{{onfock}}" ng-model="filterby.search" on-select="setSearch($select);" tagging tagging-label="false" uiselect-autofocus>
+									<!-- <ui-select ng-model="filterby.search" on-select="setSearch($select);" tagging tagging-label="false" uiselect-autofocus>
 											<ui-select-match class="text-capitalize" placeholder="Select Artist">{{filterby.search}}</ui-select-match>
 											<ui-select-choices refresh-delay="0" refresh="getDropdown($select.search)" repeat="person in allartist track by person._id">
 													<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 											</ui-select-choices>
+									</ui-select> -->
+									<ui-select ng-model="filterby.search" on-select="setSearch($select);">
+										<ui-select-match placeholder="Select Artist">{{filterby.search}}</ui-select-match>
+										<ui-select-choices repeat="person in allartist track by person._id" refresh="getDropdown($select.search)" refresh-delay="0">
+											<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+										</ui-select-choices>
 									</ui-select>
 								</label>
 							</div>
@@ -107,7 +113,12 @@
 						<div class="read-morecont">
 							<div class="read-inner">
 								<label class="item item-input">
-									<input type="text" placeholder="Medium*" required>
+									<ui-select ng-model="filterby.medium" on-select="setMediumSearch($select);">
+											<ui-select-match class="text-capitalize" placeholder="Select Medium">{{filterby.medium}}</ui-select-match>
+											<ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
+													<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+											</ui-select-choices>
+									</ui-select>
 								</label>
 							</div>
 						</div>
@@ -267,16 +278,16 @@
 		<div class="social-icon text-center">
 			<ul>
 				<li>
-					<a ng-click = "openFb()" target="_blank"> <i class="ion ion-social-facebook"></i></a>
+					<a ng-click="openFb()" target="_blank"> <i class="ion ion-social-facebook"></i></a>
 				</li>
 				<li>
-					<a ng-click = "openInsta()" target="_blank"> <i class="ion ion-social-instagram"></i></a>
+					<a ng-click="openInsta()" target="_blank"> <i class="ion ion-social-instagram"></i></a>
 				</li>
 				<li>
-					<a ng-click = "openTwit()" target="_blank"> <i class="ion ion-social-twitter"></i></a>
+					<a ng-click="openTwit()" target="_blank"> <i class="ion ion-social-twitter"></i></a>
 				</li>
 				<li>
-					<a ng-click = "openYt()" target="_blank"> <i class="ion ion-social-youtube"></i></a>
+					<a ng-click="openYt()" target="_blank"> <i class="ion ion-social-youtube"></i></a>
 				</li>
 			</ul>
 		</div>

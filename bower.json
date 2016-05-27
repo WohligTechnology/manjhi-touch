@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "ion-gallery": "~0.1.14",
-    "ngCordova": "~0.1.26-alpha"
+    "ngCordova": "~0.1.26-alpha",
+    "angular-ui-select": "^0.17.1"
   }
 }
