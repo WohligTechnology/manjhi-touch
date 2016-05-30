@@ -456,6 +456,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     };
 })
 
+.filter('inlakhs', function($filter) {
+    return function(input) {
+        if (input) {
+            if (input != "0") {
+                var x = input;
+                x = x.toString();
+                var afterPoint = '';
+                if (x.indexOf('.') > 0)
+                    afterPoint = x.substring(x.indexOf('.'), x.length);
+                x = Math.floor(x);
+                x = x.toString();
+                var lastThree = x.substring(x.length - 3);
+                var otherNumbers = x.substring(0, x.length - 3);
+                if (otherNumbers != '')
+                    lastThree = ',' + lastThree;
+                var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;
+                return res;
+            } else
+                return 0;
+        } else {
+            return 0;
+        }
+    };
+})
+
 .directive('onlyDigits', function() {
     return {
         require: 'ngModel',

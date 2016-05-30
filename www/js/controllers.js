@@ -796,7 +796,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('ForgotCtrl', function($scope, $stateParams) {})
 
-.controller('ArtworkCtrl', function($scope, $stateParams, $ionicModal, MyServices, $timeout, $ionicLoading) {
+.controller('ArtworkCtrl', function($scope, $stateParams, $ionicModal, MyServices, $timeout, $ionicLoading, $state) {
 
     $scope.pagedata = {};
     $scope.pagedata.search = "";
@@ -866,7 +866,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.getClr = function() {
         if ($scope.pagedata.type == "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value != false) {
@@ -960,9 +959,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    $scope.getClr();
-    $scope.getElm();
-    $scope.getStl();
+    // $scope.getClr();
+    // $scope.getElm();
+    // $scope.getStl();
 
     $scope.getColorDropdown = function(search) {
         if (search.length >= 1) {
@@ -975,9 +974,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
-        } else {
-            $scope.getClr();
         }
+        // else {
+        //     $scope.getClr();
+        // }
     }
     $scope.getStyleDropdown = function(search) {
         if (search.length >= 1) {
@@ -990,9 +990,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
-        } else {
-            $scope.getStl();
         }
+        // else {
+        //     $scope.getStl();
+        // }
     }
     $scope.getElementDropdown = function(search) {
         if (search.length >= 1) {
@@ -1005,9 +1006,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
-        } else {
-            $scope.getElm();
         }
+        // else {
+        //     $scope.getElm();
+        // }
     }
     var countcall = 0;
     $scope.getallartist = function() {
@@ -1070,7 +1072,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    $scope.getallartist();
+    // $scope.getallartist();
     $scope.getDropdown = function(search) {
         if (search.length >= 1) {
             $scope.change = {};
@@ -1089,9 +1091,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
-        } else {
-            $scope.getallartist();
         }
+        // else {
+        //     $scope.getallartist();
+        // }
     }
 
     $scope.getDropdownMedium = function(search) {
@@ -1112,9 +1115,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
-        } else {
-            $scope.getmedium();
         }
+        // else {
+        //     $scope.getmedium();
+        // }
     }
 
     $scope.setSearch = function(select) {
@@ -1165,7 +1169,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.reload = function() {
-        globalFunction.showLoading();
         //      console.log($scope.pagedata);
         var filterdata = $scope.pagedata;
         if (filterdata.minprice == 0) {
@@ -1191,17 +1194,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 $scope.totalartcont.push(n);
             });
             $scope.totalartcont = _.uniq($scope.totalartcont, 'artwork._id');
+            $scope.totalArtworks = _.chunk($scope.totalartcont, 2);
             $scope.callinfinite = false;
             if ($.jStorage.get("artworkScroll")) {
                 if (data.page == $.jStorage.get("artworkScroll").pageno) {
                     window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
-                } else {
-                    var variablepage = data.page;
-                    $scope.pagedata.pagenumber = ++variablepage;
-                    if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
-                        $scope.reload();
-                    }
                 }
+                // else {
+                //     var variablepage = data.page;
+                //     $scope.pagedata.pagenumber = ++variablepage;
+                //     if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
+                //         $scope.reload();
+                //     }
+                // }
             }
             $ionicLoading.hide();
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1229,6 +1234,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     // }
 
     $scope.makeactive = function(type) {
+        globalFunction.showLoading();
         //      console.log(type);
         _.each($scope.typejson, function(n) {
             var index = n.name.indexOf(type);
@@ -1259,6 +1265,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     //    };
 
     $scope.filterresults = function(search) {
+        globalFunction.showLoading();
         //      console.log(search);
         $scope.pagedata.search = _.capitalize(search);
         $scope.totalartcont = [];
@@ -1372,13 +1379,11 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.goToDetailPage = function(artwork) {
         if (artwork.type == "Sculptures") {
-            //          $location.url("/sculpture/" + artwork._id);
             $state.go('sculpture', {
                 artid: artwork._id
             });
         } else {
-            //          $location.url("/artwork/detail/" + artwork._id);
-            $state.go('detail', {
+            $state.go('app.art-details', {
                 artid: artwork._id
             });
         }

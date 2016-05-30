@@ -43,7 +43,7 @@
 					<label class="item item-input" ng-if="artistDetailImg.artwork.status!='sold'">
 						<span class="label">Price</span>
 						<div class="item-map" ng-if="artistDetailImg.artwork.gprice && artistDetailImg.artwork.gprice!='N/A'">
-							Rs {{artistDetailImg.artwork.gprice|number:0}} / ${{artistDetailImg.artwork.gprice|indollars}} <span>(excluding VAT)</span>
+							Rs {{artistDetailImg.artwork.gpriceinlakhs}} / ${{artistDetailImg.artwork.gprice|indollars}} <span>(excluding VAT)</span>
 						</div>
 						<div class="item-map" ng-if="!artistDetailImg.artwork.gprice || artistDetailImg.artwork.gprice=='N/A'">
 							Available on request

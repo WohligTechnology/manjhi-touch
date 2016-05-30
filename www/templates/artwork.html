@@ -15,34 +15,37 @@
 		</div>
 	</div>
 	<ion-content class="has-tabs made">
-		<div class="row" ng-repeat="detail in artistdetail">
-			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="details in detail">
-				<div class="prd-cont">
-					<a href="#/app/art-detail">
+		<div class="row" collection-repeat="detail in totalArtworks">
+			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="totalartconts in detail">
+				<div class="prd-cont" ng-click="goToDetailPage(totalartconts.artwork);">
+					<a href="">
 						<div class="img-holder">
 							<figure>
-								<img ng-src="{{details.image}}" class="full-image">
+								<img ng-src="{{totalartconts.artwork.image[0]|uploadthumbnail}}" class="full-image">
 							</figure>
 						</div>
 					</a>
 					<div class="artist-cont-detail">
 						<p>
-							{{details.id}}
+							{{totalartconts.artwork.imageno}}
 						</p>
 						<p>
-							{{details.name}}
+							{{totalartconts.name}}
 						</p>
 						<p>
-							{{details.size}} inches
+							{{totalartconts.artwork|makesizestr}}
 						</p>
-						<p>
-							{{details.price}}
+						<p ng-if="totalartconts.artwork.gprice && totalartconts.artwork.gprice!='N/A' && totalartconts.artwork.status!='sold'">
+							Rs {{totalartconts.artwork.gprice|inlakhs}} / ${{totalartconts.artwork.gprice|indollars}}
+						</p>
+						<p ng-if="!totalartconts.artwork.gprice || totalartconts.artwork.gprice=='N/A'">
+							Price available on request
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<ion-infinite-scroll on-infinite="addMoreItems()" distance="1%">
+		<ion-infinite-scroll on-infinite="addMoreItems()">
 		</ion-infinite-scroll>
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
