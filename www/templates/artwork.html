@@ -45,8 +45,7 @@
 				</div>
 			</div>
 		</div>
-		<ion-infinite-scroll on-infinite="addMoreItems()">
-		</ion-infinite-scroll>
+		<ion-infinite-scroll on-infinite="addMoreItems()" ng-if="infiniteLoading"></ion-infinite-scroll>
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">

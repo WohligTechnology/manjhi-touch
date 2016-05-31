@@ -10,12 +10,12 @@
 			<ion-list class="panel-list search-panel">
 				<div class="search-top item item-divider">
 					<div class="src-text"><i class="icon ion-chevron-right"></i>Search for</div>
-					<button class="button button-positive button-block src-btn">Go</button>
+					<button class="button button-positive button-block src-btn" ng-click="filterresults(pagedata.search)">Go</button>
 				</div>
-				<ion-checkbox>Paintings</ion-checkbox>
+				<!-- <ion-checkbox>Paintings</ion-checkbox>
 				<ion-checkbox>Sculptures</ion-checkbox>
 				<ion-checkbox>Photographs</ion-checkbox>
-				<ion-checkbox>Prints</ion-checkbox>
+				<ion-checkbox>Prints</ion-checkbox> -->
 			</ion-list>
 			<ion-list class="panel-list search-panel">
 				<readmores class="">
@@ -24,9 +24,14 @@
 					</div>
 					<div class="read-morecont">
 						<div class="read-inner">
-							<label class="item item-input">
-								<input type="text" placeholder="Name">
-							</label>
+							<div class="item item-input">
+								<ui-select uiselect-autofocus demo="{{onfock}}" ng-model="pagedata.search" on-select="setSearch($select);" tagging tagging-label="false">
+									<ui-select-match class="text-capitalize" placeholder="Select Artist">{{pagedata.search}}</ui-select-match>
+									<ui-select-choices refresh-delay="0" refresh="getDropdown($select.search)" repeat="person in allartist track by person._id">
+										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
 						</div>
 					</div>
 				</readmores>
@@ -39,9 +44,9 @@
 					<div class="read-morecont">
 						<div class="read-inner">
 							<div class="min-max">
-								<div range-slider min="minPrice" max="maxPrice" model-min="filterby.minprice" model-max="filterby.maxprice" step="5"></div>
-								<input type="number" max="100000" placeholder="10000000" class="maxmin pull-right" ng-model="filterby.maxprice">
-								<input type="number" maxlength="1000" placeholder="0" class="maxmin" ng-model="filterby.minprice">
+								<div range-slider min="minPrice" max="maxPrice" model-min="pagedata.minprice" model-max="pagedata.maxprice" step="5"></div>
+								<input type="number" placeholder="10000000" class="maxmin pull-right" ng-model="pagedata.maxprice">
+								<input type="number" placeholder="0" class="maxmin" ng-model="pagedata.minprice">
 							</div>
 						</div>
 					</div>
@@ -56,14 +61,14 @@
 						<div class="read-inner inner-main">
 							<div class="min-max margin-top-zero ng-scope">
 								<h3 class="margin-top-zero">Height</h3>
-								<input type="number" placeholder="max-height" class="maxmin pull-right">
-								<input type="number" placeholder="min-height" class="maxmin">
+								<input type="number" placeholder="max-height" class="maxmin pull-right" ng-model="pagedata.maxheight">
+								<input type="number" placeholder="min-height" class="maxmin" ng-model="pagedata.minheight">
 								<h3>Width</h3>
-								<input type="number" placeholder="max-width" class="maxmin pull-right">
-								<input type="number" placeholder="min-width" class="maxmin">
+								<input type="number" placeholder="max-width" class="maxmin pull-right" ng-model="pagedata.maxwidth">
+								<input type="number" placeholder="min-width" class="maxmin" ng-model="pagedata.minwidth">
 								<h3>Depth</h3>
-								<input type="number" placeholder="max-Depth" class="maxmin pull-right">
-								<input type="number" placeholder="min-Depth" class="maxmin">
+								<input type="number" placeholder="max-Depth" class="maxmin pull-right" ng-model="pagedata.maxbreadth">
+								<input type="number" placeholder="min-Depth" class="maxmin" ng-model="pagedata.minbreadth">
 							</div>
 						</div>
 					</div>
@@ -76,9 +81,14 @@
 					</div>
 					<div class="read-morecont">
 						<div class="read-inner">
-							<label class="item item-input">
-								<input type="text" placeholder="Medium*" required>
-							</label>
+							<div class="item item-input">
+								<ui-select ng-model="pagedata.medium" on-select="setMediumSearch($select);" tagging tagging-label="false">
+									<ui-select-match class="text-capitalize" placeholder="Select Medium">{{pagedata.medium}}</ui-select-match>
+									<ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
+										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
 						</div>
 					</div>
 				</readmores>
@@ -90,22 +100,37 @@
 					</div>
 					<div class="read-morecont">
 						<div class="read-inner">
-							<label class="item item-input">
-								<input type="text" placeholder="Color">
-							</label>
-							<label class="item item-input">
-								<input type="text" placeholder="Style">
-							</label>
-							<label class="item item-input">
-								<input type="text" placeholder="Elements">
-							</label>
+							<div class="item item-input">
+								<ui-select ng-model="pagedata.color" on-select="setColorSearch($select);" tagging tagging-label="false">
+									<ui-select-match class="text-capitalize" placeholder="eg. red, green..">{{pagedata.color}}</ui-select-match>
+									<ui-select-choices refresh-delay="0" refresh="getColorDropdown($select.search)" repeat="person in allColor track by person._id">
+										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+							<div class="item item-input">
+								<ui-select ng-model="pagedata.style" on-select="setStyleSearch($select);" tagging tagging-label="false">
+									<ui-select-match class="text-capitalize" placeholder="eg. ">{{pagedata.style}}</ui-select-match>
+									<ui-select-choices refresh-delay="0" refresh="getStyleDropdown($select.search)" repeat="person in allStyle track by person._id">
+										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
+							<div class="item item-input">
+								<ui-select ng-model="pagedata.element" on-select="setElementSearch($select);" tagging tagging-label="false">
+									<ui-select-match class="text-capitalize" placeholder="eg. ">{{pagedata.element}}</ui-select-match>
+									<ui-select-choices refresh-delay="0" refresh="getElementDropdown($select.search)" repeat="person in allElement track by person._id">
+										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
+									</ui-select-choices>
+								</ui-select>
+							</div>
 						</div>
 					</div>
 				</readmores>
 			</ion-list>
 		</div>
 		<div class="padding">
-			<button class="button button-positive button-block martoptwo">Submit</button>
+			<button class="button button-positive button-block martoptwo" ng-click="filterresults(pagedata.search)">Submit</button>
 		</div>
 	</ion-content>
 </ion-modal-view>

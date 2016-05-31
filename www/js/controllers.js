@@ -300,9 +300,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('LoginCtrl', function($scope, $stateParams) {})
 
-.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout) {
+.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state) {
     abc = $scope;
-
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
     $scope.filterby = {};
     $scope.filterby.search = "";
     $scope.filterby.type = "";
@@ -318,10 +319,167 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.filterby.maxheight = '';
     $scope.filterby.minbreadth = '';
     $scope.filterby.maxbreadth = '';
+    $scope.showInvalidLogin = false;
 
+    MyServices.getSlider(function(data) {
+        $scope.slides = data;
+        $ionicSlideBoxDelegate.update();
+    });
+
+    $scope.registeruser = function() {
+        if ($scope.register.password === $scope.register.confirmpassword) {
+            $scope.passwordNotMatch = false;
+            $scope.register.accesslevel = "customer";
+            MyServices.registeruser($scope.register, function(data, status) {
+                console.log(data);
+                if (data.value != false) {
+                    $scope.showAlreadyRegistered = false;
+                    $scope.showWishlist = true;
+                    //$.jStorage.set("user", data);
+                    ngDialog.closeAll();
+                    $state.go("termcondition");
+                } else if (data.value == false && data.comment == "User already exists") {
+                    $scope.showAlreadyRegistered = true;
+                }
+            })
+        } else {
+            $scope.passwordNotMatch = true;
+        }
+    };
+
+    $scope.userlogin = function() {
+        MyServices.userlogin($scope.login, function(data, status) {
+            if (data.value != false) {
+                $scope.showInvalidLogin = false;
+                MyServices.getuserprofile(function(data) {
+                    ngDialog.closeAll();
+                    if (data.id && data.accesslevel == "reseller") {
+                        $state.go("create-artwork");
+                    } else {
+                        $state.go("termcondition");
+                    }
+                })
+            } else {
+                $scope.showInvalidLogin = true;
+            }
+        })
+    };
+
+    $scope.showLogin = true;
+    $scope.changeTab = function(tab) {
+        console.log(tab);
+        if (tab == 1) {
+            $scope.showLogin = false;
+        } else {
+            $scope.showLogin = true;
+        }
+    }
+
+    MyServices.getuserprofile(function(data) {
+        if (data.id) {
+            $scope.isLoggedIn = true;
+            userProfile = data;
+            MyServices.getMyFavourites(data.id, function(favorite) {
+                userProfile.wishlist = favorite;
+            });
+        } else {
+            $scope.isLoggedIn = false;
+        }
+    });
+
+    $scope.lauchedSoon = function() {
+        dataNextPre.messageBox("To be launched soon...");
+    };
+
+    $scope.onfock = "";
+    $scope.oon = function() {
+        if ($scope.onfock === "") {
+            $scope.onfock = "sdfs";
+        } else {
+            $scope.onfock = "";
+        }
+    };
+    dataNextPre.setData = function(data) {
+        //      console.log(data);
+    };
+    $scope.changeUI = 0;
+    // set available range
+    $scope.minPrice = 0;
+    $scope.maxPrice = 10000000;
+
+    // default the user's values to the available range
+    $scope.userMinPrice = $scope.minPrice;
+    $scope.userMaxPrice = $scope.maxPrice;
+
+    //    MyServices.getsliderimages(function (data, status) {
+    //        _.each(data, function (n) {
+    //            $scope.slides.push(n._id);
+    //        })
+    //    });
+
+    $scope.applyfilter = function() {
+        //      console.log($scope.filterby);
+        console.log($scope.filterby);
+        $.jStorage.set("filterby", $scope.filterby);
+        //      $location.url("/artwork/-1");
+        $state.go('app.artwork', {
+            type: -1
+        });
+    };
+
+    $scope.goToArtworks = function(type) {
+        //      $location.url("/artwork/" + type);
+        $state.go('app.artwork', {
+            type: type
+        });
+    };
+
+    $scope.onclick = function(value) {
+        $scope.filterby.checked
+    };
+    var lastChecked = null;
+    $scope.onclick = function(event) {
+        if (event.target.value === lastChecked) {
+            $scope.filterby.type = "";
+            $scope.getallartist();
+            lastChecked = null;
+        } else {
+            lastChecked = event.target.value;
+        }
+    };
+    $scope.changetype = function(chang) {
+        if (chang == 1) {
+            $scope.filterby.type = "Paintings";
+            $scope.getallartist();
+            $scope.getmedium();
+            $scope.getClr();
+            $scope.getElm();
+            $scope.getStl();
+        } else if (chang == 2) {
+            $scope.filterby.type = "Sculptures";
+            $scope.getallartist();
+            $scope.getmedium();
+            $scope.getClr();
+            $scope.getElm();
+            $scope.getStl();
+        } else if (chang == 3) {
+            $scope.filterby.type = "Photographs";
+            $scope.getallartist();
+            $scope.getmedium();
+            $scope.getClr();
+            $scope.getElm();
+            $scope.getStl();
+        } else if (chang == 4) {
+            $scope.filterby.type = "Prints";
+            $scope.getallartist();
+            $scope.getmedium();
+            $scope.getClr();
+            $scope.getElm();
+            $scope.getStl();
+        }
+    };
     $scope.setSearch = function(select) {
-        console.log(select);
-        // $scope.filterby.search = select.selected.name;
+        $scope.filterby.search = select.selected.name;
     };
     $scope.setMediumSearch = function(select) {
         $scope.filterby.medium = select.selected.name;
@@ -458,6 +616,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     };
+    $scope.getClr();
+    $scope.getElm();
+    $scope.getStl();
     var countcall = 0;
     $scope.getallartist = function() {
         if ($scope.filterby.type === "") {
@@ -514,6 +675,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getallartist();
         }
     }
     $scope.getDropdownMedium = function(search) {
@@ -534,6 +697,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getmedium();
         }
     }
 
@@ -550,6 +715,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getClr();
         }
     }
     $scope.getStyleDropdown = function(search) {
@@ -563,6 +730,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getStl();
         }
     }
     $scope.getElementDropdown = function(search) {
@@ -576,6 +745,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getElm();
         }
     }
 })
@@ -796,7 +967,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('ForgotCtrl', function($scope, $stateParams) {})
 
-.controller('ArtworkCtrl', function($scope, $stateParams, $ionicModal, MyServices, $timeout, $ionicLoading, $state) {
+.controller('ArtworkCtrl', function($scope, $stateParams, $ionicModal, MyServices, $timeout, $ionicLoading, $state, $ionicScrollDelegate) {
 
     $scope.pagedata = {};
     $scope.pagedata.search = "";
@@ -829,25 +1000,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             })
         }
     })
-
-    function getScrollXY() {
-        var x = 0,
-            y = 0;
-        if (typeof(window.pageYOffset) == 'number') {
-            // Netscape
-            x = window.pageXOffset;
-            y = window.pageYOffset;
-        } else if (document.body && (document.body.scrollLeft || document.body.scrollTop)) {
-            // DOM
-            x = document.body.scrollLeft;
-            y = document.body.scrollTop;
-        } else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
-            // IE6 standards compliant mode
-            x = document.documentElement.scrollLeft;
-            y = document.documentElement.scrollTop;
-        }
-        return [x, y];
-    }
 
     $scope.openReachout = function() {
         globalFunction.reachOut();
@@ -959,9 +1111,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    // $scope.getClr();
-    // $scope.getElm();
-    // $scope.getStl();
+    $scope.getClr();
+    $scope.getElm();
+    $scope.getStl();
 
     $scope.getColorDropdown = function(search) {
         if (search.length >= 1) {
@@ -974,10 +1126,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getClr();
         }
-        // else {
-        //     $scope.getClr();
-        // }
     }
     $scope.getStyleDropdown = function(search) {
         if (search.length >= 1) {
@@ -990,10 +1141,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getStl();
         }
-        // else {
-        //     $scope.getStl();
-        // }
     }
     $scope.getElementDropdown = function(search) {
         if (search.length >= 1) {
@@ -1006,10 +1156,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getElm();
         }
-        // else {
-        //     $scope.getElm();
-        // }
     }
     var countcall = 0;
     $scope.getallartist = function() {
@@ -1072,7 +1221,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    // $scope.getallartist();
+    $scope.getallartist();
     $scope.getDropdown = function(search) {
         if (search.length >= 1) {
             $scope.change = {};
@@ -1091,10 +1240,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getallartist();
         }
-        // else {
-        //     $scope.getallartist();
-        // }
     }
 
     $scope.getDropdownMedium = function(search) {
@@ -1115,10 +1263,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     }
                 });
             }, 1000);
+        } else {
+            $scope.getmedium();
         }
-        // else {
-        //     $scope.getmedium();
-        // }
     }
 
     $scope.setSearch = function(select) {
@@ -1169,6 +1316,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.reload = function() {
+        $scope.infiniteLoading = false;
         //      console.log($scope.pagedata);
         var filterdata = $scope.pagedata;
         if (filterdata.minprice == 0) {
@@ -1210,6 +1358,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             }
             $ionicLoading.hide();
             $scope.$broadcast('scroll.infiniteScrollComplete');
+            $scope.infiniteLoading = true;
         });
     }
 
@@ -1272,22 +1421,18 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.pagedata.pagenumber = 1;
         $scope.pagedata.filter = "srno";
         $scope.pagedata.sort = 1;
+        $scope.closeFilter();
         $scope.checkForEmpty();
         $scope.reload();
     }
 
-    // $(window).scroll(function() {
-    //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-    //         console.log("at bottom");
-    //         $scope.pagedata.pagenumber++;
-    //         $scope.reload();
-    //     }
-    // });
-
+    $scope.infiniteLoading = true;
     $scope.addMoreItems = function() {
         if (lastpage > $scope.pagedata.pagenumber) {
             $scope.pagedata.pagenumber++;
             $scope.reload();
+        } else {
+            $scope.infiniteLoading = false;
         }
     }
 
@@ -1339,6 +1484,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.pagedata.filter = by;
         $scope.pagedata.pagenumber = 1;
         $scope.totalartcont = [];
+        $scope.closeSort();
         $scope.reload();
     }
 
@@ -1377,45 +1523,42 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.makeactive('All');
     }
 
-    $scope.goToDetailPage = function(artwork) {
-        if (artwork.type == "Sculptures") {
-            $state.go('sculpture', {
-                artid: artwork._id
-            });
-        } else {
-            $state.go('app.art-details', {
-                artid: artwork._id
-            });
+    function getScrollXY() {
+        var x = 0,
+            y = 0;
+        if (typeof(window.pageYOffset) == 'number') {
+            // Netscape
+            x = window.pageXOffset;
+            y = window.pageYOffset;
+        } else if (document.body && (document.body.scrollLeft || document.body.scrollTop)) {
+            // DOM
+            x = document.body.scrollLeft;
+            y = document.body.scrollTop;
+        } else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) {
+            // IE6 standards compliant mode
+            x = document.documentElement.scrollLeft;
+            y = document.documentElement.scrollTop;
         }
+        return [x, y];
     }
 
-    $scope.artistdetail = [{
-        image: 'img/artist/artist1.jpg',
-        id: '1528',
-        name: 'Ajay R Dhandre',
-        size: '19.5 x 23',
-        price: 'Rs 30,000 / $ 60.00'
-    }, {
-        image: 'img/artist/artist2.jpg',
-        id: '1527',
-        name: 'Amarnath Sharma',
-        size: '30 x 20',
-        price: 'Rs 30,000 / $ 60.00'
-    }, {
-        image: 'img/artist/artist3.jpg',
-        name: 'Ajay Sharma',
-        id: '1530',
-        size: '21.5 x 26',
-        price: 'Rs 30,000 / $ 60.00'
-    }, {
-        image: 'img/artist/artist4.jpg',
-        id: '1530',
-        name: 'Bhushen Koul',
-        madein: 'Oil on board',
-        size: '20.5 x 23 x N/A',
-        price: 'Rs 30,000 / $ 60.00'
-    }];
-    $scope.artistdetail = _.chunk($scope.artistdetail, 2);
+    $scope.goToDetailPage = function(artwork) {
+        var xy = $ionicScrollDelegate.getScrollPosition();
+        console.log(xy);
+        // var obj = {};
+        // obj.pageno = artwork.pageno;
+        // obj.scroll = xy[1];
+        // $.jStorage.set("artworkScroll", obj);
+        // if (artwork.type == "Sculptures") {
+        //     $state.go('sculpture', {
+        //         artid: artwork._id
+        //     });
+        // } else {
+        //     $state.go('app.art-details', {
+        //         artid: artwork._id
+        //     });
+        // }
+    }
 
     // Open the login modal
     $scope.showFilter = function() {
@@ -1823,7 +1966,88 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('EventCtrl', function($scope, $stateParams) {
+.controller('EventCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
+
+    globalFunction.showLoading();
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
+
+    $scope.events = {};
+    $scope.events.upcoming = [];
+    $scope.events.current = [];
+    $scope.events.past = [];
+
+    MyServices.getAllEvents(function(data, status) {
+        // console.log(data);
+        _.each(data, function(n) {
+            if (n.startdate) {
+                var eventDate = new Date(n.startdate);
+                eventDate.setHours(0, 0, 0, 0);
+                var eventEndDate = new Date(n.enddate);
+                eventEndDate.setHours(0, 0, 0, 0);
+                var currDate = new Date();
+                currDate.setHours(0, 0, 0, 0);
+                $scope.currentYear = currDate.getFullYear();
+                // console.log(n.startdate + " / eventDate = " + eventDate + " / currDate = " + currDate + " / " + (eventDate == currDate));
+                if (moment(currDate).isBetween(eventDate, eventEndDate)) {
+                    $scope.events.current.push(n);
+                } else if (moment(eventDate).isAfter(currDate)) {
+                    $scope.events.upcoming.push(n);
+                } else if (moment(eventDate).isBefore(currDate)) {
+                    $scope.events.past.push(n);
+                }
+            }
+        });
+        // console.log($scope.events);
+
+        if ($scope.events.upcoming && $scope.events.upcoming.length > 0) {
+            $scope.events.upcoming = _.groupBy($scope.events.upcoming, function(n) {
+                return n.year;
+            });
+            var arr = [];
+            _.each($scope.events.upcoming, function(value, key) {
+                arr.push(value);
+            })
+            $scope.events.upcoming = arr;
+        }
+        if ($scope.events.current && $scope.events.current.length > 0) {
+            $scope.events.current = _.groupBy($scope.events.current, function(n) {
+                return n.year;
+            });
+            var arr = [];
+            _.each($scope.events.current, function(value, key) {
+                arr.push(value);
+            })
+            $scope.events.current = arr;
+        }
+        if ($scope.events.past && $scope.events.past.length > 0) {
+            $scope.events.past = _.groupBy($scope.events.past, function(n) {
+                return n.year;
+            });
+            var arr = [];
+            _.each($scope.events.past, function(value, key) {
+                arr.push(value);
+            })
+            $scope.events.past = arr;
+        }
+
+        $scope.events.current = _.sortBy($scope.events.current, function(n) {
+            return -1 * n[0].year;
+        });
+
+        $scope.events.upcoming = _.sortBy($scope.events.upcoming, function(n) {
+            return -1 * n[0].year;
+        });
+
+        $scope.events.past = _.sortBy($scope.events.past, function(n) {
+            return -1 * n[0].year;
+        });
+
+        console.log($scope.events);
+
+        $ionicLoading.hide()
+    });
+
 
     $scope.event2016 = [{
         name: 'AURA ART CONNECTS THE TWO WORLDS OF ART AND FASHION',

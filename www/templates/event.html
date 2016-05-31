@@ -8,9 +8,11 @@
 		<div class="event-set">
 			<div class="all-events search-box">
 				<h5 class="assertive home-header padtop">Upcoming Events</h5>
-				<h5 class="eventhead">2016</h5>
-				<div class="row" ng-repeat="events in event2016">
-					<div class="col-50" ng-repeat="event in events">
+				<div class="row-boot" ng-repeat="events in event2016">
+					<div class="no-flex">
+						<h5 class="eventhead">2016</h5>
+					</div>
+					<div class="col-md50" ng-repeat="event in events">
 						<div class="event-detail ">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>

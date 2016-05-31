@@ -7,28 +7,31 @@
 	</ion-header-bar>
 	<ion-content>
 		<div class="list catogories">
-			<label class="item item-radio">
+			<!-- <div class="item item-radio">
 				<input type="radio" name="group" value="on">
 				<div class="item-content">
 					Latest on Top
 				</div>
 				<i class="radio-icon ion-checkmark"></i>
-			</label>
-			<label class="item item-radio">
+			</div>
+			<div class="item item-radio">
 				<input type="radio" name="group">
 				<div class="item-content">
 					High to Low
 				</div>
 				<i class="radio-icon ion-checkmark"></i>
-			</label>
-			<label class="item item-radio">
+			</div>
+			<div class="item item-radio">
 				<input type="radio" name="group">
 				<div class="item-content">
 					Low to High
 				</div>
 				<i class="radio-icon ion-checkmark"></i>
-			</label>
-		</div>
+			</div>
+		</div> -->
+		<ion-radio ng-model="abcdsort" ng-click="sortBy(-1,'yoc')" ng-value="'yoc'">Latest on Top</ion-radio>
+		<ion-radio ng-model="abcdsort" ng-click="sortBy(-1,'gprice')" ng-value="'htlgprice'">High to Low</ion-radio>
+		<ion-radio ng-model="abcdsort" ng-click="sortBy(1,'gprice')" ng-value="'lthgprice'">Low to High</ion-radio>
 		<div class="padding">
 			<button class="button button-positive button-block martoptwo">Submit</button>
 		</div>
