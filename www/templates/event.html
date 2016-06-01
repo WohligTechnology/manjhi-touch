@@ -6,22 +6,22 @@
 	</ion-nav-buttons>
 	<ion-content class="padding">
 		<div class="event-set">
-			<div class="all-events search-box">
+			<div class="all-events search-box" ng-if="events.upcoming && events.upcoming.length>0">
 				<h5 class="assertive home-header padtop">Upcoming Events</h5>
-				<div class="row-boot" ng-repeat="events in event2016">
+				<div class="row-boot" ng-repeat="event1 in events.upcoming">
 					<div class="no-flex">
-						<h5 class="eventhead">2016</h5>
+						<h5 class="eventhead">{{event1[0].year}}</h5>
 					</div>
-					<div class="col-md50" ng-repeat="event in events">
-						<div class="event-detail ">
+					<div class="col-md50" ng-repeat="event in event1">
+						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
 								<p>{{event.detail}}</p>
 							</div>
-							<a href="#/app/eventdetail">
+							<a href="">
 								<div class="event-img media-img text-center">
 									<figure>
-										<img ng-src="{{event.img}}" class="img-responsive">
+										<img ng-src="{{event.homeimg | uploadthumbnail}}" class="img-responsive">
 									</figure>
 								</div>
 							</a>
@@ -29,12 +29,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="all-events search-box">
-				<h5 class="assertive home-header padtop">Present Events</h5>
-				<h5 class="eventhead">2015</h5>
-				<div class="row" ng-repeat="events in event2015">
-					<div class="col-50" ng-repeat="event in events">
-						<div class="event-detail ">
+			<div class="all-events search-box" ng-if="events.current && events.current.length>0">
+				<h5 class="assertive home-header padtop">Current Events</h5>
+				<div class="row-boot" ng-repeat="currevent in events.current">
+					<div class="no-flex">
+						<h5 class="eventhead">{{currentYear}}</h5>
+					</div>
+					<div class="col-md50" ng-repeat="event in currevent">
+						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
 								<p>{{event.detail}}</p>
@@ -50,30 +52,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="all-events search-box">
+			<div class="all-events search-box" ng-if="events.past && events.past.length>0">
 				<h5 class="assertive home-header padtop">Past Events</h5>
-				<h5 class="eventhead">2014</h5>
-				<div class="row" ng-repeat="events in event2014">
-					<div class="col-50" ng-repeat="event in events">
-						<div class="event-detail ">
-							<div class="data-event">
-								<h6 class="font-color2">{{event.name}}</h6>
-								<p>{{event.detail}}</p>
-							</div>
-							<a href="#/app/eventdetail">
-								<div class="media-img event-img text-center">
-									<figure>
-										<img ng-src="{{event.img}}" class="img-responsive">
-									</figure>
-								</div>
-							</a>
-						</div>
+				<div class="row-boot" ng-repeat="event1 in events.past">
+					<div class="no-flex">
+						<h5 class="eventhead">{{event1[0].year}}</h5>
 					</div>
-				</div>
-				<h5 class="eventhead">2013</h5>
-				<div class="row" ng-repeat="events in event2014">
-					<div class="col-50" ng-repeat="event in events">
-						<div class="event-detail ">
+					<div class="col-md50" ng-repeat="event in event1">
+						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
 								<p>{{event.detail}}</p>
@@ -81,7 +67,7 @@
 							<a href="#/app/eventdetail">
 								<div class="media-img event-img text-center">
 									<figure>
-										<img ng-src="{{event.img}}" class="img-responsive">
+										<img ng-src="{{event.homeimg|uploadthumbnail}}" class="img-responsive">
 									</figure>
 								</div>
 							</a>

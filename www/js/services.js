@@ -1,5 +1,5 @@
 var adminurl = "http://www.auraart.in/";
-// var adminurl = "http://192.168.1.129:82/";
+var adminurl = "http://192.168.1.129:82/";
 var imgUploadUrl = adminurl + "user/uploadfile";
 
 angular.module('starter.services', [])
@@ -76,8 +76,6 @@ angular.module('starter.services', [])
             }).success(callback);
         },
         getallartist: function(pagedata, callback) {
-            delete pagedata.pagenumber;
-            delete pagedata.pagesize;
             $http({
                 url: adminurl + "user/findbyletter",
                 method: "POST",
@@ -280,10 +278,11 @@ angular.module('starter.services', [])
         },
         getAllArtistByAccess: function(n, callback) {
             $http({
-                url: adminurl + "user/findbyaccess",
+                url: adminurl + "user/findForList",
                 method: "POST",
                 data: {
-                    "accesslevel": "artist"
+                    "search": "",
+                    "searchname": ""
                 }
             }).success(function(data, status) {
                 callback(data, status, n);

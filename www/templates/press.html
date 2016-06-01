@@ -7,23 +7,23 @@
 	<ion-content class="padding">
 		<div class="media">
 			<div class="all-events search-box media mediacov">
-				<h5 class="assertive home-header">Media Coverage 2015</h5>
-				<div class="row" ng-repeat="media in media2015">
-					<div class="col-50" ng-repeat="media2015 in media">
+				<div class="row-boot" ng-repeat="year in pressYear | orderBy:'year':true">
+					<h5 class="assertive home-header">Media Coverage {{year}}</h5>
+					<div class="col-md50" ng-repeat="media in press[year]">
 						<div class="media-detail">
 							<div class="data">
-								<h6 class="positive">{{media2015.name}}</h6>
-								<p>{{media2015.date}}</p>
+								<h6 class="positive">{{media.title}}</h6>
+								<p>{{media.date|date}}</p>
 							</div>
 							<div class="media-img text-center">
 								<figure>
-									<img ng-src="{{media2015.img}}" class="full-size" ng-click="showpressimage();">
+									<img ng-src="{{media.photos|uploadthumbnail}}" class="full-size" ng-click="showpressimage(media.photos);">
 								</figure>
 							</div>
 						</div>
 					</div>
 				</div>
-				<h5 class="assertive home-header">Media Coverage 2014</h5>
+				<!-- <h5 class="assertive home-header">Media Coverage 2014</h5>
 				<div class="row" ng-repeat="media in media2014">
 					<div class="col-50" ng-repeat="media2014 in media">
 						<ion-gallery ion-gallery-items="photos" ng-if="photos"></ion-gallery>
@@ -40,7 +40,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</ion-content>

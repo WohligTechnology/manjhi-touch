@@ -5,7 +5,7 @@
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<ion-content>
-		<div class="row animate-if" collection-repeat="artist in artistimage">
+		<div class="row animate-if" collection-repeat="artist in artistArr">
 			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="artistimages in artist">
 				<a href="" ng-click="getHeight(artistimages);">
 					<div class="prd-holder">
@@ -21,6 +21,7 @@
 				</a>
 			</div>
 		</div>
+		<ion-infinite-scroll on-infinite="addMoreItems()" ng-if="infiniteLoading"></ion-infinite-scroll>
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">

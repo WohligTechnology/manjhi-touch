@@ -52,6 +52,12 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         }
     })
 
+    if ($.jStorage.get("isLoggedIn") && $.jStorage.get("isLoggedIn") == true) {
+        $scope.isLoggedIn = true;
+    } else {
+        $scope.isLoggedIn = false;
+    }
+
     MyServices.getuserprofile(function(data) {
         if (data.id) {
             $scope.isLoggedIn = true;
@@ -60,6 +66,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 userProfile.wishlist = favorite;
             })
         } else {
+            $.jStorage.set("isLoggedIn", false)
             $scope.isLoggedIn = false;
         }
     })
@@ -128,9 +135,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         });
     }
 
+    var myPopup = "";
     $scope.nowAddToFav = function(obj) {
         console.log(obj);
-        ngDialog.closeAll();
+        myPopup.close();
         globalFunction.showLoading();
         MyServices.addToFav(obj, function(data) {
             $ionicLoading.hide();
@@ -157,43 +165,43 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     dataNextPre.favorite = function(art) {
         // art.heartClass = "fa fa-heart font-color3";
-        if ($scope.userProfile.id) {
-            // globalFunction.showLoading();
-            console.log(art.heartClass);
-            switch (art.heartClass) {
-                case "ion-ios-heart-outline":
-                    {
-                        MyServices.getMyFolders(function(data) {
-                            if (data.value != false) {
-                                $scope.myFolders = data;
-                            } else {
-                                $scope.myFolders = [];
-                            }
-                        })
-                        $scope.favObj = {};
-                        $scope.favObj.artwork = art.artwork._id;
-                        ngDialog.open({
-                            scope: $scope,
-                            template: 'views/content/modal-choose.html'
-                        });
-                        art.heartClass = "ion-ios-heart";
-                    }
-                    break;
-                case "ion-ios-heart":
-                    {
-                        console.log('in second if');
-                        $ionicLoading.hide();
-                        MyServices.deleteFromFav($scope.userProfile.id, art.artwork._id, function(data) {
-                            if (!data.value) {
-                                art.heartClass = "ion-ios-heart-outline";
-                                dataNextPre.messageBox("Removed from favourites");
-                            }
-                        })
-                    }
-                    break;
-                default:
-            }
-            MyServices.getuserprofile(function(data) {
+        // if ($scope.userProfile.id) {
+        // globalFunction.showLoading();
+        console.log(art.heartClass);
+        switch (art.heartClass) {
+            case "ion-ios-heart-outline":
+                {
+                    MyServices.getMyFolders(function(data) {
+                        if (data.value != false) {
+                            $scope.myFolders = data;
+                        } else {
+                            $scope.myFolders = [];
+                        }
+                    })
+                    $scope.favObj = {};
+                    $scope.favObj.artwork = art.artwork._id;
+                    myPopup = $ionicPopup.show({
+                        templateUrl: 'templates/modal-choose.html',
+                        scope: $scope,
+                    });
+                    art.heartClass = "ion-ios-heart";
+                }
+                break;
+            case "ion-ios-heart":
+                {
+                    console.log('in second if');
+                    $ionicLoading.hide();
+                    MyServices.deleteFromFav($scope.userProfile.id, art.artwork._id, function(data) {
+                        if (!data.value) {
+                            art.heartClass = "ion-ios-heart-outline";
+                            dataNextPre.messageBox("Removed from favourites");
+                        }
+                    })
+                }
+                break;
+            default:
+        }
+        MyServices.getuserprofile(function(data) {
                 if (data.id) {
                     userProfile = data;
                     MyServices.getMyFavourites(data.id, function(favorite) {
@@ -201,12 +209,12 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     })
                 }
             })
-        } else {
-            ngDialog.open({
-                scope: $scope,
-                template: 'views/content/favLogin.html'
-            });
-        }
+            // } else {
+            //     ngDialog.open({
+            //         scope: $scope,
+            //         template: 'views/content/favLogin.html'
+            //     });
+            // }
     }
 
     dataNextPre.getCartItems = function() {
@@ -298,7 +306,28 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('AccessCtrl', function($scope, $ionicModal, $timeout) {})
 
-.controller('LoginCtrl', function($scope, $stateParams) {})
+.controller('LoginCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state) {
+
+    $scope.loginData = {};
+    $scope.doLogin = function() {
+        $ionicLoading.show({
+            template: 'Please Wait...',
+            duration: 10000
+        });
+        MyServices.userlogin($scope.loginData, function(data, status) {
+            console.log(data);
+            if (data.value != false) {
+                $scope.showInvalidLogin = false;
+                $.jStorage.set("isLoggedIn", true);
+                $state.go('app.home');
+            } else {
+                $scope.showInvalidLogin = true;
+            }
+            $ionicLoading.hide();
+        })
+    }
+
+})
 
 .controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state) {
     abc = $scope;
@@ -762,72 +791,129 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 })
 
 .controller('FavouritesCtrl', function($scope, $stateParams, $ionicLoading, $state, MyServices) {
-    $scope.artistdetail = [{
-        image: 'img/artist/artist1.jpg',
-        id: '1527',
-        typename: 'Untitled',
-        madein: 'Oil on board',
-        size: '19.5 x 23',
-        year: '1978',
-        price: 'Rs 1,00,000/ $ 6,400'
-    }, {
-        image: 'img/artist/artist2.jpg',
-        id: '1530',
-        typename: 'Web In a Cage',
-        madein: 'Sheesham wood, SS and gold foil',
-        size: '9 X 13 X 48',
-        year: '2006',
-        price: 'Rs 140,000/ $6,800'
-    }, {
-        image: 'img/artist/artist3.jpg',
-        id: '1531',
-        typename: 'One Step = 8000 Replies',
-        madein: 'SS, aluminum, canvas & sensor',
-        size: '6 X 78 X 24',
-        year: '2008',
-        price: 'Rs 180,000/ $7,400'
-    }, {
-        image: 'img/artist/artist4.jpg',
-        id: '1532',
-        typename: 'Needles needle',
-        madein: 'Mild steel, copper wire & canvas',
-        size: '4 X 65 X 29',
-        year: '2008',
-        price: 'Price available on request'
-    }, {
-        image: 'img/artist/artist5.jpg',
-        id: '1533',
-        typename: 'African drums',
-        madein: 'Sheesham woodl on board',
-        size: '8 X 56 X 11',
-        year: '2005',
-        price: 'Rs 180,000/ $7,400'
-    }, {
-        image: 'img/artist/artist2.jpg',
-        id: '1524',
-        typename: 'Forget Me Not',
-        madein: 'Cushions and Seeds',
-        size: '34 X 16 X 5',
-        year: '2013',
-        price: 'Rs 40,000/ $3,400'
-    }, {
-        image: 'img/artist/artist5.jpg',
-        id: '1535',
-        typename: 'Drawing of a Fan',
-        madein: 'Stainless Steel and White Paint',
-        size: '50 X 15 X 12',
-        year: '2013',
-        price: 'Rs 1,40,000/ $7,400'
-    }, {
-        image: 'img/artist/artist4.jpg',
-        id: '1536',
-        typename: 'Untitled',
-        madein: 'Oil on board',
-        size: '19.5 x 23',
-        year: '1978',
-        price: 'Price available on request'
-    }];
-    $scope.artistdetail = _.chunk($scope.artistdetail, 2);
+
+    $scope.artistdetail = [];
+    $scope.allfavourites = [];
+    $scope.noFavs = false;
+    $scope.totalfav = 0;
+
+    function getMyFavouritesId() {
+        globalFunction.showLoading();
+        MyServices.getuserprofile(function(data) {
+            if (data.id) {
+                userProfile = data;
+                $scope.userProfile = data;
+                MyServices.getMyFavourites(data.id, function(favorite) {
+                    console.log(favorite);
+                    if (favorite.value != false) {
+                        $scope.noFavs = false;
+                        userProfile.wishlist = favorite;
+                        _.each(favorite, function(n) {
+                            if (n.wishlistfolder) {
+                                $scope.allfavourites.push({
+                                    "_id": n.artwork,
+                                    "wishlistfolder": n.wishlistfolder
+                                });
+                            } else {
+                                $scope.totalfav++;
+                                $scope.allfavourites.push({
+                                    "_id": n.artwork
+                                });
+                            }
+                        });
+                        getFavorite($scope.allfavourites)
+                    } else {
+                        $ionicLoading.hide();
+                        $scope.myFavourites = [];
+                        $scope.noFavs = true;
+                    }
+                })
+            }
+        })
+    }
+    getMyFavouritesId();
+
+    $scope.activeTab = "myfav";
+
+    function getFavorite(allfavourites) {
+        $scope.myArtists = [];
+        MyServices.getAllFavouritesData(allfavourites, function(datas, status) {
+            console.log("favorite data");
+            $scope.myFavourites = _.chunk(datas, 2);
+            console.log($scope.myFavourites);
+            // var favs = _.groupBy(datas, function(n) {
+            //     return n.name;
+            // });
+            // _.each(favs, function(key, value) {
+            //     _.each(key, function(n) {
+            //         if (!n.wishlistfolder) {
+            //             $scope.myArtists.push(value);
+            //         }
+            //     })
+            // })
+            // $scope.myArtists = _.uniq($scope.myArtists);
+            // if (!$stateParams.artist) {
+            //     $scope.artistName = '';
+            //     $scope.artistdetail = datas;
+            // } else {
+            //     $scope.activeTab = "myartist";
+            //     $scope.artistName = $stateParams.artist;
+            //     $scope.artistdetail = [];
+            //     _.each(datas, function(n) {
+            //         if (n.name === $stateParams.artist)
+            //             $scope.artistdetail.push(n);
+            //     });
+            //     if ($scope.artistdetail.length == 0) {
+            //         $scope.activeTab = "myfolder";
+            //         $scope.artistName = $scope.myFolders[_.findIndex($scope.myFolders, {
+            //             "_id": $stateParams.artist
+            //         })].name;
+            //         _.each(datas, function(n) {
+            //             if (n.wishlistfolder == $stateParams.artist) {
+            //                 delete n.wishlistfolder;
+            //                 $scope.artistdetail.push(n);
+            //             }
+            //         });
+            //     }
+            // }
+            // if ($scope.artistdetail.length == 0) {
+            //     $scope.noFavsFolder = true;
+            // } else {
+            //     $scope.noFavsFolder = false;
+            // }
+            $ionicLoading.hide();
+        })
+    }
+
+    $scope.goToDetail = function(artwork) {
+        console.log(artwork);
+        if (artwork.type == "Sculptures") {
+            $state.go('sculpture', {
+                artid: artwork._id
+            });
+        } else {
+            $state.go('app.art-details', {
+                artid: artwork._id
+            });
+        }
+    }
+
+    $scope.removeFromFav = function(artid) {
+        MyServices.deleteFromFav(1, artid, function(data) {
+            if (!data.value) {
+                $scope.allfavourites = [];
+                getMyFavouritesId();
+                dataNextPre.messageBox("Removed from favourites");
+            }
+        })
+    }
+
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
+
+
+
+
 })
 
 .controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, $state, MyServices, $filter) {
@@ -1657,6 +1743,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     };
 
     $scope.pagedata = {};
+    $scope.pagedata.pagenumber = 1;
+    $scope.pagedata.pagesize = 12;
     $scope.pagedata.search = '';
     $scope.pagedata.searchname = '';
     $scope.artistimage = [];
@@ -1711,15 +1799,32 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         if ($scope.pagedata.type == "All") {
             $scope.pagedata.type = "";
         }
+        $scope.infiniteLoading = false;
         MyServices.getallartist($scope.pagedata, function(data, status) {
             $ionicLoading.hide();
-            $scope.artistimage = _.chunk(data.data, 2);
+            lastpage = data.totalpages;
+            _.each(data.data, function(n) {
+                $scope.artistimage.push(n);
+            })
+            $scope.artistimage = _.uniq($scope.artistimage, '_id');
+            $scope.artistArr = _.chunk($scope.artistimage, 2);
             if ($.jStorage.get("artistScroll")) {
                 console.log("in if");
                 window.scrollTo(0, $.jStorage.get("artistScroll"));
                 // window.pageYOffset = $.jStorage.get("artistScroll");
             }
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            $scope.infiniteLoading = true;
         });
+    }
+
+    $scope.addMoreItems = function() {
+        if (lastpage >= $scope.pagedata.pagenumber) {
+            $scope.pagedata.pagenumber++;
+            $scope.reload();
+        } else {
+            $scope.infiniteLoading = false;
+        }
     }
 
     $scope.getartistbysearch = function() {
@@ -1738,6 +1843,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 n.class = "";
             }
         })
+        $scope.pagedata.pagenumber = 1;
         $scope.pagedata.type = type;
         $scope.pagedata.searchname = '';
         $scope.artistimage = [];
@@ -1879,78 +1985,32 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 })
 
-.controller('PressCtrl', function($scope, $stateParams, $ionicModal) {
-    $scope.media2015 = [{
-        name: 'Interiors & Decor',
-        date: ' Sep 30, 2014 ',
-        img: 'img/mediacove/m1.jpg'
-    }, {
-        name: 'Design Matrix',
-        date: 'Oct 30, 2014 ',
-        img: 'img/mediacove/m2.jpg'
-    }, {
-        name: 'IFJ',
-        date: 'Aug 31, 2014',
-        img: 'img/mediacove/m3.jpg'
-    }, {
-        name: 'The Design Source',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m4.jpg'
-    }, {
-        name: 'Sourcing Hardware',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m5.jpg'
-    }, {
-        name: 'Society Interiors',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m6.jpg'
-    }, {
-        name: 'Architecture + Design',
-        date: 'Aug 31, 2014',
-        img: 'img/mediacove/m7.jpg'
-    }, {
-        name: 'Times of India - Full page - Page 13',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m7.jpg'
-    }];
+.controller('PressCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading) {
 
-    $scope.media2014 = [{
-        name: 'Interiors & Decor',
-        date: ' Sep 30, 2014 ',
-        img: 'img/mediacove/m1.jpg'
-    }, {
-        name: 'Design Matrix',
-        date: 'Oct 30, 2014 ',
-        img: 'img/mediacove/m2.jpg'
-    }, {
-        name: 'IFJ',
-        date: 'Aug 31, 2014',
-        img: 'img/mediacove/m3.jpg'
-    }, {
-        name: 'The Design Source',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m4.jpg'
-    }, {
-        name: 'Sourcing Hardware',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m5.jpg'
-    }, {
-        name: 'Society Interiors',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m6.jpg'
-    }, {
-        name: 'Architecture + Design',
-        date: 'Aug 31, 2014',
-        img: 'img/mediacove/m7.jpg'
-    }, {
-        name: 'Times of India - Full page - Page 13',
-        date: 'Sep 30, 2014',
-        img: 'img/mediacove/m7.jpg'
-    }];
-    $scope.media2014 = _.chunk($scope.media2014, 2);
-    $scope.media2015 = _.chunk($scope.media2015, 2);
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
+    $scope.press = [];
 
-    $scope.showpressimage = function() {
+    globalFunction.showLoading();
+
+    function getPress(data) {
+        $ionicLoading.hide();
+        if (data.value != false) {
+            data2 = _.groupBy(data, function(n) {
+                var year = moment(n.date).get("year");
+                return year;
+            }, true);
+            $scope.pressYear = _.keys(data2);
+
+            $scope.press = data2;
+            console.log(data2);
+        }
+    }
+    MyServices.pressFind(getPress);
+
+    $scope.showpressimage = function(image) {
+        $scope.pressImage = "";
+        $scope.pressImage = image;
         $scope.modal.show();
     };
     $ionicModal.fromTemplateUrl('templates/modal-pressimage.html', {
@@ -2047,95 +2107,31 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
         $ionicLoading.hide()
     });
-
-
-    $scope.event2016 = [{
-        name: 'AURA ART CONNECTS THE TWO WORLDS OF ART AND FASHION',
-        detail: ' ITC Grand-Maratha, Sahar Road, Mumbai',
-        img: 'img/event/event1.jpg'
-    }, {
-        name: 'Art and Culture exchange between India & China',
-        detail: 'Mar 31, 2015 - Mar 31, 2015 ITC Grand-Maratha, Sahar Road, Mumbai',
-        img: 'img/event/event2.jpg'
-    }];
-
-    $scope.event2015 = [{
-        name: 'The Art Enclave at UBM Index Fairs 2014',
-        detail: ' Oct 09, 2014 - Oct 12, 2014 MMRDA Exhibition Centre, BKC, Mumbai',
-        img: 'img/event/event3.jpg'
-    }, {
-        name: 'Art Partner for The Edutainment Show 2014',
-        detail: 'Apr 26, 2014 - Apr 27, 2014 JW Marriott Hotel Mumbai',
-        img: 'img/event/event2.jpg'
-    }, {
-        name: 'Art Partner for Yes Bank International Polo Cup',
-        detail: 'Mar 22, 2014 - Mar 22, 2014 Mahalaxmi Race Course, Mumbai',
-        img: 'img/event/event5.jpg'
-    }];
-
-    $scope.event2014 = [{
-        name: 'Art Infrastructure – nobody’s business',
-        detail: 'Dec 14, 2013 - Dec 14, 2013 Taj Lands End',
-        img: 'img/event/event4.JPG'
-    }, {
-        name: 'Aura Art Show 2013 - Oct 15-21, 2013, Jehangir Art Gallery, Mumbai',
-        detail: 'Oct 15, 2013 - Oct 21, 2013 Jehangir Art Gallery, Auditorium Hall',
-        img: 'img/event/event5.jpg'
-    }, {
-        name: 'The Indian Luxury Expo - April 26-28, 2013, Grand Hyatt, Mumbai',
-        detail: 'Apr 26, 2013 - Apr 28, 2013 Grand Hyatt',
-        img: 'img/event/event6.jpg'
-    }, {
-        name: 'Wassup! Andheri, 2013 - A grand Art & Entertainment Festival',
-        detail: 'Feb 28, 2013 - Mar 03, 2013 Chitrakoot Ground, Andheri',
-        img: 'img/event/event1.jpg'
-    }, {
-        name: 'Aura Art organised live painting demo at AGP Multi Million Race Day',
-        detail: 'Feb 17, 2013 - Feb 17, 2013 Mahalaxmi Race Course',
-        img: 'img/event/event3.jpg'
-    }, {
-        name: 'Group Show at The Capital  -  Fundraiser for Cuddles Foundation',
-        detail: 'Jan 15, 2013 - Jan 21, 2013 The Capital, BKC, Mumbai',
-        img: 'img/event/event7.jpg'
-    }];
-    $scope.event2014 = _.chunk($scope.event2014, 2);
-    $scope.event2015 = _.chunk($scope.event2015, 2);
-    $scope.event2016 = _.chunk($scope.event2016, 2);
 })
 
-.controller('EventdetailCtrl', function($scope, $stateParams, $ionicModal) {
-    $scope.event = [{
-        name: 'Aura Art connects the two worlds of art and fashion',
-        venue: 'Pooja House, Opp JW Mariott, Juhu, Mumbai',
-        Period: 'Saturday, 09 May 2015 - Saturday, 09 May 2015',
-        time: '11:00 am to 7:00 pm',
-        detail: '<p>In line with its vision of connecting a wider spectrum of society to fine art, Aura Art eConnect Pvt Ltd ("AAeCPL") is proud to be the Exclusive Art Partner for Amy Billimoria House of Design ("ABHD"). ABHD is a luxury destination for fashion, jewelry and art, founded by leading fashion designer Amy Billimoria, in association with Pankti Shah and is located in the prestigious and strategic neighborhood of Juhu.</p>  <p>We are delighted to invite you to ABHD on May 9, 2015 from 11am to 7pm, at Pooja House, next to Starbucks Café, opp JW Mariott, Juhu, to view a large array of fashion and design products, besides relishing paintings by renowned artists like S Yousuf Ali, Manjit Bawa, Umesh Varma, Sidharth, Vrundavan Solanki, Charan Sharma, Ajay De, Veguri Ravindra Babu, Tejinder Kanda and sculptures by Ratilal Kansodaria, Bhawan Rampure, Sachin Dadhich.</p><p>The design house was launched on May 7, 2015 amidst much fanfare, in the august presence of leading celebrities and dignitaries like Rani Mukerji, Esha Deol, Ayushmann Khurrana, Lucky Morani, Talat Aziz, Mahesh Chhabria, Anjali Chhabria,Nilesh Ganjwala,Yogesh Lakhani, Bhagyashree, Suchitra Krishnamoorthi, Anup Jalota, Tanishaa Mukerji, Deepti Gujral amongst others.</p><p>This is a novel initiative where a unique ambience has been created for an exciting display of both top of the line fashion products and the best of fine art under one roof.  In a venue like this, Aura Art eConnect looks forward to a convergence of sensitivities - of colour, form and texture - that compliment each other and enhance the viewing pleasure.You are welcome to partake in this heady concoction of art, fashion and design, which will be available at the design house 7 days a week from 10:00 am to 8:00 pm.</p>'
-    }];
+.controller('EventdetailCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading) {
 
-    $scope.gallery = [{
+    globalFunction.showLoading();
 
-        image: 'img/eventgallery/g1.jpg'
-    }, {
+    MyServices.getOneEvents($stateParams.id, function(data) {
+        console.log(data);
+        $scope.eventDetail = data;
+        if ($scope.eventDetail.videos) {
+            $scope.eventDetail.videos = $scope.eventDetail.videos.split(',');
+            $scope.eventDetail.videos = _.chunk($scope.eventDetail.videos, 3);
+        }
+        if ($scope.eventDetail.photos) {
+            $scope.eventDetail.photos = _.chunk($scope.eventDetail.photos, 3);
+        }
+        $ionicLoading.hide();
+    })
 
-        image: 'img/eventgallery/g2.jpg'
-    }, {
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
 
-        image: 'img/eventgallery/g3.jpg'
-    }, {
-
-        image: 'img/eventgallery/g4.jpg'
-    }, {
-
-        image: 'img/eventgallery/g5.jpg'
-    }, {
-
-        image: 'img/eventgallery/g6.jpg'
-    }, {
-
-        image: 'img/eventgallery/g7.jpg'
-    }];
-    $scope.gallery = _.chunk($scope.gallery, 3);
-    $scope.showeventimage = function() {
+    $scope.showeventimage = function(image) {
+        $scope.modalImage = "";
+        $scope.modalImage = image;
         $scope.modal.show();
     };
     $ionicModal.fromTemplateUrl('templates/modal-eventimage.html', {
@@ -2152,20 +2148,62 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('InfraServicesCtrl', function($scope, $stateParams) {})
 
-.controller('CartCtrl', function($scope, $stateParams) {
-    $scope.cart_item = [{
-        id: '1527',
-        name: 'Ajay R Dhandre',
-        typename: 'Web In a Cage',
-        price: 'Rs 140,000',
-        img: 'img/artist/artist2.jpg'
-    }, {
-        id: '1530',
-        name: 'Bhushen Koul',
-        typename: 'One Step 8000 Replies',
-        price: 'Rs 180,000',
-        img: 'img/artist/artist1.jpg'
-    }];
+.controller('CartCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state) {
+
+    $scope.totalCartPrice = 0;
+    $scope.noCartItems = false;
+    globalFunction.showLoading();
+    $scope.checkCheckout = true;
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
+    $scope.getCartItems = function() {
+        MyServices.getCartItems(function(data) {
+            console.log(data);
+            if (data.length == 0) {
+                $scope.noCartItems = true;
+            } else {
+                $scope.noCartItems = false;
+                $scope.cartItems = data;
+                $scope.totalCartPrice = 0;
+                _.each($scope.cartItems, function(n) {
+                    if (n.artwork.status == "sold") {
+                        $scope.checkCheckout = false;
+                    }
+                    if (n.artwork.gprice != 'N/A')
+                        $scope.totalCartPrice += n.artwork.gprice;
+                });
+                $scope.vat = ($scope.totalCartPrice / 100) * 12.5;
+            }
+            $ionicLoading.hide();
+        });
+    }
+
+    $scope.getCartItems();
+
+    $scope.toCheckout = function() {
+        $scope.checkCheckout = true;
+        _.each($scope.cartItems, function(n) {
+            if (n.artwork.status == "sold") {
+                $scope.checkCheckout = false;
+            }
+        });
+        if ($scope.checkCheckout == false) {
+            dataNextPre.messageBox("Item in cart already sold, Recheck cart");
+        } else {
+            $state.go("app.checkout");
+        }
+    }
+
+    $scope.removeFromCart = function(artid) {
+        MyServices.removeFromCart(artid, function(data) {
+            console.log(data);
+            if (data.value == true) {
+                dataNextPre.messageBox("Removed from cart");
+                dataNextPre.getCartItems();
+                $scope.getCartItems();
+            }
+        })
+    }
 })
 
 .controller('WishlistCtrl', function($scope, $stateParams) {
@@ -2189,7 +2227,25 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('ChngPasswordCtrl', function($scope, $stateParams) {})
 
-.controller('PersonalAccntCtrl', function($scope, $stateParams) {})
+.controller('PersonalAccntCtrl', function($scope, $stateParams, MyServices) {
+
+    MyServices.getuserprofile(function(data) {
+        if (data.id) {
+            $scope.user = data;
+        }
+    })
+
+    $scope.edituser = function() {
+        $scope.user._id = $scope.user.id;
+        MyServices.registeruser($scope.user, function(data) {
+            console.log(data);
+            if (data.value != false) {
+                dataNextPre.messageBox("Updated successfully");
+            }
+        });
+    }
+
+})
 
 .controller('TraceOrderCtrl', function($scope, $stateParams) {})
 

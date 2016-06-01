@@ -14,13 +14,14 @@
 		<form ng-submit="doLogin()">
 			<div class="list reg-login">
 				<label class="item item-input">
-					<input type="text" ng-model="loginData.username" placeholder="Username">
+					<input type="text" ng-model="loginData.email" placeholder="Username" required>
 				</label>
 				<label class="item item-input">
-					<input type="password" ng-model="loginData.password" placeholder="Password">
+					<input type="password" ng-model="loginData.password" placeholder="Password" required>
 				</label>
 				<div class="btn-grp padding">
-					<a href="#/app/home" class="button button-block button-positive" type="submit">Log in</a>
+					<button class="button button-block button-positive" type="submit">Log in</button>
+					<p class="text-center" ng-show="showInvalidLogin">Invalid login credentials</p>
 					<div class="row reg">
 						<div class="col-50">
 							<div class="">

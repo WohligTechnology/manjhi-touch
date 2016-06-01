@@ -11,13 +11,13 @@
 			</div>
 			<div class="padding">
 				<div class="list list-details">
-					<label class="item item-input">
+					<div class="item item-input">
 						<span class="label" ng-if="artistDetailImg.artwork.imageno">#</span>
 						<div class="item-map" ng-if="artistDetailImg.artwork.imageno">
 							{{artistDetailImg.artwork.imageno}}
 						</div>
 						<i class="ion {{artistDetailImg.heartClass}} assertive fav-art" ng-click="addToFav(artistDetailImg);"></i>
-					</label>
+					</div>
 					<label class="item item-input" ng-if="artistDetailImg.name && artistDetailImg.name!=''">
 						<span class="label assertive">Artist</span>
 						<div class="item-map assertive">
@@ -43,7 +43,7 @@
 					<label class="item item-input" ng-if="artistDetailImg.artwork.status!='sold'">
 						<span class="label">Price</span>
 						<div class="item-map" ng-if="artistDetailImg.artwork.gprice && artistDetailImg.artwork.gprice!='N/A'">
-							Rs {{artistDetailImg.artwork.gpriceinlakhs}} / ${{artistDetailImg.artwork.gprice|indollars}} <span>(excluding VAT)</span>
+							Rs {{artistDetailImg.artwork.gprice|inlakhs}} / ${{artistDetailImg.artwork.gprice|indollars}} <span>(excluding VAT)</span>
 						</div>
 						<div class="item-map" ng-if="!artistDetailImg.artwork.gprice || artistDetailImg.artwork.gprice=='N/A'">
 							Available on request

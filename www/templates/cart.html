@@ -1,50 +1,52 @@
 <ion-view view-title="Cart">
 	<ion-nav-buttons side="right">
-			<a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+919328877000"></a>
+		<a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+919328877000"></a>
 		<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
-    <ion-content class="">
-        <div class="list thumbnail">
-            <a class="item item-thumbnail-left" ng-repeat="item in cart_item">
-               	<img ng-src="{{item.img}}">
-                <h3>{{item.id}}</h3>
-                <h3 class="">{{item.name}}</h3>
-                <h3 class="">{{item.typename}}</h3>
-                <h3>{{item.price}}</h3>
-                <button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
-            </a>
-            <!-- end ngRepeat: product in products -->
-            <div class="item item-divider">Discount</div>
-            <div class="item item-input-inset item-positive-mate">
-                <label class="item-input-wrapper positive">
-                    <input type="text" placeholder="Enter your coupon code" class="discountcoupon form-control newsletteremail ng-pristine ng-valid">
-                </label>
-                <button class="button button-positive button-small">
-                    Submit
-                </button>
-            </div>
-            <a class="item cart-cont" href="#">
-                Subtotal Amount
-                <span class="item-note">
-                   Rs.1,00,000/ $6,400
-                </span>
-            </a>
-            <a class="item cart-cont" href="#">
-               VAT
-                <span class="item-note">
-                     Rs 20000.00
-                </span>
-            </a>
-            <a class="item cart-cont">
-                Total Amount
-                <span class="item-note">
-                    Rs.1,20,000/ $6,400
-                </span>
-            </a>
-        </div>
-        <div class="padding">
-            <a href="#/app/checkout" class="button button-block button-positive">Proceed to checkout</a>
+	<ion-content class="">
+		<div class="list thumbnail">
+			<a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'">
+				<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
+				<h3>{{artwork.artwork.imageno}}</h3>
+				<h3 class="">{{artwork.name}}</h3>
+				<h3 class="">{{artwork.artwork.name}}</h3>
+				<h3>Rs {{artwork.artwork.gprice|inlakhs}}
+				/ ${{artwork.artwork.gprice|indollars}}
+				<span>(excluding VAT)</span></h3>
+				<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
+			</a>
+			<!-- end ngRepeat: product in products -->
+			<div class="item item-divider">Discount</div>
+			<div class="item item-input-inset item-positive-mate">
+				<label class="item-input-wrapper positive">
+					<input type="text" placeholder="Enter your coupon code" class="discountcoupon form-control newsletteremail ng-pristine ng-valid">
+				</label>
+				<button class="button button-positive button-small">
+					Submit
+				</button>
+			</div>
+			<a class="item cart-cont" href="">
+	        Subtotal Amount
+	        <span class="item-note">
+	           Rs {{totalCartPrice | inlakhs}} / ${{totalCartPrice|indollars}}
+	        </span>
+	    </a>
+			<a class="item cart-cont" href="">
+	       	VAT
+	        <span class="item-note">
+	             Rs {{vat | inlakhs}} / ${{vat|indollars}}
+	        </span>
+    	</a>
+			<a class="item cart-cont">
+          Total Amount
+          <span class="item-note">
+              Rs {{totalCartPrice + vat | inlakhs}} / ${{totalCartPrice + vat|indollars}}
+          </span>
+      </a>
 		</div>
-    </ion-content>
+		<div class="padding">
+			<a href="" class="button button-block button-positive" ng-click="toCheckout();">Proceed to checkout</a>
+		</div>
+	</ion-content>
 </ion-view>

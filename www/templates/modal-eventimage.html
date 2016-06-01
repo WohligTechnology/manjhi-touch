@@ -6,9 +6,9 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <div class="img-holder-prd">
+    <div class="img-holder-prd" ng-if="modalImage">
       <div class="box img-holder-big text-center">
-        <img src="img/eventgallery/g1.jpg" class="full-image">
+        <img ng-src="{{modalImage | uploadpath}}" class="full-image">
       </div>
     </div>
   </ion-content>

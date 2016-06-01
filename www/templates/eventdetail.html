@@ -5,19 +5,25 @@
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<ion-content class="padding">
-		<div class="eventpad" ng-repeat="events in event">
+		<div class="eventpad">
 			<div class="row">
 				<div class="eventdetail">
-					<h5 class="assertive home-header">{{events.name}}</h5>
-					<p><span>Event Venue</span> : {{events.venue}}</p>
-					<p><span>Period of show </span> : {{events.Period}}</p>
-					<p><span>Event Time</span> : {{events.time}}</p>
+					<h5 class="assertive home-header">{{eventDetail.name}}</h5>
+					<p><span>Event Venue</span> : {{eventDetail.venue}}</p>
+					<p><span>Period of show </span> : {{eventDetail.startdate|date:'EEEE, MMMM d, y'}} - {{eventDetail.enddate|date:'EEEE, MMMM d, y'}}</p>
+					<p ng-if="eventDetail.starttime!='undefined:undefined undefined' && eventDetail.endtime!='undefined:undefined undefined'">
+							<span>Event Time</span> : {{eventDetail.starttime}} to {{eventDetail.endtime}}</p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="eventdetail">
-					<span>Details :</span>
-					<p ng-bind-html="events.detail | rawHtml"></p>
+					<span ng-if="eventDetail.details">Details :</span>
+					<p ng-bind-html="eventDetail.details" ng-if="eventDetail.details"></p>
+					<p ng-bind-html="eventDetail.desc1 | rawHtml" ng-if="eventDetail.desc1"></p>
+					<p ng-bind-html="eventDetail.desc2 | rawHtml" ng-if="eventDetail.desc2"></p>
+					<p ng-bind-html="eventDetail.desc3 | rawHtml" ng-if="eventDetail.desc3"></p>
+					<p ng-bind-html="eventDetail.desc4 | rawHtml" ng-if="eventDetail.desc4"></p>
+					<p ng-bind-html="eventDetail.desc5 | rawHtml" ng-if="eventDetail.desc5"></p>
 				</div>
 			</div>
 			<!-- <div class="eventgallery">
@@ -25,11 +31,11 @@
 					<ion-gallery ion-gallery-items="items" ion-gallery-row="3"></ion-gallery>
 				</div>
 			</div> -->
-			<div class="row" ng-repeat="gal in gallery">
+			<div class="row" ng-repeat="gal in eventDetail.photos" ng-if="eventDetail.photos && eventDetail.photos.length>0">
 				<div class="col-33" ng-repeat="gals in gal">
-					<div class="eventgallery" ng-click="showeventimage();">
+					<div class="eventgallery" ng-click="showeventimage(gals);">
 						<div class="event-pic" fixit>
-							<img class="fix-img" ng-src="{{gals.image}}">
+							<img class="fix-img" ng-src="{{gals|uploadthumbnail}}">
 						</div>
 					</div>
 				</div>

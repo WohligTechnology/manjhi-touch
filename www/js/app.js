@@ -12,8 +12,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-    $ionicConfigProvider.views.maxCache(3);
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
+    $ionicConfigProvider.views.maxCache(0);
+    $httpProvider.defaults.withCredentials = true;
     $stateProvider
         .state('app', {
             url: '/app',
@@ -289,7 +290,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     })
 
     .state('app.eventdetail', {
-        url: '/eventdetail',
+        url: '/eventdetail/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/eventdetail.html',
