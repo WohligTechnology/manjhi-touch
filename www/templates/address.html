@@ -7,37 +7,58 @@
 	<ion-content class="has-header cont-checkout">
 		<div class="chngpswd-cont">
 			<div class="list">
-				<div class="item item-divider">
+				<div class="item item-divider" ng-if="user.billing">
 					Default Billing Address
 				</div>
-				<div class="item">
+				<div class="item" ng-if="user.billing">
+					<h4>
+						<span ng-if="user.billing.flatno">{{user.billing.flatno}},</span>
+						<span ng-if="user.billing.bldgname">{{user.billing.bldgname}},</span>
+					</h4>
+					<h4>
+						<span ng-if="user.billing.street">{{user.billing.street}},</span>
+						<span ng-if="user.billing.landmark">{{user.billing.landmark}},</span>
+					</h4>
+					<h4 ng-if="user.billing.city">
+						<span ng-if="user.billing.locality">{{user.billing.locality}},</span>
+						<span ng-if="user.billing.city">{{user.billing.city}}</span>
+					</h4>
+					<h4 ng-if="user.billing.state">{{user.billing.state}}</h4>
+					<h4 ng-if="user.billing.pincode">{{user.billing.pincode}}</h4>
+				</div>
+				<!-- <div class="item">
 					<h4>Krishna Cottage,Mg Road</h4>
 					<h4>Kumar Metro Center,Room Number:121</h4>
 					<h4>Mumbai</h4>
 					<h4>Maharashtra</h4>
 					<h4>421001</h4>
-				</div>
-				<div class="item item-divider">
+				</div> -->
+				<div class="item item-divider" ng-if="user.shipping && user.shipping.pincode">
 					Default Shipping Address
 				</div>
-				<div class="item">
-					<h4>Krishna Cottage,Mg Road</h4>
-					<h4>Kumar Metro Center,Room Number:121</h4>
-					<h4>Mumbai</h4>
-					<h4>Maharashtra</h4>
-					<h4>421001</h4>
+				<div class="item" ng-if="user.shipping && user.shipping.pincode">
+					<h4>
+						<span ng-if="user.shipping.flatno">{{user.shipping.flatno}},</span>
+						<span ng-if="user.shipping.bldgname">{{user.shipping.bldgname}},</span>
+					</h4>
+					<h4>
+						<span ng-if="user.shipping.street">{{user.shipping.street}},</span>
+						<span ng-if="user.shipping.landmark">{{user.shipping.landmark}},</span>
+					</h4>
+					<h4 ng-if="user.shipping.city">
+						<span ng-if="user.shipping.locality">{{user.shipping.locality}},</span>
+						<span ng-if="user.shipping.city">{{user.shipping.city}}</span>
+					</h4>
+					<h4 ng-if="user.shipping.state">{{user.shipping.state}}</h4>
+					<h4 ng-if="user.shipping.pincode">{{user.shipping.pincode}}</h4>
 				</div>
 			</div>
 		</div>
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">
-			<a class="tab-item" ng-click="showBilling();">
- Edit Billing Address
-  </a>
-			<a class="tab-item" ng-click="showShipping();">
-     Edit Shipping Address
-  </a>
+			<a class="tab-item" ng-click="showBilling();">Edit Billing Address</a>
+			<a class="tab-item" ng-click="showShipping();">Edit Shipping Address</a>
 		</div>
 	</ion-footer-bar>
 </ion-view>

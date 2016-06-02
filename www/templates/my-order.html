@@ -5,36 +5,35 @@
 		<button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
 	</ion-nav-buttons>
 	<ion-content class="has-header cont-checkout">
-		<div class="list">
+		<div class="list" style="margin-bottom: 0;" ng-repeat="order in myorderedproducts" ng-if="myorderedproducts.length>0">
 			<div class="item item-divider">
-				<span class="item-note">13/dec/2015</span>
-				<p> Order Id:<span> 874464898</span></p>
+				<span class="item-note">{{order.timestamp | date:'MMMM dd, yyyy'}}</span>
+				<p> Order Id:<span> {{order.orderid}}</span></p>
 			</div>
-			<a class="item item-thumbnail-left">
-				<img src="img/artist/artist1.jpg">
-				<h3>Id</h3>
-				<h3 class="">Artist Name</h3>
-				<h3 class="">Title Name</h3>
-				<h3>Rs.1,00,000/ $6,400</h3>
+			<a class="item item-thumbnail-left" ng-repeat="orderItems in order.cart">
+				<img ng-src="{{orderItems.artwork.image[0] | uploadsmallimage}}">
+				<h3>{{orderItems.artwork.imageno}}</h3>
+				<h3 class="">{{orderItems.name}}</h3>
+				<h3 class="">{{orderItems.artwork.name}}</h3>
+				<h3>Rs {{orderItems.artwork.gprice | inlakhs}} / ${{orderItems.artwork.gprice|indollars}}</h3>
 			</a>
-			<a class="item item-thumbnail-left">
-				<img src="img/artist/artist1.jpg">
-				<h3>Id</h3>
-				<h3 class="">Artist Name</h3>
-				<h3 class="">Title Name</h3>
-				<h3>Rs.1,00,000 / $6,400</h3>
-			</a>
-			<a class="item item-thumbnail-left">
-				<img src="img/artist/artist1.jpg">
-				<h3>Id</h3>
-				<h3 class="">Artist Name</h3>
-				<h3 class="">Title Name</h3>
-				<h3>Rs.1,00,000 / $6,400</h3>
-			</a>
+			<!-- <div class="item item-divider">
+				<p> Sub Total: <span>Rs {{order.subTotal | inlakhs}} / ${{order.subTotal |indollars}}</span></p>
+			</div>
 			<div class="item item-divider">
-				<span class="item-note assertive">Shipped</span>
-				<p> Total: <span>Rs.60000/ $600</span></p>
+				<p> VAT: <span>Rs {{order.vat | inlakhs}} / ${{order.vat |indollars}}</span></p>
+			</div> -->
+			<div class="item item-divider">
+				<span class="item-note assertive" style="text-transform: capitalize">{{order.status}}</span>
+				<p> Grand Total: <span>Rs {{order.grantTotal | inlakhs}} / ${{order.grantTotal |indollars}}</span></p>
 			</div>
+		</div>
+		<ion-list ng-if="myorderedproducts.length==0">
+			<ion-item>
+				<p class="text-center font-special">You haven't placed any orders yet.</p>
+			</ion-item>
+		</ion-list>
+		<!-- <div class="list">
 			<div class="item item-divider">
 				<span class="item-note">13/dec/2015</span>
 				<p> Order Id:<span> 874464898</span></p>
@@ -64,6 +63,6 @@
 				<span class="item-note balanced">Delivered</span>
 				<p> Total: <span>Rs.60000 / $600</span></p>
 			</div>
-		</div>
+		</div> -->
 	</ion-content>
 </ion-view>

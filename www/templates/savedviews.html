@@ -5,23 +5,28 @@
     <button class="button button-icon ion-android-cart right-btn cart-btn"> <span class="badge badge-assertive cart">0</span></button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="row" ng-repeat="detail in savedviews">
-      <div class="col-50 padding-horizontal" ng-repeat="details in detail">
+    <div class="row" ng-repeat="myview in views" ng-if="views.length>0">
+      <div class="col-50 padding-horizontal" ng-repeat="view in myview">
         <div class="prd-cont">
-          <a href="#/app/art-detail">
+          <a href="">
             <div>
               <figure>
-                <img ng-src="{{details.image}}" class="full-image">
+                <img ng-src="{{view | roompath}}" class="full-image">
               </figure>
             </div>
           </a>
           <div class="artist-cont-detail">
-            <button class="button button-block button-positive">
+            <button class="button button-block button-positive" ng-click="downloadView(view)">
               Download
             </button>
           </div>
         </div>
       </div>
     </div>
+    <ion-list ng-if="views.length==0">
+			<ion-item>
+				<p class="text-center font-special">You haven't saved any views yet.</p>
+			</ion-item>
+		</ion-list>
   </ion-content>
 </ion-view>

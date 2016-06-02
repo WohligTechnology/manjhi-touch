@@ -398,6 +398,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     };
 })
 
+.filter('roompath', function() {
+    return function(input) {
+        if (input && input !== "") {
+            if (input.indexOf('.jpg') != -1)
+                return adminurl + "slider/resizeRoom?file=" + input;
+            else {
+                return adminurl + "slider/resizeRoom?file=" + input;
+            }
+        } else {
+            return "img/noimg.jpg";
+        }
+    };
+})
+
 .filter('makesizestr', function() {
     return function(artobj) {
         var size = "";

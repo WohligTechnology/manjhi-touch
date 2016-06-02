@@ -780,14 +780,21 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 })
 
-.controller('SavedViewsCtrl', function($scope, $stateParams) {
-    $scope.savedviews = [{
-        image: 'img/resizeRoom.jpg',
-    }, {
-        image: 'img/resizeRoom.jpg',
-    }];
+.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices) {
 
-    $scope.savedviews = _.chunk($scope.savedviews, 2);
+    MyServices.getuserprofile(function(data) {
+        if (data.id) {
+            if (data.room && data.room.length > 0) {
+                $scope.views = _.chunk(data.room, 2);
+            } else {
+                $scope.views = [];
+            }
+        }
+    })
+
+    $scope.downloadView = function(image) {
+        window.open(adminurl + "slider/downloadImage?file=" + image);
+    }
 })
 
 .controller('FavouritesCtrl', function($scope, $stateParams, $ionicLoading, $state, MyServices) {
@@ -2249,7 +2256,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('TraceOrderCtrl', function($scope, $stateParams) {})
 
-.controller('MyOrderCtrl', function($scope, $stateParams) {})
+.controller('MyOrderCtrl', function($scope, $stateParams, MyServices, $ionicLoading) {
+
+    globalFunction.showLoading();
+    MyServices.getMyOrders(function(data) {
+        $ionicLoading.hide();
+        console.log(data);
+        $scope.myorderedproducts = data;
+    });
+
+})
 
 .controller('SearchCtrl', function($scope, $stateParams) {
 
@@ -2281,7 +2297,30 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.artistdetail = _.chunk($scope.artistdetail, 2);
 })
 
-.controller('AddressCtrl', function($scope, $stateParams, $ionicModal) {
+.controller('AddressCtrl', function($scope, $stateParams, $ionicModal, MyServices) {
+
+    MyServices.getuserprofile(function(data) {
+        if (data.id) {
+            $scope.user = data;
+        }
+    });
+
+    $scope.edituser = function() {
+        $scope.user._id = $scope.user.id;
+        MyServices.registeruser($scope.user, function(data) {
+            console.log(data);
+            if (data.value != false) {
+                $scope.closeBilling();
+                $scope.closeShipping();
+                dataNextPre.messageBox("Updated successfully");
+            }
+        });
+    }
+
+    MyServices.getCountryJson(function(data) {
+        $scope.allcountries = data;
+    });
+
     $scope.showBilling = function() {
         $scope.modal.show();
     };
