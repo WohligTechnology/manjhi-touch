@@ -8,11 +8,12 @@
 				<button class="button button-icon button-clear ion-navicon-round right-btn" menu-toggle="left">
 				</button>
 			</ion-nav-buttons>
-			<ion-nav-title>
-				<a href="" ui-sref="app.home">
-					<img src="img/logo.jpg" class="home-logo">
-				</a>
-			</ion-nav-title>
+			<ion-nav-buttons side="right">
+				<a class="button button-clear button-icon right-btn ion-ios-telephone btn-font" href="tel:+919328877000"></a>
+				<a class="button button-clear button-icon right-btn ion-android-search btn-font" href="#/app/search"></a>
+				<button class="button button-icon ion-android-cart right-btn cart-btn" ui-sref="app.cart"> <span class="badge badge-assertive cart">{{inCart.total}}</span></button>
+			</ion-nav-buttons>
+			<ion-nav-title></ion-nav-title>
 		</ion-nav-bar>
 		<ion-nav-view name="menuContent"></ion-nav-view>
 	</ion-side-menu-content>
@@ -21,11 +22,11 @@
 		<ion-header-bar class="bar-light head-menu" align-title="center">
 			<h1 class="title">MENU</h1>
 		</ion-header-bar>
-		<ion-content ng-controller="AppCtrl">
+		<ion-content>
 			<ion-list class="upper-menu">
 				<ion-item menu-close href="#/app/home" class="item-icon-left bortop"><i class="icon ion-android-home"></i>Home</ion-item>
 				<ion-item menu-close href="#/app/artist/All" class="item-icon-left"><i class="icon ion-android-color-palette"></i>Artists</ion-item>
-				<ion-item menu-close href="#/app/artwork/all" class="item-icon-left"><i class="icon ion-android-image"></i>Paintings &amp; More</ion-item>
+				<ion-item menu-close href="#/app/artwork/All" class="item-icon-left"><i class="icon ion-android-image"></i>Paintings &amp; More</ion-item>
 				<ion-item menu-close href="#/app/cart" class="item-icon-left" ng-show="isLoggedIn"><i class="icon ion-android-cart"></i>My Cart</ion-item>
 				<ion-item menu-close href="#/access/login" class="item-icon-left" ng-hide="isLoggedIn"><i class="icon ion-android-person"></i>Login</ion-item>
 			</ion-list>
@@ -39,6 +40,7 @@
 				<ion-item menu-close href="#/app/press">Press</ion-item>
 				<ion-item menu-close href="#/app/contact">Blog</ion-item>
 				<ion-item menu-close href="#/app/contact">Contact Us</ion-item>
+				<ion-item menu-close href="" ng-show="isLoggedIn" ng-click="logout();">Logout</ion-item>
 			</ion-list>
 			<div class="bortop margin"></div>
 			<div class="social-icon text-center">

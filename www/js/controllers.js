@@ -7,7 +7,7 @@ var abc = "";
 
 angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser, $timeout, $state) {
 
     $scope.adminurl = adminurl;
 
@@ -70,6 +70,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.isLoggedIn = false;
         }
     })
+
+    $scope.logout = function() {
+        globalFunction.showLoading();
+        MyServices.logout(function(data) {
+            $ionicLoading.hide();
+            $.jStorage.set("isLoggedIn", false);
+            $scope.inCart = {};
+            $scope.inCart.total = 0;
+            $scope.isLoggedIn = false;
+            userProfile = data;
+            $state.go('app.home');
+        });
+    }
 
     globalFunction.showLoading = function() {
         $ionicLoading.show({
@@ -216,11 +229,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             //     });
             // }
     }
-
+    $scope.inCart = {};
+    $scope.inCart.total = 0;
     dataNextPre.getCartItems = function() {
         MyServices.getCartItems(function(data) {
-            // console.log(data);
+            console.log(data);
+            $scope.inCart.total = data.length;
             $scope.cartItems = data;
+            $timeout(function() {
+                $scope.$apply();
+            }, 10);
             $scope.totalCartPrice = 0;
             _.each($scope.cartItems, function(n) {
                 if (n.artwork.gprice != 'N/A')
@@ -349,6 +367,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.filterby.minbreadth = '';
     $scope.filterby.maxbreadth = '';
     $scope.showInvalidLogin = false;
+
+    dataNextPre.getCartItems();
 
     MyServices.getSlider(function(data) {
         $scope.slides = data;
@@ -1636,21 +1656,22 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.goToDetailPage = function(artwork) {
-        var xy = $ionicScrollDelegate.getScrollPosition();
-        console.log(xy);
-        // var obj = {};
-        // obj.pageno = artwork.pageno;
-        // obj.scroll = xy[1];
-        // $.jStorage.set("artworkScroll", obj);
-        // if (artwork.type == "Sculptures") {
-        //     $state.go('sculpture', {
-        //         artid: artwork._id
-        //     });
-        // } else {
-        //     $state.go('app.art-details', {
-        //         artid: artwork._id
-        //     });
-        // }
+        // var xy = $ionicScrollDelegate.getScrollPosition();
+        var xy = getScrollXY();
+        // console.log(xy);
+        var obj = {};
+        obj.pageno = artwork.pageno;
+        obj.scroll = xy[1];
+        $.jStorage.set("artworkScroll", obj);
+        if (artwork.type == "Sculptures") {
+            $state.go('sculpture', {
+                artid: artwork._id
+            });
+        } else {
+            $state.go('app.art-details', {
+                artid: artwork._id
+            });
+        }
     }
 
     // Open the login modal
