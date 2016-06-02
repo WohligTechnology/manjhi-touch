@@ -8554,7 +8554,7 @@ a {
 .pr15 {
   padding-right: 10px; }
 
-.bar .button.right-btn.button-icon .icon:before, .bar .button.right-btn.button-icon:before, .bar .button.right-btn.button-icon.icon-left:before, .bar .button.right-btn.button-icon.icon-right:before {
+.bar .button.right-btn.button-icon .icon:before, .bar .button.right-btn.button-icon.icon-left:before, .bar .button.right-btn.button-icon.icon-right:before, .bar .button.right-btn.button-icon:before {
   vertical-align: top;
   font-size: 24px;
   line-height: 35px; }
@@ -8606,18 +8606,18 @@ body {
   text-transform: uppercase;
   color: #ff4f4f; }
 
-.prd-holder, .prd-cont {
+.prd-cont, .prd-holder {
   min-height: 220px;
   padding: 10px 0; }
-  .prd-holder .full-image, .prd-cont .full-image {
+  .prd-cont .full-image, .prd-holder .full-image {
     width: auto;
     max-width: 100%;
     max-height: 200px; }
-  .prd-holder .artist-cont-detail p i, .prd-cont .artist-cont-detail p i {
+  .prd-cont .artist-cont-detail p i, .prd-holder .artist-cont-detail p i {
     float: right;
     padding-right: 10px;
     font-size: 15px; }
-  .prd-holder i.active, .prd-cont i.active {
+  .prd-cont i.active, .prd-holder i.active {
     color: #ff4f4f; }
 
 i.icon.ion-heart {
@@ -8640,7 +8640,7 @@ i.icon.ion-heart {
 .animate-if.ng-enter, .animate-if.ng-leave.ng-leave-active {
   opacity: 0; }
 
-.animate-if.ng-leave, .animate-if.ng-enter.ng-enter-active {
+.animate-if.ng-enter.ng-enter-active, .animate-if.ng-leave {
   opacity: 1; }
 
 .img-artist .col-25 {
@@ -8725,7 +8725,7 @@ i.positive {
   padding-bottom: 8px; }
   .team-style .parliament li {
     line-height: 120%; }
-.team-style p, .team-style li {
+.team-style li, .team-style p {
   margin: 0;
   color: #000;
   font-size: 13px;
@@ -9110,7 +9110,7 @@ ion-footer-bar.tabs-down.bar.bar-footer {
   padding: 5px 14px;
   color: #d4ae70; }
 
-.header-rights.bar .button.button-icon .icon:before, .header-rights.bar .button.button-icon:before, .header-rights.bar .button.button-icon.icon-right:before {
+.header-rights.bar .button.button-icon .icon:before, .header-rights.bar .button.button-icon.icon-right:before, .header-rights.bar .button.button-icon:before {
   font-size: 20px;
   line-height: 32px; }
 
@@ -9122,10 +9122,10 @@ ion-footer-bar.tabs-down.bar.bar-footer {
     font-size: 10px;
     color: #fff; }
 
-.checkbox input:before, .checkbox .checkbox-icon:before {
+.checkbox .checkbox-icon:before, .checkbox input:before {
   border-color: #9d9d9d; }
 
-.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+.checkbox input:checked + .checkbox-icon:before, .checkbox input:checked:before {
   background: #9d9d9d;
   border-color: #9d9d9d; }
 
@@ -9200,3 +9200,8 @@ ul.list.catogories p {
 .col-md50 {
   width: 50%;
   float: left; }
+
+.home-logo {
+  max-width: 100%;
+  height: auto;
+  width: 90px; }
