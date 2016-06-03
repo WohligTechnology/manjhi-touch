@@ -1,0 +1,45 @@
+<ion-modal-view>
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">Login</h1>
+        <div class="buttons">
+            <a class="button button-clear button-icon ion-close-round btn-font" href="" ng-click="closeLogin();"></a>
+        </div>
+    </ion-header-bar>
+    <ion-content class="">
+        <div class="text-center">
+            <figure>
+                <img src="img/logo.png" class="full-size" width="60%">
+            </figure>
+        </div>
+        <form ng-submit="doLogin()">
+            <div class="list reg-login">
+                <label class="item item-input">
+                    <input type="text" ng-model="loginData.email" placeholder="Username" required>
+                </label>
+                <label class="item item-input">
+                    <input type="password" ng-model="loginData.password" placeholder="Password" required>
+                </label>
+                <div class="btn-grp padding">
+                    <button class="button button-block button-positive" type="submit">Log in</button>
+                    <p class="text-center" ng-show="showInvalidLogin">Invalid login credentials</p>
+                    <div class="row reg">
+                        <div class="col-50">
+                            <div class="">
+                                <a href="#/access/forgot">	Forgot Password? </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="text-right">
+                                <a href="#/access/signin" class="pull-right"> Register</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center"> -or-</div>
+                    <a class="button button-block button-fb" ng-click="socialLogin('loginf')">Login with Facebook</a>
+                    <a class="button button-block button-twit" ng-click="socialLogin('logint')">Login with Twitter</a>
+                    <a class="button button-block button-gplus" ng-click="socialLogin('loging')">Login with Google</a>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

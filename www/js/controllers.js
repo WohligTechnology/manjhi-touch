@@ -324,7 +324,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('AccessCtrl', function($scope, $ionicModal, $timeout) {})
 
-.controller('LoginCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state) {
+.controller('LoginCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state, $cordovaInAppBrowser, $rootScope) {
 
     $scope.loginData = {};
     $scope.doLogin = function() {
@@ -344,6 +344,39 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $ionicLoading.hide();
         })
     }
+
+    var options = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+    };
+
+    var profileInterval = "";
+    $scope.socialLogin = function(val) {
+        $cordovaInAppBrowser.open(adminurl + "user/" + val, '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+        profileInterval = setInterval(function() {
+            MyServices.getuserprofile(function(data) {
+                if (data.id) {
+                    clearInterval(profileInterval);
+                    if ($cordovaInAppBrowser)
+                        $cordovaInAppBrowser.close();
+                    $scope.showInvalidLogin = false;
+                    $.jStorage.set("isLoggedIn", true);
+                    $state.go('app.home');
+                }
+            });
+        }, 1000);
+    }
+
+    $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event) {
+        console.log(e);
+        console.log(event);
+        clearInterval(profileInterval);
+    });
 
 })
 
@@ -1076,9 +1109,60 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 })
 
 
-.controller('SigninCtrl', function($scope, $stateParams) {})
+.controller('SigninCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state) {
 
-.controller('ForgotCtrl', function($scope, $stateParams) {})
+    $scope.register = {};
+
+    $scope.doSignup = function() {
+        if ($scope.register.password === $scope.register.confirmpassword) {
+            $ionicLoading.show({
+                template: 'Please Wait...',
+                duration: 10000
+            });
+            $scope.passwordNotMatch = false;
+            $scope.register.accesslevel = "customer";
+            MyServices.registeruser($scope.register, function(data, status) {
+                $ionicLoading.hide();
+                if (data.value != false) {
+                    $scope.showAlreadyRegistered = false;
+                    $scope.showWishlist = true;
+                    $state.go("app.home");
+                } else if (data.value == false && data.comment == "User already exists") {
+                    $scope.showAlreadyRegistered = true;
+                    $scope.passwordNotMatch = false;
+                }
+            })
+        } else {
+            $scope.passwordNotMatch = true;
+            $scope.showAlreadyRegistered = false;
+        }
+    };
+
+})
+
+.controller('ForgotCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $ionicPopup, $timeout) {
+
+    $scope.forgot = {};
+    $scope.forgotpassword = function() {
+        $ionicLoading.show({
+            template: 'Please Wait...',
+            duration: 10000
+        });
+        MyServices.forgotpassword($scope.forgot, function(data, status) {
+            $ionicLoading.hide();
+            if (data.value == true) {
+                var xyz = $ionicPopup.show({
+                    template: '<h5 class="text-center">New password e mailed to you.</h5>'
+                });
+
+                $timeout(function() {
+                    xyz.close();
+                }, 3000);
+            }
+        })
+    }
+
+})
 
 .controller('ArtworkCtrl', function($scope, $stateParams, $ionicModal, MyServices, $timeout, $ionicLoading, $state, $ionicScrollDelegate) {
 
@@ -2373,39 +2457,377 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams, $location) {
+.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal) {
+
     $scope.checkout = [];
     $scope.checkout.isshipping = true;
-    $scope.formstatus = false;
-    $scope.changeTab = function(tab) {
-        if (tab == 1) {
-            $scope.formstatus = true;
-            //                $scope.formstatussec = false;
-        } else {
-            //                $scope.formstatus = false;
-            $scope.formstatussec = true;
-        }
+    $scope.payment = {};
+    $scope.payment.billing = {};
+    $scope.payment.shipping = {};
+    $scope.showMobErr = false;
+    $scope.showPinErr = false;
+    $scope.checkoutRadio = 'guest';
+    $scope.showInvalidLogin = false;
+    $scope.passwordNotMatch = false;
+    $scope.showAlreadyRegistered = false;
+    $scope.login = {};
+    $scope.register = {};
+    $scope.user = {};
+    $scope.user.shipping = {};
+    $scope.user.shipping.name = "";
+    $scope.user.shipping.country = "";
+    $scope.user.billing = {};
+    $scope.user.billing.country = "";
+    $scope.checked = false;
+    $scope.showShipping = false;
+    $scope.showShippingContinue = false;
+    $scope.showCartEnable = false;
+    $scope.showLoginDiv = true;
+    $.jStorage.set("artistScroll", null);
+    $.jStorage.set("artworkScroll", null);
+    MyServices.getCountryJson(function(data) {
+        $scope.countries = data;
+        // $scope.countries.unshift({
+        //     "name": "Select Country",
+        //     "code": ""
+        // });
+    });
 
+    // Open the login modal
+    $scope.openLogin = function() {
+        $scope.modal1.show();
+    };
+    $ionicModal.fromTemplateUrl('templates/modal-login.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal1 = modal;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function() {
+        $scope.modal1.hide();
+    };
+    // Open the login modal
+
+    // Open the register modal
+    $scope.openRegister = function() {
+        $scope.modal2.show();
+    };
+    $ionicModal.fromTemplateUrl('templates/modal-register.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal2 = modal;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closeRegister = function() {
+        $scope.modal2.hide();
+    };
+    // Open the register modal
+
+    $scope.showCart = function() {
+        $scope.showCartEnable = true;
     }
-    $scope.closeTab = function(tab) {
-        if (tab == 1) {
-            $scope.formstatus = false;
-            //                $scope.formstatussec = false;
-        } else {
-            //                $scope.formstatus = false;
-            $scope.formstatussec = false;
-        }
 
+    MyServices.getuserprofile(function(data) {
+        console.log(data);
+
+        if (data.id) {
+            $scope.user = data;
+            if (!$scope.user.billing) {
+                $scope.user.billing = {};
+                $scope.user.billing.country = "";
+            }
+            if (!$scope.user.shipping) {
+                $scope.user.shipping = {};
+                $scope.user.shipping.country = "";
+            }
+            if (data.billing) {
+                $scope.user.billing.name = data.name;
+                $scope.user.billing.email = data.email;
+                $scope.user.billing.regadd = data.billing.locality;
+                $scope.user.billing.mobileno = data.mob;
+                $scope.user.billing.countrycode = data.cc;
+            }
+            if (data.shipping) {
+                $scope.user.shipping.name = data.name;
+                $scope.user.shipping.email = data.email;
+                $scope.user.shipping.regadd = data.shipping.locality;
+                $scope.user.shipping.mobileno = data.mob;
+                $scope.user.shipping.countrycode = data.cc;
+            }
+            $scope.showShipping = true;
+            $scope.showShippingContinue = true;
+            $scope.showLoginDiv = false;
+            $scope.payment.billing = data;
+        }
+    })
+
+    $scope.continueGuest = function() {
+        if ($scope.checkoutRadio == 'guest') {
+            $scope.showShipping = true;
+            $scope.showShippingContinue = true;
+        } else {
+            $scope.showShipping = false;
+            $scope.showShippingContinue = false;
+        }
+    }
+    $scope.loginRegClick = function(val) {
+        if (val == 1)
+            $scope.openLogin();
+        else if (val == 2)
+            $scope.openRegister();
+        $scope.showShipping = false;
+        $scope.showShippingContinue = false;
     }
 
-    $scope.openbilling = false;
-
-    $scope.continue = function(ch) {
-        if (ch === 'login') {
-            $scope.openbilling = false;
-            $location.path('access/login');
+    $scope.registeruser = function() {
+        if ($scope.register.password === $scope.register.confirmpassword) {
+            $scope.passwordNotMatch = false;
+            $scope.register.accesslevel = "customer";
+            MyServices.registeruser($scope.register, function(data, status) {
+                console.log(data);
+                if (data.value != false) {
+                    window.location.reload();
+                } else if (data.value == false && data.comment == "User already exists") {
+                    $scope.showAlreadyRegistered = true;
+                }
+            })
         } else {
-            $scope.openbilling = true;
+            $scope.passwordNotMatch = true;
         }
     };
+
+    $scope.userlogin = function() {
+        MyServices.userlogin($scope.login, function(data, status) {
+            if (data.value != false) {
+                $scope.showInvalidLogin = false;
+                MyServices.getuserprofile(function(data) {
+                    console.log("login successfully");
+                    window.location.reload();
+                })
+            } else {
+                $scope.showInvalidLogin = true;
+            }
+        })
+    };
+
+    $scope.totalCartPrice = 0;
+    $scope.sameAsBilling = false;
+
+    $scope.changeAddress = function(check) {
+        if (check == true) {
+            $scope.sameAsBilling = true;
+        } else {
+            $scope.sameAsBilling = false;
+        }
+
+    }
+
+    globalFunction.showLoading();
+
+    $scope.getCartItems = function() {
+        MyServices.getCartItems(function(data) {
+            console.log(data);
+            $scope.cartItems = data;
+            $scope.totalCartPrice = 0;
+            _.each($scope.cartItems, function(n) {
+                n.artwork.formname = n.artwork.srno;
+                if (n.artwork.gprice != 'N/A')
+                    $scope.totalCartPrice += n.artwork.gprice;
+            });
+            $scope.vat = ($scope.totalCartPrice / 100) * 12.5;
+            $ionicLoading.hide();
+        });
+    }
+
+    $scope.getCartItems();
+
+    $scope.removeFromCart = function(artid) {
+        MyServices.removeFromCart(artid, function(data) {
+            console.log(data);
+            if (data.value == true) {
+                dataNextPre.messageBox("Removed from cart");
+                dataNextPre.getCartItems();
+                $scope.getCartItems();
+            }
+        })
+    }
+    $scope.shippingCost = 0;
+    $scope.calculateShipping = function(artwork) {
+        var city = $scope.user.shipping.city;
+        console.log(city.trim());
+        if (artwork.form == "framed" && $filter('lowercase')($scope.user.shipping.city) != "mumbai") {
+            var height = (artwork.height + 6) * 2.54;
+            var width = (artwork.width + 6) * 2.54;
+            if (artwork.breadth != "N/A") {
+                var breadth = (artwork.breadth + 6) * 2.54;
+            } else {
+                var breadth = (0 + 6) * 2.54;
+            }
+            var formula = (height * width * breadth) / 2700;
+            formula = formula * 40;
+            artwork.shippingCost = formula;
+        }
+        console.log($scope.cartItems);
+        $scope.shippingCost = 0;
+        _.each($scope.cartItems, function(n) {
+            if (n.artwork.shippingCost) {
+                $scope.shippingCost = $scope.shippingCost + n.artwork.shippingCost;
+            }
+        });
+
+    }
+
+    $scope.paymentFunc = function() {
+        var num = 0;
+        _.each($scope.cartItems, function(n) {
+            if (n.artwork.form) {
+                num++;
+            }
+        });
+        if (num == $scope.cartItems.length) {
+            $scope.user.cart = [];
+            $scope.user.cart = $scope.cartItems;
+            $scope.user.subTotal = $scope.totalCartPrice;
+            $scope.user.vat = $scope.vat;
+            $scope.user.grantTotal = $scope.totalCartPrice + $scope.vat;
+            $scope.user.discount = 0;
+            delete $scope.user.id;
+            MyServices.checkout($scope.user, function(data) {
+                // console.log("incheck");
+                if (data.value != false) {
+                    $scope.user.orderid1 = data.id;
+                    $scope.user.orderid2 = data.orderid;
+                    $timeout(function() {
+                        $("form[name='payuForm']").submit();
+                    }, 2000);
+                    // $state.go('thankyou');
+                    // dataNextPre.messageBox("Your order is placed. Thank You !!");
+                    // $timeout(function() {
+                    //     $state.go('thankyou');
+                    // }, 3000);
+
+                } else {
+                    $state.go('sorry');
+                }
+            });
+        } else {
+            // alert("Fill all manditory * Fields");
+            dataNextPre.messageBox("Please select in what Form (Rolled or Framed) you want to receive the artwork");
+        }
+    }
+
+    $scope.toPayment = function(checked) {
+        if (checked == true) {
+            $scope.user.shipping = _.cloneDeep($scope.user.billing);
+            $scope.paymentFunc();
+        } else {
+            $scope.paymentFunc();
+        }
+
+    }
+
+    //after implementing paymentgateway topayment and viewcart will replace
+    $scope.onFieldChange = function(checked) {
+        $scope.showShippingContinue = true;
+        $scope.showCartEnable = false;
+        _.each($scope.cartItems, function(n) {
+            n.artwork.form = "";
+        });
+        $scope.shippingCost = 0;
+    }
+    $scope.viewCart = function(checked) {
+
+        if (checked == true) {
+            $scope.user.shipping = _.cloneDeep($scope.user.billing);
+        }
+        try {
+            $scope.allvalidation = [{
+                field: $scope.user.billing.name,
+                validation: ""
+            }, {
+                field: $scope.user.billing.email,
+                validation: ""
+            }, {
+                field: $scope.user.billing.countrycode,
+                validation: ""
+            }, {
+                field: $scope.user.billing.mobileno,
+                validation: ""
+            }, {
+                field: $scope.user.billing.flatno,
+                validation: ""
+            }, {
+                field: $scope.user.billing.bldgname,
+                validation: ""
+            }, {
+                field: $scope.user.billing.regadd,
+                validation: ""
+            }, {
+                field: $scope.user.billing.city,
+                validation: ""
+            }, {
+                field: $scope.user.billing.pincode,
+                validation: ""
+            }, {
+                field: $scope.user.billing.state,
+                validation: ""
+            }, {
+                field: $scope.user.billing.country,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.name,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.email,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.countrycode,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.mobileno,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.flatno,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.bldgname,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.regadd,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.city,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.pincode,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.state,
+                validation: ""
+            }, {
+                field: $scope.user.shipping.country,
+                validation: ""
+            }];
+            var check = formvalidation($scope.allvalidation);
+            if (check) {
+                $scope.showCart();
+                $scope.showShippingContinue = false;
+                $(window).scrollTop($(window).height());
+            } else {
+                dataNextPre.messageBox("Fill all manditory * Fields");
+            }
+        } catch (e) {
+            dataNextPre.messageBox("Fill all manditory * Fields");
+        }
+    }
+
+    $scope.checkout = function() {
+        $scope.user.cart = $scope.cartItems;
+        MyServices.checkout($scope.user, function(data) {
+            console.log(data);
+        });
+    }
+
 });

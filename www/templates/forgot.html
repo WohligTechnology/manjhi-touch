@@ -12,14 +12,14 @@
 				<img src="img/logo.png" class="full-size" width="60%">
 			</figure>
 		</div>
-		<form ng-submit="doSignup()">
+		<form ng-submit="forgotpassword()">
 			<div class="list  reg-login">
 				<label class="item item-input">
 					<i class="icon ion-ios-email placeholder-icon"></i>
-					<input ng-model="loginData.email" type="email" placeholder="Email">
+					<input ng-model="forgot.email" type="email" placeholder="Email" required>
 				</label>
 				<div class="btn-grp padding">
-					<a href="#/app/home" class="button button-block button-positive" type="submit">Submit</a>
+					<button class="button button-block button-positive" type="submit">Submit</button>
 				</div>
 			</div>
 		</form>

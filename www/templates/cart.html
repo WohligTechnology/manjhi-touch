@@ -1,6 +1,6 @@
 <ion-view view-title="Cart">
 	<ion-content class="">
-		<div class="list thumbnail">
+		<div class="list thumbnail" ng-if="cartItems && cartItems.length>0">
 			<a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'">
 				<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
 				<h3>{{artwork.artwork.imageno}}</h3>
@@ -40,8 +40,14 @@
           </span>
       </a>
 		</div>
-		<div class="padding">
+		<div class="padding" ng-if="cartItems && cartItems.length>0">
 			<a href="" class="button button-block button-positive" ng-click="toCheckout();">Proceed to checkout</a>
 		</div>
+		<ion-list ng-if="cartItems.length==0">
+			<ion-item>
+				<p class="text-center font-special">You have not added any artworks in your cart yet.
+				</p>
+			</ion-item>
+		</ion-list>
 	</ion-content>
 </ion-view>

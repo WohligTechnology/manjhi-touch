@@ -66,7 +66,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
             'menuContent': {
                 templateUrl: 'templates/home.html',
                 controller: 'HomeCtrl'
-
             }
         }
     })

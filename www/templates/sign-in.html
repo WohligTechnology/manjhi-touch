@@ -1,7 +1,7 @@
 <ion-view>
-	<ion-header-bar align-title="center" class="header-rights" >
+	<ion-header-bar align-title="center" class="header-rights">
 		<h1 class="title">Sign Up</h1>
-				<div class="buttons">
+		<div class="buttons">
 			<a class="button button-clear button-icon ion-close-round btn-font" href="#/app/home"></a>
 		</div>
 	</ion-header-bar>
@@ -13,26 +13,28 @@
 			</figure>
 		</div>
 		<form ng-submit="doSignup()">
-			<div class="list  reg-login">
+			<div class="list reg-login">
 				<label class="item item-input">
 					<i class="icon ion-ios-email placeholder-icon"></i>
-					<input ng-model="loginData.email" type="email" placeholder="Email">
+					<input ng-model="register.email" type="email" placeholder="Email">
 				</label>
 				<label class="item item-input">
 					<i class="icon ion-person placeholder-icon"></i>
-					<input type="text" ng-model="loginData.name" placeholder="Name">
+					<input type="text" ng-model="register.name" placeholder="Name">
 				</label>
 				<label class="item item-input">
 					<i class="icon ion-locked placeholder-icon"></i>
-					<input type="password" ng-model="loginData.password" placeholder="Password">
+					<input type="password" ng-model="register.password" placeholder="Password">
 				</label>
 				<label class="item item-input">
 					<i class="icon ion-locked placeholder-icon"></i>
-					<input type="password" ng-model="loginData.password" placeholder="ConformPassword">
+					<input type="password" ng-model="register.confirmpassword" placeholder="ConfirmPassword">
 				</label>
 				<div class="btn-grp padding">
-					<a href="#/app/home" class="button button-block button-positive" type="submit">Sign in</a>
+					<button class="button button-block button-positive" type="submit">Sign in</button>
 				</div>
+				<p class="text-center" ng-show="showAlreadyRegistered">Email id already registered</p>
+				<p class="text-center" ng-show="passwordNotMatch">Password Mismatch</p>
 			</div>
 		</form>
 	</ion-content>
