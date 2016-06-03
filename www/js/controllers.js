@@ -2617,8 +2617,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.changeAddress = function(check) {
         if (check == true) {
+            $scope.user.shipping = _.cloneDeep($scope.user.billing);
             $scope.sameAsBilling = true;
         } else {
+            $scope.user.shipping = {};
             $scope.sameAsBilling = false;
         }
 

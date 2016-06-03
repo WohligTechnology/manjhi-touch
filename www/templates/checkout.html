@@ -1,153 +1,171 @@
 <ion-view title="Checkout">
 	<ion-content class="has-header cont-checkout">
-		<div class="list-ul" ng-show="showLoginDiv">
-			<ul class="list catogories">
-				<p>Register with us for future convenience</p>
-				<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'login'" ng-click="loginRegClick(1)">Login</ion-radio>
-				<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'register'" ng-click="loginRegClick(2)">Register</ion-radio>
-				<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'guest'" ng-click="loginRegClick(3)">Checkout as guest</ion-radio>
-				<div class="padding" ng-if="checkoutRadio=='guest'">
-					<a class="button button-block button-positive chkbx-button" type="submit" ng-click="continueGuest()">
+		<div ng-if="cartItems && cartItems.length>0">
+			<div class="list-ul" ng-show="showLoginDiv">
+				<ul class="list catogories">
+					<p>Register with us for future convenience</p>
+					<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'login'" ng-click="loginRegClick(1)">Login</ion-radio>
+					<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'register'" ng-click="loginRegClick(2)">Register</ion-radio>
+					<ion-radio class="chkbx" ng-model="checkoutRadio" ng-value="'guest'" ng-click="loginRegClick(3)">Checkout as guest</ion-radio>
+					<div class="padding" ng-if="checkoutRadio=='guest'">
+						<a class="button button-block button-positive chkbx-button" type="submit" ng-click="continueGuest()">
 						Continue
 					</a>
-				</div>
-			</ul>
-		</div>
-		<div class="check-out" ng-show="showShipping">
-			<div class="item item-divider">Billing Information</div>
-			<label class="item item-input">
-				<input ng-model="user.billing.name" ng-change="onFieldChange(checked)" placeholder="Full Name*" required type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.email" ng-change="onFieldChange(checked)" placeholder="Email*" required type="email">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.company" placeholder="Company Name" type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.designation" placeholder="Designation" type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control tel-country" ng-model="user.billing.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
-			</label>
-			<label class="item item-input">
-				<input class="form-control tel-number" ng-model="user.billing.mobileno" ng-change="onFieldChange(checked)" placeholder="Mobile Number*" only-digits maxlength="11" required type="tel">
-			</label>
-			<label class="item item-input">
-				<input class="form-control one" ng-model="user.billing.flatno" ng-change="onFieldChange(checked)" placeholder="House No*" required type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control two" ng-model="user.billing.bldgname" ng-change="onFieldChange(checked)" placeholder="Name of Buliding*" required type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.landmark" placeholder="Landmark" type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.street" placeholder="Street" type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.regadd" ng-change="onFieldChange(checked)" placeholder="Locality*" required type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.city" ng-change="onFieldChange(checked)" placeholder="City*" required type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.pincode" ng-change="onFieldChange(checked)" placeholder="Pincode*" only-digits maxlength="6" type="text">
-			</label>
-			<label class="item item-input">
-				<input class="form-control" ng-model="user.billing.state" ng-change="onFieldChange(checked)" placeholder="State*" required type="text">
-			</label>
-			<label class="item item-input item-select">
-				<div class="input-label">
-					Select Country*
-				</div>
-				<div class="form-group">
-					<select class="form-control" ng-options="country.code as country.name for country in countries" ng-change="onFieldChange(checked)" ng-model="user.billing.country" placeholder="Select county"></select>
-				</div>
-			</label>
-			<div class="item item-checkbox">
-				<label class="checkbox">
-					<input ng-model="checked" ng-change="changeAddress(checked)" type="checkbox">
-				</label>
-				Same As Billing Address
+					</div>
+				</ul>
 			</div>
-			<div class="animate-if">
-				<div class="item item-divider">Shipping Address</div>
+			<div class="check-out" ng-show="showShipping">
+				<div class="item item-divider">Billing Information</div>
 				<label class="item item-input">
-					<input ng-model="user.shipping.name" ng-change="onFieldChange(checked)" placeholder="Full Name*" required type="text">
+					<input ng-model="user.billing.name" ng-change="onFieldChange(checked)" placeholder="Full Name*" required type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.email" ng-change="onFieldChange(checked)" placeholder="Email*" required type="email">
+					<input class="form-control" ng-model="user.billing.email" ng-change="onFieldChange(checked)" placeholder="Email*" required type="email">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.company" placeholder="Company Name" type="text">
+					<input class="form-control" ng-model="user.billing.company" placeholder="Company Name" type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.designation" placeholder="Designation" type="text">
+					<input class="form-control" ng-model="user.billing.designation" placeholder="Designation" type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control tel-country" ng-model="user.shipping.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
+					<input class="form-control tel-country" ng-model="user.billing.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
 				</label>
 				<label class="item item-input">
-					<input class="form-control tel-number" ng-model="user.shipping.mobileno" ng-change="onFieldChange(checked)" placeholder="Mobile Number*" only-digits maxlength="11" required type="tel">
+					<input class="form-control tel-number" ng-model="user.billing.mobileno" ng-change="onFieldChange(checked)" placeholder="Mobile Number*" only-digits maxlength="11" required type="tel">
 				</label>
 				<label class="item item-input">
-					<input class="form-control one" ng-model="user.shipping.flatno" ng-change="onFieldChange(checked)" placeholder="House No*" required type="text">
+					<input class="form-control one" ng-model="user.billing.flatno" ng-change="onFieldChange(checked)" placeholder="House No*" required type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control two" ng-model="user.shipping.bldgname" ng-change="onFieldChange(checked)" placeholder="Name of Buliding*" required type="text">
+					<input class="form-control two" ng-model="user.billing.bldgname" ng-change="onFieldChange(checked)" placeholder="Name of Buliding*" required type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.landmark" placeholder="Landmark" type="text">
+					<input class="form-control" ng-model="user.billing.landmark" placeholder="Landmark" type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.street" placeholder="Street" type="text">
+					<input class="form-control" ng-model="user.billing.street" placeholder="Street" type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.regadd" ng-change="onFieldChange(checked)" placeholder="Locality*" required type="text">
+					<input class="form-control" ng-model="user.billing.regadd" ng-change="onFieldChange(checked)" placeholder="Locality*" required type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.city" ng-change="onFieldChange(checked)" placeholder="City*" required type="text">
+					<input class="form-control" ng-model="user.billing.city" ng-change="onFieldChange(checked)" placeholder="City*" required type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.pincode" ng-change="onFieldChange(checked)" placeholder="Pincode*" only-digits maxlength="6" type="text">
+					<input class="form-control" ng-model="user.billing.pincode" ng-change="onFieldChange(checked)" placeholder="Pincode*" only-digits maxlength="6" type="text">
 				</label>
 				<label class="item item-input">
-					<input class="form-control" ng-model="user.shipping.state" ng-change="onFieldChange(checked)" placeholder="State*" required type="text">
+					<input class="form-control" ng-model="user.billing.state" ng-change="onFieldChange(checked)" placeholder="State*" required type="text">
 				</label>
 				<label class="item item-input item-select">
 					<div class="input-label">
 						Select Country*
 					</div>
 					<div class="form-group">
-						<select class="form-control" ng-options="country.code as country.name for country in countries" ng-change="onFieldChange(checked)" ng-model="user.shipping.country" placeholder="Select county"></select>
+						<select class="form-control" ng-options="country.code as country.name for country in countries" ng-change="onFieldChange(checked)" ng-model="user.billing.country" placeholder="Select county"></select>
 					</div>
 				</label>
+				<div class="item item-checkbox">
+					<label class="checkbox">
+						<input ng-model="checked" ng-change="changeAddress(checked)" type="checkbox">
+					</label>
+					Same As Billing Address
+				</div>
+				<div class="animate-if">
+					<div class="item item-divider">Shipping Address</div>
+					<label class="item item-input">
+						<input ng-model="user.shipping.name" ng-change="onFieldChange(checked)" placeholder="Full Name*" required type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.email" ng-change="onFieldChange(checked)" placeholder="Email*" required type="email">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.company" placeholder="Company Name" type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.designation" placeholder="Designation" type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control tel-country" ng-model="user.shipping.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
+					</label>
+					<label class="item item-input">
+						<input class="form-control tel-number" ng-model="user.shipping.mobileno" ng-change="onFieldChange(checked)" placeholder="Mobile Number*" only-digits maxlength="11" required type="tel">
+					</label>
+					<label class="item item-input">
+						<input class="form-control one" ng-model="user.shipping.flatno" ng-change="onFieldChange(checked)" placeholder="House No*" required type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control two" ng-model="user.shipping.bldgname" ng-change="onFieldChange(checked)" placeholder="Name of Buliding*" required type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.landmark" placeholder="Landmark" type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.street" placeholder="Street" type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.regadd" ng-change="onFieldChange(checked)" placeholder="Locality*" required type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.city" ng-change="onFieldChange(checked)" placeholder="City*" required type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.pincode" ng-change="onFieldChange(checked)" placeholder="Pincode*" only-digits maxlength="6" type="text">
+					</label>
+					<label class="item item-input">
+						<input class="form-control" ng-model="user.shipping.state" ng-change="onFieldChange(checked)" placeholder="State*" required type="text">
+					</label>
+					<label class="item item-input item-select">
+						<div class="input-label">
+							Select Country*
+						</div>
+						<div class="form-group">
+							<select class="form-control" ng-options="country.code as country.name for country in countries" ng-change="onFieldChange(checked)" ng-model="user.shipping.country" placeholder="Select county"></select>
+						</div>
+					</label>
+				</div>
+				<div class="padding">
+					<button class="button button-block button-positive margin-zero" ng-show="showShippingContinue" ng-click="viewCart(checked)">
+						Continue
+					</button>
+				</div>
 			</div>
-			<div class="padding">
-				<button class="button button-block button-positive margin-zero" ng-show="showShippingContinue" ng-click="viewCart(checked)">
-					Continue
+			<div class="list thumbnail" ng-if="showCartEnable">
+				<h4>Order Review</h4>
+				<!-- ngRepeat: product in products -->
+				<a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'">
+					<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
+					<h3>{{artwork.artwork.imageno}}</h3>
+					<h3 class="">{{artwork.name}}</h3>
+					<h3 class="">{{artwork.artwork.name}}</h3>
+					<h3>Rs {{artwork.artwork.gprice|inlakhs}} / $ {{artwork.artwork.gprice|indollars}}</h3>
+					<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
+				</a>
+				<a class="item pad-nomore">
+				Sub Total<span class="item-note ng-binding">Rs {{totalCartPrice | inlakhs}} / ${{totalCartPrice|indollars}}</span>
+			</a>
+				<a class="item pad-nomore">
+				VAT<span class="item-note ng-binding">Rs {{vat | inlakhs}} / ${{vat | indollars}}</span>
+			</a>
+				<a class="item pad-nomore">
+				Packing &amp; Shipping<span class="item-note ng-binding">Rs {{shippingCost | inlakhs}} / ${{shippingCost | indollars}}</span>
+			</a>
+				<a class="item pad-nomore">
+				Grand Total<span class="item-note ng-binding">Rs {{totalCartPrice+vat+shippingCost | inlakhs}} / ${{totalCartPrice+vat+shippingCost|indollars}}</span>
+			</a>
+			</div>
+			<div class="padding" ng-if="showCartEnable">
+				<button class="button button-block button-positive margin-zero" ng-click="toPayment(checked)">
+					Proceed &amp; Pay
 				</button>
 			</div>
 		</div>
-		<div class="list thumbnail" ng-if="showCartEnable">
-			<!-- ngRepeat: product in products -->
-			<a class="item item-thumbnail-left">
-				<img src="img/artist/artist1.jpg">
-				<h3>Id</h3>
-				<h3 class="">Artist Name</h3>
-				<h3 class="">Title Name</h3>
-				<h3>Rs.1,00,000/ $6,400</h3>
-				<h3 class="">Quantity: 1</h3>
-				<button class="button button-clear button-assertive button-small remove-btn">REMOVE</button>
-			</a>
-			<a class="item pad-nomore">
-				Total Amount
-					<span class="item-note ng-binding">
-			                   Rs.1,00,000/ $6,400
-			                </span>
-				</a>
-		</div>
-
+		<ion-list ng-if="cartItems.length==0">
+			<ion-item>
+				<p class="text-center font-special">You have not added any artworks in your cart yet.
+				</p>
+			</ion-item>
+		</ion-list>
 	</ion-content>
 </ion-view>
