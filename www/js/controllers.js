@@ -2374,6 +2374,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices) {
 
+    $scope.art = {};
+
     var countcall = 0;
     $scope.onSearchChange = function(search) {
         if (search != undefined && search != '') {
@@ -2393,6 +2395,24 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             }, 1000);
         } else {
             $scope.searchData = '';
+        }
+    }
+
+    $scope.selectSearch = function(name) {
+        console.log(name);
+        $scope.art.search = name.name;
+        $scope.art.type = name.type;
+        $scope.getSearchedArt();
+    }
+
+    $scope.getSearchedArt = function() {
+        console.log($scope.art);
+        if ($scope.art.search != '') {
+            globalFunction.showLoading();
+            MyServices.getArtworkbySearch($scope.art, function(data) {
+                console.log(data);
+                $ionicLoading.hide();
+            })
         }
     }
 
