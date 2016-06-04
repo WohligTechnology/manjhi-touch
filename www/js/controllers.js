@@ -2372,7 +2372,29 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('SearchCtrl', function($scope, $stateParams) {
+.controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices) {
+
+    var countcall = 0;
+    $scope.onSearchChange = function(search) {
+        if (search != undefined && search != '') {
+            $timeout(function() {
+                MyServices.getSearchDrop(search, ++countcall, function(data, n) {
+                    if (n == countcall) {
+                        if (data.value == false) {
+                            $scope.showDropDown = true;
+                        } else {
+                            $scope.showDropDown = false;
+                            $scope.searchData = data;
+                        }
+                    } else {
+                        $scope.showDropDown = true;
+                    }
+                })
+            }, 1000);
+        } else {
+            $scope.searchData = '';
+        }
+    }
 
     $scope.artistdetail = [{
         image: 'img/artist/artist1.jpg',
