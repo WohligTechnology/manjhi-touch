@@ -4,9 +4,9 @@
             <i class="icon ion-ios-search"></i>
             <input type="search" class="form-control" autocomplete="off" required id="topsearch" placeholder="Search..." ng-model="art.search" ng-change="onSearchChange(art.search)">
         </label>
-        <button class="button button-clear button-icon ion-ios-close-empty" ng-click="goBack()">
+        <button class="button button-clear button-icon ion-ios-close-empty" ng-click="clearSearch()">
         </button>
-        <ul class="posa" ng-if="searchData!=''">
+        <ul class="posa" ng-show="showDropDown">
             <li ng-repeat="data in searchData" ng-click="selectSearch(data)">
                 <span class="pull-right"> {{data.type}}</span>{{data.name}}
             </li>
@@ -23,41 +23,45 @@
 			</button>
 		</div>
 -->
-        <div class="row padding-vertical" ng-repeat="detail in artistdetail">
-            <div class="col-50 padding-horizontal" ng-repeat="details in detail">
+        <div class="row padding-vertical" ng-repeat="totalartcont in searchResults track by $index">
+            <div class="col-50 padding-horizontal" ng-repeat="totalartconts in totalartcont track by $index">
                 <div class="prd-cont">
-                    <a href="#/app/art-detail">
+                    <a href="">
                         <div class="img-holder">
                             <figure>
-                                <img ng-src="{{details.image}}" class="full-image">
+                                <img ng-src="{{totalartconts.artwork.image[0]|uploadthumbnail}}" class="full-image">
                             </figure>
                         </div>
                     </a>
                     <div class="artist-cont-detail">
                         <p>
-                            {{details.id}}
+                            {{totalartconts.artwork.imageno}}
                         </p>
                         <p>
-                            {{details.typename}}
+                            {{totalartconts.name}}
                         </p>
                         <p>
-                            {{details.madein}}
+                            {{totalartconts.artwork|makesizestr}}
                         </p>
-                        <p>
-                            {{details.size}}
+                        <p ng-if="totalartconts.artwork.gprice && totalartconts.artwork.gprice!='N/A' && totalartconts.artwork.status!='sold'">
+                            Rs {{totalartconts.artwork.gprice|inlakhs}} / ${{totalartconts.artwork.gprice|indollars}}
                         </p>
-                        <p>
-                            {{details.year}}
-                        </p>
-                        <p>
-                            {{details.price}}
+                        <p ng-if="!totalartconts.artwork.gprice || totalartconts.artwork.gprice=='N/A'">
+                            Price available on request
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        <ion-list ng-if="searchForSomething">
+    			<ion-item>
+    				<p class="text-center font-special">Search for something...
+    				</p>
+    			</ion-item>
+    		</ion-list>
+        <!-- <ion-infinite-scroll on-infinite="addMoreItems()" ng-if="infiniteLoading"></ion-infinite-scroll> -->
     </ion-content>
-    <ion-footer-bar class="tabs-down">
+    <!-- <ion-footer-bar class="tabs-down">
         <div class="tabs">
             <a class="tab-item" ng-click="showFilter();">
     Filter
@@ -66,5 +70,5 @@
     Sort
   </a>
         </div>
-    </ion-footer-bar>
+    </ion-footer-bar> -->
 </ion-view>

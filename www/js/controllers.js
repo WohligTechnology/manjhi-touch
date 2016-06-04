@@ -2372,24 +2372,26 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices) {
+.controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices, $ionicLoading) {
 
     $scope.art = {};
-
+    $scope.showDropDown = false;
     var countcall = 0;
+    $scope.searchForSomething = true;
+
     $scope.onSearchChange = function(search) {
         if (search != undefined && search != '') {
             $timeout(function() {
                 MyServices.getSearchDrop(search, ++countcall, function(data, n) {
                     if (n == countcall) {
                         if (data.value == false) {
-                            $scope.showDropDown = true;
-                        } else {
                             $scope.showDropDown = false;
+                        } else {
+                            $scope.showDropDown = true;
                             $scope.searchData = data;
                         }
                     } else {
-                        $scope.showDropDown = true;
+                        $scope.showDropDown = false;
                     }
                 })
             }, 1000);
@@ -2400,48 +2402,41 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.selectSearch = function(name) {
         console.log(name);
+        $scope.showDropDown = false;
         $scope.art.search = name.name;
         $scope.art.type = name.type;
+        $scope.art.pagenumber = 1;
+        $scope.art.pagesize = 5;
+        $scope.searchedArtwork = [];
         $scope.getSearchedArt();
     }
 
+    $scope.searchedArtwork = [];
     $scope.getSearchedArt = function() {
+      $scope.showDropDown = false;
         console.log($scope.art);
         if ($scope.art.search != '') {
+            $scope.searchForSomething = false;
             globalFunction.showLoading();
             MyServices.getArtworkbySearch($scope.art, function(data) {
-                console.log(data);
+                if (data.data && data.data.length > 0) {
+                    $scope.searchResults = _.chunk(data.data, 2);
+                    console.log($scope.searchResults);
+                } else {
+
+                }
                 $ionicLoading.hide();
             })
         }
     }
 
-    $scope.artistdetail = [{
-        image: 'img/artist/artist1.jpg',
-        id: '1528',
-        name: 'Ajay R Dhandre',
-        typename: 'Untitled',
-        size: '19.5 x 23',
-    }, {
-        image: 'img/artist/artist2.jpg',
-        id: '1527',
-        name: 'Amarnath Sharma',
-        typename: 'Untitled',
-        size: '19.5 x 23',
-    }, {
-        image: 'img/artist/artist3.jpg',
-        name: 'Ajay R Dhandre',
-        id: '1530',
-        typename: 'Untitled',
-        size: '19.5 x 23',
-    }, {
-        image: 'img/artist/artist4.jpg',
-        id: '1530',
-        name: 'Bhushen Koul',
-        madein: 'Oil on board',
-        size: '19.5 x 23'
-    }];
-    $scope.artistdetail = _.chunk($scope.artistdetail, 2);
+    $scope.clearSearch = function() {
+        $scope.art = {};
+        $scope.showDropDown = false;
+        $scope.searchResults = [];
+        $scope.searchForSomething = true;
+    }
+
 })
 
 .controller('AddressCtrl', function($scope, $stateParams, $ionicModal, MyServices) {
