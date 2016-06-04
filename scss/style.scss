@@ -803,6 +803,7 @@ ul.list.catogories p {
     height: auto;
     width: 90px;
 }
+
 .rel {
     position: relative;
     .posa {
@@ -820,7 +821,6 @@ ul.list.catogories p {
             cursor: pointer;
             padding: 12px 10px;
             list-style-type: none;
-            .transition(all 300ms ease);
             &:hover {
                 background-color: #CECECE;
             }

@@ -9205,3 +9205,29 @@ ul.list.catogories p {
   max-width: 100%;
   height: auto;
   width: 90px; }
+
+.rel {
+  position: relative; }
+  .rel .posa {
+    width: 100%;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #f1f1f1;
+    min-height: 43px;
+    padding: 0;
+    z-index: 99;
+    max-height: 300px;
+    overflow-y: scroll; }
+    .rel .posa li {
+      cursor: pointer;
+      padding: 12px 10px;
+      list-style-type: none; }
+      .rel .posa li:hover {
+        background-color: #CECECE; }
+      .rel .posa li span.pull-right {
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase; }
+      .rel .posa li + li {
+        border-top: 1px solid #fff; }
