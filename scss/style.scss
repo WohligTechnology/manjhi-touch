@@ -803,7 +803,6 @@ ul.list.catogories p {
     height: auto;
     width: 90px;
 }
-
 .rel {
     position: relative;
     .posa {
@@ -834,4 +833,7 @@ ul.list.catogories p {
             }
         }
     }
+}
+.rel .item-input-inset {
+    overflow: visible;
 }
