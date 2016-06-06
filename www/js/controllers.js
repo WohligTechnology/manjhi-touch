@@ -2800,7 +2800,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         } else {
             $scope.paymentFunc();
         }
-
     }
 
     //after implementing paymentgateway topayment and viewcart will replace

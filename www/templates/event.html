@@ -7,7 +7,7 @@
 					<div class="no-flex">
 						<h5 class="eventhead">{{event1[0].year}}</h5>
 					</div>
-					<div class="col-md50" ng-repeat="event in event1">
+					<div class="col-md50" ng-repeat="event in event1 | orderBy:'-startdate'">
 						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
@@ -30,7 +30,7 @@
 					<div class="no-flex">
 						<h5 class="eventhead">{{currentYear}}</h5>
 					</div>
-					<div class="col-md50" ng-repeat="event in currevent">
+					<div class="col-md50" ng-repeat="event in currevent | orderBy:'-startdate'">
 						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
@@ -53,7 +53,7 @@
 					<div class="no-flex">
 						<h5 class="eventhead">{{event1[0].year}}</h5>
 					</div>
-					<div class="col-md50" ng-repeat="event in event1">
+					<div class="col-md50" ng-repeat="event in event1 | orderBy:'-startdate'">
 						<div class="event-detail" ui-sref="app.eventdetail({id:event._id})">
 							<div class="data-event">
 								<h6 class="font-color2">{{event.name}}</h6>
