@@ -60,6 +60,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
+            $.jStorage.set("isLoggedIn", true);
             $scope.isLoggedIn = true;
             userProfile = data;
             MyServices.getMyFavourites(data.id, function(favorite) {
@@ -459,6 +460,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
+            $.jStorage.set("isLoggedIn", true);
             $scope.isLoggedIn = true;
             userProfile = data;
             MyServices.getMyFavourites(data.id, function(favorite) {
@@ -2512,7 +2514,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal, $cordovaInAppBrowser, $rootScope) {
+.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal, $cordovaInAppBrowser, $rootScope, $state) {
 
     $scope.checkout = [];
     $scope.checkout.isshipping = true;
@@ -2737,18 +2739,18 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     var boptions = {
-        location: 'yes',
-        clearcache: 'yes',
+        location: 'no',
+        clearcache: 'no',
         toolbar: 'no'
     };
 
     $scope.paymentFunc = function() {
-        var num = 1;
-        // _.each($scope.cartItems, function(n) {
-        //     if (n.artwork.form) {
-        //         num++;
-        //     }
-        // });
+        var num = 0;
+        _.each($scope.cartItems, function(n) {
+            if (n.artwork.form) {
+                num++;
+            }
+        });
         if (num == $scope.cartItems.length) {
             $scope.user.cart = [];
             $scope.user.cart = $scope.cartItems;
@@ -2777,7 +2779,17 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         console.log(event);
         console.log(event.url);
         if (event.url == "http://www.auraart.in/#/sorry/") {
-            dataNextPre.messageBox("Sorry! Your transaction failed");
+            $cordovaInAppBrowser.close();
+            dataNextPre.messageBox("Sorry! Your order is not placed");
+            $timeout(function() {
+                $state.go('app.home');
+            }, 5000);
+        } else if (event.url == "http://www.auraart.in/#/thankyou/") {
+            $cordovaInAppBrowser.close();
+            dataNextPre.messageBox("Thank you! Your order is placed");
+            $timeout(function() {
+                $state.go('app.home');
+            }, 5000);
         }
     });
 
