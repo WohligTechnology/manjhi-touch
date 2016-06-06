@@ -13,7 +13,8 @@
 					<div class="">
 						<div class="teams-done">
 							<h4> Core Team</h4>
-							<h5>Daljit S Sethi</h5>
+							<div ng-bind-html="team.mem1brief"></div>
+							<!-- <h5>Daljit S Sethi</h5>
 							<ul>
 								<li>Director, Aura Art eConnect Pvt Ltd</li>
 								<li>Director, Aura Art Development Pvt Ltd</li>
@@ -25,14 +26,14 @@
 								<li>Director, Art &#38; Culture - RI Dist 3140 (2014-15)</li>
 								<li>Deputy Governor RI Dist 3140 (1998-99)</li>
 								<li>Founder &#38; Chairman – Noble Heart Foundation</li>
-							</ul>
+							</ul> -->
 							<readmores class="">
 								<div class="text-right readmore">
 									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
 								</div>
 								<div class="read-morecont">
-									<div class="read-inner">
-										<ul>
+									<div class="read-inner" ng-bind-html="team.mem1detail">
+										<!-- <ul>
 											<li>Significant focus on research, related to investing in Art, over the last 8 years, including creating awareness of Art as an asset class. Formulated strategy for Aura Art and closely involved in forging and maintaining alliances.
 											</li>
 											<li>Working with Collectors, Corporates, Museums, Galleries and other stake holders to provide Art Infrastructure Solutions.</li>
@@ -64,24 +65,25 @@
 
 
 											<li>Other interests include reading, writing poetry and meditation (practising Sahaj Marg system, offered through Shri Ram Chandra Mission, under the guidance of Shri Parthasarathi Rajagopalachari).</li>
-										</ul>
+										</ul> -->
 									</div>
 								</div>
 							</readmores>
-							<h5>Harmeet S Sethi</h5>
+							<!-- <h5>Harmeet S Sethi</h5>
 							<ul>
 								<li>Director, Aura Art eConnect Pvt Ltd</li>
 								<li>Director, Aura Art Development Pvt Ltd</li>
 								<li>CEO, Aura Art</li>
-							</ul>
+							</ul> -->
+							<div ng-bind-html="team.mem2brief"></div>
 
 							<readmores class="">
 								<div class="text-right readmore">
 									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
 								</div>
 								<div class="read-morecont">
-									<div class="read-inner">
-										<ul>
+									<div class="read-inner" ng-bind-html="team.mem2detail">
+										<!-- <ul>
 											<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building
 												deep relationships with artists across the country.</li>
 											<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
@@ -92,11 +94,11 @@
 											<li>Bachelor of Business Administration.</li>
 											<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
 											<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
-										</ul>
+										</ul> -->
 									</div>
 								</div>
 							</readmores>
-							<h5>Rishiraj S Sethi</h5>
+							<!-- <h5>Rishiraj S Sethi</h5>
 							<ul>
 								<li>Director, Aura Art eConnect Pvt Ltd
 								</li>
@@ -104,14 +106,15 @@
 								</li>
 								<li>Chief Strategist, Aura Art
 								</li>
-							</ul>
+							</ul> -->
+							<div ng-bind-html="team.mem3brief"></div>
 							<readmores class="">
 								<div class="text-right readmore">
 									<button class="button button-clear button-assertive button-small remove-btn">see more</button>
 								</div>
 								<div class="read-morecont">
-									<div class="read-inner">
-										<ul>
+									<div class="read-inner" ng-bind-html="team.mem3detail">
+										<!-- <ul>
 											<li>An ardent Art lover. Has comprehensively studied Art and traveled extensively throughout India gaining finer insights into Art and Artists over the last 14 years. Relentlessly pursued quest for identifying high quality artworks and building
 												deep relationships with artists across the country.</li>
 											<li>Largest contribution in building the enviable Aura Art collection over the last decade and in catalysing the development and promotional efforts of various artists.
@@ -122,13 +125,14 @@
 											<li>Bachelor of Business Administration.</li>
 											<li>A Sportsman - was Captain of Junior Hockey team at school and played Lawn Tennis upto state level in Maharashtra. Has completed basic course in Rifle shooting conducted by Baroda Rifle Club.</li>
 											<li>Exhibits a deep sense of commitment and is very passionate about all endeavours he undertakes. A leader with high motivational and persuasive skills.</li>
-										</ul>
+										</ul> -->
 									</div>
 								</div>
 							</readmores>
 
 							<h4> Management Advisors </h4>
-							<h5>Shri Nilesh Ganjwala</h5>
+							<div ng-bind-html="team.advisors"></div>
+							<!-- <h5>Shri Nilesh Ganjwala</h5>
 							<p>CEO, Innergize Solutions Pvt Ltd
 							</p>
 							<h5>Shri Vinit Ganjwala</h5>
@@ -176,15 +180,15 @@
 							<h5>Swami Dayananda Saraswati</h5>
 							<p>
 								Founder, Arsha Vidya Gurukulam, Coimbatore
-							</p>
+							</p> -->
 
 
 
 							<h4>Patrons</h4>
-							<h5>Dr Karan Singh (Patron-In-Chief)</h5>
+							<div ng-bind-html="team.patrons"></div>
+							<!-- <h5>Dr Karan Singh (Patron-In-Chief)</h5>
 							<ul class="parliament">
 								<li>Member of Parliament (Rajya Sabha)</li>
-								<!-- <li>President of Indian Council for Cultural Relations</li> -->
 								<li>Chairman, Committee of Ethics</li>
 							</ul>
 
@@ -283,7 +287,7 @@
 
 							<h4> Communications</h4>
 							<h5>Shri Satish Pillai</h5>
-							<p>Mumbai (Head)</p>
+							<p>Mumbai (Head)</p> -->
 						</div>
 					</div>
 				</div>

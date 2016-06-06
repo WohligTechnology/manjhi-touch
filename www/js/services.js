@@ -594,6 +594,12 @@ angular.module('starter.services', [])
                 url: adminurl + "testimonials/find",
                 method: "POST",
             }).success(callback);
-        }
+        },
+        getTeam: function(callback) {
+            $http({
+                url: adminurl + "team/find",
+                method: "POST",
+            }).success(callback);
+        },
     };
 });

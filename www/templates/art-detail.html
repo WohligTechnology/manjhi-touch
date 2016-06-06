@@ -52,9 +52,15 @@
 					<a class="button button-block button-assertive icon-left ion-android-mail" ng-click="openContact();">
 					Contact
 					</a>
-					<a href="" class="button button-positive button-block icon-left ion-ios-cart" ng-click="addToCart(artistDetailImg)">
+					<div href="" class="button button-positive button-block" ng-if="artistDetailImg.artwork.status=='sold'">
+							Sold
+					</div>
+					<a href="" class="button button-positive button-block icon-left ion-ios-cart" ng-click="addToCart(artistDetailImg)" ng-if="artistDetailImg.artwork.gprice && artistDetailImg.artwork.gprice!='N/A' && artistDetailImg.artwork.status!='sold'">
 					Add To Cart
-				</a>
+					</a>
+					<a href="" class="button button-positive button-block" ng-click="openReachout();" ng-if="!artistDetailImg.artwork.gprice || artistDetailImg.artwork.gprice=='N/A'">
+							Request for price
+					</a>
 				</div>
 			</div>
 			<div class="img-artist style1-bg padding">

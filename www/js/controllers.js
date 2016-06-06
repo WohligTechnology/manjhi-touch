@@ -2045,12 +2045,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.goToDetail = function(artwork) {
         console.log(artwork);
         if (artwork.type == "Sculptures") {
-            //          $location.url("/sculpture/" + artwork._id);
             $state.go('sculpture', {
                 artid: artwork._id
             });
         } else {
-            //          $location.url("/artwork/detail/" + artwork._id);
             $state.go('app.art-details', {
                 artid: artwork._id
             });
@@ -2076,7 +2074,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 .controller('ContactCtrl', function($scope, $stateParams) {})
 
-.controller('AboutCtrl', function($scope, $stateParams) {
+.controller('AboutCtrl', function($scope, $stateParams, MyServices) {
     $scope.showteam = "true";
     //$scope.showactivity="true";
     console.log("dfasdf");
@@ -2095,6 +2093,12 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.classteam = "";
         }
     }
+
+    MyServices.getTeam(function(data) {
+        if (data.value != false) {
+            $scope.team = data[0];
+        }
+    })
 })
 
 .controller('PressCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading) {
@@ -2273,6 +2277,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             console.log(data);
             if (data.length == 0) {
                 $scope.noCartItems = true;
+                $scope.cartItems = [];
             } else {
                 $scope.noCartItems = false;
                 $scope.cartItems = data;
@@ -2372,7 +2377,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices, $ionicLoading) {
+.controller('SearchCtrl', function($scope, $stateParams, $timeout, MyServices, $ionicLoading, $state) {
 
     $scope.art = {};
     $scope.showDropDown = false;
@@ -2413,7 +2418,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.searchedArtwork = [];
     $scope.getSearchedArt = function() {
-      $scope.showDropDown = false;
+        $scope.showDropDown = false;
         console.log($scope.art);
         if ($scope.art.search != '') {
             $scope.searchForSomething = false;
@@ -2435,6 +2440,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.showDropDown = false;
         $scope.searchResults = [];
         $scope.searchForSomething = true;
+    }
+
+    $scope.goToDetail = function(artwork) {
+        console.log(artwork);
+        if (artwork.type == "Sculptures") {
+            $state.go('sculpture', {
+                artid: artwork._id
+            });
+        } else {
+            $state.go('app.art-details', {
+                artid: artwork._id
+            });
+        }
     }
 
 })
@@ -2494,7 +2512,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal) {
+.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal, $cordovaInAppBrowser, $rootScope) {
 
     $scope.checkout = [];
     $scope.checkout.isshipping = true;
@@ -2718,13 +2736,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     }
 
+    var boptions = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+    };
+
     $scope.paymentFunc = function() {
-        var num = 0;
-        _.each($scope.cartItems, function(n) {
-            if (n.artwork.form) {
-                num++;
-            }
-        });
+        var num = 1;
+        // _.each($scope.cartItems, function(n) {
+        //     if (n.artwork.form) {
+        //         num++;
+        //     }
+        // });
         if (num == $scope.cartItems.length) {
             $scope.user.cart = [];
             $scope.user.cart = $scope.cartItems;
@@ -2738,17 +2762,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 if (data.value != false) {
                     $scope.user.orderid1 = data.id;
                     $scope.user.orderid2 = data.orderid;
-                    $timeout(function() {
-                        $("form[name='payuForm']").submit();
-                    }, 2000);
-                    // $state.go('thankyou');
-                    // dataNextPre.messageBox("Your order is placed. Thank You !!");
-                    // $timeout(function() {
-                    //     $state.go('thankyou');
-                    // }, 3000);
+                    $cordovaInAppBrowser.open("http://aura--art.appspot.com/paymentGet.php?key=3gqoHz&txnid=" + $scope.user.orderid1 + "&amount=" + $scope.user.grantTotal + "&firstname=" + $scope.user.billing.name + "&email=" + $scope.user.billing.email + "&phone=" + $scope.user.billing.mobileno + "&productinfo=Purchase of artwork&surl=http://www.auraart.in/order/payU&furl=http://www.auraart.in/order/payU&udf1=" + $scope.user.orderid2 + "&service_provider=", '_blank', boptions).then(function(event) {}).catch(function(event) {});
 
-                } else {
-                    $state.go('sorry');
+                    // http://www.auraart.in/#/sorry/
                 }
             });
         } else {
@@ -2756,6 +2772,14 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             dataNextPre.messageBox("Please select in what Form (Rolled or Framed) you want to receive the artwork");
         }
     }
+
+    $rootScope.$on('$cordovaInAppBrowser:loadstart', function(e, event) {
+        console.log(event);
+        console.log(event.url);
+        if (event.url == "http://www.auraart.in/#/sorry/") {
+            dataNextPre.messageBox("Sorry! Your transaction failed");
+        }
+    });
 
     $scope.toPayment = function(checked) {
         if (checked == true) {

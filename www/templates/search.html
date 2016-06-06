@@ -23,9 +23,9 @@
 			</button>
 		</div>
 -->
-        <div class="row padding-vertical" ng-repeat="totalartcont in searchResults track by $index">
+        <div class="row padding-vertical" collection-repeat="totalartcont in searchResults track by $index">
             <div class="col-50 padding-horizontal" ng-repeat="totalartconts in totalartcont track by $index">
-                <div class="prd-cont">
+                <div class="prd-cont" ng-click="goToDetail(totalartconts.artwork)">
                     <a href="">
                         <div class="img-holder">
                             <figure>
@@ -49,6 +49,9 @@
                         <p ng-if="!totalartconts.artwork.gprice || totalartconts.artwork.gprice=='N/A'">
                             Price available on request
                         </p>
+                        <p ng-if="totalartconts.artwork.status=='sold'">
+            							Sold
+            						</p>
                     </div>
                 </div>
             </div>
