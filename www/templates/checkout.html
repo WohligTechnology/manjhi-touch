@@ -131,17 +131,27 @@
 					</button>
 				</div>
 			</div>
-			<div class="list thumbnail">
+			<div class="list thumbnail" ng-if="showCartEnable">
 				<h4>Order Review</h4>
 				<!-- ngRepeat: product in products -->
-				<a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'">
-					<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
-					<h3>{{artwork.artwork.imageno}}</h3>
-					<h3 class="">{{artwork.name}}</h3>
-					<h3 class="">{{artwork.artwork.name}}</h3>
-					<h3>Rs {{artwork.artwork.gprice|inlakhs}} / $ {{artwork.artwork.gprice|indollars}}</h3>
-					<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
-				</a>
+				<div class="list" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'" style="margin-bottom:0">
+					<a class="item item-thumbnail-left">
+						<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
+						<h3>{{artwork.artwork.imageno}}</h3>
+						<h3 class="">{{artwork.name}}</h3>
+						<h3 class="">{{artwork.artwork.name}}</h3>
+						<h3>Rs {{artwork.artwork.gprice|inlakhs}} / $ {{artwork.artwork.gprice|indollars}}</h3>
+						<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
+					</a>
+					<div class="row nopad">
+						<div class="col col-50 nopad">
+							<ion-radio ng-change="calculateShipping(artwork.artwork)" ng-model="artwork.artwork.form" ng-value="'rolled'">Rolled</ion-radio>
+						</div>
+						<div class="col col-50 nopad">
+							<ion-radio ng-change="calculateShipping(artwork.artwork)" ng-model="artwork.artwork.form" ng-value="'framed'">Framed</ion-radio>
+						</div>
+					</div>
+				</div>
 				<a class="item pad-nomore">
 				Sub Total<span class="item-note ng-binding">Rs {{totalCartPrice | inlakhs}} / ${{totalCartPrice|indollars}}</span>
 			</a>

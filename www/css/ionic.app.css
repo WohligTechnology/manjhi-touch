@@ -13688,3 +13688,6 @@ ul.list.catogories p {
 
 .rel.item-input-inset {
   overflow: visible !important; }
+
+.nopad {
+  padding: 0; }
