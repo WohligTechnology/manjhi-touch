@@ -155,7 +155,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         console.log(obj);
         $scope.myPopup.close();
         globalFunction.showLoading();
-        MyServices.addToFav(obj, function(data) {
+        MyServices.addToFav({
+            "artwork": obj.artwork._id
+        }, function(data) {
+            obj.heartClass = "ion-ios-heart";
             $ionicLoading.hide();
             if (!data.value) {
                 dataNextPre.messageBox("Added to favourites");
@@ -193,14 +196,13 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                             $scope.myFolders = [];
                         }
                     })
-                    $scope.favObj = {};
-                    $scope.favObj.artwork = art.artwork._id;
+                    $scope.favObj = art;
+                    // $scope.favObj.artwork = art.artwork._id;
                     $scope.myPopup = $ionicPopup.show({
                         cssClass: 'custom-class',
                         templateUrl: 'templates/modal-choose.html',
                         scope: $scope,
                     });
-                    art.heartClass = "ion-ios-heart";
                 }
                 break;
             case "ion-ios-heart":
@@ -1556,8 +1558,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                         $scope.reload();
                     }
                 }
-            } else {
-                $ionicScrollDelegate.scrollTo(0, 0, true);
             }
             $ionicLoading.hide();
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1914,8 +1914,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                         $scope.reload();
                     }
                 }
-            } else {
-                $ionicScrollDelegate.scrollTo(0, 0, true);
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
             $scope.infiniteLoading = true;
