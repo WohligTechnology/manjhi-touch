@@ -874,3 +874,6 @@ ul.list.catogories p {
   right:10px;
   cursor: pointer;
 }
+.ui-select-bootstrap>.ui-select-choices, .ui-select-bootstrap>.ui-select-no-choice {
+    max-height: 95px!important;
+}

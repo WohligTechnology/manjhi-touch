@@ -952,7 +952,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.goToDetail = function(artwork) {
         console.log(artwork);
         if (artwork.type == "Sculptures") {
-            $state.go('sculpture', {
+            $state.go('app.art-details', {
                 artid: artwork._id
             });
         } else {
@@ -1774,7 +1774,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         obj.scroll = xy.top;
         $.jStorage.set("artworkScroll", obj);
         if (artwork.type == "Sculptures") {
-            $state.go('sculpture', {
+            $state.go('app.art-details', {
                 artid: artwork._id
             });
         } else {
@@ -2043,7 +2043,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.goToDetail = function(artwork) {
         console.log(artwork);
         if (artwork.type == "Sculptures") {
-            $state.go('sculpture', {
+            $state.go('app.art-details', {
                 artid: artwork._id
             });
         } else {
@@ -2443,7 +2443,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.goToDetail = function(artwork) {
         console.log(artwork);
         if (artwork.type == "Sculptures") {
-            $state.go('sculpture', {
+            $state.go('app.art-details', {
                 artid: artwork._id
             });
         } else {
