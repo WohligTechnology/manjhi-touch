@@ -2,7 +2,7 @@
 	<ion-content>
 		<div class="img-holder-prd">
 			<div class="box img-holder-big text-center" ng-if="artistDetailImg">
-				<img ng-src="{{artistDetailImg.artwork.image[0]|uploadpath}}" ng-click="openModal();">
+				<img ng-src="{{artistDetailImg.artwork.image[0]|uploadpath}}" ng-click="openModal(artistDetailImg.artwork.image[0]);">
 			</div>
 			<div class="padding">
 				<div class="list list-details">

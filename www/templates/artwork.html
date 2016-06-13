@@ -9,7 +9,7 @@
 			</a>
 		</div>
 	</div>
-	<ion-content class="has-tabs made" overflow-scroll="true" delegate-handle="handler">
+	<ion-content class="made" overflow-scroll="true" delegate-handle="handler">
 		<div class="row" ng-repeat="detail in totalArtworks">
 			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="totalartconts in detail">
 				<div class="prd-cont" ng-click="goToDetailPage(totalartconts.artwork);">
@@ -47,13 +47,13 @@
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">
-			<a class="tab-item">
+			<a class="tab-item" ng-click="makeactive('All');">
 	 		All
 	  </a>
-			<a class="tab-item">
+			<a class="tab-item" ng-click="makeactive('Paintings');">
 	    Paintings
 	  </a>
-			<a class="tab-item">
+			<a class="tab-item" ng-click="makeactive('Sculptures');">
 	    Sculptures
 	  </a>
 			<a class="tab-item" ng-click="showCategory();">

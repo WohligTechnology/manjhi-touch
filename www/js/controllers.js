@@ -118,6 +118,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     dataNextPre.messageBox = function(msg) {
         var xyz = $ionicPopup.show({
+            cssClass: 'custom-class',
             template: '<h5 class="text-center">' + msg + '</h5>'
         });
 
@@ -195,6 +196,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     $scope.favObj = {};
                     $scope.favObj.artwork = art.artwork._id;
                     myPopup = $ionicPopup.show({
+                        cssClass: 'custom-class',
                         templateUrl: 'templates/modal-choose.html',
                         scope: $scope,
                     });
@@ -1086,7 +1088,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }).then(function(modal) {
         $scope.modal = modal;
     });
-    $scope.openModal = function() {
+    $scope.openModal = function(image) {
+        $scope.bigImage = image;
         $scope.modal.show();
     };
     $scope.closeModal = function() {
@@ -1154,6 +1157,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $ionicLoading.hide();
             if (data.value == true) {
                 var xyz = $ionicPopup.show({
+                    cssClass: 'custom-class',
                     template: '<h5 class="text-center">New password e mailed to you.</h5>'
                 });
 
@@ -1579,6 +1583,21 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     //     // }
     // }
 
+    $scope.showCategory = function() {
+        $scope.modal.show();
+    };
+    $ionicModal.fromTemplateUrl('templates/category.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closeCategory = function() {
+        if ($scope.modal)
+            $scope.modal.hide();
+    };
+
     $scope.makeactive = function(type) {
         globalFunction.showLoading();
         //      console.log(type);
@@ -1599,6 +1618,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.pagedata.filter = "srno";
         $scope.pagedata.sort = 1;
         // $scope.pagedata.medium = '';
+        $scope.closeCategory();
         $scope.checkForEmpty();
         $scope.reload();
     }
@@ -1664,6 +1684,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     };
 
     $scope.sortBy = function(num, by) {
+        globalFunction.showLoading();
         if (num == -1 && by == 'yoc') {
             $scope.lotactive = 'active';
             $scope.htlactive = '';
@@ -1772,20 +1793,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.modal1.hide();
     };
 
-    $scope.showCategory = function() {
-        $scope.modal.show();
-    };
-    $ionicModal.fromTemplateUrl('templates/category.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.modal = modal;
-    });
-
-    // Triggered in the login modal to close it
-    $scope.closeCategory = function() {
-        $scope.modal.hide();
-    };
-
     $ionicModal.fromTemplateUrl('templates/sort.html', {
         scope: $scope
     }).then(function(modal) {
@@ -1846,6 +1853,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.closeCategory = function(type) {
         $scope.modal.hide();
         if (type) {
+            $scope.pagedata.pagenumber = 1;
             $scope.pagedata.type = type;
             $scope.pagedata.searchname = '';
             $scope.artistimage = [];
@@ -1946,6 +1954,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.makeactive = function(type) {
+        globalFunction.showLoading();
         _.each($scope.typejson, function(n) {
             var index = n.name.indexOf(type);
             if (index != -1) {
