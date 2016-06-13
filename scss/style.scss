@@ -851,3 +851,26 @@ ul.list.catogories p {
 .pt30 {
   padding-top: 30px;
 }
+.custom-class{
+  .popup-head{
+    display: none;
+  }
+}
+.folder{
+  font-weight: bold;
+  color: #ff4f4f;
+  font-size: 16px;
+}
+.padselect{
+  padding: 5px 0px 5px 14px;
+}
+.oroption{
+  font-weight: bold;
+  margin: 15px 0 10px;
+}
+.close{
+  position: absolute;
+  top:5px;
+  right:10px;
+  cursor: pointer;
+}

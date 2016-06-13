@@ -124,7 +124,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
         $timeout(function() {
             xyz.close();
-        }, 5000);
+        }, 3000);
     }
 
     dataNextPre.messageBoxNoTime = function(msg) {
@@ -150,10 +150,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         });
     }
 
-    var myPopup = "";
+    $scope.myPopup = "";
     $scope.nowAddToFav = function(obj) {
         console.log(obj);
-        myPopup.close();
+        $scope.myPopup.close();
         globalFunction.showLoading();
         MyServices.addToFav(obj, function(data) {
             $ionicLoading.hide();
@@ -195,7 +195,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     })
                     $scope.favObj = {};
                     $scope.favObj.artwork = art.artwork._id;
-                    myPopup = $ionicPopup.show({
+                    $scope.myPopup = $ionicPopup.show({
                         cssClass: 'custom-class',
                         templateUrl: 'templates/modal-choose.html',
                         scope: $scope,
