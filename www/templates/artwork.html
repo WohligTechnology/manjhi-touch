@@ -9,8 +9,8 @@
 			</a>
 		</div>
 	</div>
-	<ion-content class="has-tabs made">
-		<div class="row" collection-repeat="detail in totalArtworks">
+	<ion-content class="has-tabs made" overflow-scroll="true" delegate-handle="handler">
+		<div class="row" ng-repeat="detail in totalArtworks">
 			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="totalartconts in detail">
 				<div class="prd-cont" ng-click="goToDetailPage(totalartconts.artwork);">
 					<a href="">

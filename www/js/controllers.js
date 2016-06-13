@@ -1533,9 +1533,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.lthactive = '';
         }
         MyServices.artworktype(filterdata, function(data, status) {
-            // console.log(data.data);
             lastpage = parseInt(data.totalpages);
-            // $scope.totalartcont = _.union($scope.totalartcont, data.data);
             _.each(data.data, function(n) {
                 n.artwork.pageno = data.page;
                 $scope.totalartcont.push(n);
@@ -1545,15 +1543,15 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.callinfinite = false;
             if ($.jStorage.get("artworkScroll")) {
                 if (data.page == $.jStorage.get("artworkScroll").pageno) {
-                    window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                    $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artworkScroll").scroll, true);
+                    // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                } else {
+                    var variablepage = data.page;
+                    $scope.pagedata.pagenumber = ++variablepage;
+                    if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
+                        $scope.reload();
+                    }
                 }
-                // else {
-                //     var variablepage = data.page;
-                //     $scope.pagedata.pagenumber = ++variablepage;
-                //     if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
-                //         $scope.reload();
-                //     }
-                // }
             }
             $ionicLoading.hide();
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1742,12 +1740,11 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.goToDetailPage = function(artwork) {
-        // var xy = $ionicScrollDelegate.getScrollPosition();
-        var xy = getScrollXY();
-        // console.log(xy);
+        var xy = $ionicScrollDelegate.$getByHandle('handler').getScrollPosition();
+        // var xy = getScrollXY();
         var obj = {};
         obj.pageno = artwork.pageno;
-        obj.scroll = xy[1];
+        obj.scroll = xy.top;
         $.jStorage.set("artworkScroll", obj);
         if (artwork.type == "Sculptures") {
             $state.go('sculpture', {
