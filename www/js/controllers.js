@@ -1556,6 +1556,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                         $scope.reload();
                     }
                 }
+            } else {
+                $ionicScrollDelegate.scrollTo(0, 0, true);
             }
             $ionicLoading.hide();
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1621,6 +1623,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.closeCategory();
         $scope.checkForEmpty();
         $scope.reload();
+    }
+
+    $scope.clearjStorage = function() {
+        $.jStorage.set("artworkScroll", null);
     }
 
     //    $scope.loadMore = function () {
@@ -1810,35 +1816,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     };
 })
 
-.controller('ArtistCtrl', function($scope, $stateParams, $ionicModal, MyServices, $state, $ionicLoading) {
+.controller('ArtistCtrl', function($scope, $stateParams, $ionicModal, MyServices, $state, $ionicLoading, $ionicScrollDelegate) {
     $scope.tab = 'grid';
-    // $scope.aristname = [{
-    //     name: 'S Yousuf Ali',
-    //     image: 'img/artist/artist1.jpg'
-    //
-    // }, {
-    //     name: 'Ajay De',
-    //     image: 'img/artist/artist2.jpg',
-    //
-    // }, {
-    //     name: 'Asit Poddar',
-    //     image: 'img/artist/artist3.jpg',
-    //
-    // }, {
-    //     name: 'BR Bodade',
-    //     image: 'img/artist/artist4.jpg',
-    //
-    // }, {
-    //     name: 'Aradhna Tandon',
-    //     image: 'img/artist/artist3.jpg',
-    //
-    // }, {
-    //     name: 'Devki Modi',
-    //     image: 'img/artist/artist4.jpg',
-    //
-    // }];
-    //
-    // $scope.aristname = _.chunk($scope.aristname, 2);
 
     $scope.showCategory = function() {
         $scope.modal.show();
@@ -1850,15 +1829,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     });
 
     // Triggered in the login modal to close it
-    $scope.closeCategory = function(type) {
-        $scope.modal.hide();
-        if (type) {
-            $scope.pagedata.pagenumber = 1;
-            $scope.pagedata.type = type;
-            $scope.pagedata.searchname = '';
-            $scope.artistimage = [];
-            $scope.reload();
-        }
+    $scope.closeCategory = function() {
+        if ($scope.modal)
+            $scope.modal.hide();
     };
 
     $scope.pagedata = {};
@@ -1902,17 +1875,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.getHeight = function(artist) {
-        console.log("getHeight");
-        var xy = getScrollXY();
-        console.log(xy);
-        $.jStorage.set("artistScroll", xy[1]);
+        console.log(artist);
+        var xy = $ionicScrollDelegate.$getByHandle('ahandler').getScrollPosition();
+        var obj = {};
+        obj.pageno = artist.pageno;
+        obj.scroll = xy.top;
+        $.jStorage.set("artistScroll", obj);
         $state.go('app.artist-detail', {
             "artistid": artist._id
         });
     }
 
     $scope.reload = function() {
-        globalFunction.showLoading();
+        // globalFunction.showLoading();
         console.log("reload");
 
         if ($scope.pagedata.type == "All") {
@@ -1923,14 +1898,24 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $ionicLoading.hide();
             lastpage = data.totalpages;
             _.each(data.data, function(n) {
+                n.pageno = $scope.pagedata.pagenumber;
                 $scope.artistimage.push(n);
             })
             $scope.artistimage = _.uniq($scope.artistimage, '_id');
             $scope.artistArr = _.chunk($scope.artistimage, 2);
             if ($.jStorage.get("artistScroll")) {
-                console.log("in if");
-                window.scrollTo(0, $.jStorage.get("artistScroll"));
-                // window.pageYOffset = $.jStorage.get("artistScroll");
+                if ($scope.pagedata.pagenumber == $.jStorage.get("artistScroll").pageno) {
+                    $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artistScroll").scroll, true);
+                    // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                } else {
+                    var variablepage = $scope.pagedata.pagenumber;
+                    $scope.pagedata.pagenumber = ++variablepage;
+                    if ($scope.pagedata.pagenumber <= $.jStorage.get("artistScroll").pageno) {
+                        $scope.reload();
+                    }
+                }
+            } else {
+                $ionicScrollDelegate.scrollTo(0, 0, true);
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
             $scope.infiniteLoading = true;
@@ -1967,7 +1952,12 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $scope.pagedata.type = type;
         $scope.pagedata.searchname = '';
         $scope.artistimage = [];
+        $scope.closeCategory();
         $scope.reload();
+    }
+
+    $scope.clearjStorage = function() {
+        $.jStorage.set("artistScroll", null);
     }
 
     // $(window).scroll(function() {

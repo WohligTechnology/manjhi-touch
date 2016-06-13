@@ -47,13 +47,13 @@
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">
-			<a class="tab-item" ng-click="makeactive('All');">
+			<a class="tab-item" ng-click="makeactive('All');clearjStorage();">
 	 		All
 	  </a>
-			<a class="tab-item" ng-click="makeactive('Paintings');">
+			<a class="tab-item" ng-click="makeactive('Paintings');clearjStorage();">
 	    Paintings
 	  </a>
-			<a class="tab-item" ng-click="makeactive('Sculptures');">
+			<a class="tab-item" ng-click="makeactive('Sculptures');clearjStorage();">
 	    Sculptures
 	  </a>
 			<a class="tab-item" ng-click="showCategory();">

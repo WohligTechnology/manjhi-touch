@@ -1,6 +1,6 @@
 <ion-view classs="bar-stable" title="Artist">
-	<ion-content>
-		<div class="row animate-if" collection-repeat="artist in artistArr">
+	<ion-content overflow-scroll="true" delegate-handle="ahandler">
+		<div class="row animate-if" ng-repeat="artist in artistArr">
 			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="artistimages in artist">
 				<a href="" ng-click="getHeight(artistimages);">
 					<div class="prd-holder">
@@ -20,9 +20,9 @@
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
 		<div class="tabs">
-			<a class="tab-item" ng-click="makeactive('All');">All</a>
-			<a class="tab-item" ng-click="makeactive('Paintings');">Paintings</a>
-			<a class="tab-item" ng-click="makeactive('Sculptures');">Sculptures</a>
+			<a class="tab-item" ng-click="makeactive('All');clearjStorage();">All</a>
+			<a class="tab-item" ng-click="makeactive('Paintings');clearjStorage();">Paintings</a>
+			<a class="tab-item" ng-click="makeactive('Sculptures');clearjStorage();">Sculptures</a>
 			<a class="tab-item" ng-click="showCategory();">Others</a>
 		</div>
 	</ion-footer-bar>
