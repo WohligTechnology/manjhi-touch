@@ -24,7 +24,7 @@
 	<ion-content class="has-tabs-top1 padding">
 		<div class="home-holder">
 			<ion-slide-box on-slide-changed="slideHasChanged($index)">
-				<ion-slide ng-repeat="slide in slides.image">
+				<ion-slide ng-repeat="slide in slides.image" ng-click="goToArtwork(slide);">
 					<img ng-src="{{slide.image | uploadpath}}" class="full-image">
 				</ion-slide>
 				<!-- <ion-slide>

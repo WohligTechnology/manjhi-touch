@@ -413,6 +413,18 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         $ionicSlideBoxDelegate.update();
     });
 
+    $scope.goToArtwork = function(image) {
+        console.log(image);
+        if (image.link) {
+            if (image.link.indexOf('artwork/detail') || image.link.indexOf('sculpture/')) {
+                var splited = image.link.split('/');
+                $state.go('app.art-details', {
+                    artid: splited[splited.length - 1]
+                });
+            }
+        }
+    }
+
     $scope.registeruser = function() {
         if ($scope.register.password === $scope.register.confirmpassword) {
             $scope.passwordNotMatch = false;
