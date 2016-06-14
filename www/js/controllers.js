@@ -1670,7 +1670,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.filterresults = function(search) {
         globalFunction.showLoading();
-        //      console.log(search);
+        $.jStorage.set("artworkScroll", null);
         $scope.pagedata.search = _.capitalize(search);
         $scope.totalartcont = [];
         $scope.pagedata.pagenumber = 1;
@@ -1690,7 +1690,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.infiniteLoading = false;
         }
     }
-
 
     // set available range
     $scope.minPrice = 0;
