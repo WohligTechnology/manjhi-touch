@@ -1670,7 +1670,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.filterresults = function(search) {
         globalFunction.showLoading();
-        $.jStorage.set("artworkScroll", null);
+        $.jStorage.set("artworkScroll", {
+            pageno: 1,
+            scroll: 0
+        });
         $scope.pagedata.search = _.capitalize(search);
         $scope.totalartcont = [];
         $scope.pagedata.pagenumber = 1;
@@ -2928,5 +2931,38 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             console.log(data);
         });
     }
+
+    var soptions = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+    };
+
+    var profileInterval = "";
+    $scope.socialLogin = function(val) {
+        $cordovaInAppBrowser.open(adminurl + "user/" + val, '_blank', soptions).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+        profileInterval = setInterval(function() {
+            MyServices.getuserprofile(function(data) {
+                if (data.id) {
+                    clearInterval(profileInterval);
+                    if ($cordovaInAppBrowser)
+                        $cordovaInAppBrowser.close();
+                    $scope.showInvalidLogin = false;
+                    $.jStorage.set("isLoggedIn", true);
+                    window.location.reload();
+                }
+            });
+        }, 1000);
+    }
+
+    $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event) {
+        console.log(e);
+        console.log(event);
+        clearInterval(profileInterval);
+    });
 
 });
