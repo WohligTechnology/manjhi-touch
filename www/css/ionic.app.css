@@ -13093,7 +13093,7 @@ i.icon.ion-heart {
 .btn-grp .button-positive {
   margin-bottom: 0; }
 
-.btn-grp button.button.button-block.button-fb {
+.btn-grp .button.button-block.button-fb {
   border-color: #3c5a98;
   background-color: #3c5a98;
   color: #fff;
@@ -13711,7 +13711,7 @@ ul.list.catogories p {
   font-size: 16px; }
 
 .padselect {
-  padding: 5px 0px 5px 14px; }
+  padding: 5px 0 5px 14px; }
 
 .oroption {
   font-weight: bold;
@@ -13723,8 +13723,12 @@ ul.list.catogories p {
   right: 10px;
   cursor: pointer; }
 
-.ui-select-bootstrap > .ui-select-choices, .ui-select-bootstrap > .ui-select-no-choice {
+.ui-select-bootstrap > .ui-select-choices,
+.ui-select-bootstrap > .ui-select-no-choice {
   max-height: 95px !important; }
 
 input.form-control.ui-select-search {
   width: 100% !important; }
+
+.ml10 {
+  margin-left: 10px; }

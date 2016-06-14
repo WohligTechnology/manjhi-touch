@@ -2520,7 +2520,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal, $cordovaInAppBrowser, $rootScope, $state) {
+.controller('CheckoutCtrl', function($scope, $stateParams, $location, $ionicLoading, MyServices, $timeout, $ionicModal, $cordovaInAppBrowser, $rootScope, $state, $filter) {
 
     $scope.checkout = [];
     $scope.checkout.isshipping = true;

@@ -70,7 +70,7 @@
 					<label class="checkbox">
 						<input ng-model="checked" ng-change="changeAddress(checked)" type="checkbox">
 					</label>
-					Same As Billing Address
+						<b>Same As Billing Address</b>
 				</div>
 				<div class="animate-if">
 					<div class="item item-divider">Shipping Address</div>
@@ -132,7 +132,7 @@
 				</div>
 			</div>
 			<div class="list thumbnail" ng-if="showCartEnable">
-				<h4>Order Review</h4>
+				<h4 class="ml10">Order Review</h4>
 				<!-- ngRepeat: product in products -->
 				<div class="list" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'" style="margin-bottom:0">
 					<a class="item item-thumbnail-left">
