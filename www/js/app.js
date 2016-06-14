@@ -304,7 +304,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
         views: {
             'menuContent': {
                 templateUrl: 'templates/infra-services.html',
-                controller: 'EventdetailCtrl'
+                controller: 'InfraServicesCtrl'
 
             }
         }
@@ -577,7 +577,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
             }
         });
     };
-});
+})
 
 var formvalidation = function(allvalidation) {
     console.log(allvalidation);

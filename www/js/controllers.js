@@ -325,6 +325,14 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         });
     }
 
+    $scope.openBlog = function() {
+        $cordovaInAppBrowser.open('http://blog.auraart.in/', '_blank', options).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
+
 })
 
 .controller('AccessCtrl', function($scope, $ionicModal, $timeout) {})
@@ -385,7 +393,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
 })
 
-.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state) {
+.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state, $cordovaInAppBrowser) {
     abc = $scope;
     $.jStorage.set("artistScroll", null);
     $.jStorage.set("artworkScroll", null);
@@ -407,6 +415,18 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.showInvalidLogin = false;
 
     dataNextPre.getCartItems();
+
+    $scope.openBlog = function() {
+        $cordovaInAppBrowser.open('http://blog.auraart.in/', '_blank', {
+            location: 'yes',
+            clearcache: 'yes',
+            toolbar: 'no'
+        }).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
 
     MyServices.getSlider(function(data) {
         $scope.slides = data;
