@@ -7,7 +7,7 @@
 					<p><span>Event Venue</span> : {{eventDetail.venue}}</p>
 					<p><span>Period of show </span> : {{eventDetail.startdate|date:'EEEE, MMMM d, y'}} - {{eventDetail.enddate|date:'EEEE, MMMM d, y'}}</p>
 					<p ng-if="eventDetail.starttime!='undefined:undefined undefined' && eventDetail.endtime!='undefined:undefined undefined'">
-							<span>Event Time</span> : {{eventDetail.starttime}} to {{eventDetail.endtime}}</p>
+						<span>Event Time</span> : {{eventDetail.starttime}} to {{eventDetail.endtime}}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -21,12 +21,12 @@
 					<p ng-bind-html="eventDetail.desc5 | rawHtml" ng-if="eventDetail.desc5"></p>
 				</div>
 			</div>
-			<!-- <div class="eventgallery">
+			<div class="eventgallery" ng-if="eventDetail">
 				<div class="event-pic">
-					<ion-gallery ion-gallery-items="items" ion-gallery-row="3"></ion-gallery>
+					<ion-gallery ion-gallery-items="eventDetail.photos" ion-gallery-row="3" ion-zoom-events="true"></ion-gallery>
 				</div>
-			</div> -->
-			<div class="row" ng-repeat="gal in eventDetail.photos" ng-if="eventDetail.photos && eventDetail.photos.length>0">
+			</div>
+			<!-- <div class="row" ng-repeat="gal in eventDetail.photos" ng-if="eventDetail.photos && eventDetail.photos.length>0">
 				<div class="col-33" ng-repeat="gals in gal">
 					<div class="eventgallery" ng-click="showeventimage(gals);">
 						<div class="event-pic" fixit>
@@ -34,6 +34,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</ion-content>

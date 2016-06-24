@@ -1,34 +1,36 @@
 <ion-modal-view>
-  <ion-header-bar class="header-rights" align-title="center">
-    <h1 class="title">
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">
     Send Us Query
     </h1>
-    <div class="buttons">
-      <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeContact()"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <div class="contact-form">
-      <!-- <h4 class="">Send Us Query</h4> -->
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="Name">
-        </label>
-        <label class="item item-input">
-          <input type="text" placeholder="Phone No">
-        </label>
-        <label class="item item-input">
-          <input type="text" placeholder="Email ID*" required>
-        </label>
-        <label class="item item-input">
-          <textarea placeholder="Observations &amp; Queries *" required></textarea>
-        </label>
-        <div class="padding">
-          <button class="button button-block button-positive">
-            Submit
-          </button>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeContact()"></button>
         </div>
-      </div>
-    </div>
-  </ion-content>
+    </ion-header-bar>
+    <ion-content>
+        <div class="contact-form">
+            <!-- <h4 class="">Send Us Query</h4> -->
+            <div class="list">
+                <form ng-submit="submitQuery();" name="reachOut">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="reach.person">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Phone No" ng-model="reach.number">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Email ID*" required ng-model="reach.from">
+                    </label>
+                    <label class="item item-input">
+                        <textarea placeholder="Observations &amp; Queries *" required ng-model="reach.remarks"></textarea>
+                    </label>
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-positive" ng-disabled="reachOut.$invalid">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ion-content>
 </ion-modal-view>

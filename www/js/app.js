@@ -13,8 +13,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
-    $ionicConfigProvider.views.maxCache(0);
+    $ionicConfigProvider.views.maxCache(3);
     $httpProvider.defaults.withCredentials = true;
+
     $stateProvider
         .state('app', {
             url: '/app',
@@ -64,6 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
         url: '/home',
         views: {
             'menuContent': {
+                cache: false,
                 templateUrl: 'templates/home.html',
                 controller: 'HomeCtrl'
             }
@@ -373,6 +375,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
 })
 
 .filter('uploadpath', function() {
+    return function(input) {
+        if (input && input !== "") {
+            if (input.indexOf('.jpg') != -1)
+                return adminurl + "user/resize?width=750&file=" + input;
+            else {
+                return adminurl + "user/resize?file=" + input;
+            }
+        } else {
+            // return "img/noimg.jpg";
+        }
+    };
+})
+
+.filter('uploadpath1200', function() {
     return function(input) {
         if (input && input !== "") {
             if (input.indexOf('.jpg') != -1)

@@ -5,7 +5,7 @@ var dollarPrice = '';
 var globalFunction = {};
 var abc = "";
 
-angular.module('starter.controllers', ['starter.services', 'ui.select'])
+angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gallery'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser, $timeout, $state) {
 
@@ -183,43 +183,43 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     dataNextPre.favorite = function(art) {
         // art.heartClass = "fa fa-heart font-color3";
-        // if ($scope.userProfile.id) {
-        // globalFunction.showLoading();
-        console.log(art.heartClass);
-        switch (art.heartClass) {
-            case "ion-ios-heart-outline":
-                {
-                    MyServices.getMyFolders(function(data) {
-                        if (data.value != false) {
-                            $scope.myFolders = data;
-                        } else {
-                            $scope.myFolders = [];
-                        }
-                    })
-                    $scope.favObj = art;
-                    // $scope.favObj.artwork = art.artwork._id;
-                    $scope.myPopup = $ionicPopup.show({
-                        cssClass: 'custom-class',
-                        templateUrl: 'templates/modal-choose.html',
-                        scope: $scope,
-                    });
-                }
-                break;
-            case "ion-ios-heart":
-                {
-                    console.log('in second if');
-                    $ionicLoading.hide();
-                    MyServices.deleteFromFav($scope.userProfile.id, art.artwork._id, function(data) {
-                        if (!data.value) {
-                            art.heartClass = "ion-ios-heart-outline";
-                            dataNextPre.messageBox("Removed from favourites");
-                        }
-                    })
-                }
-                break;
-            default:
-        }
-        MyServices.getuserprofile(function(data) {
+        if ($scope.userProfile.id) {
+            // globalFunction.showLoading();
+            console.log(art.heartClass);
+            switch (art.heartClass) {
+                case "ion-ios-heart-outline":
+                    {
+                        MyServices.getMyFolders(function(data) {
+                            if (data.value != false) {
+                                $scope.myFolders = data;
+                            } else {
+                                $scope.myFolders = [];
+                            }
+                        })
+                        $scope.favObj = art;
+                        // $scope.favObj.artwork = art.artwork._id;
+                        $scope.myPopup = $ionicPopup.show({
+                            cssClass: 'custom-class',
+                            templateUrl: 'templates/modal-choose.html',
+                            scope: $scope,
+                        });
+                    }
+                    break;
+                case "ion-ios-heart":
+                    {
+                        console.log('in second if');
+                        $ionicLoading.hide();
+                        MyServices.deleteFromFav($scope.userProfile.id, art.artwork._id, function(data) {
+                            if (!data.value) {
+                                art.heartClass = "ion-ios-heart-outline";
+                                dataNextPre.messageBox("Removed from favourites");
+                            }
+                        })
+                    }
+                    break;
+                default:
+            }
+            MyServices.getuserprofile(function(data) {
                 if (data.id) {
                     userProfile = data;
                     MyServices.getMyFavourites(data.id, function(favorite) {
@@ -227,12 +227,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                     })
                 }
             })
-            // } else {
-            //     ngDialog.open({
-            //         scope: $scope,
-            //         template: 'views/content/favLogin.html'
-            //     });
-            // }
+        } else {
+            dataNextPre.messageBox("Please login to add to favourites");
+        }
     }
     $scope.inCart = {};
     $scope.inCart.total = 0;
@@ -570,32 +567,32 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.changetype = function(chang) {
         if (chang == 1) {
             $scope.filterby.type = "Paintings";
-            $scope.getallartist();
-            $scope.getmedium();
-            $scope.getClr();
-            $scope.getElm();
-            $scope.getStl();
+            // $scope.getallartist();
+            // $scope.getmedium();
+            // $scope.getClr();
+            // $scope.getElm();
+            // $scope.getStl();
         } else if (chang == 2) {
             $scope.filterby.type = "Sculptures";
-            $scope.getallartist();
-            $scope.getmedium();
-            $scope.getClr();
-            $scope.getElm();
-            $scope.getStl();
+            // $scope.getallartist();
+            // $scope.getmedium();
+            // $scope.getClr();
+            // $scope.getElm();
+            // $scope.getStl();
         } else if (chang == 3) {
             $scope.filterby.type = "Photographs";
-            $scope.getallartist();
-            $scope.getmedium();
-            $scope.getClr();
-            $scope.getElm();
-            $scope.getStl();
+            // $scope.getallartist();
+            // $scope.getmedium();
+            // $scope.getClr();
+            // $scope.getElm();
+            // $scope.getStl();
         } else if (chang == 4) {
             $scope.filterby.type = "Prints";
-            $scope.getallartist();
-            $scope.getmedium();
-            $scope.getClr();
-            $scope.getElm();
-            $scope.getStl();
+            // $scope.getallartist();
+            // $scope.getmedium();
+            // $scope.getClr();
+            // $scope.getElm();
+            // $scope.getStl();
         }
     };
     $scope.setSearch = function(select) {
@@ -617,7 +614,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     $scope.allmedium = [];
     $scope.getmedium = function() {
         if ($scope.filterby.type === "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.getallmedium($scope.change, function(data, status) {
                 if (data && data.value !== false) {
@@ -627,7 +623,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             MyServices.getallmedium($scope.change, function(data, status) {
@@ -642,7 +637,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.getClr = function() {
         if ($scope.filterby.type == "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value != false) {
@@ -656,7 +650,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -674,7 +667,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     };
     $scope.getStl = function() {
         if ($scope.filterby.type === "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value !== false) {
@@ -688,7 +680,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -706,7 +697,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     };
     $scope.getElm = function() {
         if ($scope.filterby.type === "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value !== false) {
@@ -720,7 +710,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -736,9 +725,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     };
-    $scope.getClr();
-    $scope.getElm();
-    $scope.getStl();
+
     var countcall = 0;
     $scope.getallartist = function() {
         if ($scope.filterby.type === "") {
@@ -777,96 +764,82 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         }
     };
     $scope.getDropdown = function(search) {
-        if (search.length >= 1) {
+        if (search.length >= 3) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            $timeout(function() {
-                MyServices.getAllArtistDrop($scope.change, function(data) {
-                    console.log(data);
-                    if (data && data.value != false) {
-                        $scope.allartist = data;
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getallartist();
+            MyServices.getAllArtistDrop($scope.change, function(data) {
+                console.log(data);
+                if (data && data.value != false) {
+                    $scope.allartist = data;
+                    $scope.allartist.unshift({
+                        "_id": "0",
+                        name: ""
+                    });
+                } else {
+                    $scope.allartist = [];
+                }
+            });
         }
     }
     $scope.getDropdownMedium = function(search) {
-        if (search.length >= 1) {
+        if (search.length >= 3) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            $timeout(function() {
-                MyServices.getallmedium($scope.change, function(data) {
-                    if (data && data.value != false) {
-                        $scope.allmedium = data;
-                        $scope.allmedium.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allmedium = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getmedium();
+            MyServices.getallmedium($scope.change, function(data) {
+                if (data && data.value != false) {
+                    $scope.allmedium = data;
+                    $scope.allmedium.unshift({
+                        "_id": "0",
+                        name: ""
+                    });
+                } else {
+                    $scope.allmedium = [];
+                }
+            });
         }
     }
 
     //search by keyword
 
     $scope.getColorDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                    if (data && data.value != false) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
                         $scope.allColor = data;
-                    } else {
-                        $scope.allColor = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getClr();
+                    }, 400);
+                } else {
+                    $scope.allColor = [];
+                }
+            });
         }
     }
     $scope.getStyleDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                    if (data && data.value != false) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
                         $scope.allStyle = data;
-                    } else {
-                        $scope.allStyle = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getStl();
+                    }, 400);
+                } else {
+                    $scope.allStyle = [];
+                }
+            });
         }
     }
     $scope.getElementDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                    if (data && data.value != false) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
                         $scope.allElement = data;
-                    } else {
-                        $scope.allElement = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getElm();
+                    }, 400);
+                } else {
+                    $scope.allElement = [];
+                }
+            });
         }
     }
 })
@@ -1018,6 +991,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
 
     $scope.aristImages = [];
     $scope.allartworks = [];
+    $scope.reach = {};
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
@@ -1030,10 +1004,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.loadArtWork($stateParams.artid);
         }
     })
-
-    $scope.openReachout = function() {
-        globalFunction.reachOut();
-    }
 
     $scope.loadArtWork = function(id) {
         globalFunction.showLoading();
@@ -1061,6 +1031,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.artistDetailImg = data[0];
             $scope.artistDetailImg.heartClass = $filter('showheart')($scope.artistDetailImg.artwork._id);
             console.log($scope.artistDetailImg);
+            $scope.reach.artist = $scope.artistDetailImg.name;
+            $scope.reach.srno = $scope.artistDetailImg.artwork.srno;
             if ($scope.artistDetailImg.artwork.srno == 1) {
                 $scope.prevButton = false;
             }
@@ -1088,34 +1060,17 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
         dataNextPre.favorite(art);
     }
 
-    $scope.artdetail = [{
-        image: 'img/artist/artist1.jpg',
-    }, {
-        image: 'img/artist/artist2.jpg',
-    }, {
-        image: 'img/artist/artist3.jpg',
-    }]
+    $scope.submitQuery = function() {
+        MyServices.reachOutArtist($scope.reach, function(data) {
+            $scope.closeContact();
+            dataNextPre.messageBox("Your query has been submitted");
+            $scope.reach.from = "";
+            $scope.reach.number = "";
+            $scope.reach.person = "";
+            $scope.reach.remarks = "";
+        })
+    }
 
-    $scope.artistsimilar = [{
-        image: 'img/artist/artist1.jpg',
-    }, {
-        image: 'img/artist/artist2.jpg',
-    }, {
-        image: 'img/artist/artist3.jpg',
-    }, {
-        image: 'img/artist/artist4.jpg',
-    }]
-
-    $scope.artdetailcont = [{
-        id: '1',
-        name: 'Ajay R Dhandre',
-        title: 'Untitled',
-        medium: 'Water Colour & Ink on Paper',
-        size: '30 X 20 inches',
-        year: '2005',
-        price: 'Rs 30,000 / $ 60.00'
-
-    }]
     $ionicModal.fromTemplateUrl('templates/modal-image.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -1268,7 +1223,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -1286,7 +1240,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
     $scope.getStl = function() {
         if ($scope.pagedata.type == "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value != false) {
@@ -1300,7 +1253,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -1318,7 +1270,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
     $scope.getElm = function() {
         if ($scope.pagedata.type == "") {
-            //          console.log("in if");
             $scope.change = "";
             MyServices.tagSearchType($scope.change, "", function(data, status) {
                 if (data && data.value != false) {
@@ -1332,7 +1283,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 }
             });
         } else {
-            //          console.log("in else");
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             MyServices.tagSearchType($scope.change, "", function(data, status) {
@@ -1348,55 +1298,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    $scope.getClr();
-    $scope.getElm();
-    $scope.getStl();
 
-    $scope.getColorDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                    if (data && data.value != false) {
-                        $scope.allColor = data;
-                    } else {
-                        $scope.allColor = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getClr();
-        }
-    }
-    $scope.getStyleDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                    if (data && data.value != false) {
-                        $scope.allStyle = data;
-                    } else {
-                        $scope.allStyle = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getStl();
-        }
-    }
-    $scope.getElementDropdown = function(search) {
-        if (search.length >= 1) {
-            $timeout(function() {
-                MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                    if (data && data.value != false) {
-                        $scope.allElement = data;
-                    } else {
-                        $scope.allElement = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getElm();
-        }
-    }
     var countcall = 0;
     $scope.getallartist = function() {
         if ($scope.pagedata.type == "") {
@@ -1458,50 +1360,78 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             });
         }
     }
-    $scope.getallartist();
+
     $scope.getDropdown = function(search) {
-        if (search.length >= 1) {
+        if (search.length >= 3) {
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             $scope.change.search = search;
-            $timeout(function() {
-                MyServices.getAllArtistDrop($scope.change, function(data) {
-                    if (data && data.value != false) {
+            MyServices.getAllArtistDrop($scope.change, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
                         $scope.allartist = data;
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getallartist();
+                    }, 400);
+                } else {
+                    $scope.allartist = [];
+                }
+            });
         }
     }
 
     $scope.getDropdownMedium = function(search) {
-        if (search.length >= 1) {
+        if (search.length >= 3) {
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             $scope.change.search = search;
-            $timeout(function() {
-                MyServices.getallmedium($scope.change, function(data) {
-                    if (data && data.value != false) {
+            MyServices.getallmedium($scope.change, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
                         $scope.allmedium = data;
-                        $scope.allmedium.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allmedium = [];
-                    }
-                });
-            }, 1000);
-        } else {
-            $scope.getmedium();
+                    }, 400);
+                } else {
+                    $scope.allmedium = [];
+                }
+            });
+        }
+    }
+
+    $scope.getColorDropdown = function(search) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
+                        $scope.allColor = data;
+                    }, 400);
+                } else {
+                    $scope.allColor = [];
+                }
+            });
+        }
+    }
+    $scope.getStyleDropdown = function(search) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
+                        $scope.allStyle = data;
+                    }, 400);
+                } else {
+                    $scope.allStyle = [];
+                }
+            });
+        }
+    }
+    $scope.getElementDropdown = function(search) {
+        if (search.length >= 3) {
+            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
+                if (data && data.value != false) {
+                    $timeout(function() {
+                        $scope.allElement = data;
+                    }, 400);
+                } else {
+                    $scope.allElement = [];
+                }
+            });
         }
     }
 
@@ -1658,7 +1588,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.clearjStorage = function() {
-        $.jStorage.set("artworkScroll", null);
+        $.jStorage.set("artworkScroll", {
+            pageno: 1,
+            scroll: 0
+        });
     }
 
     //    $scope.loadMore = function () {
@@ -1989,7 +1922,10 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     }
 
     $scope.clearjStorage = function() {
-        $.jStorage.set("artistScroll", null);
+        $.jStorage.set("artistScroll", {
+            pageno: 1,
+            scroll: 0
+        });
     }
 
     // $(window).scroll(function() {
@@ -2255,7 +2191,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
     });
 })
 
-.controller('EventdetailCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading) {
+.controller('EventdetailCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading, $filter) {
 
     globalFunction.showLoading();
 
@@ -2267,7 +2203,14 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.eventDetail.videos = _.chunk($scope.eventDetail.videos, 3);
         }
         if ($scope.eventDetail.photos) {
-            $scope.eventDetail.photos = _.chunk($scope.eventDetail.photos, 3);
+            var photoArr = [];
+            _.each($scope.eventDetail.photos, function(n) {
+                var obj = {};
+                obj.src = $filter('uploadpath')(n);
+                photoArr.push(obj);
+            })
+            $scope.eventDetail.photos = photoArr;
+            // $scope.eventDetail.photos = _.chunk($scope.eventDetail.photos, 3);
         }
         $ionicLoading.hide();
     })
@@ -2754,7 +2697,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             }
             var formula = (height * width * breadth) / 2700;
             formula = formula * 40;
-            artwork.shippingCost = formula;
+            artwork.shippingCost = Math.round(formula);
         }
         console.log($scope.cartItems);
         $scope.shippingCost = 0;
@@ -2763,7 +2706,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
                 $scope.shippingCost = $scope.shippingCost + n.artwork.shippingCost;
             }
         });
-
+        $scope.shippingCost = Math.round($scope.shippingCost);
     }
 
     var boptions = {
@@ -2784,7 +2727,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select'])
             $scope.user.cart = $scope.cartItems;
             $scope.user.subTotal = $scope.totalCartPrice;
             $scope.user.vat = $scope.vat;
-            $scope.user.grantTotal = $scope.totalCartPrice + $scope.vat;
+            $scope.user.grantTotal = $scope.totalCartPrice + $scope.vat + $scope.shippingCost;
             $scope.user.discount = 0;
             delete $scope.user.id;
             MyServices.checkout($scope.user, function(data) {
