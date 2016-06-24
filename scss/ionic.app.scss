@@ -24,11 +24,9 @@ $headings-font-weight: 500 !default;
 .padbottom {
   padding-bottom: 0 !important;
 }
- 
 .marbotzero {
   margin-bottom: 0;
 }
-
 .marbot {
   margin-bottom: 12px;
 }
@@ -81,7 +79,7 @@ $headings-font-weight: 500 !default;
 }
 .text-heading {
   position: absolute;
-  top: 0px;
+  top: 0;
   color: white;
   text-transform: uppercase;
   width: auto;
@@ -265,6 +263,17 @@ button.right-btn.cart-btn {
     border-bottom: 0;
     text-transform: uppercase;
     font-size: 14px;
+  }
+  .item-radio .radio-icon {
+    visibility: visible;
+    &:before {
+      content: "\f372";
+    }
+  }
+  .item-radio input:checked + .radio-content .radio-icon {
+    &:before {
+      content: "\f373";
+    }
   }
 }
 .box-grey.border-colr {
