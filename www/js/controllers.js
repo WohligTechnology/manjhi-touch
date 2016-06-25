@@ -8,7 +8,6 @@ var abc = "";
 angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gallery'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser, $timeout, $state) {
-
     $scope.adminurl = adminurl;
 
     var scrolled = 0;
@@ -764,7 +763,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     };
     $scope.getDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
@@ -783,7 +782,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
     $scope.getDropdownMedium = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
@@ -804,7 +803,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     //search by keyword
 
     $scope.getColorDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.filterby.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -817,7 +816,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
     $scope.getStyleDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.filterby.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -830,7 +829,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
     $scope.getElementDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.filterby.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -1362,7 +1361,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     $scope.getDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             $scope.change.search = search;
@@ -1379,7 +1378,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     $scope.getDropdownMedium = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.pagedata.type;
             $scope.change.search = search;
@@ -1396,7 +1395,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     $scope.getColorDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -1409,7 +1408,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
     $scope.getStyleDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -1422,7 +1421,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
     $scope.getElementDropdown = function(search) {
-        if (search.length >= 3) {
+        if (search.length >= 2) {
             MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
                 if (data && data.value != false) {
                     $timeout(function() {
@@ -2038,7 +2037,18 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('ContactCtrl', function($scope, $stateParams) {})
+.controller('ContactCtrl', function($scope, $stateParams, $ionicLoading, MyServices) {
+    $scope.reach = {};
+
+    $scope.submitQuery = function() {
+        globalFunction.showLoading();
+        MyServices.reachOutArtist($scope.reach, function(data) {
+            $ionicLoading.hide();
+            dataNextPre.messageBox("Your query has been submitted");
+        })
+    }
+
+})
 
 .controller('AboutCtrl', function($scope, $stateParams, MyServices) {
     $scope.showteam = "true";

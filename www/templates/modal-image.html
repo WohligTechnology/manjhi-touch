@@ -1,19 +1,19 @@
 <ion-modal-view>
-  <ion-header-bar class="header-rights" align-title="center">
-    <h1 class="title">Artwork Detail</h1>
-    <div class="buttons">
-      <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeModal()"></button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">Artwork Detail</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="zooming">
 
-    <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false">
-      <img ng-src="{{bigImage|uploadpath1200}}" class="full-image">
-    </ion-scroll>
-    <!-- <div class="img-holder-prd">
+        <ion-scroll zooming="true" direction="xy" delegate-handle="zoom-pane" class="zoom-pane" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false">
+            <img ng-src="{{bigImage|uploadpath1200}}" class="full-image">
+        </ion-scroll>
+        <!-- <div class="img-holder-prd">
       <div class="box text-center">
         <img ng-src="{{bigImage|uploadpath1200}}" class="full-image">
       </div>
     </div> -->
-  </ion-content>
+    </ion-content>
 </ion-modal-view>

@@ -44,25 +44,27 @@
 			</div>
 		</div>
 		<div class="contact-form">
-			<h4 class="">Send Us Query</h4>
+			<!-- <h4 class="">Send Us Query</h4> -->
 			<div class="list">
-				<label class="item item-input">
-					<input type="text" placeholder="Name">
-				</label>
-				<label class="item item-input">
-					<input type="text" placeholder="Phone No">
-				</label>
-				<label class="item item-input">
-					<input type="text" placeholder="Email ID*" required>
-				</label>
-				<label class="item item-input">
-					<textarea placeholder="Observations &amp; Queries *" required></textarea>
-				</label>
-				<div class="padding">
-					<button class="button button-block button-positive">
-						Submit
-					</button>
-				</div>
+				<form ng-submit="submitQuery();" name="reachOut">
+					<label class="item item-input">
+						<input type="text" placeholder="Name" ng-model="reach.person">
+					</label>
+					<label class="item item-input">
+						<input type="text" placeholder="Phone No" ng-model="reach.number">
+					</label>
+					<label class="item item-input">
+						<input type="text" placeholder="Email ID*" required ng-model="reach.from">
+					</label>
+					<label class="item item-input">
+						<textarea placeholder="Observations &amp; Queries *" required ng-model="reach.remarks"></textarea>
+					</label>
+					<div class="padding">
+						<button type="submit" class="button button-block button-positive" ng-disabled="reachOut.$invalid">
+							Submit
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</ion-content>

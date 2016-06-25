@@ -26,7 +26,7 @@
 						<div class="read-inner">
 							<div class="item item-input">
 								<ui-select uiselect-autofocus demo="{{onfock}}" ng-model="pagedata.search" on-select="setSearch($select);">
-									<ui-select-match class="text-capitalize" placeholder="Enter or Select Artist">{{pagedata.search}}</ui-select-match>
+									<ui-select-match class="text-capitalize" placeholder="Enter/Select Artist Name">{{pagedata.search}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getDropdown($select.search)" repeat="person in allartist track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
@@ -83,7 +83,7 @@
 						<div class="read-inner">
 							<div class="item item-input">
 								<ui-select ng-model="pagedata.medium" on-select="setMediumSearch($select);">
-									<ui-select-match class="text-capitalize" placeholder="Enter or Select Medium">{{pagedata.medium}}</ui-select-match>
+									<ui-select-match class="text-capitalize" placeholder="Enter/Select Medium">{{pagedata.medium}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
