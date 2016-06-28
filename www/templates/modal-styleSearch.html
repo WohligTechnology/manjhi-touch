@@ -1,0 +1,18 @@
+<ion-modal-view>
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">Search Style</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeSearch4()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="item item-input">
+            <ui-select ng-model="filterby.style" on-select="setStyleSearch($select);">
+                <ui-select-match class="text-capitalize" placeholder="Style (Eg. Abstract, Figurative)">{{filterby.style}}</ui-select-match>
+                <ui-select-choices refresh-delay="0" refresh="getStyleDropdown($select.search)" repeat="person in allStyle track by person._id">
+                    <div ng-bind-html="person.name| addhighlight: $select.search" class="text-capitalize"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -402,6 +402,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     };
 })
 
+.filter('upload500', function() {
+    return function(input) {
+        if (input && input !== "") {
+            if (input.indexOf('.jpg') != -1)
+                return adminurl + "user/resize?width=500&file=" + input;
+            else {
+                return adminurl + "user/resize?file=" + input;
+            }
+        } else {
+            // return "img/noimg.jpg";
+        }
+    };
+})
+
 .filter('uploadsmallimage', function() {
     return function(input) {
         if (input && input !== "") {

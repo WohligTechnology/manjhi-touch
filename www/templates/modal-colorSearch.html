@@ -1,0 +1,18 @@
+<ion-modal-view>
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">Search Color</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeSearch3()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="item item-input">
+            <ui-select ng-model="filterby.color" on-select="setColorSearch($select);">
+                <ui-select-match class="text-capitalize" placeholder="Color (Eg. Red, Blue, White, Black)">{{filterby.color}}</ui-select-match>
+                <ui-select-choices refresh-delay="0" refresh="getColorDropdown($select.search)" repeat="person in allColor track by person._id">
+                    <div ng-bind-html="person.name| addhighlight: $select.search" class="text-capitalize"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </ion-content>
+</ion-modal-view>

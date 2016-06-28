@@ -31,7 +31,7 @@
 				<div class="row nopad">
 					<div class="col-20">
 						<label class="item item-input">
-							<input class="form-control tel-country" ng-model="user.billing.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
+							<input class="form-control tel-country" ng-model="user.billing.countrycode" placeholder="+91" only-digits maxlength="8" type="tel">
 						</label>
 					</div>
 					<div class="col-80">
@@ -95,7 +95,7 @@
 					<div class="row nopad">
 						<div class="col-20">
 							<label class="item item-input">
-								<input class="form-control tel-country" ng-model="user.shipping.countrycode" ng-change="onFieldChange(checked)" placeholder="eg. +91*" required only-digits maxlength="8" type="tel">
+								<input class="form-control tel-country" ng-model="user.shipping.countrycode" placeholder="+91" only-digits maxlength="8" type="tel">
 							</label>
 						</div>
 						<div class="col-80">
@@ -155,7 +155,7 @@
 						<h3>Rs {{artwork.artwork.gprice|inlakhs}} / $ {{artwork.artwork.gprice|indollars}}</h3>
 						<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
 					</a>
-					<div class="row nopad">
+					<div class="row nopad" ng-if="artwork.artwork.type!='Sculptures'">
 						<div class="col col-50 nopad">
 							<ion-radio ng-change="calculateShipping(artwork.artwork)" ng-model="artwork.artwork.form" ng-value="'rolled'">Rolled</ion-radio>
 						</div>

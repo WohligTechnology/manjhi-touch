@@ -13739,7 +13739,7 @@ ul.list.catogories p {
 
 .ui-select-bootstrap > .ui-select-choices,
 .ui-select-bootstrap > .ui-select-no-choice {
-  max-height: 95px !important; }
+  max-height: 450px !important; }
 
 input.form-control.ui-select-search {
   width: 100% !important; }
@@ -13763,3 +13763,13 @@ input.form-control.ui-select-search {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+
+.item-thumbnail-left .item-content .item-image,
+.item-thumbnail-left .item-content > img:first-child,
+.item-thumbnail-left .item-image,
+.item-thumbnail-left > img:first-child {
+  width: auto;
+  height: auto; }
+
+.text-capitalize {
+  text-transform: capitalize !important; }

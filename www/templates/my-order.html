@@ -6,7 +6,7 @@
 				<p> Order Id:<span> {{order.orderid}}</span></p>
 			</div>
 			<a class="item item-thumbnail-left" ng-repeat="orderItems in order.cart">
-				<img ng-src="{{orderItems.artwork.image[0] | uploadsmallimage}}">
+				<img ng-src="{{orderItems.artwork.image[0] | uploadthumbnail}}">
 				<h3>{{orderItems.artwork.imageno}}</h3>
 				<h3 class="">{{orderItems.name}}</h3>
 				<h3 class="">{{orderItems.artwork.name}}</h3>

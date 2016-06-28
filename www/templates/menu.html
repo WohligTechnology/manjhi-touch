@@ -26,6 +26,7 @@
 		</ion-header-bar>
 		<ion-content>
 			<ion-list class="upper-menu">
+				<ion-item menu-close href="" class="item-icon-left bortop" ng-show="isLoggedIn">Hello! {{::userProfile.name}}</ion-item>
 				<ion-item menu-close href="#/app/home" class="item-icon-left bortop"><i class="icon ion-android-home"></i>Home</ion-item>
 				<ion-item menu-close href="#/app/artist/All" class="item-icon-left"><i class="icon ion-android-color-palette"></i>Artists</ion-item>
 				<ion-item menu-close href="#/app/artwork/All" class="item-icon-left"><i class="icon ion-android-image"></i>Paintings &amp; More</ion-item>

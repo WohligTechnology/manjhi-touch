@@ -25,12 +25,14 @@
 					<div class="read-morecont">
 						<div class="read-inner">
 							<div class="item item-input">
-								<ui-select uiselect-autofocus demo="{{onfock}}" ng-model="pagedata.search" on-select="setSearch($select);">
+								<p ng-click="openSearch1();" ng-if="!filterby.search">Enter/Select Artist Name</p>
+								<p ng-click="openSearch1();" ng-if="filterby.search">{{filterby.search}}</p>
+								<!-- <ui-select uiselect-autofocus demo="{{onfock}}" ng-model="pagedata.search" on-select="setSearch($select);">
 									<ui-select-match class="text-capitalize" placeholder="Enter/Select Artist Name">{{pagedata.search}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getDropdown($select.search)" repeat="person in allartist track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
-								</ui-select>
+								</ui-select> -->
 							</div>
 						</div>
 					</div>
@@ -82,12 +84,14 @@
 					<div class="read-morecont">
 						<div class="read-inner">
 							<div class="item item-input">
-								<ui-select ng-model="pagedata.medium" on-select="setMediumSearch($select);">
+								<p ng-click="openSearch2();" ng-if="!filterby.medium">Enter/Select Medium</p>
+								<p ng-click="openSearch2();" ng-if="filterby.medium">{{filterby.medium}}</p>
+								<!-- <ui-select ng-model="pagedata.medium" on-select="setMediumSearch($select);">
 									<ui-select-match class="text-capitalize" placeholder="Enter/Select Medium">{{pagedata.medium}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
-								</ui-select>
+								</ui-select> -->
 							</div>
 						</div>
 					</div>
@@ -101,28 +105,34 @@
 					<div class="read-morecont">
 						<div class="read-inner">
 							<div class="item item-input">
-								<ui-select ng-model="pagedata.color" on-select="setColorSearch($select);">
+								<p ng-click="openSearch3();" ng-if="!filterby.color">Color (Eg. Red, Blue, White, Black)</p>
+								<p ng-click="openSearch3();" ng-if="filterby.color">{{filterby.color}}</p>
+								<!-- <ui-select ng-model="pagedata.color" on-select="setColorSearch($select);">
 									<ui-select-match class="text-capitalize" placeholder="Color (Eg. Red, Blue, White, Black)">{{pagedata.color}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getColorDropdown($select.search)" repeat="person in allColor track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
-								</ui-select>
+								</ui-select> -->
 							</div>
 							<div class="item item-input">
-								<ui-select ng-model="pagedata.style" on-select="setStyleSearch($select);">
+								<p ng-click="openSearch4();" ng-if="!filterby.style">Style (Eg. Abstract, Figurative)</p>
+								<p ng-click="openSearch4();" ng-if="filterby.style">{{filterby.style}}</p>
+								<!-- <ui-select ng-model="pagedata.style" on-select="setStyleSearch($select);">
 									<ui-select-match class="text-capitalize" placeholder="Style (Eg. Abstract, Figurative)">{{pagedata.style}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getStyleDropdown($select.search)" repeat="person in allStyle track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
-								</ui-select>
+								</ui-select> -->
 							</div>
 							<div class="item item-input">
-								<ui-select ng-model="pagedata.element" on-select="setElementSearch($select);">
+								<p ng-click="openSearch5();" ng-if="!filterby.element">Elements (Eg. Buddha, Bird)</p>
+								<p ng-click="openSearch5();" ng-if="filterby.element">{{filterby.element}}</p>
+								<!-- <ui-select ng-model="pagedata.element" on-select="setElementSearch($select);">
 									<ui-select-match class="text-capitalize" placeholder="Elements (Eg. Buddha, Bird)">{{pagedata.element}}</ui-select-match>
 									<ui-select-choices refresh-delay="0" refresh="getElementDropdown($select.search)" repeat="person in allElement track by person._id">
 										<div ng-bind-html="person.name| addhighlight: $select.search"></div>
 									</ui-select-choices>
-								</ui-select>
+								</ui-select> -->
 							</div>
 						</div>
 					</div>

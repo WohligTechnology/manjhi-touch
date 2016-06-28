@@ -2,7 +2,7 @@
 	<ion-content>
 		<div class="img-holder-prd">
 			<div class="box img-holder-big text-center" ng-if="artistDetailImg">
-				<img ng-src="{{artistDetailImg.artwork.image[0]|uploadpath}}" ng-click="openModal(artistDetailImg.artwork.image[0]);">
+				<img ng-src="{{artistDetailImg.artwork.image[0]|upload500}}" ng-click="openModal(artistDetailImg.artwork.image[0]);">
 			</div>
 			<div class="padding">
 				<div class="list list-details">
@@ -46,20 +46,20 @@
 					</label>
 				</div>
 				<div class="btn-grp">
-					<!-- <button class="button button-block button-balanced icon-left ion-ios-home">
-						View Artwork In Your Room
-					</button> -->
-					<a class="button button-block button-assertive icon-left ion-android-mail" ng-click="openContact();">
-					Contact
-					</a>
 					<div href="" class="button button-positive button-block" ng-if="artistDetailImg.artwork.status=='sold'">
-							Sold
+						Sold
 					</div>
 					<a href="" class="button button-positive button-block icon-left ion-ios-cart" ng-click="addToCart(artistDetailImg)" ng-if="artistDetailImg.artwork.gprice && artistDetailImg.artwork.gprice!='N/A' && artistDetailImg.artwork.status!='sold'">
 					Add To Cart
 					</a>
 					<a href="" class="button button-positive button-block" ng-click="openContact();" ng-if="!artistDetailImg.artwork.gprice || artistDetailImg.artwork.gprice=='N/A'">
 							Request for price
+					</a>
+					<a class="button button-block button-stable icon-left ion-android-share-alt" ng-click="shareImage();">
+					Share
+					</a>
+					<a class="button button-block button-assertive icon-left ion-android-mail" ng-click="openContact();">
+					Contact
 					</a>
 				</div>
 			</div>

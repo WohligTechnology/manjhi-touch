@@ -14,7 +14,7 @@
         <form ng-submit="userlogin()">
             <div class="list reg-login">
                 <label class="item item-input">
-                    <input type="text" ng-model="login.email" placeholder="Username" required>
+                    <input type="email" ng-model="login.email" placeholder="Username" required>
                 </label>
                 <label class="item item-input">
                     <input type="password" ng-model="login.password" placeholder="Password" required>
@@ -22,7 +22,7 @@
                 <div class="btn-grp padding">
                     <button class="button button-block button-positive" type="submit">Log in</button>
                     <p class="text-center" ng-show="showInvalidLogin">Invalid login credentials</p>
-                    <div class="row reg">
+                    <!-- <div class="row reg">
                         <div class="col-50">
                             <div class="">
                                 <a href="#/access/forgot">	Forgot Password? </a>
@@ -33,7 +33,7 @@
                                 <a href="#/access/signin" class="pull-right"> Register</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="text-center"> -or-</div>
                     <a class="button button-block button-fb" ng-click="socialLogin('loginf')">Login with Facebook</a>
                     <a class="button button-block button-twit" ng-click="socialLogin('logint')">Login with Twitter</a>

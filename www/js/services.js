@@ -244,12 +244,14 @@ angular.module('starter.services', [])
                 }
             }).success(callback);
         },
-        getAllArtistDrop: function(searchtext, callback) {
+        getAllArtistDrop: function(searchtext, n, callback) {
             $http({
                 url: adminurl + "user/findUser",
                 method: "POST",
                 data: searchtext
-            }).success(callback);
+            }).success(function(data, status) {
+                callback(data, n);
+            });
         },
         getAllArtistDropArtist: function(searchtext, callback) {
             $http({
@@ -258,12 +260,14 @@ angular.module('starter.services', [])
                 data: searchtext
             }).success(callback);
         },
-        getallmedium: function(data, callback) {
+        getallmedium: function(data, n, callback) {
             $http({
                 url: adminurl + "artmedium/getmedium",
                 method: "POST",
                 data: data
-            }).success(callback);
+            }).success(function(data, status) {
+                callback(data, n);
+            });
         },
         userbytype: function(searchtext, n, callback) {
             $http({
@@ -327,7 +331,7 @@ angular.module('starter.services', [])
                 }
             }).success(callback);
         },
-        tagSearchType: function(type, search, callback) {
+        tagSearchType: function(type, search, n, callback) {
             $http({
                 url: adminurl + "tag/gettag",
                 method: "POST",
@@ -335,7 +339,9 @@ angular.module('starter.services', [])
                     "type": type,
                     "search": search
                 }
-            }).success(callback);
+            }).success(function(data) {
+                callback(data, n);
+            });
         },
         placeOrder: function(order, callback) {
             $http({

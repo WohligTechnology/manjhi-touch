@@ -1,6 +1,6 @@
 <ion-view title="Personal Info">
 	<ion-content class="has-header cont-checkout personal-radio">
-		<form ng-submit="edituser();">
+		<form ng-submit="edituser();" name="personal">
 			<div class="list" ng-if="user">
 				<label class="item item-input">
 					<input type="text" placeholder="Name*" ng-model="user.name" required>
@@ -12,7 +12,7 @@
 					<input type="text" placeholder="Secondary Email ID" ng-model="user.secemail">
 				</label>
 				<label class="item item-input">
-					<input type="tel" placeholder="Phone No" ng-model="user.mob">
+					<input type="tel" placeholder="Phone No" ng-model="user.mob" required>
 				</label>
 				<label class="item item-input item-select">
 					<div class="input-label">
@@ -25,7 +25,7 @@
 					</select>
 			</div>
 			<div class="padding-horizontal">
-				<button type="submit" class="button button-full button-positive">
+				<button type="submit" class="button button-full button-positive" ng-disabled="personal.$invalid">
 					Save
 				</button>
 			</div>

@@ -7,7 +7,7 @@ var abc = "";
 
 angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gallery'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser, $timeout, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicLoading, MyServices, $ionicLoading, $ionicPopup, $cordovaInAppBrowser, $timeout, $state, $rootScope) {
     $scope.adminurl = adminurl;
 
     var scrolled = 0;
@@ -51,22 +51,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     })
 
-    if ($.jStorage.get("isLoggedIn") && $.jStorage.get("isLoggedIn") == true) {
-        $scope.isLoggedIn = true;
-    } else {
-        $scope.isLoggedIn = false;
-    }
-
     MyServices.getuserprofile(function(data) {
         if (data.id) {
-            $.jStorage.set("isLoggedIn", true);
+            console.log(data);
             $scope.isLoggedIn = true;
             userProfile = data;
+            $scope.userProfile = data;
             MyServices.getMyFavourites(data.id, function(favorite) {
                 userProfile.wishlist = favorite;
             })
         } else {
-            $.jStorage.set("isLoggedIn", false)
             $scope.isLoggedIn = false;
         }
     })
@@ -75,7 +69,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         globalFunction.showLoading();
         MyServices.logout(function(data) {
             $ionicLoading.hide();
-            $.jStorage.set("isLoggedIn", false);
             $scope.inCart = {};
             $scope.inCart.total = 0;
             $scope.isLoggedIn = false;
@@ -227,9 +220,71 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 }
             })
         } else {
-            dataNextPre.messageBox("Please login to add to favourites");
+            $scope.openLogin();
         }
     }
+
+    $scope.openLogin = function() {
+        $scope.modal1.show();
+    };
+    $ionicModal.fromTemplateUrl('templates/modal-login.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal1 = modal;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function() {
+        $scope.modal1.hide();
+    };
+
+    $scope.userlogin = function() {
+        MyServices.userlogin($scope.login, function(data, status) {
+            if (data.value != false) {
+                $scope.showInvalidLogin = false;
+                MyServices.getuserprofile(function(data) {
+                    console.log("login successfully");
+                    window.location.reload();
+                })
+            } else {
+                $scope.showInvalidLogin = true;
+            }
+        })
+    };
+
+    var soptions = {
+        location: 'yes',
+        clearcache: 'yes',
+        toolbar: 'no'
+    };
+
+    var profileInterval = "";
+    $scope.socialLogin = function(val) {
+        $cordovaInAppBrowser.open(adminurl + "user/" + val, '_blank', soptions).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+        profileInterval = setInterval(function() {
+            MyServices.getuserprofile(function(data) {
+                if (data.id) {
+                    clearInterval(profileInterval);
+                    if ($cordovaInAppBrowser)
+                        $cordovaInAppBrowser.close();
+                    $scope.showInvalidLogin = false;
+                    window.location.reload();
+                }
+            });
+        }, 1000);
+    }
+
+    $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event) {
+        console.log(e);
+        console.log(event);
+        clearInterval(profileInterval);
+    });
+
+
     $scope.inCart = {};
     $scope.inCart.total = 0;
     dataNextPre.getCartItems = function() {
@@ -333,7 +388,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 .controller('AccessCtrl', function($scope, $ionicModal, $timeout) {})
 
-.controller('LoginCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state, $cordovaInAppBrowser, $rootScope) {
+.controller('LoginCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state, $cordovaInAppBrowser, $rootScope, $ionicPopup) {
 
     $scope.loginData = {};
     $scope.doLogin = function() {
@@ -344,9 +399,20 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         MyServices.userlogin($scope.loginData, function(data, status) {
             console.log(data);
             if (data.value != false) {
+                MyServices.getuserprofile(function(profile) {
+                    if (profile.id) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: "Welcome " + profile.name,
+                            template: 'You are now logged in'
+                        });
+
+                        alertPopup.then(function(res) {
+                            $state.go('app.home');
+                            window.location.reload();
+                        });
+                    }
+                });
                 $scope.showInvalidLogin = false;
-                $.jStorage.set("isLoggedIn", true);
-                $state.go('app.home');
             } else {
                 $scope.showInvalidLogin = true;
             }
@@ -374,8 +440,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                     if ($cordovaInAppBrowser)
                         $cordovaInAppBrowser.close();
                     $scope.showInvalidLogin = false;
-                    $.jStorage.set("isLoggedIn", true);
                     $state.go('app.home');
+                    window.location.reload();
                 }
             });
         }, 1000);
@@ -389,7 +455,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state, $cordovaInAppBrowser) {
+.controller('HomeCtrl', function($scope, $stateParams, MyServices, $timeout, $ionicSlideBoxDelegate, $state, $cordovaInAppBrowser, $ionicModal) {
     abc = $scope;
     $.jStorage.set("artistScroll", null);
     $.jStorage.set("artworkScroll", null);
@@ -492,7 +558,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
-            $.jStorage.set("isLoggedIn", true);
             $scope.isLoggedIn = true;
             userProfile = data;
             MyServices.getMyFavourites(data.id, function(favorite) {
@@ -594,205 +659,141 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             // $scope.getStl();
         }
     };
+
+    $ionicModal.fromTemplateUrl('templates/modal-artistSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal1 = modal;
+    });
+
+    $scope.openSearch1 = function() {
+        $scope.searchmodal1.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch1 = function() {
+        $scope.searchmodal1.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-mediumSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal2 = modal;
+    });
+
+    $scope.openSearch2 = function() {
+        $scope.searchmodal2.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch2 = function() {
+        $scope.searchmodal2.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-colorSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal3 = modal;
+    });
+
+    $scope.openSearch3 = function() {
+        $scope.searchmodal3.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch3 = function() {
+        $scope.searchmodal3.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-styleSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal4 = modal;
+    });
+
+    $scope.openSearch4 = function() {
+        $scope.searchmodal4.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch4 = function() {
+        $scope.searchmodal4.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-elementSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal5 = modal;
+    });
+
+    $scope.openSearch5 = function() {
+        $scope.searchmodal5.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch5 = function() {
+        $scope.searchmodal5.hide();
+    };
+
+
     $scope.setSearch = function(select) {
         $scope.filterby.search = select.selected.name;
+        $scope.closeSearch1();
     };
     $scope.setMediumSearch = function(select) {
         $scope.filterby.medium = select.selected.name;
+        $scope.closeSearch2();
     };
     $scope.setColorSearch = function(select) {
         $scope.filterby.color = select.selected.name;
+        $scope.closeSearch3();
     };
     $scope.setStyleSearch = function(select) {
         $scope.filterby.style = select.selected.name;
+        $scope.closeSearch4();
     };
     $scope.setElementSearch = function(select) {
         $scope.filterby.element = select.selected.name;
+        $scope.closeSearch5();
     };
+
     $scope.allartist = [];
     $scope.allmedium = [];
-    $scope.getmedium = function() {
-        if ($scope.filterby.type === "") {
-            $scope.change = "";
-            MyServices.getallmedium($scope.change, function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allmedium = _.uniq(data, '_id');
-                } else {
-                    $scope.allmedium = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.filterby.type;
-            MyServices.getallmedium($scope.change, function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allmedium = _.uniq(data, '_id');
-                } else {
-                    $scope.allmedium = [];
-                }
-            });
-        }
-    };
 
-    $scope.getClr = function() {
-        if ($scope.filterby.type == "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allColor = _.uniq(data, '_id');
-                    $scope.allColor.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allColor = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.filterby.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allColor = _.uniq(data, '_id');
-                    $scope.allColor.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allColor = [];
-                }
-            });
-        }
-    };
-    $scope.getStl = function() {
-        if ($scope.filterby.type === "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allStyle = _.uniq(data, '_id');
-                    $scope.allStyle.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allStyle = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.filterby.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allStyle = _.uniq(data, '_id');
-                    $scope.allStyle.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allStyle = [];
-                }
-            });
-        }
-    };
-    $scope.getElm = function() {
-        if ($scope.filterby.type === "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allElement = _.uniq(data, '_id');
-                    $scope.allElement.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allElement = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.filterby.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value !== false) {
-                    $scope.allElement = _.uniq(data, '_id');
-                    $scope.allElement.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allElement = [];
-                }
-            });
-        }
-    };
-
-    var countcall = 0;
-    $scope.getallartist = function() {
-        if ($scope.filterby.type === "") {
-            MyServices.getAllArtistByAccess(++countcall, function(data, status, n) {
-                if (n == countcall) {
-                    if (data && data.value !== false) {
-                        $scope.allartist = _.uniq(data, '_id');
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                } else {
-                    $scope.allartist = [];
-                }
-            });
-        } else {
-            MyServices.userbytype($scope.filterby.type, ++countcall, function(data, status, n) {
-                if (n == countcall) {
-                    if (data && data.value !== false) {
-                        $scope.allartist = data;
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                } else {
-                    $scope.allartist = [];
-                }
-
-            });
-        }
-    };
+    var artistCall = 0;
     $scope.getDropdown = function(search) {
         if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            MyServices.getAllArtistDrop($scope.change, function(data) {
-                console.log(data);
-                if (data && data.value != false) {
-                    $scope.allartist = data;
-                    $scope.allartist.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
+            MyServices.getAllArtistDrop($scope.change, ++artistCall, function(data, n) {
+                if (n == artistCall) {
+                    console.log(data);
+                    if (data && data.value != false) {
+                        $scope.allartist = data;
+                    }
                 } else {
                     $scope.allartist = [];
                 }
             });
+        } else {
+            $scope.allartist = [];
         }
     }
+
+    var mediumCall = 0;
     $scope.getDropdownMedium = function(search) {
         if (search.length >= 2) {
             $scope.change = {};
             $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            MyServices.getallmedium($scope.change, function(data) {
-                if (data && data.value != false) {
-                    $scope.allmedium = data;
-                    $scope.allmedium.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
+            MyServices.getallmedium($scope.change, ++mediumCall, function(data, n) {
+                if (n == mediumCall) {
+                    if (data && data.value != false) {
+                        $scope.allmedium = data;
+                    } else {
+                        $scope.allmedium = [];
+                    }
                 } else {
                     $scope.allmedium = [];
                 }
@@ -801,46 +802,81 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     //search by keyword
-
+    var colorCall = 0;
     $scope.getColorDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++colorCall, function(data, n) {
+                if (n == colorCall) {
+                    if (data && data.value != false) {
                         $scope.allColor = data;
-                    }, 400);
+                    } else {
+                        $scope.allColor = [];
+                    }
                 } else {
                     $scope.allColor = [];
                 }
             });
         }
     }
+
+    var styleCall = 0;
     $scope.getStyleDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++styleCall, function(data, n) {
+                if (n == styleCall) {
+                    if (data && data.value != false) {
                         $scope.allStyle = data;
-                    }, 400);
+                    } else {
+                        $scope.allStyle = [];
+                    }
                 } else {
                     $scope.allStyle = [];
                 }
             });
         }
     }
+
+    var elementCall = 0;
     $scope.getElementDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.filterby.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++elementCall, function(data, n) {
+                if (n == elementCall) {
+                    if (data && data.value != false) {
                         $scope.allElement = data;
-                    }, 400);
+                    } else {
+                        $scope.allElement = [];
+                    }
                 } else {
                     $scope.allElement = [];
                 }
             });
         }
     }
+
+    $scope.submitQuery = function() {
+        MyServices.reachOutArtist($scope.reach, function(data) {
+            $scope.closeContact();
+            dataNextPre.messageBox("Your query has been submitted");
+            $scope.reach.from = "";
+            $scope.reach.number = "";
+            $scope.reach.person = "";
+            $scope.reach.remarks = "";
+        })
+    }
+
+    $ionicModal.fromTemplateUrl('templates/modal-contact.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal1 = modal;
+    });
+    $scope.openContact = function() {
+        $scope.modal1.show();
+    };
+    $scope.closeContact = function() {
+        $scope.modal1.hide();
+    };
+
 })
 
 .controller('SavedViewsCtrl', function($scope, $stateParams, MyServices) {
@@ -986,7 +1022,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, $state, MyServices, $filter) {
+.controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, $state, MyServices, $filter, $cordovaSocialSharing) {
 
     $scope.aristImages = [];
     $scope.allartworks = [];
@@ -1068,6 +1104,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             $scope.reach.person = "";
             $scope.reach.remarks = "";
         })
+    }
+
+    $scope.shareImage = function() {
+        console.log($scope.artistDetailImg);
+        $cordovaSocialSharing.share($scope.artistDetailImg.artwork.name + " by " + $scope.artistDetailImg.name, "", "http://www.auraart.in/user/resize?width=750&file=" + $scope.artistDetailImg.artwork.image[0], "") // Share via native share sheet
+            .then(function(result) {
+                // Success!
+            }, function(err) {
+                // An error occured. Show a message to the user
+            });
     }
 
     $ionicModal.fromTemplateUrl('templates/modal-image.html', {
@@ -1196,197 +1242,137 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         globalFunction.reachOut();
     }
 
-    //get user details
+    $ionicModal.fromTemplateUrl('templates/modal-artistSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal1 = modal;
+    });
+
+    $scope.openSearch1 = function() {
+        $scope.searchmodal1.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch1 = function() {
+        $scope.searchmodal1.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-mediumSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal2 = modal;
+    });
+
+    $scope.openSearch2 = function() {
+        $scope.searchmodal2.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch2 = function() {
+        $scope.searchmodal2.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-colorSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal3 = modal;
+    });
+
+    $scope.openSearch3 = function() {
+        $scope.searchmodal3.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch3 = function() {
+        $scope.searchmodal3.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-styleSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal4 = modal;
+    });
+
+    $scope.openSearch4 = function() {
+        $scope.searchmodal4.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch4 = function() {
+        $scope.searchmodal4.hide();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/modal-elementSearch.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.searchmodal5 = modal;
+    });
+
+    $scope.openSearch5 = function() {
+        $scope.searchmodal5.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeSearch5 = function() {
+        $scope.searchmodal5.hide();
+    };
+
+
+    $scope.setSearch = function(select) {
+        $scope.filterby.search = select.selected.name;
+        $scope.closeSearch1();
+    };
+    $scope.setMediumSearch = function(select) {
+        $scope.filterby.medium = select.selected.name;
+        $scope.closeSearch2();
+    };
     $scope.setColorSearch = function(select) {
-        $scope.pagedata.color = select.selected.name;
-    }
+        $scope.filterby.color = select.selected.name;
+        $scope.closeSearch3();
+    };
     $scope.setStyleSearch = function(select) {
-        $scope.pagedata.style = select.selected.name;
-    }
+        $scope.filterby.style = select.selected.name;
+        $scope.closeSearch4();
+    };
     $scope.setElementSearch = function(select) {
-        $scope.pagedata.element = select.selected.name;
-    }
-
-    $scope.getClr = function() {
-        if ($scope.pagedata.type == "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allColor = _.uniq(data, '_id');
-                    $scope.allColor.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allColor = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allColor = _.uniq(data, '_id');
-                    $scope.allColor.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allColor = [];
-                }
-            });
-        }
-    }
-    $scope.getStl = function() {
-        if ($scope.pagedata.type == "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allStyle = _.uniq(data, '_id');
-                    $scope.allStyle.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allStyle = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allStyle = _.uniq(data, '_id');
-                    $scope.allStyle.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allStyle = [];
-                }
-            });
-        }
-    }
-    $scope.getElm = function() {
-        if ($scope.pagedata.type == "") {
-            $scope.change = "";
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allElement = _.uniq(data, '_id');
-                    $scope.allElement.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allElement = [];
-                }
-            });
-        } else {
-            $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
-            MyServices.tagSearchType($scope.change, "", function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allElement = _.uniq(data, '_id');
-                    $scope.allElement.unshift({
-                        "_id": "0",
-                        name: ""
-                    });
-                } else {
-                    $scope.allElement = [];
-                }
-            });
-        }
-    }
-
-    var countcall = 0;
-    $scope.getallartist = function() {
-        if ($scope.pagedata.type == "") {
-            MyServices.getAllArtistByAccess(++countcall, function(data, status, n) {
-                if (n == countcall) {
-                    if (data && data.value != false) {
-                        $scope.allartist = _.uniq(data, '_id');
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                } else {
-                    $scope.allartist = [];
-                }
-            });
-        } else {
-            MyServices.userbytype($scope.pagedata.type, ++countcall, function(data, status, n) {
-                if (n == countcall) {
-                    if (data && data.value != false) {
-                        $scope.allartist = data;
-                        $scope.allartist.unshift({
-                            "_id": "0",
-                            name: ""
-                        });
-                    } else {
-                        $scope.allartist = [];
-                    }
-                } else {
-                    $scope.allartist = [];
-                }
-            });
-        }
-    }
-
-    $scope.getmedium = function() {
-        if ($scope.pagedata.type == "") {
-            //          console.log("in if");
-            $scope.change = "";
-            MyServices.getallmedium($scope.change, function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allmedium = _.uniq(data, '_id');
-                } else {
-                    $scope.allmedium = [];
-                }
-            });
-        } else {
-            //          console.log("in else");
-            $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
-            MyServices.getallmedium($scope.change, function(data, status) {
-                if (data && data.value != false) {
-                    $scope.allmedium = _.uniq(data, '_id');
-                } else {
-                    $scope.allmedium = [];
-                }
-            });
-        }
-    }
-
+        $scope.filterby.element = select.selected.name;
+        $scope.closeSearch5();
+    };
+    
+    var artistCall = 0;
     $scope.getDropdown = function(search) {
         if (search.length >= 2) {
             $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
+            $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            MyServices.getAllArtistDrop($scope.change, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.getAllArtistDrop($scope.change, ++artistCall, function(data, n) {
+                if (n == artistCall) {
+                    console.log(data);
+                    if (data && data.value != false) {
                         $scope.allartist = data;
-                    }, 400);
+                    }
                 } else {
                     $scope.allartist = [];
                 }
             });
+        } else {
+            $scope.allartist = [];
         }
     }
 
+    var mediumCall = 0;
     $scope.getDropdownMedium = function(search) {
         if (search.length >= 2) {
             $scope.change = {};
-            $scope.change.type = $scope.pagedata.type;
+            $scope.change.type = $scope.filterby.type;
             $scope.change.search = search;
-            MyServices.getallmedium($scope.change, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.getallmedium($scope.change, ++mediumCall, function(data, n) {
+                if (n == mediumCall) {
+                    if (data && data.value != false) {
                         $scope.allmedium = data;
-                    }, 400);
+                    } else {
+                        $scope.allmedium = [];
+                    }
                 } else {
                     $scope.allmedium = [];
                 }
@@ -1394,51 +1380,56 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         }
     }
 
+    //search by keyword
+    var colorCall = 0;
     $scope.getColorDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++colorCall, function(data, n) {
+                if (n == colorCall) {
+                    if (data && data.value != false) {
                         $scope.allColor = data;
-                    }, 400);
+                    } else {
+                        $scope.allColor = [];
+                    }
                 } else {
                     $scope.allColor = [];
                 }
             });
         }
     }
+
+    var styleCall = 0;
     $scope.getStyleDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++styleCall, function(data, n) {
+                if (n == styleCall) {
+                    if (data && data.value != false) {
                         $scope.allStyle = data;
-                    }, 400);
+                    } else {
+                        $scope.allStyle = [];
+                    }
                 } else {
                     $scope.allStyle = [];
                 }
             });
         }
     }
+
+    var elementCall = 0;
     $scope.getElementDropdown = function(search) {
         if (search.length >= 2) {
-            MyServices.tagSearchType($scope.pagedata.type, search, function(data) {
-                if (data && data.value != false) {
-                    $timeout(function() {
+            MyServices.tagSearchType($scope.filterby.type, search, ++elementCall, function(data, n) {
+                if (n == elementCall) {
+                    if (data && data.value != false) {
                         $scope.allElement = data;
-                    }, 400);
+                    } else {
+                        $scope.allElement = [];
+                    }
                 } else {
                     $scope.allElement = [];
                 }
             });
         }
-    }
-
-    $scope.setSearch = function(select) {
-        $scope.pagedata.search = select.selected.name;
-    }
-    $scope.setMediumSearch = function(select) {
-        $scope.pagedata.medium = select.selected.name;
     }
 
     $scope.typejson = [{
@@ -2727,12 +2718,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     $scope.paymentFunc = function() {
         var num = 0;
+        var count = 0;
         _.each($scope.cartItems, function(n) {
-            if (n.artwork.form) {
-                num++;
+            if (n.artwork.type != "Sculptures") {
+                count++;
+                if (n.artwork.form) {
+                    num++;
+                }
             }
         });
-        if (num == $scope.cartItems.length) {
+        if (num == count) {
             $scope.user.cart = [];
             $scope.user.cart = $scope.cartItems;
             $scope.user.subTotal = $scope.totalCartPrice;
@@ -2805,9 +2800,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 field: $scope.user.billing.email,
                 validation: ""
             }, {
-                field: $scope.user.billing.countrycode,
-                validation: ""
-            }, {
                 field: $scope.user.billing.mobileno,
                 validation: ""
             }, {
@@ -2836,9 +2828,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 validation: ""
             }, {
                 field: $scope.user.shipping.email,
-                validation: ""
-            }, {
-                field: $scope.user.shipping.countrycode,
                 validation: ""
             }, {
                 field: $scope.user.shipping.mobileno,
@@ -2905,7 +2894,6 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                     if ($cordovaInAppBrowser)
                         $cordovaInAppBrowser.close();
                     $scope.showInvalidLogin = false;
-                    $.jStorage.set("isLoggedIn", true);
                     window.location.reload();
                 }
             });

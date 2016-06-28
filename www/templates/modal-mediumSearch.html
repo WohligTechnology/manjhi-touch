@@ -1,0 +1,18 @@
+<ion-modal-view>
+    <ion-header-bar class="header-rights" align-title="center">
+        <h1 class="title">Search Medium</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round btn-close" ng-click="closeSearch2()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="item item-input">
+            <ui-select ng-model="filterby.medium" on-select="setMediumSearch($select);">
+                <ui-select-match class="text-capitalize" placeholder="Enter/Select Medium">{{filterby.medium}}</ui-select-match>
+                <ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
+                    <div ng-bind-html="person.name| addhighlight: $select.search" class="text-capitalize"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </ion-content>
+</ion-modal-view>
