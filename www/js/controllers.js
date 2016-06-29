@@ -1319,26 +1319,26 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 
     $scope.setSearch = function(select) {
-        $scope.filterby.search = select.selected.name;
+        $scope.pagedata.search = select.selected.name;
         $scope.closeSearch1();
     };
     $scope.setMediumSearch = function(select) {
-        $scope.filterby.medium = select.selected.name;
+        $scope.pagedata.medium = select.selected.name;
         $scope.closeSearch2();
     };
     $scope.setColorSearch = function(select) {
-        $scope.filterby.color = select.selected.name;
+        $scope.pagedata.color = select.selected.name;
         $scope.closeSearch3();
     };
     $scope.setStyleSearch = function(select) {
-        $scope.filterby.style = select.selected.name;
+        $scope.pagedata.style = select.selected.name;
         $scope.closeSearch4();
     };
     $scope.setElementSearch = function(select) {
-        $scope.filterby.element = select.selected.name;
+        $scope.pagedata.element = select.selected.name;
         $scope.closeSearch5();
     };
-    
+
     var artistCall = 0;
     $scope.getDropdown = function(search) {
         if (search.length >= 2) {
@@ -1700,7 +1700,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         $scope.pagedata.color = "";
         $scope.pagedata.style = "";
         $scope.pagedata.element = "";
-
+        $scope.closeFilter();
         $scope.makeactive('All');
     }
 
