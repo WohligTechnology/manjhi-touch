@@ -13270,7 +13270,7 @@ ul.lineul + ul.lineul {
 .list.list-details span.label {
   display: inline-block;
   padding: 0 10px 0 0;
-  width: 30%;
+  width: 25%;
   color: #444;
   font-size: 14px;
   font-weight: 600;
@@ -13280,7 +13280,7 @@ ul.lineul + ul.lineul {
   padding-right: 10px;
   display: inline-block;
   padding: 2px 0;
-  width: 65%;
+  width: 70%;
   color: #444;
   font-size: 14px;
   vertical-align: text-bottom; }
@@ -13773,3 +13773,21 @@ input.form-control.ui-select-search {
 
 .text-capitalize {
   text-transform: capitalize !important; }
+
+.item-radio .radio-icon {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  z-index: 3;
+  visibility: hidden;
+  padding: 14px;
+  height: 100%;
+  font-size: 20px; }
+
+.item-complex .item-content,
+.item-radio .item-content {
+  position: relative;
+  z-index: 2;
+  padding: 14px 49px 14px 16px;
+  border: none;
+  background-color: #fff; }
