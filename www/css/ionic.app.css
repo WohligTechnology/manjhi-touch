@@ -8966,10 +8966,12 @@ a.item.cart-cont {
 .event-pic {
   max-width: 100%;
   margin-right: 5px;
-  overflow: hidden;
   margin-bottom: 10px; }
-  .event-pic img {
-    max-width: 100%; }
+  .event-pic .item {
+    border: 0; }
+
+.imageView .gallery-slide-view {
+  border: 0; }
 
 .home-header {
   margin-bottom: 5px;
