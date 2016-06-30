@@ -6,7 +6,7 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="item item-input">
+        <div class="item item-input custom-ui-select">
             <ui-select ng-model="filterby.color" on-select="setColorSearch($select);">
                 <ui-select-match class="text-capitalize" placeholder="Color (Eg. Red, Blue, White, Black)">{{filterby.color}}</ui-select-match>
                 <ui-select-choices refresh-delay="0" refresh="getColorDropdown($select.search)" repeat="person in allColor track by person._id">

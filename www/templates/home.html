@@ -37,10 +37,10 @@
 						<div class="src-text"><i class="icon ion-chevron-right"></i>Search for</div>
 						<button class="button button-positive button-block src-btn" ng-click="applyfilter()">Go</button>
 					</div>
-					<ion-radio ng-model="abcd" ng-change="changetype(1)" ng-value="'Paintings'">Paintings</ion-radio>
-					<ion-radio ng-model="abcd" ng-change="changetype(2)" ng-value="'Sculptures'">Sculptures</ion-radio>
-					<ion-radio ng-model="abcd" ng-change="changetype(3)" ng-value="'Photographs'">Photographs</ion-radio>
-					<ion-radio ng-model="abcd" ng-change="changetype(4)" ng-value="'Prints'">Prints</ion-radio>
+					<ion-radio ng-model="a.abcd" ng-change="changetype(1)" ng-value="'Paintings'">Paintings</ion-radio>
+					<ion-radio ng-model="a.abcd" ng-change="changetype(2)" ng-value="'Sculptures'">Sculptures</ion-radio>
+					<ion-radio ng-model="a.abcd" ng-change="changetype(3)" ng-value="'Photographs'">Photographs</ion-radio>
+					<ion-radio ng-model="a.abcd" ng-change="changetype(4)" ng-value="'Prints'">Prints</ion-radio>
 					<!-- <ion-checkbox ng-change="changetype(1)">Paintings</ion-checkbox>
 					<ion-checkbox ng-change="changetype(1)">Sculptures</ion-checkbox>
 					<ion-checkbox ng-change="changetype(1)">Photographs</ion-checkbox>
@@ -53,9 +53,9 @@
 						</div>
 						<div class="read-morecont">
 							<div class="read-inner">
-								<div class="item item-input">
-									<p ng-click="openSearch1();" ng-if="!filterby.search">Enter/Select Artist Name</p>
-									<p ng-click="openSearch1();" ng-if="filterby.search">{{filterby.search}}</p>
+								<div class="item item-input" ng-click="openSearch1();">
+									<p ng-if="!filterby.search">Enter/Select Artist Name</p>
+									<p ng-if="filterby.search">{{filterby.search}}</p>
 									<!-- <ui-select demo="{{onfock}}" ng-model="filterby.search" on-select="setSearch($select);">
 										<ui-select-match class="text-capitalize" placeholder="Enter/Select Artist Name">{{filterby.search}}</ui-select-match>
 										<ui-select-choices refresh-delay="0" refresh="getDropdown($select.search)" repeat="person in allartist track by person._id">
@@ -117,9 +117,9 @@
 						</div>
 						<div class="read-morecont">
 							<div class="read-inner">
-								<div class="item item-input">
-									<p ng-click="openSearch2();" ng-if="!filterby.medium">Enter/Select Medium</p>
-									<p ng-click="openSearch2();" ng-if="filterby.medium">{{filterby.medium}}</p>
+								<div class="item item-input" ng-click="openSearch2();">
+									<p ng-if="!filterby.medium">Enter/Select Medium</p>
+									<p ng-if="filterby.medium">{{filterby.medium}}</p>
 									<!-- <ui-select ng-model="filterby.medium" on-select="setMediumSearch($select);">
 										<ui-select-match class="text-capitalize" placeholder="Enter/Select Medium">{{filterby.medium}}</ui-select-match>
 										<ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
@@ -138,9 +138,9 @@
 						</div>
 						<div class="read-morecont">
 							<div class="read-inner">
-								<div class="item item-input">
-									<p ng-click="openSearch3();" ng-if="!filterby.color">Color (Eg. Red, Blue, White, Black)</p>
-									<p ng-click="openSearch3();" ng-if="filterby.color">{{filterby.color}}</p>
+								<div class="item item-input" ng-click="openSearch3();">
+									<p ng-if="!filterby.color">Color (Eg. Red, Blue, White, Black)</p>
+									<p ng-if="filterby.color">{{filterby.color}}</p>
 									<!-- <ui-select ng-model="filterby.color" on-select="setColorSearch($select);">
 										<ui-select-match class="text-capitalize" placeholder="Color (Eg. Red, Blue, White, Black)">{{filterby.color}}</ui-select-match>
 										<ui-select-choices refresh-delay="0" refresh="getColorDropdown($select.search)" repeat="person in allColor track by person._id">
@@ -148,9 +148,9 @@
 										</ui-select-choices>
 									</ui-select> -->
 								</div>
-								<div class="item item-input">
-									<p ng-click="openSearch4();" ng-if="!filterby.style">Style (Eg. Abstract, Figurative)</p>
-									<p ng-click="openSearch4();" ng-if="filterby.style">{{filterby.style}}</p>
+								<div class="item item-input" ng-click="openSearch4();">
+									<p ng-if="!filterby.style">Style (Eg. Abstract, Figurative)</p>
+									<p ng-if="filterby.style">{{filterby.style}}</p>
 									<!-- <ui-select ng-model="filterby.style" on-select="setStyleSearch($select);">
 										<ui-select-match class="text-capitalize" placeholder="Style (Eg. Abstract, Figurative)">{{filterby.style}}</ui-select-match>
 										<ui-select-choices refresh-delay="0" refresh="getStyleDropdown($select.search)" repeat="person in allStyle track by person._id">
@@ -158,9 +158,9 @@
 										</ui-select-choices>
 									</ui-select> -->
 								</div>
-								<div class="item item-input">
-									<p ng-click="openSearch5();" ng-if="!filterby.element">Elements (Eg. Buddha, Bird)</p>
-									<p ng-click="openSearch5();" ng-if="filterby.element">{{filterby.element}}</p>
+								<div class="item item-input" ng-click="openSearch5();">
+									<p ng-if="!filterby.element">Elements (Eg. Buddha, Bird)</p>
+									<p ng-if="filterby.element">{{filterby.element}}</p>
 									<!-- <ui-select ng-model="filterby.element" on-select="setElementSearch($select);">
 										<ui-select-match class="text-capitalize" placeholder="Elements (Eg. Buddha, Bird)">{{filterby.element}}</ui-select-match>
 										<ui-select-choices refresh-delay="0" refresh="getElementDropdown($select.search)" repeat="person in allElement track by person._id">
@@ -174,7 +174,14 @@
 				</ion-list>
 			</div>
 		</div>
-		<button class="button button-positive button-block martoptwo btn-home" ng-click="applyfilter()">Go</button>
+		<div class="row crow">
+			<div class="col">
+				<button class="button button-positive button-block martoptwo btn-home" ng-click="clearfilters()">Clear</button>
+			</div>
+			<div class="col">
+				<button class="button button-positive button-block martoptwo btn-home" ng-click="applyfilter()">Go</button>
+			</div>
+		</div>
 		<!-- <div class="heading padding-vertical assertive text-center htwo">
 			<h4 class="marbottwo">Customised Solutions</h4>
 		</div>

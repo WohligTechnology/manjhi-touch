@@ -44,6 +44,14 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         $scope.searchbar = $scope.searchbar === false ? true : false;
     };
 
+    $scope.callNow = function() {
+        window.plugins.CallNumber.callNumber(function(success) {
+            console.log(success);
+        }, function(err) {
+            console.log(err);
+        }, "+919328877000", true);
+    };
+
     MyServices.getDollarPrice(function(data) {
         if (data.value != false) {
             dollarPrice = data[0].price;
@@ -853,16 +861,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             });
         }
     }
-
+    $scope.reach = {};
     $scope.submitQuery = function() {
-        MyServices.reachOutArtist($scope.reach, function(data) {
-            $scope.closeContact();
-            dataNextPre.messageBox("Your query has been submitted");
-            $scope.reach.from = "";
-            $scope.reach.number = "";
-            $scope.reach.person = "";
-            $scope.reach.remarks = "";
-        })
+        console.log($scope.reach);
+        if ($scope.reach && $scope.reach.from) {
+            MyServices.reachOutArtist($scope.reach, function(data) {
+                $scope.closeContact();
+                dataNextPre.messageBox("Your query has been submitted");
+                $scope.reach.from = "";
+                $scope.reach.number = "";
+                $scope.reach.person = "";
+                $scope.reach.remarks = "";
+            });
+        }
     }
 
     $ionicModal.fromTemplateUrl('templates/modal-contact.html', {
@@ -877,6 +888,26 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     $scope.closeContact = function() {
         $scope.modal1.hide();
     };
+    $scope.a = {};
+    $scope.clearfilters = function() {
+        $scope.filterby = {};
+        $scope.a = {};
+        $scope.a.abcd = false;
+        $scope.filterby.search = "";
+        $scope.filterby.type = "";
+        $scope.filterby.pagenumber = 1;
+        $scope.filterby.pagesize = 20;
+        $scope.filterby.filter = "srno";
+        $scope.filterby.sort = 1;
+        $scope.filterby.minprice = 0;
+        $scope.filterby.maxprice = 10000000;
+        $scope.filterby.minwidth = '';
+        $scope.filterby.maxwidth = '';
+        $scope.filterby.minheight = '';
+        $scope.filterby.maxheight = '';
+        $scope.filterby.minbreadth = '';
+        $scope.filterby.maxbreadth = '';
+    }
 
 })
 
@@ -1109,7 +1140,13 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     $scope.shareImage = function() {
         console.log($scope.artistDetailImg);
-        $cordovaSocialSharing.share($scope.artistDetailImg.artwork.name + " by " + $scope.artistDetailImg.name, "", "http://www.auraart.in/user/resize?width=750&file=" + $scope.artistDetailImg.artwork.image[0], "") // Share via native share sheet
+        var link = "";
+        if ($scope.artistDetailImg.artwork.type != "Sculptures")
+            link = "http://www.auraart.in/#/artwork/detail/" + $scope.artistDetailImg.artwork._id;
+        else
+            link = "http://www.auraart.in/#/sculpture/" + $scope.artistDetailImg.artwork._id;
+
+        $cordovaSocialSharing.share($scope.artistDetailImg.artwork.name + " by " + $scope.artistDetailImg.name, "Aura Art: " + $scope.artistDetailImg.artwork.name + " by " + $scope.artistDetailImg.name, "http://www.auraart.in/user/resize.jpg?height=750&file=" + $scope.artistDetailImg.artwork.image[0], link) // Share via native share sheet
             .then(function(result) {
                 // Success!
             }, function(err) {
@@ -1492,29 +1529,34 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             $scope.lthactive = '';
         }
         MyServices.artworktype(filterdata, function(data, status) {
-            lastpage = parseInt(data.totalpages);
-            _.each(data.data, function(n) {
-                n.artwork.pageno = data.page;
-                $scope.totalartcont.push(n);
-            });
-            $scope.totalartcont = _.uniq($scope.totalartcont, 'artwork._id');
-            $scope.totalArtworks = _.chunk($scope.totalartcont, 2);
-            $scope.callinfinite = false;
-            if ($.jStorage.get("artworkScroll")) {
-                if (data.page == $.jStorage.get("artworkScroll").pageno) {
-                    $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artworkScroll").scroll, true);
-                    // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
-                } else {
-                    var variablepage = data.page;
-                    $scope.pagedata.pagenumber = ++variablepage;
-                    if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
-                        $scope.reload();
+            if (data.value != false) {
+                lastpage = parseInt(data.totalpages);
+                _.each(data.data, function(n) {
+                    n.artwork.pageno = data.page;
+                    $scope.totalartcont.push(n);
+                });
+                $scope.totalartcont = _.uniq($scope.totalartcont, 'artwork._id');
+                $scope.totalArtworks = _.chunk($scope.totalartcont, 2);
+                $scope.callinfinite = false;
+                if ($.jStorage.get("artworkScroll")) {
+                    if (data.page == $.jStorage.get("artworkScroll").pageno) {
+                        $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artworkScroll").scroll, true);
+                        // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                    } else {
+                        var variablepage = data.page;
+                        $scope.pagedata.pagenumber = ++variablepage;
+                        if ($scope.pagedata.pagenumber <= $.jStorage.get("artworkScroll").pageno) {
+                            $scope.reload();
+                        }
                     }
                 }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.infiniteLoading = true;
+            } else {
+                $scope.totalArtworks = [];
+                $scope.infiniteLoading = false;
             }
             $ionicLoading.hide();
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-            $scope.infiniteLoading = true;
         });
     }
 
@@ -2220,9 +2262,8 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     $.jStorage.set("artistScroll", null);
     $.jStorage.set("artworkScroll", null);
 
-    $scope.showeventimage = function(image) {
-        $scope.modalImage = "";
-        $scope.modalImage = image;
+    $scope.showeventvideo = function(video) {
+        $scope.modalVideo = video;
         $scope.modal.show();
     };
     $ionicModal.fromTemplateUrl('templates/modal-eventimage.html', {
@@ -2755,13 +2796,13 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     $rootScope.$on('$cordovaInAppBrowser:loadstart', function(e, event) {
         console.log(event);
         console.log(event.url);
-        if (event.url == "http://www.auraart.in/#/sorry/") {
+        if (event.url.indexOf("http://www.auraart.in/#/sorry/") != -1) {
             $cordovaInAppBrowser.close();
             dataNextPre.messageBox("Sorry! Your order is not placed");
             $timeout(function() {
                 $state.go('app.home');
             }, 5000);
-        } else if (event.url == "http://www.auraart.in/#/thankyou/") {
+        } else if (event.url.indexOf("http://www.auraart.in/#/thankyou/") != -1) {
             $cordovaInAppBrowser.close();
             dataNextPre.messageBox("Thank you! Your order is placed");
             $timeout(function() {

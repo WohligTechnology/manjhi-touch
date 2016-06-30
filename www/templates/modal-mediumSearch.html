@@ -6,10 +6,11 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="item item-input">
+        <div class="item item-input custom-ui-select">
+          <!-- <pre>{{allmedium}}</pre> -->
             <ui-select ng-model="filterby.medium" on-select="setMediumSearch($select);">
                 <ui-select-match class="text-capitalize" placeholder="Enter/Select Medium">{{filterby.medium}}</ui-select-match>
-                <ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium track by person._id">
+                <ui-select-choices refresh-delay="0" refresh="getDropdownMedium($select.search)" repeat="person in allmedium">
                     <div ng-bind-html="person.name| addhighlight: $select.search" class="text-capitalize"></div>
                 </ui-select-choices>
             </ui-select>

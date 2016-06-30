@@ -26,14 +26,14 @@
 					<ion-gallery ion-gallery-items="eventDetail.photos" ion-gallery-row="3" ion-zoom-events="true"></ion-gallery>
 				</div>
 			</div>
-			<!-- <div class="row" ng-repeat="gal in eventDetail.photos" ng-if="eventDetail.photos && eventDetail.photos.length>0">
-				<div class="col-33" ng-repeat="gals in gal">
-					<div class="eventgallery" ng-click="showeventimage(gals);">
+			<div class="row" ng-repeat="gal in eventDetail.videos" ng-if="eventDetail.videos && eventDetail.videos.length>0">
+				<div class="col-33" ng-repeat="gals in gal" ng-click="showeventvideo(gals)">
+					<div class="eventgallery">
 						<div class="event-pic" fixit>
-							<img class="fix-img" ng-src="{{gals|uploadthumbnail}}">
+								<img class="fix-img" ng-src="http://img.youtube.com/vi/{{gals}}/mqdefault.jpg">
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</ion-content>

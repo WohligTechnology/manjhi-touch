@@ -27,10 +27,10 @@
                             <span ng-if="artistdetails.artwork.yoc && artistdetails.artwork.yoc!=''">{{artistdetails.artwork.yoc}}</span>
                         </p>
                         <p>
-                            <span ng-if="artistdetails.gprice && artistdetails.gprice!='N/A'">
-								Rs {{artistdetails.gprice|inlakhs}} / ${{artistdetails.gprice|indollars}}
+                            <span ng-if="artistdetails.artwork.gprice && artistdetails.artwork.gprice!='N/A'">
+								Rs {{artistdetails.artwork.gprice|inlakhs}} / ${{artistdetails.artwork.gprice|indollars}}
 							</span>
-                            <span ng-if="!artistdetails.gprice || artistdetails.gprice=='N/A'">
+                            <span ng-if="!artistdetails.artwork.gprice || artistdetails.artwork.gprice=='N/A'">
 								Available on request
 							</span>
                         </p>

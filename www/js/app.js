@@ -609,6 +609,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     };
 })
 
+.directive('youtube', function($sce) {
+  return {
+      restrict: 'A',
+      scope: {
+          code: '='
+      },
+      replace: true,
+      template: '<iframe id="popup-youtube-player" style="overflow:hidden;width:100%" width="100%" height="200px" src="{{url}}" frameborder="0" allowscriptaccess="always" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>',
+      link: function(scope) {
+          scope.$watch('code', function(newVal) {
+              if (newVal) {
+                  scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+              }
+          });
+      }
+  };
+})
+
 var formvalidation = function(allvalidation) {
     console.log(allvalidation);
     var isvalid2 = true;

@@ -6,7 +6,7 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <div class="item item-input">
+        <div class="item item-input custom-ui-select">
             <ui-select ng-model="filterby.element" on-select="setElementSearch($select);">
                 <ui-select-match class="text-capitalize" placeholder="Elements (Eg. Buddha, Bird)">{{filterby.element}}</ui-select-match>
                 <ui-select-choices refresh-delay="0" refresh="getElementDropdown($select.search)" repeat="person in allElement track by person._id">

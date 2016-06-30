@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<ion-content class="made" overflow-scroll="true" delegate-handle="handler">
-		<div class="row" ng-repeat="detail in totalArtworks">
+		<div class="row" ng-repeat="detail in totalArtworks" ng-if="totalArtworks.length>0">
 			<div class="col-50 padding-horizontal right-leftbr" ng-repeat="totalartconts in detail">
 				<div class="prd-cont" ng-click="goToDetailPage(totalartconts.artwork);">
 					<a href="">
@@ -43,6 +43,12 @@
 				</div>
 			</div>
 		</div>
+		<ion-list ng-if="totalArtworks.length==0">
+			<ion-item>
+				<p class="text-center font-special">No artworks found
+				</p>
+			</ion-item>
+		</ion-list>
 		<ion-infinite-scroll on-infinite="addMoreItems()" ng-if="infiniteLoading"></ion-infinite-scroll>
 	</ion-content>
 	<ion-footer-bar class="tabs-down">
