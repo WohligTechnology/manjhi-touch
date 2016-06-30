@@ -21,16 +21,26 @@
 					<p ng-bind-html="eventDetail.desc5 | rawHtml" ng-if="eventDetail.desc5"></p>
 				</div>
 			</div>
+			<div class="title">
+				<h4>
+				Photos
+				</h4>
+			</div>
 			<div class="eventgallery" ng-if="eventDetail">
 				<div class="event-pic">
 					<ion-gallery ion-gallery-items="eventDetail.photos" ion-gallery-row="3" ion-zoom-events="true"></ion-gallery>
 				</div>
 			</div>
+			<div class="title">
+				<h4>
+					Videos
+				</h4>
+			</div>
 			<div class="row" ng-repeat="gal in eventDetail.videos" ng-if="eventDetail.videos && eventDetail.videos.length>0">
 				<div class="col-33" ng-repeat="gals in gal" ng-click="showeventvideo(gals)">
 					<div class="eventgallery">
 						<div class="event-pic" fixit>
-								<img class="fix-img" ng-src="http://img.youtube.com/vi/{{gals}}/mqdefault.jpg">
+							<img class="fix-img" ng-src="http://img.youtube.com/vi/{{gals}}/mqdefault.jpg">
 						</div>
 					</div>
 				</div>
