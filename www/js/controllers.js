@@ -797,6 +797,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 } else {
                     $scope.allmedium = [];
                 }
+                console.log(n, $scope.allmedium);
             });
         }
     }

@@ -406,7 +406,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     return function(input) {
         if (input && input !== "") {
             if (input.indexOf('.jpg') != -1)
-                return adminurl + "user/resize?width=500&file=" + input;
+                return adminurl + "user/resize?width=400&file=" + input;
             else {
                 return adminurl + "user/resize?file=" + input;
             }
