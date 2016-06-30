@@ -2275,6 +2275,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     // Triggered in the login modal to close it
     $scope.closeeventimage = function() {
         $scope.modal.hide();
+        $scope.modal.remove();
     };
 })
 

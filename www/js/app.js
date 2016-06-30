@@ -12,9 +12,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider, ionGalleryConfigProvider) {
     $ionicConfigProvider.views.maxCache(3);
     $httpProvider.defaults.withCredentials = true;
+    ionGalleryConfigProvider.setGalleryConfig({
+        action_label: 'X',
+        toggle: false,
+        row_size: 3,
+        fixed_row_size: false
+    });
 
     $stateProvider
         .state('app', {
@@ -610,21 +616,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
 })
 
 .directive('youtube', function($sce) {
-  return {
-      restrict: 'A',
-      scope: {
-          code: '='
-      },
-      replace: true,
-      template: '<iframe id="popup-youtube-player" style="overflow:hidden;width:100%" width="100%" height="200px" src="{{url}}" frameborder="0" allowscriptaccess="always" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>',
-      link: function(scope) {
-          scope.$watch('code', function(newVal) {
-              if (newVal) {
-                  scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
-              }
-          });
-      }
-  };
+    return {
+        restrict: 'A',
+        scope: {
+            code: '='
+        },
+        replace: true,
+        template: '<iframe id="popup-youtube-player" style="overflow:hidden;width:100%" width="100%" height="200px" src="{{url}}" frameborder="0" allowscriptaccess="always" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>',
+        link: function(scope) {
+            scope.$watch('code', function(newVal) {
+                if (newVal) {
+                    scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal + "?autoplay=1&modestbranding=0&showinfo=0&rel=0&loop=1");
+                }
+            });
+        }
+    };
 })
 
 var formvalidation = function(allvalidation) {

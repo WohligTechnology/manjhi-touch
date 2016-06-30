@@ -508,7 +508,10 @@ a.item.cart-cont {
     border: 0;
   }
   img {
-    width: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 100%;
   }
 }
 .imageView .gallery-slide-view {
