@@ -1054,7 +1054,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, $state, MyServices, $filter, $cordovaSocialSharing) {
+.controller('ArtDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicLoading, $state, MyServices, $filter, $cordovaSocialSharing, $cordovaInAppBrowser) {
 
     $scope.aristImages = [];
     $scope.allartworks = [];
@@ -1071,6 +1071,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             $scope.loadArtWork($stateParams.artid);
         }
     })
+
+    $scope.openBrowser = function(link) {
+        var soptions = {
+            location: 'yes',
+            clearcache: 'yes',
+            toolbar: 'no'
+        };
+        $cordovaInAppBrowser.open(link, '_blank', soptions).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
 
     $scope.loadArtWork = function(id) {
         globalFunction.showLoading();
@@ -1355,25 +1368,31 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         $scope.searchmodal5.hide();
     };
 
-
+    $scope.filterby={}
     $scope.setSearch = function(select) {
         $scope.pagedata.search = select.selected.name;
+        $scope.filterby.search = select.selected.name;
         $scope.closeSearch1();
     };
     $scope.setMediumSearch = function(select) {
         $scope.pagedata.medium = select.selected.name;
+        $scope.filterby.medium = select.selected.name;
+        console.log($scope.pagedata.medium);
         $scope.closeSearch2();
     };
     $scope.setColorSearch = function(select) {
         $scope.pagedata.color = select.selected.name;
+        $scope.filterby.color = select.selected.name;
         $scope.closeSearch3();
     };
     $scope.setStyleSearch = function(select) {
         $scope.pagedata.style = select.selected.name;
+        $scope.filterby.style = select.selected.name;
         $scope.closeSearch4();
     };
     $scope.setElementSearch = function(select) {
         $scope.pagedata.element = select.selected.name;
+        $scope.filterby.element = select.selected.name;
         $scope.closeSearch5();
     };
 
@@ -2006,7 +2025,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('ArtistDetailCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading, $state) {
+.controller('ArtistDetailCtrl', function($scope, $stateParams, $ionicModal, MyServices, $ionicLoading, $state, $cordovaInAppBrowser) {
 
     $scope.artistid = $stateParams.artistid;
 
@@ -2019,6 +2038,19 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     //     year: '1978',
     //     price: 'Rs 1,00,000/ $6,400'
     // }
+
+    $scope.openBrowser = function(link) {
+        var soptions = {
+            location: 'yes',
+            clearcache: 'yes',
+            toolbar: 'no'
+        };
+        $cordovaInAppBrowser.open(link, '_blank', soptions).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
+    }
 
     globalFunction.showLoading();
     MyServices.getArtistDetail($stateParams.artistid, function(data, status) {
@@ -2254,6 +2286,16 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 photoArr.push(obj);
             })
             $scope.eventDetail.photos = photoArr;
+            // $scope.eventDetail.photos = _.chunk($scope.eventDetail.photos, 3);
+        }
+        if ($scope.eventDetail.pressphoto) {
+            var pressArr = [];
+            _.each($scope.eventDetail.pressphoto, function(n) {
+                var obj = {};
+                obj.src = $filter('uploadpath')(n.photos);
+                pressArr.push(obj);
+            })
+            $scope.eventDetail.pressphoto = pressArr;
             // $scope.eventDetail.photos = _.chunk($scope.eventDetail.photos, 3);
         }
         $ionicLoading.hide();

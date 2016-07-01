@@ -12,6 +12,8 @@
 				</h4>
 				<div class="read-morecont">
 					<div class="read-inner padding">
+						<p class="bold" ng-if="artistdetail.clink" ng-click="openBrowser(artistdetail.clink)"><u>eCatalogue</u></p>
+						<p class="bold" ng-if="artistdetail.eblink" ng-click="openBrowser(artistdetail.eblink)"><u>eBook</u></p>
 						<p>
 							<span class="bold" ng-if="artistdetail.dob || artistdetail.stateofb">Born </span>
 							<span class="bold" ng-if="artistdetail.dob && artistdetail.dob!=''">in </span> {{artistdetail.dob}}

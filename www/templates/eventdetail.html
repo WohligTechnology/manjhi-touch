@@ -21,17 +21,17 @@
 					<p ng-bind-html="eventDetail.desc5 | rawHtml" ng-if="eventDetail.desc5"></p>
 				</div>
 			</div>
-			<div class="title">
+			<div class="title" ng-if="eventDetail.photos && eventDetail.photos.length>0">
 				<h4>
 				Photos
 				</h4>
 			</div>
-			<div class="eventgallery" ng-if="eventDetail">
+			<div class="eventgallery" ng-if="eventDetail.photos && eventDetail.photos.length>0">
 				<div class="event-pic">
 					<ion-gallery ion-gallery-items="eventDetail.photos" ion-gallery-row="3" ion-zoom-events="true"></ion-gallery>
 				</div>
 			</div>
-			<div class="title">
+			<div class="title" ng-if="eventDetail.videos && eventDetail.videos.length>0">
 				<h4>
 					Videos
 				</h4>
@@ -43,6 +43,16 @@
 							<img class="fix-img" ng-src="http://img.youtube.com/vi/{{gals}}/mqdefault.jpg">
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="title" ng-if="eventDetail.pressphoto && eventDetail.pressphoto.length>0">
+				<h4>
+					Press
+				</h4>
+			</div>
+			<div class="eventgallery" ng-if="eventDetail.pressphoto && eventDetail.pressphoto.length>0">
+				<div class="event-pic">
+					<ion-gallery ion-gallery-items="eventDetail.pressphoto" ion-gallery-row="3" ion-zoom-events="true"></ion-gallery>
 				</div>
 			</div>
 		</div>

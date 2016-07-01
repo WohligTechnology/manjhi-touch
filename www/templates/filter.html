@@ -139,9 +139,15 @@
 				</readmores>
 			</ion-list>
 		</div>
-		<div class="padding">
-			<button class="button button-positive button-block martoptwo" ng-click="filterresults(pagedata.search)">Go</button>
-			<button class="button button-positive button-block martoptwo" ng-click="clearfilters()">Clear</button>
-		</div>
+		<!-- <div class="padding"> -->
+			<div class="row crow">
+				<div class="col">
+					<button class="button button-stable button-block martoptwo" ng-click="clearfilters()">Clear</button>
+				</div>
+				<div class="col">
+					<button class="button button-positive button-block martoptwo" ng-click="filterresults(pagedata.search)">Go</button>
+				</div>
+			</div>
+		<!-- </div> -->
 	</ion-content>
 </ion-modal-view>
