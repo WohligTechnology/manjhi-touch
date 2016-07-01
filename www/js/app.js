@@ -1,3 +1,23 @@
+function initPushwoosh() {
+  var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+  if (device.platform == "Android") {
+    registerPushwooshAndroid();
+  }
+
+  if (device.platform == "iPhone" || device.platform == "iOS") {
+    registerPushwooshIOS();
+  }
+
+  pushNotification.getLaunchNotification(
+    function(notification) {
+      if (notification != null) {
+        console.log(JSON.stringify(notification));
+      } else {
+        console.log("No launch notification");
+      }
+    }
+  );
+}
 angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
@@ -9,6 +29,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ion-gallery', 'start
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
+        initPushwoosh();
     });
 })
 
