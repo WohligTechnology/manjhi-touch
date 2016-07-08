@@ -68,6 +68,15 @@ a {
 .has-tabs-top1 {
   top: 110px;
 }
+.platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top1 {
+  top: 130px;
+}
+.platform-ios.platform-cordova:not(.fullscreen) .has-header2 {
+  top: 130px;
+}
+.platform-ios.platform-cordova:not(.fullscreen) .has-header.made {
+  top: 130px;
+}
 .artbox .row+.row .col {
   padding-top: 0;
   margin-top: -3px;
