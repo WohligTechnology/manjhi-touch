@@ -1368,7 +1368,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         $scope.searchmodal5.hide();
     };
 
-    $scope.filterby={}
+    $scope.filterby = {}
     $scope.setSearch = function(select) {
         $scope.pagedata.search = select.selected.name;
         $scope.filterby.search = select.selected.name;
@@ -1557,7 +1557,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                 $scope.totalartcont = _.uniq($scope.totalartcont, 'artwork._id');
                 $scope.totalArtworks = _.chunk($scope.totalartcont, 2);
                 $scope.callinfinite = false;
-                if ($.jStorage.get("artworkScroll")) {
+                if ($.jStorage.get("artworkScroll") && $.jStorage.get("artworkScroll").pageno > 1) {
                     if (data.page == $.jStorage.get("artworkScroll").pageno) {
                         $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artworkScroll").scroll, true);
                         // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
@@ -1922,7 +1922,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             })
             $scope.artistimage = _.uniq($scope.artistimage, '_id');
             $scope.artistArr = _.chunk($scope.artistimage, 2);
-            if ($.jStorage.get("artistScroll")) {
+            if ($.jStorage.get("artistScroll") && $.jStorage.get("artistScroll").pageno > 1) {
                 if ($scope.pagedata.pagenumber == $.jStorage.get("artistScroll").pageno) {
                     $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artistScroll").scroll, true);
                     // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
@@ -1946,6 +1946,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         } else {
             $scope.infiniteLoading = false;
         }
+        console.log($scope.pagedata.pagenumber);
     }
 
     $scope.getartistbysearch = function() {
