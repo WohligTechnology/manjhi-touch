@@ -261,9 +261,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     };
 
     var soptions = {
-        location: 'yes',
+        location: 'no',
         clearcache: 'yes',
-        toolbar: 'no'
+        toolbar: 'yes'
     };
 
     var profileInterval = "";
@@ -340,9 +340,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     var options = {
-        location: 'yes',
+        location: 'no',
         clearcache: 'yes',
-        toolbar: 'no'
+        toolbar: 'yes'
     };
 
     $scope.openFb = function() {
@@ -429,9 +429,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     var options = {
-        location: 'yes',
+        location: 'no',
         clearcache: 'yes',
-        toolbar: 'no'
+        toolbar: 'yes'
     };
 
     var profileInterval = "";
@@ -488,9 +488,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     $scope.openBlog = function() {
         $cordovaInAppBrowser.open('http://blog.auraart.in/', '_blank', {
-            location: 'yes',
+            location: 'no',
             clearcache: 'yes',
-            toolbar: 'no'
+            toolbar: 'yes'
         }).then(function(event) {
             // success
         }).catch(function(event) {
@@ -502,6 +502,14 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         $scope.slides = data;
         $ionicSlideBoxDelegate.update();
     });
+
+    $scope.slideHasChanged = function(index) {
+        if (index == ($scope.slides.image.length - 1)) {
+            $timeout(function() {
+                $ionicSlideBoxDelegate.slide(0);
+            }, 5000);
+        }
+    }
 
     $scope.goToArtwork = function(image) {
         console.log(image);
@@ -911,7 +919,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices) {
+.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices, $cordovaInAppBrowser) {
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
@@ -924,7 +932,17 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     })
 
     $scope.downloadView = function(image) {
-        window.open(adminurl + "slider/downloadImage?file=" + image);
+        var soptions = {
+            location: 'no',
+            clearcache: 'yes',
+            toolbar: 'yes'
+        };
+
+        $cordovaInAppBrowser.open(adminurl + "slider/downloadImage?file=" + image, '_blank', soptions).then(function(event) {
+            // success
+        }).catch(function(event) {
+            // error
+        });
     }
 })
 
@@ -1074,9 +1092,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     $scope.openBrowser = function(link) {
         var soptions = {
-            location: 'yes',
+            location: 'no',
             clearcache: 'yes',
-            toolbar: 'no'
+            toolbar: 'yes'
         };
         $cordovaInAppBrowser.open(link, '_blank', soptions).then(function(event) {
             // success
@@ -1568,6 +1586,11 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                             $scope.reload();
                         }
                     }
+                } else if ($.jStorage.get("artworkScroll") && $.jStorage.get("artworkScroll").pageno == 1) {
+                    if (data.page == $.jStorage.get("artworkScroll").pageno) {
+                        $ionicScrollDelegate.scrollTo(0, $.jStorage.get("artworkScroll").scroll, true);
+                        // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                    }
                 }
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 $scope.infiniteLoading = true;
@@ -1933,6 +1956,11 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
                         $scope.reload();
                     }
                 }
+            } else if ($.jStorage.get("artistScroll") && $.jStorage.get("artistScroll").pageno == 1) {
+                if ($scope.pagedata.pagenumber == $.jStorage.get("artistScroll").pageno) {
+                    $ionicScrollDelegate.scrollTop(0, $.jStorage.get("artistScroll").scroll, true);
+                    // window.scrollTo(0, $.jStorage.get("artworkScroll").scroll);
+                }
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
             $scope.infiniteLoading = true;
@@ -2042,9 +2070,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
     $scope.openBrowser = function(link) {
         var soptions = {
-            location: 'yes',
+            location: 'no',
             clearcache: 'yes',
-            toolbar: 'no'
+            toolbar: 'yes'
         };
         $cordovaInAppBrowser.open(link, '_blank', soptions).then(function(event) {
             // success
@@ -2799,7 +2827,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     var boptions = {
         location: 'no',
         clearcache: 'no',
-        toolbar: 'no'
+        toolbar: 'yes'
     };
 
     $scope.paymentFunc = function() {
@@ -2961,9 +2989,9 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     }
 
     var soptions = {
-        location: 'yes',
+        location: 'no',
         clearcache: 'yes',
-        toolbar: 'no'
+        toolbar: 'yes'
     };
 
     var profileInterval = "";
