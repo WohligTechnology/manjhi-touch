@@ -31,7 +31,8 @@
     "pushwoosh-cordova-plugin",
     "cordova-plugin-file-transfer",
     "cordova-plugin-file",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-refresh-gallery"
   ],
   "cordovaPlatforms": [
     "ios",

@@ -960,10 +960,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             }, function(err) {
                 // Error
                 $ionicLoading.hide();
-            }, function(progress) {
-
-
-            });
+            }, function(progress) {});
 
         // var url = adminurl + "slider/downloadImage?file=" + image;
         // var targetPath = cordova.file.dataDirectory + image;
