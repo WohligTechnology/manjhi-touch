@@ -37,7 +37,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     $scope.userProfile = {};
     $scope.cartItems = [];
     $scope.totalCartPrice = 0;
-    $scope.isLoggedIn == false;
+    $scope.isLoggedIn = false;
     $scope.joinus = {};
     $scope.searchbar = false;
     $scope.toggleSearchbar = function() {
@@ -153,11 +153,15 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     $scope.myPopup = "";
     $scope.nowAddToFav = function(obj) {
         console.log(obj);
+        var xyz = {};
+        xyz.artwork = obj.artwork._id;
+        if (obj.wishlistfolder && obj.wishlistfolder != '') {
+            xyz.wishlistfolder = obj.wishlistfolder;
+        }
+        console.log(xyz);
         $scope.myPopup.close();
         globalFunction.showLoading();
-        MyServices.addToFav({
-            "artwork": obj.artwork._id
-        }, function(data) {
+        MyServices.addToFav(xyz, function(data) {
             obj.heartClass = "ion-ios-heart";
             $ionicLoading.hide();
             if (!data.value) {
@@ -459,6 +463,12 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
         console.log(e);
         console.log(event);
         clearInterval(profileInterval);
+    });
+
+    MyServices.getuserprofile(function(data) {
+        if (data.id) {
+            $state.go('app.home');
+        }
     });
 
 })
@@ -919,7 +929,7 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices, $cordovaInAppBrowser) {
+.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices, $cordovaInAppBrowser, $ionicLoading, $cordovaFileTransfer, $cordovaFile, $ionicPopup, $timeout) {
 
     MyServices.getuserprofile(function(data) {
         if (data.id) {
@@ -932,17 +942,46 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     })
 
     $scope.downloadView = function(image) {
-        var soptions = {
-            location: 'no',
-            clearcache: 'yes',
-            toolbar: 'yes'
-        };
+        globalFunction.showLoading();
+        console.log(image);
 
-        $cordovaInAppBrowser.open(adminurl + "slider/downloadImage?file=" + image, '_blank', soptions).then(function(event) {
-            // success
-        }).catch(function(event) {
-            // error
-        });
+        var url = adminurl + "slider/downloadImage?file=" + image;
+        $cordovaFile.createDir(cordova.file.dataDirectory, "AuraArt", true);
+        var targetPath = cordova.file.dataDirectory + "/AuraArt/" + image;
+        var trustHosts = true
+        var options = {};
+
+        $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+            .then(function(result) {
+                // Success!
+                console.log("Downloaded");
+                $ionicLoading.hide();
+                refreshMedia.refresh(targetPath);
+            }, function(err) {
+                // Error
+                $ionicLoading.hide();
+            }, function(progress) {
+
+
+            });
+
+        // var url = adminurl + "slider/downloadImage?file=" + image;
+        // var targetPath = cordova.file.dataDirectory + image;
+        // var trustHosts = true;
+        // var options = {};
+        // console.log("dir path", cordova.file.dataDirectory);
+        // $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+        //     .then(function(result) {
+        //         // Success!
+        //         console.log("Downloaded");
+        //         $ionicLoading.hide();
+        //     }, function(err) {
+        //         $ionicLoading.hide();
+        //         // Error
+        //     }, function(progress) {
+        //
+        //     });
+
     }
 })
 

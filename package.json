@@ -28,7 +28,10 @@
     },
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
-    "pushwoosh-cordova-plugin"
+    "pushwoosh-cordova-plugin",
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-file",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "ios",
