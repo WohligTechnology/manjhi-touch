@@ -1,15 +1,30 @@
 <ion-view title="Art Infrastructure Services">
-	<ion-content class="padding">
-		<div class="padding-more infra-services">
-			<h4 class="home-header assertive uppercase">Art Infrastructure Services</h4>
-			<!-- <h5 class="home-header assertive">ACTIVITIES</h5> -->
-			<div class="row-head">
-				<p class="assertive uppercase">ACTIVITIES</p>
-			</div>
-			<p>In line with its aspiration to migrate to a fully Integrated Art House, Aura Art Development Pvt Ltd is pleased to offer Art Infrastructure Solutions (through provision of services and products, in-house as well as through Partners), to Collectors,
-				Corporates, Galleries and other Institutions, including, inter-alia, assistance with the following activities.</p>
+    <ion-content class="padding">
+        <div class="padding-more infra-services">
+            <h4 class="home-header assertive uppercase">Art Infrastructure Services</h4>
+            <!-- <h5 class="home-header assertive">ACTIVITIES</h5> -->
+            <div class="row-head">
+                <p class="assertive uppercase">ACTIVITIES</p>
+            </div>
+            <p>In line with its aspiration to migrate to a fully Integrated Art House, Aura Art Development Pvt Ltd is pleased to offer Art Infrastructure Solutions (through provision of services and products, in-house as well as through Partners), to
+                Collectors, Corporates, Galleries and other Institutions, including, inter-alia, assistance with the following activities.</p>
 
-			<div class="row">
+            <div class="row" ng-repeat="activity in activities">
+                <div class="col-50" ng-repeat="activ in activity">
+                    <div class="box-style1">
+                        <div class="infra-img-holder">
+                            <img ng-src="{{activ.homeimage | uploadpath}}" class="" alt="demo">
+                        </div>
+                        <h5>{{activ.name}}</h5>
+                        <p ng-bind-html="activ.activityinbrief"></p>
+                        <!-- <div class="readmore2">
+                            <a href="#" class="assertive">Click for more</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
 				<div class="col-50">
 					<div class="box-style1">
 						<div class="infra-img-holder">
@@ -113,141 +128,147 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container">
+		</div> -->
 
-			<div class="row-head">
-				<p class="calm">Data Management</p>
-			</div>
-			<div class="">
-				<div class="padding-more">
-					<div class="row-headleft">
-						<span>1.Planning Stage</span>
-						<ul>
-							<li>Identify the Collection to be mapped including various categories (paintings, sculptures, prints etc)</li>
-							<li>Assess the number of items under each category, to ascertain the total collection size</li>
-							<li>Identify the various locations where the collection is housed</li>
-							<li>Gather preliminary data readily available</li>
-						</ul>
-						<span>2.Photographing the Collection</span>
-						<ul>
-							<li>Engage a professional photographer with experience in photographing fine art</li>
-							<li>May include unpacking framed works, stretching of rolled canvases, unframing of glass works to get high quality photos</li>
-							<li>Editing the photos, including color correction, cropping and conversion to Jpeg format (300dpi)</li>
+            <div ng-repeat="activity in activityDetail">
+                <div class="row-head">
+                    <p class="calm">{{activity.name}}</p>
+                </div>
+                <div class="">
+                    <div class="padding-more">
+                        <div class="row-headleft">
+													<p ng-bind-html="activity.detail1"></p>
+													<p ng-bind-html="activity.detail2"></p>
+                            <!-- <span>1.Planning Stage</span>
+                            <ul>
+                                <li>Identify the Collection to be mapped including various categories (paintings, sculptures, prints etc)</li>
+                                <li>Assess the number of items under each category, to ascertain the total collection size</li>
+                                <li>Identify the various locations where the collection is housed</li>
+                                <li>Gather preliminary data readily available</li>
+                            </ul>
+                            <span>2.Photographing the Collection</span>
+                            <ul>
+                                <li>Engage a professional photographer with experience in photographing fine art</li>
+                                <li>May include unpacking framed works, stretching of rolled canvases, unframing of glass works to get high quality photos</li>
+                                <li>Editing the photos, including color correction, cropping and conversion to Jpeg format (300dpi)</li>
 
-						</ul>
-						<span>3.Data Collection</span>
-						<ul>
-							<li>Collect the necessary documents, like invoices, authentication certificates, condition report (if any previous restoration done), featured in any catalogue (auction/show) etc.</li>
-							<li>Measure each Item in the Collection (with and without frame)</li>
-							<li>Check if the work is signed and if so, placement of signature</li>
-							<li>Assign a Permanent No for each Item in the collection</li>
-						</ul>
+                            </ul>
+                            <span>3.Data Collection</span>
+                            <ul>
+                                <li>Collect the necessary documents, like invoices, authentication certificates, condition report (if any previous restoration done), featured in any catalogue (auction/show) etc.</li>
+                                <li>Measure each Item in the Collection (with and without frame)</li>
+                                <li>Check if the work is signed and if so, placement of signature</li>
+                                <li>Assign a Permanent No for each Item in the collection</li>
+                            </ul>
 
-						<span>4. Data Mapping and Presentation</span>
-						<ul>
-							<li>Compile all the gathered data in Excel</li>
-							<li>Identify information gaps in the collection</li>
-							<li>Map the final data on an online platform (database) or present the findings in a catalogue/coffee table book</li>
+                            <span>4. Data Mapping and Presentation</span>
+                            <ul>
+                                <li>Compile all the gathered data in Excel</li>
+                                <li>Identify information gaps in the collection</li>
+                                <li>Map the final data on an online platform (database) or present the findings in a catalogue/coffee table book</li>
 
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row-head">
-				<p class="calm">Valuation &amp; Insurance</p>
-			</div>
-			<div class="row-headleft">
-				<span>1.Valuation</span>
-				<p> Once the data for the Collection has been mapped, Aura Art Development Pvt Ltd ("AADPL") will Value the Art Collection, based on available benchmarks.</p>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row-head">
+                    <p class="calm">Valuation &amp; Insurance</p>
+                </div>
+                <div class="row-headleft">
+                    <span>1.Valuation</span>
+                    <p>
+                        Once the data for the Collection has been mapped, Aura Art Development Pvt Ltd ("AADPL") will Value the Art Collection, based on available benchmarks.</p>
 
-				<ul>
-					<li>Auction records constitute the most credible third party data available to the public. AADPL has consistently mapped all auction results (by Sotheby's, Christies, Osians, Saffronart etc) of significant Indian artists over last 10 years.</li>
-					<li>Each Painting is valued within the range of Per Sq Feet values that similar works of the respective artists command, to the extent data is available.</li>
-					<li>For other cases, we will utilize our industry network to create appropriate bench marks.</li>
-				</ul>
-				<span>2.Insurance</span>
-				<p> Once the Art Collection is valued, we will provide guidance for insuring the collection, viz:</p>
-				<ul>
-					<li>Identify which part of the collection to be insured and value: cost vs market value</li>
-					<li>Risks to be covered (stay risks vs transit risks) and exclusions</li>
-					<li>Negotiate quotes and other terms with insurer(s)</li>
-					<li>Guide on checks and balances to be put in place on an on-going basis. Periodic review to assess compliance with intended processes, to ensure smooth and efficient renewal</li>
+                    <ul>
+                        <li>Auction records constitute the most credible third party data available to the public. AADPL has consistently mapped all auction results (by Sotheby's, Christies, Osians, Saffronart etc) of significant Indian artists over last 10 years.</li>
+                        <li>Each Painting is valued within the range of Per Sq Feet values that similar works of the respective artists command, to the extent data is available.</li>
+                        <li>For other cases, we will utilize our industry network to create appropriate bench marks.</li>
+                    </ul>
+                    <span>2.Insurance</span>
+                    <p>
+                        Once the Art Collection is valued, we will provide guidance for insuring the collection, viz:</p>
+                    <ul>
+                        <li>Identify which part of the collection to be insured and value: cost vs market value</li>
+                        <li>Risks to be covered (stay risks vs transit risks) and exclusions</li>
+                        <li>Negotiate quotes and other terms with insurer(s)</li>
+                        <li>Guide on checks and balances to be put in place on an on-going basis. Periodic review to assess compliance with intended processes, to ensure smooth and efficient renewal</li>
 
-				</ul>
-			</div>
-			<div class="row-head">
-				<p class="calm">Conservation &amp; Restoration</p>
-			</div>
-			<div class="panel-set">
-				<div class="col-md-2">
-					<div class="panels">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Preliminary Observation
-							</div>
-							<div class="panel-body">
-								Prima facie review of items displaying visual signs of degradation
-							</div>
-						</div </div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panels">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Condition Report
-							</div>
-							<div class="panel-body">
-								Documentation of the present condition of the object by an expert Restorer, along with drawings/photos, past treatment evidence, methods of examination and testing
-							</div>
-						</div </div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panels">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Treatment Proposal
-							</div>
-							<div class="panel-body">
-								Includes materials to be used, time estimate, cost estimate, objectives and limitations of treatment, benefits and risks, general description of properties of materials to be used
-							</div>
-						</div </div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="panels">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Client-decision Parameters
-							</div>
-							<div class="panel-body">
-								- Stabilization (to maintain the integrity of an object) vs Restoration (treatment procedures intended to return the object to a known or assumed state)
-								<br> - Treatment to be done on-site / off-site
-							</div>
-						</div </div>
-					</div>
-				</div>
-			</div>
-			<div class="row-head">
-				<p class="calm">Strategy for Art Initiatives including CSR</p>
-			</div>
-			<div class="row-headleft">
-				<ul>
-					<li>Artists respond to the world around them, create links between communities by developing work that is inclusive/ socially relevant, through an alternative voice of creativity. Therefore, exposing such art to people can enable them to understand their
-						cultural, social, political, economic and natural environments better.</li>
-					<li>Since India prides on its rich heritage and culture, corporate support towards the conservation and preservation of arts, heritage sites, manuscripts etc is vital</li>
-					<li>Art is an effective way to engage/ interact with the community in an interesting way – hence the importance of Public art, including through public-private partnerships.</li>
-				</ul>
+                    </ul>
+                </div>
+                <div class="row-head">
+                    <p class="calm">Conservation &amp; Restoration</p>
+                </div>
+                <div class="panel-set">
+                    <div class="col-md-2">
+                        <div class="panels">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Preliminary Observation
+                                </div>
+                                <div class="panel-body">
+                                    Prima facie review of items displaying visual signs of degradation
+                                </div>
+                            </div </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="panels">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Condition Report
+                                </div>
+                                <div class="panel-body">
+                                    Documentation of the present condition of the object by an expert Restorer, along with drawings/photos, past treatment evidence, methods of examination and testing
+                                </div>
+                            </div </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="panels">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Treatment Proposal
+                                </div>
+                                <div class="panel-body">
+                                    Includes materials to be used, time estimate, cost estimate, objectives and limitations of treatment, benefits and risks, general description of properties of materials to be used
+                                </div>
+                            </div </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="panels">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Client-decision Parameters
+                                </div>
+                                <div class="panel-body">
+                                    - Stabilization (to maintain the integrity of an object) vs Restoration (treatment procedures intended to return the object to a known or assumed state)
+                                    <br>
+                                    - Treatment to be done on-site / off-site
+                                </div>
+                            </div </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-head">
+                    <p class="calm">Strategy for Art Initiatives including CSR</p>
+                </div>
+                <div class="row-headleft">
+                    <ul>
+                        <li>Artists respond to the world around them, create links between communities by developing work that is inclusive/ socially relevant, through an alternative voice of creativity. Therefore, exposing such art to people can enable them to understand
+                            their cultural, social, political, economic and natural environments better.</li>
+                        <li>Since India prides on its rich heritage and culture, corporate support towards the conservation and preservation of arts, heritage sites, manuscripts etc is vital</li>
+                        <li>Art is an effective way to engage/ interact with the community in an interesting way – hence the importance of Public art, including through public-private partnerships.</li>
+                    </ul>
 
+                    <ul>
+                        <li>Art triggers emotion and sensitizes people, therefore exposure to various kinds of art can soften people and lead to personal growth and sooth their nerves.</li>
+                        <li>Promotion of arts education can enable people to discover their inherent creative capability and provide a means of self expression and fulfillment.</li>
+                        <li>Art programs aimed at the upliftment of artists with lack of means and resources can foster better talent and eventually add to the already rich cultural fabric of India.</li>
 
-				<ul>
-					<li>Art triggers emotion and sensitizes people, therefore exposure to various kinds of art can soften people and lead to personal growth and sooth their nerves.</li>
-					<li>Promotion of arts education can enable people to discover their inherent creative capability and provide a means of self expression and fulfillment.</li>
-					<li>Art programs aimed at the upliftment of artists with lack of means and resources can foster better talent and eventually add to the already rich cultural fabric of India.</li>
-
-				</ul>
-			</div>
-	</ion-content>
-</ion-view>
+                    </ul>
+                </div>
+            </div> -->
+        </ion-content>
+    </ion-view>

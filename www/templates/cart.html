@@ -1,18 +1,20 @@
-<ion-view view-title="Cart">
-	<ion-content class="">
-		<div class="list thumbnail" ng-if="cartItems && cartItems.length>0">
-			<a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'">
-				<img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
-				<h3>{{artwork.artwork.imageno}}</h3>
-				<h3 class="">{{artwork.name}}</h3>
-				<h3 class="">{{artwork.artwork.name}}</h3>
-				<h3>Rs {{artwork.artwork.gprice|inlakhs}}
-				/ ${{artwork.artwork.gprice|indollars}}
-				<span>(excluding VAT)</span></h3>
-				<button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
-			</a>
-			<!-- end ngRepeat: product in products -->
-			<!-- <div class="item item-divider">Discount</div>
+<ion-view view-title="Cart" cache-view="false">
+    <ion-content class="">
+        <div class="list thumbnail" ng-if="cartItems && cartItems.length>0">
+            <a class="item item-thumbnail-left" ng-repeat="artwork in cartItems | orderBy : 'artwork.srno'" ng-click="openModal(artwork.artwork.image[0]);">
+                <img ng-src="{{artwork.artwork.image[0] | uploadthumbnail}}">
+                <h3>{{artwork.artwork.imageno}}</h3>
+                <h3 class="">{{artwork.name}}</h3>
+                <h3 class="">{{artwork.artwork.name}}</h3>
+                <h3>Rs
+                    {{artwork.artwork.gprice|inlakhs}}
+                    / ${{artwork.artwork.gprice|indollars}}
+                    <span>(excluding VAT)</span>
+                </h3>
+                <button class="button button-clear button-assertive button-small remove-btn" ng-click="removeFromCart(artwork.artwork._id);">REMOVE</button>
+            </a>
+            <!-- end ngRepeat: product in products -->
+            <!-- <div class="item item-divider">Discount</div>
 			<div class="item item-input-inset item-positive-mate">
 				<label class="item-input-wrapper positive">
 					<input type="text" placeholder="Enter your coupon code" class="discountcoupon form-control newsletteremail ng-pristine ng-valid">
@@ -21,33 +23,39 @@
 					Submit
 				</button>
 			</div> -->
-			<a class="item cart-cont" href="">
-	        Subtotal Amount
-	        <span class="item-note">
-	           Rs {{totalCartPrice | inlakhs}} / ${{totalCartPrice|indollars}}
-	        </span>
-	    </a>
-			<a class="item cart-cont" href="">
-	       	VAT
-	        <span class="item-note">
-	             Rs {{vat | inlakhs}} / ${{vat|indollars}}
-	        </span>
-    	</a>
-			<a class="item cart-cont">
-          Total Amount
-          <span class="item-note">
-              Rs {{totalCartPrice + vat | inlakhs}} / ${{totalCartPrice + vat|indollars}}
-          </span>
-      </a>
-		</div>
-		<div class="padding" ng-if="cartItems && cartItems.length>0">
-			<a href="" class="button button-block button-positive" ng-click="toCheckout();">Proceed to checkout</a>
-		</div>
-		<ion-list ng-if="cartItems.length==0">
-			<ion-item>
-				<p class="text-center font-special">You have not added any artworks in your cart yet.
-				</p>
-			</ion-item>
-		</ion-list>
-	</ion-content>
+            <a class="item cart-cont" href="">
+                Subtotal Amount
+                <span class="item-note">
+                    Rs
+                    {{totalCartPrice | inlakhs}}
+                    / ${{totalCartPrice|indollars}}
+                </span>
+            </a>
+            <a class="item cart-cont" href="">
+                VAT
+                <span class="item-note">
+                    Rs
+                    {{vat | inlakhs}}
+                    / ${{vat|indollars}}
+                </span>
+            </a>
+            <a class="item cart-cont">
+                Total Amount
+                <span class="item-note">
+                    Rs
+                    {{totalCartPrice + vat | inlakhs}}
+                    / ${{totalCartPrice + vat|indollars}}
+                </span>
+            </a>
+        </div>
+        <div class="padding" ng-if="cartItems && cartItems.length>0">
+            <a href="" class="button button-block button-positive" ng-click="toCheckout();">Proceed to checkout</a>
+        </div>
+        <ion-list ng-if="cartItems.length==0">
+            <ion-item>
+                <p class="text-center font-special">You have not added any artworks in your cart yet.
+                </p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

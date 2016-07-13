@@ -2404,9 +2404,40 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     };
 })
 
-.controller('InfraServicesCtrl', function($scope, $stateParams) {})
+.controller('InfraServicesCtrl', function($scope, $stateParams, MyServices) {
 
-.controller('CartCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state) {
+    MyServices.getAllActivities(function(data) {
+        if (data.value != false) {
+            $scope.activityDetail = _.cloneDeep(data);
+            $scope.activities = _.chunk(data, 2);
+            console.log("activities", $scope.activities);
+        }
+    })
+
+    MyServices.getAllPartners(function(data) {
+        console.log("partners", data);
+        if (data.value != false) {
+            $scope.partners = data;
+        }
+    })
+
+    MyServices.getAllProjects(function(data) {
+        console.log("projects", data);
+        if (data.value != false) {
+            $scope.projects = _.chunk(data, 2);
+        }
+    })
+
+    MyServices.getAllTestimonials(function(data) {
+        console.log("testimonials", data);
+        if (data.value != false) {
+            $scope.testimonials = data;
+        }
+    })
+
+})
+
+.controller('CartCtrl', function($scope, $stateParams, MyServices, $ionicLoading, $state, $ionicModal) {
 
     $scope.totalCartPrice = 0;
     $scope.noCartItems = false;
@@ -2463,6 +2494,23 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
             }
         })
     }
+
+    $ionicModal.fromTemplateUrl('templates/modal-image.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $scope.openModal = function(image) {
+        $scope.bigImage = image;
+        $scope.modal.show();
+    };
+
+    // Triggered in the login modal to close it
+    $scope.closeModal = function() {
+        $scope.modal.hide();
+    };
+
 })
 
 .controller('WishlistCtrl', function($scope, $stateParams) {
