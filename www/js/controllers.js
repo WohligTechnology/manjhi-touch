@@ -929,9 +929,11 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
 
 })
 
-.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices, $cordovaInAppBrowser, $ionicLoading, $cordovaFileTransfer, $cordovaFile, $ionicPopup, $timeout) {
+.controller('SavedViewsCtrl', function($scope, $stateParams, MyServices, $cordovaInAppBrowser, $ionicLoading, $cordovaFileTransfer, $cordovaFile, $ionicPopup, $timeout, $cordovaSocialSharing) {
 
+    globalFunction.showLoading();
     MyServices.getuserprofile(function(data) {
+        $ionicLoading.hide();
         if (data.id) {
             if (data.room && data.room.length > 0) {
                 $scope.views = _.chunk(data.room, 2);
@@ -942,44 +944,60 @@ angular.module('starter.controllers', ['starter.services', 'ui.select', 'ion-gal
     })
 
     $scope.downloadView = function(image) {
-        globalFunction.showLoading();
-        console.log(image);
-
-        var url = adminurl + "slider/downloadImage?file=" + image;
-        $cordovaFile.createDir(cordova.file.dataDirectory, "AuraArt", true);
-        var targetPath = cordova.file.dataDirectory + "/AuraArt/" + image;
-        var trustHosts = true
-        var options = {};
-
-        $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+        $cordovaSocialSharing.share('', '', adminurl + "slider/downloadImage?file=" + image, '') // Share via native share sheet
             .then(function(result) {
                 // Success!
-                console.log("Downloaded");
-                $ionicLoading.hide();
-                refreshMedia.refresh(targetPath);
             }, function(err) {
-                // Error
-                $ionicLoading.hide();
-            }, function(progress) {});
-
-        // var url = adminurl + "slider/downloadImage?file=" + image;
-        // var targetPath = cordova.file.dataDirectory + image;
-        // var trustHosts = true;
-        // var options = {};
-        // console.log("dir path", cordova.file.dataDirectory);
-        // $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
-        //     .then(function(result) {
-        //         // Success!
-        //         console.log("Downloaded");
-        //         $ionicLoading.hide();
-        //     }, function(err) {
-        //         $ionicLoading.hide();
-        //         // Error
-        //     }, function(progress) {
-        //
-        //     });
-
+                // An error occured. Show a message to the user
+            });
     }
+
+    // $scope.downloadView = function(image) {
+    //     globalFunction.showLoading();
+    //     console.log(image);
+    //
+    //     var isIOS = ionic.Platform.isIOS();
+    //     var isAndroid = ionic.Platform.isAndroid();
+    //     console.log("isIOS = " + isIOS, "isAndroid = " + isAndroid);
+    //     $scope.filePath = {};
+    //     if (isIOS) {
+    //         $scope.filePath = cordova.file.dataDirectory;
+    //     } else if (isAndroid) {
+    //         $scope.filePath = cordova.file.externalRootDirectory;
+    //     }
+    //
+    //     var targetPath = $scope.filePath + "AuraArt/" + image;
+    //     console.log("targetPath", targetPath);
+    //     var trustHosts = true
+    //     var options = {};
+    //
+    //     var url = adminurl + "slider/downloadImage?file=" + image;
+    //     $cordovaFile.createDir($scope.filePath, "AuraArt", true)
+    //         .then(function(success) {
+    //             // success
+    //             console.log("success", success);
+    //             saveNow();
+    //         }, function(error) {
+    //             console.log("error", error);
+    //             // error
+    //         });
+    //
+    //     function saveNow() {
+    //         console.log("in saveNow");
+    //         $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+    //             .then(function(result) {
+    //                 // Success!
+    //                 console.log("Downloaded");
+    //                 $ionicLoading.hide();
+    //                 refreshMedia.refresh(targetPath);
+    //             }, function(err) {
+    //                 // Error
+    //                 $ionicLoading.hide();
+    //             }, function(progress) {
+    //
+    //             });
+    //     }
+    // }
 })
 
 .controller('FavouritesCtrl', function($scope, $stateParams, $ionicLoading, $state, MyServices) {
